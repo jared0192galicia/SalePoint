@@ -4,6 +4,8 @@
  */
 package com.unsis.view;
 
+import com.unsis.view.panel.PanelContainer;
+
 /**
  *
  * @author labtecweb10
@@ -15,6 +17,9 @@ public class Main extends javax.swing.JFrame {
      */
     public Main() {
         initComponents();
+        PanelContainer panel = new PanelContainer();
+        panel.setBounds(0,0, 400, 300);
+        this.add(panel);
     }
 
     /**
