@@ -59,15 +59,23 @@ public class PanelContainer extends javax.swing.JPanel {
     private void initComponents() {
         java.awt.GridBagConstraints gridBagConstraints;
 
+        labelHomewore = new javax.swing.JLabel();
         comboHomeware = new javax.swing.JComboBox<>();
         jComboBox3 = new javax.swing.JComboBox<>();
         jComboBox4 = new javax.swing.JComboBox<>();
         jComboBox5 = new javax.swing.JComboBox<>();
         jComboBox6 = new javax.swing.JComboBox<>();
-        labelHomewore = new javax.swing.JLabel();
+
+        labelHomewore.setBackground(new java.awt.Color(17, 57, 103));
+        labelHomewore.setForeground(new java.awt.Color(255, 255, 255));
+        labelHomewore.setIcon(new javax.swing.ImageIcon(getClass().getResource("/homeworeIcon.png"))); // NOI18N
+        labelHomewore.setText("Almacén");
 
         setBackground(new java.awt.Color(60, 75, 112));
-        setLayout(new java.awt.GridBagLayout());
+        java.awt.GridBagLayout layout = new java.awt.GridBagLayout();
+        layout.columnWidths = new int[] {0};
+        layout.rowHeights = new int[] {0, 5, 0, 5, 0, 5, 0, 5, 0};
+        setLayout(layout);
 
         comboHomeware.setBackground(new java.awt.Color(60, 75, 112));
         comboHomeware.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "iren" }));
@@ -77,6 +85,8 @@ public class PanelContainer extends javax.swing.JPanel {
         gridBagConstraints.gridy = 0;
         gridBagConstraints.gridwidth = java.awt.GridBagConstraints.RELATIVE;
         gridBagConstraints.fill = java.awt.GridBagConstraints.HORIZONTAL;
+        gridBagConstraints.ipadx = 10;
+        gridBagConstraints.ipady = 5;
         add(comboHomeware, gridBagConstraints);
 
         jComboBox3.setBackground(new java.awt.Color(60, 75, 112));
@@ -84,9 +94,11 @@ public class PanelContainer extends javax.swing.JPanel {
         jComboBox3.setBorder(null);
         gridBagConstraints = new java.awt.GridBagConstraints();
         gridBagConstraints.gridx = 0;
-        gridBagConstraints.gridy = 4;
+        gridBagConstraints.gridy = 2;
         gridBagConstraints.gridwidth = java.awt.GridBagConstraints.RELATIVE;
         gridBagConstraints.fill = java.awt.GridBagConstraints.HORIZONTAL;
+        gridBagConstraints.ipadx = 10;
+        gridBagConstraints.ipady = 5;
         add(jComboBox3, gridBagConstraints);
 
         jComboBox4.setBackground(new java.awt.Color(60, 75, 112));
@@ -94,9 +106,11 @@ public class PanelContainer extends javax.swing.JPanel {
         jComboBox4.setBorder(null);
         gridBagConstraints = new java.awt.GridBagConstraints();
         gridBagConstraints.gridx = 0;
-        gridBagConstraints.gridy = 6;
+        gridBagConstraints.gridy = 4;
         gridBagConstraints.gridwidth = java.awt.GridBagConstraints.RELATIVE;
         gridBagConstraints.fill = java.awt.GridBagConstraints.HORIZONTAL;
+        gridBagConstraints.ipadx = 10;
+        gridBagConstraints.ipady = 5;
         add(jComboBox4, gridBagConstraints);
 
         jComboBox5.setBackground(new java.awt.Color(60, 75, 112));
@@ -104,9 +118,11 @@ public class PanelContainer extends javax.swing.JPanel {
         jComboBox5.setBorder(null);
         gridBagConstraints = new java.awt.GridBagConstraints();
         gridBagConstraints.gridx = 0;
-        gridBagConstraints.gridy = 8;
+        gridBagConstraints.gridy = 6;
         gridBagConstraints.gridwidth = java.awt.GridBagConstraints.RELATIVE;
         gridBagConstraints.fill = java.awt.GridBagConstraints.HORIZONTAL;
+        gridBagConstraints.ipadx = 10;
+        gridBagConstraints.ipady = 5;
         add(jComboBox5, gridBagConstraints);
 
         jComboBox6.setBackground(new java.awt.Color(60, 75, 112));
@@ -114,19 +130,12 @@ public class PanelContainer extends javax.swing.JPanel {
         jComboBox6.setBorder(null);
         gridBagConstraints = new java.awt.GridBagConstraints();
         gridBagConstraints.gridx = 0;
-        gridBagConstraints.gridy = 10;
+        gridBagConstraints.gridy = 8;
         gridBagConstraints.gridwidth = java.awt.GridBagConstraints.RELATIVE;
         gridBagConstraints.fill = java.awt.GridBagConstraints.HORIZONTAL;
+        gridBagConstraints.ipadx = 10;
+        gridBagConstraints.ipady = 5;
         add(jComboBox6, gridBagConstraints);
-
-        labelHomewore.setBackground(new java.awt.Color(17, 57, 103));
-        labelHomewore.setForeground(new java.awt.Color(255, 255, 255));
-        labelHomewore.setIcon(new javax.swing.ImageIcon("/home/labtecweb10/Documentos/homeworeIcon.png")); // NOI18N
-        labelHomewore.setText("Almacén");
-        gridBagConstraints = new java.awt.GridBagConstraints();
-        gridBagConstraints.gridx = 0;
-        gridBagConstraints.gridy = 2;
-        add(labelHomewore, gridBagConstraints);
     }// </editor-fold>//GEN-END:initComponents
 
 

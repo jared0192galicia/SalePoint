@@ -1,7 +1,3 @@
-/*
- * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
- * Click nbfs://nbhost/SystemFileSystem/Templates/GUIForms/JPanel.java to edit this template
- */
 package com.unsis.view.panel;
 
 /**
@@ -15,7 +11,9 @@ public class NavBar extends javax.swing.JPanel {
      */
     public NavBar() {
         initComponents();
-        
+        PanelContainer options = new PanelContainer();
+        options.setBounds(5, 140, 204, 191);
+        this.add(options);
     }
 
     /**
@@ -34,7 +32,6 @@ public class NavBar extends javax.swing.JPanel {
         jComboBox4 = new javax.swing.JComboBox<>();
         jComboBox5 = new javax.swing.JComboBox<>();
         jComboBox6 = new javax.swing.JComboBox<>();
-        labelHomewore = new javax.swing.JLabel();
         jLabel1 = new javax.swing.JLabel();
         jButton1 = new javax.swing.JButton();
 
@@ -98,14 +95,6 @@ public class NavBar extends javax.swing.JPanel {
         gridBagConstraints.fill = java.awt.GridBagConstraints.HORIZONTAL;
         panelContainer.add(jComboBox6, gridBagConstraints);
 
-        labelHomewore.setForeground(new java.awt.Color(255, 255, 255));
-        labelHomewore.setIcon(new javax.swing.ImageIcon(getClass().getResource("/com/unsis/images/homeworeIcon.png"))); // NOI18N
-        labelHomewore.setText("Almacén");
-        gridBagConstraints = new java.awt.GridBagConstraints();
-        gridBagConstraints.gridx = 0;
-        gridBagConstraints.gridy = 2;
-        panelContainer.add(labelHomewore, gridBagConstraints);
-
         jLabel1.setFont(new java.awt.Font("Liberation Sans", 0, 36)); // NOI18N
         jLabel1.setForeground(new java.awt.Color(255, 255, 255));
         jLabel1.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
@@ -113,7 +102,7 @@ public class NavBar extends javax.swing.JPanel {
 
         jButton1.setBackground(new java.awt.Color(17, 57, 103));
         jButton1.setForeground(new java.awt.Color(255, 255, 255));
-        jButton1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/com/unsis/images/homeIcon.png"))); // NOI18N
+        jButton1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/homeIcon.png"))); // NOI18N
         jButton1.setText("Inicio");
         jButton1.setToolTipText("");
         jButton1.setBorder(null);
@@ -137,9 +126,9 @@ public class NavBar extends javax.swing.JPanel {
                 .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 67, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jButton1, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(18, 18, 18)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 400, Short.MAX_VALUE)
                 .addComponent(panelContainer, javax.swing.GroupLayout.PREFERRED_SIZE, 191, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(696, Short.MAX_VALUE))
+                .addGap(302, 302, 302))
         );
     }// </editor-fold>//GEN-END:initComponents
 
@@ -152,7 +141,6 @@ public class NavBar extends javax.swing.JPanel {
     private javax.swing.JComboBox<String> jComboBox5;
     private javax.swing.JComboBox<String> jComboBox6;
     private javax.swing.JLabel jLabel1;
-    private javax.swing.JLabel labelHomewore;
     private javax.swing.JPanel panelContainer;
     // End of variables declaration//GEN-END:variables
 }

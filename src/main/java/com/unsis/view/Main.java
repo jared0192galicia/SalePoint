@@ -4,7 +4,7 @@
  */
 package com.unsis.view;
 
-import com.unsis.view.panel.PanelContainer;
+import com.unsis.view.panel.NavBar;
 
 /**
  *
@@ -17,8 +17,8 @@ public class Main extends javax.swing.JFrame {
      */
     public Main() {
         initComponents();
-        PanelContainer panel = new PanelContainer();
-        panel.setBounds(0,0, 400, 300);
+        NavBar panel = new NavBar();
+        panel.setBounds(0,0, 216, 1024);
         this.add(panel);
     }
 
