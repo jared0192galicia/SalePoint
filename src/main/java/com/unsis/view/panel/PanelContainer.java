@@ -1,30 +1,60 @@
-/*
- * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
- * Click nbfs://nbhost/SystemFileSystem/Templates/GUIForms/JPanel.java to edit this template
- */
 package com.unsis.view.panel;
 
+import java.awt.Color;
 import java.awt.Component;
+import java.util.ArrayList;
+import javax.swing.BorderFactory;
 import javax.swing.DefaultComboBoxModel;
 import javax.swing.DefaultListCellRenderer;
 import javax.swing.JLabel;
 import javax.swing.JList;
 
-/**
- *
- * @author labtecweb10
- */
 public class PanelContainer extends javax.swing.JPanel {
 
-    DefaultComboBoxModel<JLabel> comboBoxModel = new DefaultComboBoxModel<>();
-
-    /**
-     * Creates new form PanelContainer
-     */
     public PanelContainer() {
         initComponents();
+        rendererAllComoboBox();
 
-        comboHomeware.setRenderer(new DefaultListCellRenderer() {
+        comboHomeware.setModel(getModel(new String[] {"Mercancia disponible", "Ventas", "Menu"})); // Establece el modelo en el JComboBox
+        comboHomeware.setBackground(Color.BLUE);
+    }
+
+    /**
+     * Crea un modelo
+     *
+     * @return
+     */
+    private DefaultComboBoxModel getModel(String[] texts) {
+        DefaultComboBoxModel model = new javax.swing.DefaultComboBoxModel<JLabel>(generateOptions(texts));
+
+        return model;
+    }
+
+    /**
+     * Genera un array de JLabels para retornarlos como lista de opciones
+     * @param texts Textos que incluye cada JLabel
+     * @return Array de JLabels
+     */
+    private JLabel[] generateOptions(String[] texts) {
+        ArrayList<JLabel> labels = new ArrayList<>();
+        labels.add(labelHomewore);
+        JLabel label;
+        for (String text : texts) {
+            label = new JLabel(text);
+            label.setBackground(new java.awt.Color(17, 57, 103));
+            label.setForeground(new java.awt.Color(255, 255, 255));
+            
+            labels.add(label);
+        }
+        
+        return (JLabel[]) labels.toArray(new JLabel[labels.size()]);
+    }
+
+    /**
+     * Rescribe el metodo de renderizado de los ComboBox para mostrar JLabel's
+     */
+    private void rendererAllComoboBox() {
+        DefaultListCellRenderer listCellRenderer = new DefaultListCellRenderer() {
             @Override
             public Component getListCellRendererComponent(JList<?> list, Object value, int index, boolean isSelected, boolean cellHasFocus) {
                 if (value instanceof JLabel) {
@@ -32,21 +62,8 @@ public class PanelContainer extends javax.swing.JPanel {
                 }
                 return super.getListCellRendererComponent(list, value, index, isSelected, cellHasFocus);
             }
-        });
-
-        comboBoxModel.addElement(labelHomewore); // Agrega el JLabel al modelo
-
-        comboHomeware.setModel(getModel()); // Establece el modelo en el JComboBox
-    }
-
-    private JLabel getOption() {
-        return labelHomewore;
-    }
-
-    private DefaultComboBoxModel getModel() {
-        return new javax.swing.DefaultComboBoxModel<JLabel>(new JLabel[]{
-            getOption()
-        });
+        };
+        comboHomeware.setRenderer(listCellRenderer);
     }
 
     /**
@@ -68,7 +85,7 @@ public class PanelContainer extends javax.swing.JPanel {
 
         labelHomewore.setBackground(new java.awt.Color(17, 57, 103));
         labelHomewore.setForeground(new java.awt.Color(255, 255, 255));
-        labelHomewore.setIcon(new javax.swing.ImageIcon(getClass().getResource("/homeworeIcon.png"))); // NOI18N
+        labelHomewore.setIcon(new javax.swing.ImageIcon("C:\\Users\\jared\\OneDrive\\Documentos\\NetBeansProjects\\Unsis\\SalePoint\\src\\main\\java\\com\\unsis\\images\\homeworeIcon.png")); // NOI18N
         labelHomewore.setText("Almacén");
 
         setBackground(new java.awt.Color(60, 75, 112));
@@ -78,24 +95,26 @@ public class PanelContainer extends javax.swing.JPanel {
         setLayout(layout);
 
         comboHomeware.setBackground(new java.awt.Color(60, 75, 112));
+        comboHomeware.setForeground(new java.awt.Color(255, 255, 255));
         comboHomeware.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "iren" }));
-        comboHomeware.setBorder(null);
+        comboHomeware.setBorder(BorderFactory.createLineBorder(new Color(27, 53, 103), 2));
+        comboHomeware.setFocusCycleRoot(true);
         gridBagConstraints = new java.awt.GridBagConstraints();
         gridBagConstraints.gridx = 0;
         gridBagConstraints.gridy = 0;
-        gridBagConstraints.gridwidth = java.awt.GridBagConstraints.RELATIVE;
+        gridBagConstraints.gridwidth = java.awt.GridBagConstraints.REMAINDER;
         gridBagConstraints.fill = java.awt.GridBagConstraints.HORIZONTAL;
         gridBagConstraints.ipadx = 10;
         gridBagConstraints.ipady = 5;
         add(comboHomeware, gridBagConstraints);
 
-        jComboBox3.setBackground(new java.awt.Color(60, 75, 112));
+        jComboBox3.setBackground(new java.awt.Color(0, 0, 102));
         jComboBox3.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
         jComboBox3.setBorder(null);
         gridBagConstraints = new java.awt.GridBagConstraints();
         gridBagConstraints.gridx = 0;
         gridBagConstraints.gridy = 2;
-        gridBagConstraints.gridwidth = java.awt.GridBagConstraints.RELATIVE;
+        gridBagConstraints.gridwidth = java.awt.GridBagConstraints.REMAINDER;
         gridBagConstraints.fill = java.awt.GridBagConstraints.HORIZONTAL;
         gridBagConstraints.ipadx = 10;
         gridBagConstraints.ipady = 5;
@@ -107,7 +126,7 @@ public class PanelContainer extends javax.swing.JPanel {
         gridBagConstraints = new java.awt.GridBagConstraints();
         gridBagConstraints.gridx = 0;
         gridBagConstraints.gridy = 4;
-        gridBagConstraints.gridwidth = java.awt.GridBagConstraints.RELATIVE;
+        gridBagConstraints.gridwidth = java.awt.GridBagConstraints.REMAINDER;
         gridBagConstraints.fill = java.awt.GridBagConstraints.HORIZONTAL;
         gridBagConstraints.ipadx = 10;
         gridBagConstraints.ipady = 5;
@@ -119,7 +138,7 @@ public class PanelContainer extends javax.swing.JPanel {
         gridBagConstraints = new java.awt.GridBagConstraints();
         gridBagConstraints.gridx = 0;
         gridBagConstraints.gridy = 6;
-        gridBagConstraints.gridwidth = java.awt.GridBagConstraints.RELATIVE;
+        gridBagConstraints.gridwidth = java.awt.GridBagConstraints.REMAINDER;
         gridBagConstraints.fill = java.awt.GridBagConstraints.HORIZONTAL;
         gridBagConstraints.ipadx = 10;
         gridBagConstraints.ipady = 5;
@@ -131,7 +150,7 @@ public class PanelContainer extends javax.swing.JPanel {
         gridBagConstraints = new java.awt.GridBagConstraints();
         gridBagConstraints.gridx = 0;
         gridBagConstraints.gridy = 8;
-        gridBagConstraints.gridwidth = java.awt.GridBagConstraints.RELATIVE;
+        gridBagConstraints.gridwidth = java.awt.GridBagConstraints.REMAINDER;
         gridBagConstraints.fill = java.awt.GridBagConstraints.HORIZONTAL;
         gridBagConstraints.ipadx = 10;
         gridBagConstraints.ipady = 5;

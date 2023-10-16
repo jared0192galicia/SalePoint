@@ -4,6 +4,7 @@
  */
 package com.unsis.view;
 
+import com.unsis.view.panel.HumanResourcesPanel;
 import com.unsis.view.panel.NavBar;
 
 /**
@@ -17,9 +18,15 @@ public class Main extends javax.swing.JFrame {
      */
     public Main() {
         initComponents();
+        this.setSize(1237, 1024);
         NavBar panel = new NavBar();
         panel.setBounds(0,0, 216, 1024);
+        
+        HumanResourcesPanel humans = new HumanResourcesPanel();
+        humans.setBounds(217, 0, 1200, 1900);
+        
         this.add(panel);
+        this.add(humans);
     }
 
     /**
