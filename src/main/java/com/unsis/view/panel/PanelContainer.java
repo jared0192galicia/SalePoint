@@ -1,13 +1,21 @@
 package com.unsis.view.panel;
 
+import com.unsis.models.constants.Constants;
 import java.awt.Color;
+import java.util.ArrayList;
+import java.util.HashSet;
+import javax.swing.JButton;
 import javax.swing.JMenuItem;
 
 public class PanelContainer extends javax.swing.JPanel {
 
-    public PanelContainer(String[] access) {
+    private ArrayList<JButton> areas;
+    
+    public PanelContainer() {
         initComponents();
-        generateOptions(access);
+        areas = new ArrayList<>();
+        this.generateAreas();
+        generateOptions(new String[]{"3","2","1"});
     }
 
     private void generateOptions(String texts[]) {
@@ -21,6 +29,27 @@ public class PanelContainer extends javax.swing.JPanel {
             menuHomeware.add(item);
         }
     }
+    
+    private void generateAreas() {
+        ArrayList<String> titleAreas = new ArrayList<>();
+        
+        for (Constants.Section section : Constants.sections) {
+            titleAreas.add(section.getArea());
+        }
+        
+        HashSet<String> areas = new HashSet<>(titleAreas);
+        
+        JButton button;
+        for (String area : areas) {
+            button = new JButton(area);
+            this.areas.add(button);
+        }
+        
+        for (JButton area : this.areas) {
+            toolBar.add(area);
+        }
+    }
+    
     /**
      * This method is called from within the constructor to initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is always
@@ -32,7 +61,7 @@ public class PanelContainer extends javax.swing.JPanel {
 
         labelHomewore = new javax.swing.JLabel();
         menuHomeware = new javax.swing.JPopupMenu();
-        jToolBar1 = new javax.swing.JToolBar();
+        toolBar = new javax.swing.JToolBar();
         buttonHomeware = new javax.swing.JButton();
         buttonHomeware1 = new javax.swing.JButton();
         buttonHomeware2 = new javax.swing.JButton();
@@ -41,7 +70,6 @@ public class PanelContainer extends javax.swing.JPanel {
 
         labelHomewore.setBackground(new java.awt.Color(17, 57, 103));
         labelHomewore.setForeground(new java.awt.Color(255, 255, 255));
-        labelHomewore.setIcon(new javax.swing.ImageIcon("C:\\Users\\jared\\OneDrive\\Documentos\\NetBeansProjects\\Unsis\\SalePoint\\src\\main\\java\\com\\unsis\\images\\homeworeIcon.png")); // NOI18N
         labelHomewore.setText("Almacén");
 
         menuHomeware.setBackground(new java.awt.Color(60, 75, 112));
@@ -51,17 +79,16 @@ public class PanelContainer extends javax.swing.JPanel {
         setBackground(new java.awt.Color(60, 75, 112));
         setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
-        jToolBar1.setBackground(new java.awt.Color(60, 75, 112));
-        jToolBar1.setBorder(javax.swing.BorderFactory.createBevelBorder(javax.swing.border.BevelBorder.RAISED));
-        jToolBar1.setFloatable(false);
-        jToolBar1.setOrientation(javax.swing.SwingConstants.VERTICAL);
-        jToolBar1.setMaximumSize(new java.awt.Dimension(220, 50));
-        jToolBar1.setMinimumSize(new java.awt.Dimension(220, 106));
-        jToolBar1.setPreferredSize(new java.awt.Dimension(220, 106));
+        toolBar.setBackground(new java.awt.Color(60, 75, 112));
+        toolBar.setBorder(javax.swing.BorderFactory.createBevelBorder(javax.swing.border.BevelBorder.RAISED));
+        toolBar.setFloatable(false);
+        toolBar.setOrientation(javax.swing.SwingConstants.VERTICAL);
+        toolBar.setMaximumSize(new java.awt.Dimension(220, 50));
+        toolBar.setMinimumSize(new java.awt.Dimension(220, 106));
+        toolBar.setPreferredSize(new java.awt.Dimension(220, 106));
 
         buttonHomeware.setBackground(new java.awt.Color(17, 57, 103));
         buttonHomeware.setForeground(new java.awt.Color(255, 255, 255));
-        buttonHomeware.setIcon(new javax.swing.ImageIcon("C:\\Users\\jared\\OneDrive\\Documentos\\NetBeansProjects\\Unsis\\SalePoint\\src\\main\\java\\com\\unsis\\images\\homeworeIcon.png")); // NOI18N
         buttonHomeware.setText("Almacen");
         buttonHomeware.setBorder(javax.swing.BorderFactory.createBevelBorder(javax.swing.border.BevelBorder.RAISED));
         buttonHomeware.setContentAreaFilled(false);
@@ -75,11 +102,10 @@ public class PanelContainer extends javax.swing.JPanel {
                 buttonHomewareActionPerformed(evt);
             }
         });
-        jToolBar1.add(buttonHomeware);
+        toolBar.add(buttonHomeware);
 
         buttonHomeware1.setBackground(new java.awt.Color(17, 57, 103));
         buttonHomeware1.setForeground(new java.awt.Color(255, 255, 255));
-        buttonHomeware1.setIcon(new javax.swing.ImageIcon("C:\\Users\\jared\\OneDrive\\Documentos\\NetBeansProjects\\Unsis\\SalePoint\\src\\main\\java\\com\\unsis\\images\\settingsIcon.png")); // NOI18N
         buttonHomeware1.setText("Ajustes");
         buttonHomeware1.setBorder(javax.swing.BorderFactory.createBevelBorder(javax.swing.border.BevelBorder.RAISED));
         buttonHomeware1.setContentAreaFilled(false);
@@ -94,11 +120,10 @@ public class PanelContainer extends javax.swing.JPanel {
                 buttonHomeware1ActionPerformed(evt);
             }
         });
-        jToolBar1.add(buttonHomeware1);
+        toolBar.add(buttonHomeware1);
 
         buttonHomeware2.setBackground(new java.awt.Color(17, 57, 103));
         buttonHomeware2.setForeground(new java.awt.Color(255, 255, 255));
-        buttonHomeware2.setIcon(new javax.swing.ImageIcon("C:\\Users\\jared\\OneDrive\\Documentos\\NetBeansProjects\\Unsis\\SalePoint\\src\\main\\java\\com\\unsis\\images\\ventasLogo.png")); // NOI18N
         buttonHomeware2.setText("Ventas");
         buttonHomeware2.setBorder(javax.swing.BorderFactory.createBevelBorder(javax.swing.border.BevelBorder.RAISED));
         buttonHomeware2.setContentAreaFilled(false);
@@ -113,11 +138,10 @@ public class PanelContainer extends javax.swing.JPanel {
                 buttonHomeware2ActionPerformed(evt);
             }
         });
-        jToolBar1.add(buttonHomeware2);
+        toolBar.add(buttonHomeware2);
 
         buttonHomeware3.setBackground(new java.awt.Color(17, 57, 103));
         buttonHomeware3.setForeground(new java.awt.Color(255, 255, 255));
-        buttonHomeware3.setIcon(new javax.swing.ImageIcon("C:\\Users\\jared\\OneDrive\\Documentos\\NetBeansProjects\\Unsis\\SalePoint\\src\\main\\java\\com\\unsis\\images\\contaIcon.png")); // NOI18N
         buttonHomeware3.setText("Ventas");
         buttonHomeware3.setBorder(javax.swing.BorderFactory.createBevelBorder(javax.swing.border.BevelBorder.RAISED));
         buttonHomeware3.setContentAreaFilled(false);
@@ -131,11 +155,10 @@ public class PanelContainer extends javax.swing.JPanel {
                 buttonHomeware3ActionPerformed(evt);
             }
         });
-        jToolBar1.add(buttonHomeware3);
+        toolBar.add(buttonHomeware3);
 
         buttonHomeware4.setBackground(new java.awt.Color(17, 57, 103));
         buttonHomeware4.setForeground(new java.awt.Color(255, 255, 255));
-        buttonHomeware4.setIcon(new javax.swing.ImageIcon("C:\\Users\\jared\\OneDrive\\Documentos\\NetBeansProjects\\Unsis\\SalePoint\\src\\main\\java\\com\\unsis\\images\\humanResourcesIcon.png")); // NOI18N
         buttonHomeware4.setText("Recursos humanos");
         buttonHomeware4.setBorder(javax.swing.BorderFactory.createBevelBorder(javax.swing.border.BevelBorder.RAISED));
         buttonHomeware4.setContentAreaFilled(false);
@@ -149,9 +172,9 @@ public class PanelContainer extends javax.swing.JPanel {
                 buttonHomeware4ActionPerformed(evt);
             }
         });
-        jToolBar1.add(buttonHomeware4);
+        toolBar.add(buttonHomeware4);
 
-        add(jToolBar1, new org.netbeans.lib.awtextra.AbsoluteConstraints(-4, -5, 220, 160));
+        add(toolBar, new org.netbeans.lib.awtextra.AbsoluteConstraints(-4, -5, 220, 160));
     }// </editor-fold>//GEN-END:initComponents
 
     private void buttonHomewareActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_buttonHomewareActionPerformed
@@ -181,8 +204,8 @@ public class PanelContainer extends javax.swing.JPanel {
     private javax.swing.JButton buttonHomeware2;
     private javax.swing.JButton buttonHomeware3;
     private javax.swing.JButton buttonHomeware4;
-    private javax.swing.JToolBar jToolBar1;
     private javax.swing.JLabel labelHomewore;
     private javax.swing.JPopupMenu menuHomeware;
+    private javax.swing.JToolBar toolBar;
     // End of variables declaration//GEN-END:variables
 }

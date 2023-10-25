@@ -93,7 +93,7 @@ public class Venta extends javax.swing.JPanel {
         jLabel2.setFont(new java.awt.Font("Jaldi", 0, 36)); // NOI18N
         jLabel2.setForeground(new java.awt.Color(1, 41, 87));
         jLabel2.setText("Alta de empleado");
-        add(jLabel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(51, 15, 281, 46));
+        add(jLabel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(51, 15, 330, 46));
 
         jPanel1.setBackground(new java.awt.Color(255, 255, 255));
         jPanel1.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
@@ -101,7 +101,7 @@ public class Venta extends javax.swing.JPanel {
         jLabel3.setFont(new java.awt.Font("Jaldi", 0, 24)); // NOI18N
         jLabel3.setForeground(new java.awt.Color(82, 146, 222));
         jLabel3.setText("Productos agregados");
-        jPanel1.add(jLabel3, new org.netbeans.lib.awtextra.AbsoluteConstraints(70, 30, 240, -1));
+        jPanel1.add(jLabel3, new org.netbeans.lib.awtextra.AbsoluteConstraints(70, 30, 330, -1));
 
         tableProduct.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {

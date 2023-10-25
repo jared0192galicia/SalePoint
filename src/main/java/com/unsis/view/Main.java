@@ -4,9 +4,9 @@
  */
 package com.unsis.view;
 
+import com.unsis.models.constants.Constants;
 import com.unsis.view.panel.AltaEmpleado;
 import com.unsis.view.panel.HumanResourcesPanel;
-import com.unsis.view.panel.Login;
 import com.unsis.view.panel.NavBar;
 import com.unsis.view.panel.Venta;
 import javax.swing.JPanel;
@@ -25,10 +25,11 @@ public class Main extends javax.swing.JFrame {
      * Creates new form Home
      * @param access
      */
-    public Main(String[] access) {
+    public Main() {
         initComponents();
+        Constants.fillContants();
         this.setSize(1237, 1224);
-        NavBar navigator = new NavBar(access);
+        NavBar navigator = new NavBar();
         navigator.setBounds(0,0, 216, 1024);
         
         //HumanResourcesPanel humans = new HumanResourcesPanel();
@@ -100,7 +101,7 @@ public class Main extends javax.swing.JFrame {
         /* Create and display the form */
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
-                new Main(new String[]{"", ""}).setVisible(true);
+                new Main().setVisible(true);
             }
         });
     }
