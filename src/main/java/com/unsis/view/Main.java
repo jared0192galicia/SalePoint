@@ -4,7 +4,12 @@
  */
 package com.unsis.view;
 
+import com.unsis.view.panel.AltaEmpleado;
+import com.unsis.view.panel.HumanResourcesPanel;
+import com.unsis.view.panel.Login;
 import com.unsis.view.panel.NavBar;
+import com.unsis.view.panel.Venta;
+import javax.swing.JPanel;
 
 /**
  *
@@ -12,14 +17,31 @@ import com.unsis.view.panel.NavBar;
  */
 public class Main extends javax.swing.JFrame {
 
+    private final AltaEmpleado altaEmpleado = new AltaEmpleado();
+    private final HumanResourcesPanel humanResources = new HumanResourcesPanel();
+    private final Venta sale = new Venta();
+    
     /**
      * Creates new form Home
+     * @param access
      */
-    public Main() {
+    public Main(String[] access) {
         initComponents();
-        NavBar panel = new NavBar();
-        panel.setBounds(0,0, 216, 1024);
-        this.add(panel);
+        this.setSize(1237, 1224);
+        NavBar navigator = new NavBar(access);
+        navigator.setBounds(0,0, 216, 1024);
+        
+        //HumanResourcesPanel humans = new HumanResourcesPanel();
+        //humans.setBounds(217, 0, 1200, 1900);
+        
+        altaEmpleado.setBounds(217, 0, 1200, 1900);
+        
+        this.add(navigator);
+        this.add(altaEmpleado);
+    }
+    
+    private void setView(JPanel panel) {
+        panel.setLocation(217, 0);
     }
 
     /**
@@ -37,11 +59,11 @@ public class Main extends javax.swing.JFrame {
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 400, Short.MAX_VALUE)
+            .addGap(0, 684, Short.MAX_VALUE)
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 300, Short.MAX_VALUE)
+            .addGap(0, 502, Short.MAX_VALUE)
         );
 
         pack();
@@ -78,7 +100,7 @@ public class Main extends javax.swing.JFrame {
         /* Create and display the form */
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
-                new Main().setVisible(true);
+                new Main(new String[]{"", ""}).setVisible(true);
             }
         });
     }

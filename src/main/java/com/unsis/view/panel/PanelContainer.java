@@ -1,54 +1,26 @@
-/*
- * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
- * Click nbfs://nbhost/SystemFileSystem/Templates/GUIForms/JPanel.java to edit this template
- */
 package com.unsis.view.panel;
 
-import java.awt.Component;
-import javax.swing.DefaultComboBoxModel;
-import javax.swing.DefaultListCellRenderer;
-import javax.swing.JLabel;
-import javax.swing.JList;
+import java.awt.Color;
+import javax.swing.JMenuItem;
 
-/**
- *
- * @author labtecweb10
- */
 public class PanelContainer extends javax.swing.JPanel {
 
-    DefaultComboBoxModel<JLabel> comboBoxModel = new DefaultComboBoxModel<>();
-
-    /**
-     * Creates new form PanelContainer
-     */
-    public PanelContainer() {
+    public PanelContainer(String[] access) {
         initComponents();
-
-        comboHomeware.setRenderer(new DefaultListCellRenderer() {
-            @Override
-            public Component getListCellRendererComponent(JList<?> list, Object value, int index, boolean isSelected, boolean cellHasFocus) {
-                if (value instanceof JLabel) {
-                    return (JLabel) value;
-                }
-                return super.getListCellRendererComponent(list, value, index, isSelected, cellHasFocus);
-            }
-        });
-
-        comboBoxModel.addElement(labelHomewore); // Agrega el JLabel al modelo
-
-        comboHomeware.setModel(getModel()); // Establece el modelo en el JComboBox
+        generateOptions(access);
     }
 
-    private JLabel getOption() {
-        return labelHomewore;
+    private void generateOptions(String texts[]) {
+        JMenuItem item;
+        for (String text : texts) {
+            item = new JMenuItem(text);
+            item.setBackground(Color.BLUE);
+            item.setForeground(Color.WHITE);
+            item.setBackground(new Color(60,75,112));
+            item.setOpaque(true);
+            menuHomeware.add(item);
+        }
     }
-
-    private DefaultComboBoxModel getModel() {
-        return new javax.swing.DefaultComboBoxModel<JLabel>(new JLabel[]{
-            getOption()
-        });
-    }
-
     /**
      * This method is called from within the constructor to initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is always
@@ -57,94 +29,160 @@ public class PanelContainer extends javax.swing.JPanel {
     @SuppressWarnings("unchecked")
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
-        java.awt.GridBagConstraints gridBagConstraints;
 
         labelHomewore = new javax.swing.JLabel();
-        comboHomeware = new javax.swing.JComboBox<>();
-        jComboBox3 = new javax.swing.JComboBox<>();
-        jComboBox4 = new javax.swing.JComboBox<>();
-        jComboBox5 = new javax.swing.JComboBox<>();
-        jComboBox6 = new javax.swing.JComboBox<>();
+        menuHomeware = new javax.swing.JPopupMenu();
+        jToolBar1 = new javax.swing.JToolBar();
+        buttonHomeware = new javax.swing.JButton();
+        buttonHomeware1 = new javax.swing.JButton();
+        buttonHomeware2 = new javax.swing.JButton();
+        buttonHomeware3 = new javax.swing.JButton();
+        buttonHomeware4 = new javax.swing.JButton();
 
         labelHomewore.setBackground(new java.awt.Color(17, 57, 103));
         labelHomewore.setForeground(new java.awt.Color(255, 255, 255));
-        labelHomewore.setIcon(new javax.swing.ImageIcon(getClass().getResource("/homeworeIcon.png"))); // NOI18N
+        labelHomewore.setIcon(new javax.swing.ImageIcon("C:\\Users\\jared\\OneDrive\\Documentos\\NetBeansProjects\\Unsis\\SalePoint\\src\\main\\java\\com\\unsis\\images\\homeworeIcon.png")); // NOI18N
         labelHomewore.setText("Almacén");
 
+        menuHomeware.setBackground(new java.awt.Color(60, 75, 112));
+        menuHomeware.setForeground(new java.awt.Color(255, 255, 255));
+        menuHomeware.setBorder(javax.swing.BorderFactory.createBevelBorder(javax.swing.border.BevelBorder.RAISED));
+
         setBackground(new java.awt.Color(60, 75, 112));
-        java.awt.GridBagLayout layout = new java.awt.GridBagLayout();
-        layout.columnWidths = new int[] {0};
-        layout.rowHeights = new int[] {0, 5, 0, 5, 0, 5, 0, 5, 0};
-        setLayout(layout);
+        setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
-        comboHomeware.setBackground(new java.awt.Color(60, 75, 112));
-        comboHomeware.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "iren" }));
-        comboHomeware.setBorder(null);
-        gridBagConstraints = new java.awt.GridBagConstraints();
-        gridBagConstraints.gridx = 0;
-        gridBagConstraints.gridy = 0;
-        gridBagConstraints.gridwidth = java.awt.GridBagConstraints.RELATIVE;
-        gridBagConstraints.fill = java.awt.GridBagConstraints.HORIZONTAL;
-        gridBagConstraints.ipadx = 10;
-        gridBagConstraints.ipady = 5;
-        add(comboHomeware, gridBagConstraints);
+        jToolBar1.setBackground(new java.awt.Color(60, 75, 112));
+        jToolBar1.setBorder(javax.swing.BorderFactory.createBevelBorder(javax.swing.border.BevelBorder.RAISED));
+        jToolBar1.setFloatable(false);
+        jToolBar1.setOrientation(javax.swing.SwingConstants.VERTICAL);
+        jToolBar1.setMaximumSize(new java.awt.Dimension(220, 50));
+        jToolBar1.setMinimumSize(new java.awt.Dimension(220, 106));
+        jToolBar1.setPreferredSize(new java.awt.Dimension(220, 106));
 
-        jComboBox3.setBackground(new java.awt.Color(60, 75, 112));
-        jComboBox3.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
-        jComboBox3.setBorder(null);
-        gridBagConstraints = new java.awt.GridBagConstraints();
-        gridBagConstraints.gridx = 0;
-        gridBagConstraints.gridy = 2;
-        gridBagConstraints.gridwidth = java.awt.GridBagConstraints.RELATIVE;
-        gridBagConstraints.fill = java.awt.GridBagConstraints.HORIZONTAL;
-        gridBagConstraints.ipadx = 10;
-        gridBagConstraints.ipady = 5;
-        add(jComboBox3, gridBagConstraints);
+        buttonHomeware.setBackground(new java.awt.Color(17, 57, 103));
+        buttonHomeware.setForeground(new java.awt.Color(255, 255, 255));
+        buttonHomeware.setIcon(new javax.swing.ImageIcon("C:\\Users\\jared\\OneDrive\\Documentos\\NetBeansProjects\\Unsis\\SalePoint\\src\\main\\java\\com\\unsis\\images\\homeworeIcon.png")); // NOI18N
+        buttonHomeware.setText("Almacen");
+        buttonHomeware.setBorder(javax.swing.BorderFactory.createBevelBorder(javax.swing.border.BevelBorder.RAISED));
+        buttonHomeware.setContentAreaFilled(false);
+        buttonHomeware.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+        buttonHomeware.setFocusable(false);
+        buttonHomeware.setHorizontalTextPosition(javax.swing.SwingConstants.RIGHT);
+        buttonHomeware.setMaximumSize(new java.awt.Dimension(220, 30));
+        buttonHomeware.setPreferredSize(new java.awt.Dimension(220, 30));
+        buttonHomeware.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                buttonHomewareActionPerformed(evt);
+            }
+        });
+        jToolBar1.add(buttonHomeware);
 
-        jComboBox4.setBackground(new java.awt.Color(60, 75, 112));
-        jComboBox4.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
-        jComboBox4.setBorder(null);
-        gridBagConstraints = new java.awt.GridBagConstraints();
-        gridBagConstraints.gridx = 0;
-        gridBagConstraints.gridy = 4;
-        gridBagConstraints.gridwidth = java.awt.GridBagConstraints.RELATIVE;
-        gridBagConstraints.fill = java.awt.GridBagConstraints.HORIZONTAL;
-        gridBagConstraints.ipadx = 10;
-        gridBagConstraints.ipady = 5;
-        add(jComboBox4, gridBagConstraints);
+        buttonHomeware1.setBackground(new java.awt.Color(17, 57, 103));
+        buttonHomeware1.setForeground(new java.awt.Color(255, 255, 255));
+        buttonHomeware1.setIcon(new javax.swing.ImageIcon("C:\\Users\\jared\\OneDrive\\Documentos\\NetBeansProjects\\Unsis\\SalePoint\\src\\main\\java\\com\\unsis\\images\\settingsIcon.png")); // NOI18N
+        buttonHomeware1.setText("Ajustes");
+        buttonHomeware1.setBorder(javax.swing.BorderFactory.createBevelBorder(javax.swing.border.BevelBorder.RAISED));
+        buttonHomeware1.setContentAreaFilled(false);
+        buttonHomeware1.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+        buttonHomeware1.setFocusable(false);
+        buttonHomeware1.setHorizontalTextPosition(javax.swing.SwingConstants.RIGHT);
+        buttonHomeware1.setMaximumSize(new java.awt.Dimension(220, 30));
+        buttonHomeware1.setPreferredSize(new java.awt.Dimension(220, 30));
+        buttonHomeware1.setVerticalTextPosition(javax.swing.SwingConstants.BOTTOM);
+        buttonHomeware1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                buttonHomeware1ActionPerformed(evt);
+            }
+        });
+        jToolBar1.add(buttonHomeware1);
 
-        jComboBox5.setBackground(new java.awt.Color(60, 75, 112));
-        jComboBox5.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
-        jComboBox5.setBorder(null);
-        gridBagConstraints = new java.awt.GridBagConstraints();
-        gridBagConstraints.gridx = 0;
-        gridBagConstraints.gridy = 6;
-        gridBagConstraints.gridwidth = java.awt.GridBagConstraints.RELATIVE;
-        gridBagConstraints.fill = java.awt.GridBagConstraints.HORIZONTAL;
-        gridBagConstraints.ipadx = 10;
-        gridBagConstraints.ipady = 5;
-        add(jComboBox5, gridBagConstraints);
+        buttonHomeware2.setBackground(new java.awt.Color(17, 57, 103));
+        buttonHomeware2.setForeground(new java.awt.Color(255, 255, 255));
+        buttonHomeware2.setIcon(new javax.swing.ImageIcon("C:\\Users\\jared\\OneDrive\\Documentos\\NetBeansProjects\\Unsis\\SalePoint\\src\\main\\java\\com\\unsis\\images\\ventasLogo.png")); // NOI18N
+        buttonHomeware2.setText("Ventas");
+        buttonHomeware2.setBorder(javax.swing.BorderFactory.createBevelBorder(javax.swing.border.BevelBorder.RAISED));
+        buttonHomeware2.setContentAreaFilled(false);
+        buttonHomeware2.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+        buttonHomeware2.setFocusable(false);
+        buttonHomeware2.setHorizontalTextPosition(javax.swing.SwingConstants.RIGHT);
+        buttonHomeware2.setMaximumSize(new java.awt.Dimension(220, 30));
+        buttonHomeware2.setPreferredSize(new java.awt.Dimension(220, 30));
+        buttonHomeware2.setVerticalTextPosition(javax.swing.SwingConstants.BOTTOM);
+        buttonHomeware2.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                buttonHomeware2ActionPerformed(evt);
+            }
+        });
+        jToolBar1.add(buttonHomeware2);
 
-        jComboBox6.setBackground(new java.awt.Color(60, 75, 112));
-        jComboBox6.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
-        jComboBox6.setBorder(null);
-        gridBagConstraints = new java.awt.GridBagConstraints();
-        gridBagConstraints.gridx = 0;
-        gridBagConstraints.gridy = 8;
-        gridBagConstraints.gridwidth = java.awt.GridBagConstraints.RELATIVE;
-        gridBagConstraints.fill = java.awt.GridBagConstraints.HORIZONTAL;
-        gridBagConstraints.ipadx = 10;
-        gridBagConstraints.ipady = 5;
-        add(jComboBox6, gridBagConstraints);
+        buttonHomeware3.setBackground(new java.awt.Color(17, 57, 103));
+        buttonHomeware3.setForeground(new java.awt.Color(255, 255, 255));
+        buttonHomeware3.setIcon(new javax.swing.ImageIcon("C:\\Users\\jared\\OneDrive\\Documentos\\NetBeansProjects\\Unsis\\SalePoint\\src\\main\\java\\com\\unsis\\images\\contaIcon.png")); // NOI18N
+        buttonHomeware3.setText("Ventas");
+        buttonHomeware3.setBorder(javax.swing.BorderFactory.createBevelBorder(javax.swing.border.BevelBorder.RAISED));
+        buttonHomeware3.setContentAreaFilled(false);
+        buttonHomeware3.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+        buttonHomeware3.setFocusable(false);
+        buttonHomeware3.setHorizontalTextPosition(javax.swing.SwingConstants.RIGHT);
+        buttonHomeware3.setMaximumSize(new java.awt.Dimension(220, 30));
+        buttonHomeware3.setPreferredSize(new java.awt.Dimension(220, 30));
+        buttonHomeware3.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                buttonHomeware3ActionPerformed(evt);
+            }
+        });
+        jToolBar1.add(buttonHomeware3);
+
+        buttonHomeware4.setBackground(new java.awt.Color(17, 57, 103));
+        buttonHomeware4.setForeground(new java.awt.Color(255, 255, 255));
+        buttonHomeware4.setIcon(new javax.swing.ImageIcon("C:\\Users\\jared\\OneDrive\\Documentos\\NetBeansProjects\\Unsis\\SalePoint\\src\\main\\java\\com\\unsis\\images\\humanResourcesIcon.png")); // NOI18N
+        buttonHomeware4.setText("Recursos humanos");
+        buttonHomeware4.setBorder(javax.swing.BorderFactory.createBevelBorder(javax.swing.border.BevelBorder.RAISED));
+        buttonHomeware4.setContentAreaFilled(false);
+        buttonHomeware4.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+        buttonHomeware4.setFocusable(false);
+        buttonHomeware4.setHorizontalTextPosition(javax.swing.SwingConstants.RIGHT);
+        buttonHomeware4.setMaximumSize(new java.awt.Dimension(220, 30));
+        buttonHomeware4.setPreferredSize(new java.awt.Dimension(220, 30));
+        buttonHomeware4.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                buttonHomeware4ActionPerformed(evt);
+            }
+        });
+        jToolBar1.add(buttonHomeware4);
+
+        add(jToolBar1, new org.netbeans.lib.awtextra.AbsoluteConstraints(-4, -5, 220, 160));
     }// </editor-fold>//GEN-END:initComponents
+
+    private void buttonHomewareActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_buttonHomewareActionPerformed
+        menuHomeware.show(buttonHomeware, 5, buttonHomeware.getHeight());
+    }//GEN-LAST:event_buttonHomewareActionPerformed
+
+    private void buttonHomeware1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_buttonHomeware1ActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_buttonHomeware1ActionPerformed
+
+    private void buttonHomeware2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_buttonHomeware2ActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_buttonHomeware2ActionPerformed
+
+    private void buttonHomeware3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_buttonHomeware3ActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_buttonHomeware3ActionPerformed
+
+    private void buttonHomeware4ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_buttonHomeware4ActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_buttonHomeware4ActionPerformed
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JComboBox<String> comboHomeware;
-    private javax.swing.JComboBox<String> jComboBox3;
-    private javax.swing.JComboBox<String> jComboBox4;
-    private javax.swing.JComboBox<String> jComboBox5;
-    private javax.swing.JComboBox<String> jComboBox6;
+    private javax.swing.JButton buttonHomeware;
+    private javax.swing.JButton buttonHomeware1;
+    private javax.swing.JButton buttonHomeware2;
+    private javax.swing.JButton buttonHomeware3;
+    private javax.swing.JButton buttonHomeware4;
+    private javax.swing.JToolBar jToolBar1;
     private javax.swing.JLabel labelHomewore;
+    private javax.swing.JPopupMenu menuHomeware;
     // End of variables declaration//GEN-END:variables
 }
