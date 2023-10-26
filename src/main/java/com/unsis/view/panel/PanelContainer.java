@@ -11,7 +11,6 @@ import java.util.HashSet;
 import javax.swing.JButton;
 import javax.swing.JMenuItem;
 import javax.swing.JPopupMenu;
-import javax.swing.border.Border;
 
 public class PanelContainer extends javax.swing.JPanel {
 
@@ -21,10 +20,9 @@ public class PanelContainer extends javax.swing.JPanel {
         initComponents();
         areas = new ArrayList<>();
         this.generateAreas();
-        //generateOptions(new String[]{"3", "2", "1"});
     }
 
-    private JPopupMenu generateOptions(String area) {
+    private JPopupMenu generateOptions(String area, JButton parent) {
         JPopupMenu menu = new JPopupMenu();
         JMenuItem item;
         for (Constants.Section section : Constants.sections) {
@@ -34,7 +32,7 @@ public class PanelContainer extends javax.swing.JPanel {
                 item.setForeground(Color.WHITE);
                 item.setBackground(new Color(60, 75, 112));
                 item.setOpaque(true);
-                item.setPreferredSize(new Dimension(toolBar.getWidth(), HEIGHT));
+                item.setPreferredSize(new Dimension(parent.getWidth() - 5, item.getPreferredSize().height));
                 menu.add(item);
             }
         }
@@ -68,7 +66,7 @@ public class PanelContainer extends javax.swing.JPanel {
             buttonWrapper.setPreferredSize(new Dimension(220, 30));
 
             buttonWrapper.addActionListener((e) -> {
-                generateOptions(area).show(buttonWrapper, 5, buttonWrapper.getHeight());
+                generateOptions(area, buttonWrapper).show(buttonWrapper, 0, buttonWrapper.getHeight());
             });
 
             this.areas.add(buttonWrapper);

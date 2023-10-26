@@ -1,6 +1,7 @@
 package com.unsis.puntoVenta;
 
 import com.unsis.view.Main;
+import com.unsis.view.panel.FirstEjecutation;
 import com.unsis.view.panel.Login;
 import com.unsis.view.panel.RegisterCompany;
 
@@ -26,7 +27,7 @@ public class PuntoVenta {
                 }
             }
         } else {
-            RegisterCompany registerCompanyWindow = new RegisterCompany();
+            FirstEjecutation registerCompanyWindow = new FirstEjecutation();
             registerCompanyWindow.setVisible(true);
 
             // Agregar un bucle para pausar la ejecución hasta que la ventana se cierre
@@ -43,6 +44,6 @@ public class PuntoVenta {
     }
 
     private boolean loadedMarch() {
-        return true;
+        return false;
     }
 }

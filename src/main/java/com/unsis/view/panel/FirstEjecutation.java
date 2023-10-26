@@ -4,6 +4,10 @@
  */
 package com.unsis.view.panel;
 
+import java.awt.Image;
+import javax.swing.Icon;
+import javax.swing.ImageIcon;
+
 /**
  *
  * @author labtecweb04
@@ -15,7 +19,49 @@ public class FirstEjecutation extends javax.swing.JFrame {
      */
     public FirstEjecutation() {
         initComponents();
+        
+        this.setResizable(false);
+        this.setLocationRelativeTo(null);
+        this.setTitle("Iniciar programa");
+        
+        resizeImages();
     }
+    
+    /**
+     * Redimenciona las imagenes de los botones para que se ajusten a el tamaño
+     * necesario
+     */
+    private void resizeImages() {
+        Icon resizedIcon = resizeIcon(buttonCancel.getIcon(), 30, 30);
+        buttonCancel.setIcon(resizedIcon);
+
+        resizedIcon = resizeIcon(buttonSave.getIcon(), 25, 22);
+        buttonSave.setIcon(resizedIcon);
+
+    }
+
+    /**
+     * Resize image for 
+     * @param icon image for resize
+     * @param width Width for image
+     * @param height height for image
+     * @return
+     */
+    private Icon resizeIcon(Icon icon, int width, int height) {
+        if (icon instanceof ImageIcon) {
+            ImageIcon imageIcon = (ImageIcon) icon;
+            Image image = imageIcon.getImage();
+
+            // Redimensionar la imagen al tamaño deseado
+            Image resizedImage = image.getScaledInstance(width, height, Image.SCALE_SMOOTH);
+
+            // Crear un nuevo ImageIcon con la imagen redimensionada
+            return new ImageIcon(resizedImage);
+        }
+
+        return icon; // Devolver el icono original si no es un ImageIcon
+    }
+
 
     /**
      * This method is called from within the constructor to initialize the form.
@@ -33,8 +79,8 @@ public class FirstEjecutation extends javax.swing.JFrame {
         jPanel2 = new javax.swing.JPanel();
         jTextField1 = new javax.swing.JTextField();
         jLabel1 = new javax.swing.JLabel();
-        jButton1 = new javax.swing.JButton();
-        jButton2 = new javax.swing.JButton();
+        buttonCancel = new javax.swing.JButton();
+        buttonSave = new javax.swing.JButton();
         jPanel3 = new javax.swing.JPanel();
         labeltext = new javax.swing.JLabel();
         jPanel4 = new javax.swing.JPanel();
@@ -59,7 +105,7 @@ public class FirstEjecutation extends javax.swing.JFrame {
         jButton3.setText("Importar");
         jButton3.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(215, 251, 203)));
         jButton3.setHorizontalAlignment(javax.swing.SwingConstants.RIGHT);
-        jPanel1.add(jButton3, new org.netbeans.lib.awtextra.AbsoluteConstraints(180, 360, 100, 30));
+        jPanel1.add(jButton3, new org.netbeans.lib.awtextra.AbsoluteConstraints(160, 360, 120, 30));
 
         getContentPane().add(jPanel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, -1, -1));
 
@@ -81,25 +127,25 @@ public class FirstEjecutation extends javax.swing.JFrame {
         jLabel1.setForeground(new java.awt.Color(3, 43, 89));
         jLabel1.setText("Ingrese un Nombre");
 
-        jButton1.setFont(new java.awt.Font("Jaldi", 1, 15)); // NOI18N
-        jButton1.setForeground(new java.awt.Color(25, 130, 206));
-        jButton1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Group 43.png"))); // NOI18N
-        jButton1.setText("Descartar");
-        jButton1.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(25, 130, 206)));
-        jButton1.setHorizontalAlignment(javax.swing.SwingConstants.RIGHT);
-        jButton1.setPreferredSize(new java.awt.Dimension(109, 33));
-        jButton1.addActionListener(new java.awt.event.ActionListener() {
+        buttonCancel.setFont(new java.awt.Font("Jaldi", 1, 15)); // NOI18N
+        buttonCancel.setForeground(new java.awt.Color(25, 130, 206));
+        buttonCancel.setIcon(new javax.swing.ImageIcon(getClass().getResource("/menos.png"))); // NOI18N
+        buttonCancel.setText("Descartar");
+        buttonCancel.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(25, 130, 206)));
+        buttonCancel.setHorizontalAlignment(javax.swing.SwingConstants.RIGHT);
+        buttonCancel.setPreferredSize(new java.awt.Dimension(109, 33));
+        buttonCancel.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton1ActionPerformed(evt);
+                buttonCancelActionPerformed(evt);
             }
         });
 
-        jButton2.setBackground(new java.awt.Color(25, 130, 206));
-        jButton2.setFont(new java.awt.Font("Jaldi", 1, 15)); // NOI18N
-        jButton2.setForeground(new java.awt.Color(255, 255, 255));
-        jButton2.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Group 42.png"))); // NOI18N
-        jButton2.setText("Guardar");
-        jButton2.setHorizontalAlignment(javax.swing.SwingConstants.RIGHT);
+        buttonSave.setBackground(new java.awt.Color(25, 130, 206));
+        buttonSave.setFont(new java.awt.Font("Jaldi", 1, 15)); // NOI18N
+        buttonSave.setForeground(new java.awt.Color(255, 255, 255));
+        buttonSave.setIcon(new javax.swing.ImageIcon(getClass().getResource("/save.png"))); // NOI18N
+        buttonSave.setText("Guardar");
+        buttonSave.setHorizontalAlignment(javax.swing.SwingConstants.RIGHT);
 
         labeltext.setHorizontalAlignment(javax.swing.SwingConstants.LEFT);
         labeltext.setVerticalAlignment(javax.swing.SwingConstants.TOP);
@@ -143,31 +189,32 @@ public class FirstEjecutation extends javax.swing.JFrame {
         jPanel2Layout.setHorizontalGroup(
             jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel2Layout.createSequentialGroup()
-                .addContainerGap(84, Short.MAX_VALUE)
-                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
-                    .addComponent(jPanel3, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addGroup(javax.swing.GroupLayout.Alignment.LEADING, jPanel2Layout.createSequentialGroup()
-                        .addComponent(jButton1, javax.swing.GroupLayout.PREFERRED_SIZE, 101, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 63, Short.MAX_VALUE)
-                        .addComponent(jButton2))
-                    .addComponent(jLabel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(jTextField1))
+                .addContainerGap(47, Short.MAX_VALUE)
+                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
+                        .addComponent(jPanel3, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addComponent(jLabel1, javax.swing.GroupLayout.DEFAULT_SIZE, 310, Short.MAX_VALUE)
+                        .addComponent(jTextField1))
+                    .addGroup(jPanel2Layout.createSequentialGroup()
+                        .addComponent(buttonCancel, javax.swing.GroupLayout.PREFERRED_SIZE, 155, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(buttonSave)))
                 .addGap(82, 82, 82))
         );
         jPanel2Layout.setVerticalGroup(
             jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel2Layout.createSequentialGroup()
-                .addContainerGap(60, Short.MAX_VALUE)
+                .addContainerGap(69, Short.MAX_VALUE)
                 .addComponent(jPanel3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(77, 77, 77)
                 .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 28, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jTextField1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(29, 29, 29)
+                .addGap(18, 18, 18)
                 .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jButton1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jButton2))
-                .addGap(110, 110, 110))
+                    .addComponent(buttonCancel, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(buttonSave, javax.swing.GroupLayout.PREFERRED_SIZE, 33, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(121, 121, 121))
         );
 
         getContentPane().add(jPanel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(450, 0, 439, -1));
@@ -179,9 +226,9 @@ public class FirstEjecutation extends javax.swing.JFrame {
         // TODO add your handling code here:
     }//GEN-LAST:event_jTextField1ActionPerformed
 
-    private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
+    private void buttonCancelActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_buttonCancelActionPerformed
         // TODO add your handling code here:
-    }//GEN-LAST:event_jButton1ActionPerformed
+    }//GEN-LAST:event_buttonCancelActionPerformed
 
     /**
      * @param args the command line arguments
@@ -219,8 +266,8 @@ public class FirstEjecutation extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JButton jButton1;
-    private javax.swing.JButton jButton2;
+    private javax.swing.JButton buttonCancel;
+    private javax.swing.JButton buttonSave;
     private javax.swing.JButton jButton3;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel3;

@@ -49,7 +49,7 @@ public class Login extends javax.swing.JFrame {
 
         jPanel1.setBackground(new java.awt.Color(17, 57, 103));
 
-        jLabel1.setFont(new java.awt.Font("Jaldi", 0, 25)); // NOI18N
+        jLabel1.setFont(new java.awt.Font("Jaldi", 0, 18)); // NOI18N
         jLabel1.setForeground(new java.awt.Color(231, 231, 231));
         jLabel1.setText("Usuario");
 
@@ -76,7 +76,7 @@ public class Login extends javax.swing.JFrame {
             }
         });
 
-        jLabel2.setFont(new java.awt.Font("Jaldi", 0, 25)); // NOI18N
+        jLabel2.setFont(new java.awt.Font("Jaldi", 0, 18)); // NOI18N
         jLabel2.setForeground(new java.awt.Color(231, 231, 231));
         jLabel2.setText("Contraseña");
 
@@ -107,15 +107,15 @@ public class Login extends javax.swing.JFrame {
             .addGroup(jPanel1Layout.createSequentialGroup()
                 .addGap(82, 82, 82)
                 .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 28, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(txtUser, javax.swing.GroupLayout.PREFERRED_SIZE, 31, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(30, 30, 30)
+                .addGap(24, 24, 24)
                 .addComponent(jLabel2, javax.swing.GroupLayout.PREFERRED_SIZE, 28, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(txtPass, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(50, 50, 50)
+                .addGap(71, 71, 71)
                 .addComponent(buttonLogin)
-                .addContainerGap(51, Short.MAX_VALUE))
+                .addContainerGap(42, Short.MAX_VALUE))
         );
 
         jPanel2.setBackground(new java.awt.Color(255, 255, 255));

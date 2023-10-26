@@ -7,8 +7,10 @@ package com.unsis.view;
 import com.unsis.models.constants.Constants;
 import com.unsis.view.panel.AltaEmpleado;
 import com.unsis.view.panel.HumanResourcesPanel;
+import com.unsis.view.panel.MainMenu;
 import com.unsis.view.panel.NavBar;
 import com.unsis.view.panel.Venta;
+import javax.swing.JFrame;
 import javax.swing.JPanel;
 
 /**
@@ -18,6 +20,7 @@ import javax.swing.JPanel;
 public class Main extends javax.swing.JFrame {
 
     private final AltaEmpleado altaEmpleado = new AltaEmpleado();
+    private final MainMenu mainMenu = new MainMenu();
     private final HumanResourcesPanel humanResources = new HumanResourcesPanel();
     private final Venta sale = new Venta();
     
@@ -27,18 +30,17 @@ public class Main extends javax.swing.JFrame {
      */
     public Main() {
         initComponents();
-        Constants.fillContants();
+        
+        this.setExtendedState(JFrame.MAXIMIZED_BOTH);
         this.setSize(1237, 1224);
+        
+        Constants.fillContants();
+        
         NavBar navigator = new NavBar();
         navigator.setBounds(0,0, 216, 1024);
         
-        //HumanResourcesPanel humans = new HumanResourcesPanel();
-        //humans.setBounds(217, 0, 1200, 1900);
-        
-        altaEmpleado.setBounds(217, 0, 1200, 1900);
-        
         this.add(navigator);
-        this.add(altaEmpleado);
+        this.add(mainMenu);
     }
     
     private void setView(JPanel panel) {
