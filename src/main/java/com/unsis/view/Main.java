@@ -18,7 +18,7 @@ public class Main extends javax.swing.JFrame {
      */
     public Main() {
         initComponents();
-        this.setSize(1237, 1024);
+        this.setSize(1237, 1224);
         NavBar panel = new NavBar();
         panel.setBounds(0,0, 216, 1024);
         

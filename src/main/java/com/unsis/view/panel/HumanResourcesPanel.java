@@ -26,6 +26,9 @@ public class HumanResourcesPanel extends javax.swing.JPanel {
 
         // Obtener el JTableHeader (encabezado de la tabla)
         JTableHeader tableHeader = table.getTableHeader();
+        tableHeader.setFont(new Font("monospaced", Font.BOLD, 24));
+        tableHeader.setForeground(Color.DARK_GRAY); // Alineación del texto en el encabezado
+        tableHeader.setAlignmentX(SwingConstants.CENTER);
 
         // Crear un renderizador de encabezado personalizado
         DefaultTableCellRenderer headerRenderer = new DefaultTableCellRenderer();
@@ -33,14 +36,15 @@ public class HumanResourcesPanel extends javax.swing.JPanel {
         headerRenderer.setVerticalAlignment(SwingConstants.CENTER);
         headerRenderer.setBackground(Color.WHITE); // Cambia el color de fondo del encabezado
         headerRenderer.setForeground(Color.DARK_GRAY); // Cambia el color del texto del encabezado
-        headerRenderer.setFont(new Font("Arial", Font.BOLD, 20)); // Cambia el color del texto del encabezado
+        headerRenderer.setFont(new Font("monospaced", Font.BOLD, 24)); // Cambia el color del texto del encabezado
 
         // Asignar el renderizador personalizado al encabezado
         tableHeader.setDefaultRenderer(headerRenderer);
-        
-        TableColumnModel modelColumn =  table.getColumnModel();
+
+        TableColumnModel modelColumn = table.getColumnModel();
         modelColumn.setColumnMargin(35);
     }
+    
 
     /**
      * This method is called from within the constructor to initialize the form.
@@ -79,8 +83,9 @@ public class HumanResourcesPanel extends javax.swing.JPanel {
 
         buttonModify.setBackground(new java.awt.Color(255, 255, 255));
         buttonModify.setFont(new java.awt.Font("Dialog", 1, 16)); // NOI18N
-        buttonModify.setForeground(new java.awt.Color(51, 102, 255));
-        buttonModify.setText("+ Modificación");
+        buttonModify.setForeground(new java.awt.Color(101, 128, 223));
+        buttonModify.setIcon(new javax.swing.ImageIcon("C:\\Users\\jared\\OneDrive\\Documentos\\NetBeansProjects\\Unsis\\SalePoint\\src\\main\\java\\resources\\images\\iconEdit.png")); // NOI18N
+        buttonModify.setText("Modificación");
         buttonModify.setBorder(BorderFactory.createLineBorder(Color.BLUE, 2));
         buttonModify.setContentAreaFilled(false);
 
@@ -119,6 +124,7 @@ public class HumanResourcesPanel extends javax.swing.JPanel {
         );
 
         jPanel2.setBackground(new java.awt.Color(255, 255, 255));
+        jPanel2.setPreferredSize(new java.awt.Dimension(453, 500));
 
         table.setBackground(new java.awt.Color(255, 255, 255));
         table.setModel(new javax.swing.table.DefaultTableModel(
@@ -151,13 +157,13 @@ public class HumanResourcesPanel extends javax.swing.JPanel {
         jPanel2.setLayout(jPanel2Layout);
         jPanel2Layout.setHorizontalGroup(
             jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jScrollPane1)
+            .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 1073, Short.MAX_VALUE)
         );
         jPanel2Layout.setVerticalGroup(
             jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel2Layout.createSequentialGroup()
-                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 925, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(0, 699, Short.MAX_VALUE))
+                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 499, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(0, 1, Short.MAX_VALUE))
         );
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
@@ -165,11 +171,11 @@ public class HumanResourcesPanel extends javax.swing.JPanel {
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addGap(31, 31, 31)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                    .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(jPanel2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                .addContainerGap(96, Short.MAX_VALUE))
+                .addGap(57, 57, 57)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                    .addComponent(jPanel2, javax.swing.GroupLayout.PREFERRED_SIZE, 1073, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addContainerGap(64, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -178,7 +184,7 @@ public class HumanResourcesPanel extends javax.swing.JPanel {
                 .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(35, 35, 35)
                 .addComponent(jPanel2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(44, Short.MAX_VALUE))
+                .addContainerGap(35, Short.MAX_VALUE))
         );
     }// </editor-fold>//GEN-END:initComponents
 
