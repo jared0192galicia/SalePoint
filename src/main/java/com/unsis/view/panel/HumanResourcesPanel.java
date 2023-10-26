@@ -67,61 +67,50 @@ public class HumanResourcesPanel extends javax.swing.JPanel {
         setBackground(new java.awt.Color(240, 240, 240));
 
         jPanel1.setBackground(new java.awt.Color(255, 255, 255));
+        jPanel1.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
         buttonCreate.setBackground(new java.awt.Color(255, 255, 255));
         buttonCreate.setFont(new java.awt.Font("Dialog", 1, 16)); // NOI18N
         buttonCreate.setForeground(new java.awt.Color(0, 153, 0));
-        buttonCreate.setText("+ Alta");
+        buttonCreate.setIcon(new javax.swing.ImageIcon(getClass().getResource("/iconPlus.png"))); // NOI18N
+        buttonCreate.setText("Alta");
         buttonCreate.setBorder(BorderFactory.createLineBorder(new Color(0,153,0), 2));
         buttonCreate.setContentAreaFilled(false);
+        buttonCreate.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+        buttonCreate.setMaximumSize(new java.awt.Dimension(157, 38));
+        buttonCreate.setMinimumSize(new java.awt.Dimension(157, 38));
+        jPanel1.add(buttonCreate, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 10, 170, 60));
 
         buttonExport.setBackground(new java.awt.Color(0, 102, 0));
         buttonExport.setFont(new java.awt.Font("Dialog", 1, 16)); // NOI18N
         buttonExport.setForeground(new java.awt.Color(255, 255, 255));
         buttonExport.setText("+ Exportar");
         buttonExport.setBorder(null);
+        jPanel1.add(buttonExport, new org.netbeans.lib.awtextra.AbsoluteConstraints(928, 23, 136, 34));
 
         buttonModify.setBackground(new java.awt.Color(255, 255, 255));
         buttonModify.setFont(new java.awt.Font("Dialog", 1, 16)); // NOI18N
         buttonModify.setForeground(new java.awt.Color(101, 128, 223));
-        buttonModify.setIcon(new javax.swing.ImageIcon("C:\\Users\\jared\\OneDrive\\Documentos\\NetBeansProjects\\Unsis\\SalePoint\\src\\main\\java\\resources\\images\\iconEdit.png")); // NOI18N
+        buttonModify.setIcon(new javax.swing.ImageIcon(getClass().getResource("/iconEdit.png"))); // NOI18N
         buttonModify.setText("Modificación");
         buttonModify.setBorder(BorderFactory.createLineBorder(Color.BLUE, 2));
         buttonModify.setContentAreaFilled(false);
+        buttonModify.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+        buttonModify.setMaximumSize(new java.awt.Dimension(157, 35));
+        buttonModify.setMinimumSize(new java.awt.Dimension(157, 35));
+        jPanel1.add(buttonModify, new org.netbeans.lib.awtextra.AbsoluteConstraints(190, 10, 170, 60));
 
         buttonDelete.setBackground(new java.awt.Color(255, 255, 255));
         buttonDelete.setFont(new java.awt.Font("Dialog", 1, 16)); // NOI18N
         buttonDelete.setForeground(new java.awt.Color(255, 0, 51));
-        buttonDelete.setText("+ Eliminar");
+        buttonDelete.setIcon(new javax.swing.ImageIcon(getClass().getResource("/iconTrash.png"))); // NOI18N
+        buttonDelete.setText("Eliminar");
         buttonDelete.setBorder(BorderFactory.createLineBorder(Color.RED, 2));
         buttonDelete.setContentAreaFilled(false);
-
-        javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
-        jPanel1.setLayout(jPanel1Layout);
-        jPanel1Layout.setHorizontalGroup(
-            jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jPanel1Layout.createSequentialGroup()
-                .addGap(27, 27, 27)
-                .addComponent(buttonCreate, javax.swing.GroupLayout.PREFERRED_SIZE, 136, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(30, 30, 30)
-                .addComponent(buttonModify)
-                .addGap(18, 18, 18)
-                .addComponent(buttonDelete, javax.swing.GroupLayout.PREFERRED_SIZE, 136, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 422, Short.MAX_VALUE)
-                .addComponent(buttonExport, javax.swing.GroupLayout.PREFERRED_SIZE, 136, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(25, 25, 25))
-        );
-        jPanel1Layout.setVerticalGroup(
-            jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jPanel1Layout.createSequentialGroup()
-                .addGap(23, 23, 23)
-                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(buttonCreate, javax.swing.GroupLayout.PREFERRED_SIZE, 43, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(buttonExport, javax.swing.GroupLayout.DEFAULT_SIZE, 44, Short.MAX_VALUE)
-                    .addComponent(buttonModify, javax.swing.GroupLayout.DEFAULT_SIZE, 44, Short.MAX_VALUE)
-                    .addComponent(buttonDelete, javax.swing.GroupLayout.DEFAULT_SIZE, 44, Short.MAX_VALUE))
-                .addGap(17, 17, 17))
-        );
+        buttonDelete.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+        buttonDelete.setMaximumSize(new java.awt.Dimension(157, 35));
+        buttonDelete.setMinimumSize(new java.awt.Dimension(157, 35));
+        jPanel1.add(buttonDelete, new org.netbeans.lib.awtextra.AbsoluteConstraints(370, 10, 170, 60));
 
         jPanel2.setBackground(new java.awt.Color(255, 255, 255));
         jPanel2.setPreferredSize(new java.awt.Dimension(453, 500));
@@ -175,16 +164,16 @@ public class HumanResourcesPanel extends javax.swing.JPanel {
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                     .addComponent(jPanel2, javax.swing.GroupLayout.PREFERRED_SIZE, 1073, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addContainerGap(64, Short.MAX_VALUE))
+                .addContainerGap(70, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
                 .addGap(31, 31, 31)
-                .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(35, 35, 35)
+                .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, 85, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(30, 30, 30)
                 .addComponent(jPanel2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(35, Short.MAX_VALUE))
+                .addContainerGap(46, Short.MAX_VALUE))
         );
     }// </editor-fold>//GEN-END:initComponents
 

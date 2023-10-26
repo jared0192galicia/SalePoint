@@ -66,7 +66,7 @@ public class PanelContainer extends javax.swing.JPanel {
         buttonHomeware.setText("Almacen");
         buttonHomeware.setBorder(javax.swing.BorderFactory.createBevelBorder(javax.swing.border.BevelBorder.RAISED));
         buttonHomeware.setContentAreaFilled(false);
-        buttonHomeware.setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
+        buttonHomeware.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
         buttonHomeware.setFocusable(false);
         buttonHomeware.setHorizontalTextPosition(javax.swing.SwingConstants.RIGHT);
         buttonHomeware.setMaximumSize(new java.awt.Dimension(220, 30));
@@ -84,6 +84,7 @@ public class PanelContainer extends javax.swing.JPanel {
         buttonHomeware1.setText("Ajustes");
         buttonHomeware1.setBorder(javax.swing.BorderFactory.createBevelBorder(javax.swing.border.BevelBorder.RAISED));
         buttonHomeware1.setContentAreaFilled(false);
+        buttonHomeware1.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
         buttonHomeware1.setFocusable(false);
         buttonHomeware1.setHorizontalTextPosition(javax.swing.SwingConstants.RIGHT);
         buttonHomeware1.setMaximumSize(new java.awt.Dimension(220, 30));
@@ -102,6 +103,7 @@ public class PanelContainer extends javax.swing.JPanel {
         buttonHomeware2.setText("Ventas");
         buttonHomeware2.setBorder(javax.swing.BorderFactory.createBevelBorder(javax.swing.border.BevelBorder.RAISED));
         buttonHomeware2.setContentAreaFilled(false);
+        buttonHomeware2.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
         buttonHomeware2.setFocusable(false);
         buttonHomeware2.setHorizontalTextPosition(javax.swing.SwingConstants.RIGHT);
         buttonHomeware2.setMaximumSize(new java.awt.Dimension(220, 30));
@@ -120,6 +122,7 @@ public class PanelContainer extends javax.swing.JPanel {
         buttonHomeware3.setText("Ventas");
         buttonHomeware3.setBorder(javax.swing.BorderFactory.createBevelBorder(javax.swing.border.BevelBorder.RAISED));
         buttonHomeware3.setContentAreaFilled(false);
+        buttonHomeware3.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
         buttonHomeware3.setFocusable(false);
         buttonHomeware3.setHorizontalTextPosition(javax.swing.SwingConstants.RIGHT);
         buttonHomeware3.setMaximumSize(new java.awt.Dimension(220, 30));
@@ -137,7 +140,7 @@ public class PanelContainer extends javax.swing.JPanel {
         buttonHomeware4.setText("Recursos humanos");
         buttonHomeware4.setBorder(javax.swing.BorderFactory.createBevelBorder(javax.swing.border.BevelBorder.RAISED));
         buttonHomeware4.setContentAreaFilled(false);
-        buttonHomeware4.setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
+        buttonHomeware4.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
         buttonHomeware4.setFocusable(false);
         buttonHomeware4.setHorizontalTextPosition(javax.swing.SwingConstants.RIGHT);
         buttonHomeware4.setMaximumSize(new java.awt.Dimension(220, 30));
@@ -149,7 +152,7 @@ public class PanelContainer extends javax.swing.JPanel {
         });
         jToolBar1.add(buttonHomeware4);
 
-        add(jToolBar1, new org.netbeans.lib.awtextra.AbsoluteConstraints(-4, -5, 220, 270));
+        add(jToolBar1, new org.netbeans.lib.awtextra.AbsoluteConstraints(-4, -5, 220, 160));
     }// </editor-fold>//GEN-END:initComponents
 
     private void buttonHomewareActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_buttonHomewareActionPerformed
