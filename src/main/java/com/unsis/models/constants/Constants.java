@@ -8,7 +8,6 @@ import java.util.ArrayList;
  */
 public class Constants {
 
-    //public static String[][] secctions = new String[][]{{"Lista Empleados","", ""}, };
     public static ArrayList<Section> sections = new ArrayList<>();
 
     public static void fillContants() {

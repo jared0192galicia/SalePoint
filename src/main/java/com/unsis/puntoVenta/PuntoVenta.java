@@ -14,11 +14,29 @@ public class PuntoVenta {
         PuntoVenta entryPoint = new PuntoVenta();
 
         if (entryPoint.loadedMarch()) {
-            new Login().setVisible(true);
+            Login loginWindow = new Login();
+            loginWindow.setVisible(true);
 
+            // Agregar un bucle para pausar la ejecución hasta que la ventana se cierre
+            while (loginWindow.isVisible()) {
+                try {
+                    Thread.sleep(100); // Pausa por 100 milisegundos
+                } catch (InterruptedException e) {
+                    e.printStackTrace();
+                }
+            }
         } else {
-            new RegisterCompany().setVisible(true);
+            RegisterCompany registerCompanyWindow = new RegisterCompany();
+            registerCompanyWindow.setVisible(true);
 
+            // Agregar un bucle para pausar la ejecución hasta que la ventana se cierre
+            while (registerCompanyWindow.isVisible()) {
+                try {
+                    Thread.sleep(100); // Pausa por 100 milisegundos
+                } catch (InterruptedException e) {
+                    e.printStackTrace();
+                }
+            }
         }
 
         new Main(new String[]{"1", "2", "3", "4"}).setVisible(true);
