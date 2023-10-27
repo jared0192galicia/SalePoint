@@ -8,11 +8,12 @@ public class NavBar extends javax.swing.JPanel {
 
     /**
      * Creates new form NavBar
+     * @param access
      */
-    public NavBar() {
+    public NavBar(String[] access) {
         initComponents();
         this.setSize(207, 1024);
-        PanelContainer options = new PanelContainer();
+        PanelContainer options = new PanelContainer(access);
         options.setBounds(5, 140, 204, 191);
         this.add(options);
     }

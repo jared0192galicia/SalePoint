@@ -1,5 +1,6 @@
 package com.unsis.puntoVenta;
 
+import com.unsis.view.Main;
 import com.unsis.view.panel.Login;
 import com.unsis.view.panel.RegisterCompany;
 
@@ -20,6 +21,7 @@ public class PuntoVenta {
 
         }
 
+        new Main(new String[]{"1", "2", "3", "4"}).setVisible(true);
         System.out.println("End of the execution");
     }
 

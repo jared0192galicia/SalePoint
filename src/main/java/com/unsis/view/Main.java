@@ -23,11 +23,12 @@ public class Main extends javax.swing.JFrame {
     
     /**
      * Creates new form Home
+     * @param access
      */
-    public Main() {
+    public Main(String[] access) {
         initComponents();
         this.setSize(1237, 1224);
-        NavBar navigator = new NavBar();
+        NavBar navigator = new NavBar(access);
         navigator.setBounds(0,0, 216, 1024);
         
         //HumanResourcesPanel humans = new HumanResourcesPanel();
@@ -99,7 +100,7 @@ public class Main extends javax.swing.JFrame {
         /* Create and display the form */
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
-                new Main().setVisible(true);
+                new Main(new String[]{"", ""}).setVisible(true);
             }
         });
     }

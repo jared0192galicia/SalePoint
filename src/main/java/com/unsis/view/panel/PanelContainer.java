@@ -5,10 +5,9 @@ import javax.swing.JMenuItem;
 
 public class PanelContainer extends javax.swing.JPanel {
 
-    public PanelContainer() {
+    public PanelContainer(String[] access) {
         initComponents();
-        //rendererAllComoboBox();
-        generateOptions(new String[]{"Inventario", "Mercancia disponible"});
+        generateOptions(access);
     }
 
     private void generateOptions(String texts[]) {
