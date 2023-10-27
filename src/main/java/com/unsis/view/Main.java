@@ -6,7 +6,7 @@ package com.unsis.view;
 
 import com.unsis.view.panel.AltaEmpleado;
 import com.unsis.view.panel.HumanResourcesPanel;
-import com.unsis.view.panel.InicioSecion;
+import com.unsis.view.panel.Login;
 import com.unsis.view.panel.NavBar;
 import com.unsis.view.panel.Venta;
 import javax.swing.JPanel;

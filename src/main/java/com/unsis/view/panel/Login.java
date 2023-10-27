@@ -8,13 +8,15 @@ package com.unsis.view.panel;
  *
  * @author labtecweb04
  */
-public class InicioSecion extends javax.swing.JPanel {
+public class Login extends javax.swing.JFrame {
 
     /**
      * Creates new form InicioSecion
      */
-    public InicioSecion() {
+    public Login() {
         initComponents();
+        this.setVisible(true);
+        System.out.println("Login");
     }
 
     /**
