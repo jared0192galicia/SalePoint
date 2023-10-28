@@ -37,7 +37,7 @@ public class PanelContainer extends javax.swing.JPanel {
                 menu.add(item);
             }
         }
-        
+
         return menu;
     }
 
@@ -56,22 +56,22 @@ public class PanelContainer extends javax.swing.JPanel {
 
         JButton button;
         for (String area : areas) {
-            button = new JButton(area);
-            button.setBackground(new Color(17, 57, 103));
-            button.setForeground(Color.WHITE);
-            button.setFont(new Font("Dialog", Font.BOLD, 12));
-            button.setBorder(buttonHomeware.getBorder());
-            button.setCursor(Cursor.getPredefinedCursor(Cursor.HAND_CURSOR));
-            button.setFocusPainted(true);
-            button.setMargin(new Insets(2, 14, 2, 14));
-            button.setMaximumSize(new Dimension(220, 30));
-            button.setPreferredSize(new Dimension(220, 30));
-            
-            button.addActionListener((e) -> {
-                generateOptions(area).show(button, 5, button.getHeight());
+            final JButton buttonWrapper = new JButton(area); // Envuelve 'button' en un array final
+            buttonWrapper.setBackground(new Color(17, 57, 103));
+            buttonWrapper.setForeground(Color.WHITE);
+            buttonWrapper.setFont(new Font("Dialog", Font.BOLD, 12));
+            buttonWrapper.setBorder(buttonHomeware.getBorder());
+            buttonWrapper.setCursor(Cursor.getPredefinedCursor(Cursor.HAND_CURSOR));
+            buttonWrapper.setFocusPainted(true);
+            buttonWrapper.setMargin(new Insets(2, 14, 2, 14));
+            buttonWrapper.setMaximumSize(new Dimension(220, 30));
+            buttonWrapper.setPreferredSize(new Dimension(220, 30));
+
+            buttonWrapper.addActionListener((e) -> {
+                generateOptions(area).show(buttonWrapper, 5, buttonWrapper.getHeight());
             });
 
-            this.areas.add(button);
+            this.areas.add(buttonWrapper);
         }
 
         for (JButton area : this.areas) {
