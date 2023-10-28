@@ -2,54 +2,83 @@ package com.unsis.view.panel;
 
 import com.unsis.models.constants.Constants;
 import java.awt.Color;
+import java.awt.Cursor;
+import java.awt.Dimension;
+import java.awt.Font;
+import java.awt.Insets;
 import java.util.ArrayList;
 import java.util.HashSet;
 import javax.swing.JButton;
 import javax.swing.JMenuItem;
+import javax.swing.JPopupMenu;
+import javax.swing.border.Border;
 
 public class PanelContainer extends javax.swing.JPanel {
 
     private ArrayList<JButton> areas;
-    
+
     public PanelContainer() {
         initComponents();
         areas = new ArrayList<>();
         this.generateAreas();
-        generateOptions(new String[]{"3","2","1"});
+        //generateOptions(new String[]{"3", "2", "1"});
     }
 
-    private void generateOptions(String texts[]) {
+    private JPopupMenu generateOptions(String area) {
+        JPopupMenu menu = new JPopupMenu();
         JMenuItem item;
-        for (String text : texts) {
-            item = new JMenuItem(text);
-            item.setBackground(Color.BLUE);
-            item.setForeground(Color.WHITE);
-            item.setBackground(new Color(60,75,112));
-            item.setOpaque(true);
-            menuHomeware.add(item);
+        for (Constants.Section section : Constants.sections) {
+            if (section.getArea().equals(area)) {
+                item = new JMenuItem(section.getNombre());
+                item.setToolTipText(section.getDescripcion());
+                item.setForeground(Color.WHITE);
+                item.setBackground(new Color(60, 75, 112));
+                item.setOpaque(true);
+                menu.add(item);
+            }
         }
+        
+        return menu;
     }
-    
+
+    /**
+     * Generate JButtons for ToolBar with the names of the areas with access for
+     * user logger
+     */
     private void generateAreas() {
         ArrayList<String> titleAreas = new ArrayList<>();
-        
+
         for (Constants.Section section : Constants.sections) {
             titleAreas.add(section.getArea());
         }
-        
+
         HashSet<String> areas = new HashSet<>(titleAreas);
-        
+
         JButton button;
         for (String area : areas) {
             button = new JButton(area);
+            button.setBackground(new Color(17, 57, 103));
+            button.setForeground(Color.WHITE);
+            button.setFont(new Font("Dialog", Font.BOLD, 12));
+            button.setBorder(buttonHomeware.getBorder());
+            button.setCursor(Cursor.getPredefinedCursor(Cursor.HAND_CURSOR));
+            button.setFocusPainted(true);
+            button.setMargin(new Insets(2, 14, 2, 14));
+            button.setMaximumSize(new Dimension(220, 30));
+            button.setPreferredSize(new Dimension(220, 30));
+            
+            button.addActionListener((e) -> {
+                generateOptions(area).show(button, 5, button.getHeight());
+            });
+
             this.areas.add(button);
         }
-        
+
         for (JButton area : this.areas) {
             toolBar.add(area);
         }
     }
-    
+
     /**
      * This method is called from within the constructor to initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is always
