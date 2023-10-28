@@ -67,29 +67,33 @@ public class AltaEmpleado extends javax.swing.JPanel {
         jButton1 = new javax.swing.JButton();
         jLabel22 = new javax.swing.JLabel();
         jLabel23 = new javax.swing.JLabel();
-        jCheckBox1 = new javax.swing.JCheckBox();
         jLabel24 = new javax.swing.JLabel();
-        jCheckBox2 = new javax.swing.JCheckBox();
-        jCheckBox3 = new javax.swing.JCheckBox();
-        jCheckBox4 = new javax.swing.JCheckBox();
-        jCheckBox5 = new javax.swing.JCheckBox();
-        jCheckBox6 = new javax.swing.JCheckBox();
-        jCheckBox7 = new javax.swing.JCheckBox();
+        checkOrders = new javax.swing.JCheckBox();
+        checkSettingsApp = new javax.swing.JCheckBox();
+        checkSettingsCompany = new javax.swing.JCheckBox();
+        check = new javax.swing.JCheckBox();
+        checkInventory = new javax.swing.JCheckBox();
+        checkRegisterProducts = new javax.swing.JCheckBox();
         jCheckBox8 = new javax.swing.JCheckBox();
-        jCheckBox9 = new javax.swing.JCheckBox();
-        jCheckBox10 = new javax.swing.JCheckBox();
-        jCheckBox11 = new javax.swing.JCheckBox();
+        checkRegisterEmploy = new javax.swing.JCheckBox();
+        updateEmployes = new javax.swing.JCheckBox();
+        checkListEmployes = new javax.swing.JCheckBox();
         jLabel25 = new javax.swing.JLabel();
         jLabel26 = new javax.swing.JLabel();
-        jButton2 = new javax.swing.JButton();
-        jButton3 = new javax.swing.JButton();
+        buttonDiscard = new javax.swing.JButton();
+        buttonSave = new javax.swing.JButton();
+        checkSalePoint = new javax.swing.JCheckBox();
+        jLabel27 = new javax.swing.JLabel();
+        checkCourt = new javax.swing.JCheckBox();
+        checkRegisterExpenses = new javax.swing.JCheckBox();
+        checkExpensesHistory = new javax.swing.JCheckBox();
 
         setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
         jLabel1.setFont(new java.awt.Font("Jaldi", 0, 36)); // NOI18N
         jLabel1.setForeground(new java.awt.Color(1, 41, 87));
         jLabel1.setText("Alta de empleado");
-        add(jLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(51, 15, 281, 46));
+        add(jLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(51, 15, 370, 46));
 
         jPanel1.setBackground(new java.awt.Color(255, 255, 255));
         jPanel1.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
@@ -97,11 +101,11 @@ public class AltaEmpleado extends javax.swing.JPanel {
         jLabel2.setFont(new java.awt.Font("Jaldi", 0, 24)); // NOI18N
         jLabel2.setForeground(new java.awt.Color(82, 146, 222));
         jLabel2.setText("Informacion empresarial");
-        jPanel1.add(jLabel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 260, 240, -1));
+        jPanel1.add(jLabel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 260, 280, -1));
 
         jLabel3.setFont(new java.awt.Font("Jaldi", 0, 18)); // NOI18N
         jLabel3.setForeground(new java.awt.Color(118, 125, 142));
-        jLabel3.setText("Especiales");
+        jLabel3.setText("Ajustes");
         jPanel1.add(jLabel3, new org.netbeans.lib.awtextra.AbsoluteConstraints(1180, 200, 110, 40));
         jPanel1.add(jTextField1, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 350, 150, 30));
 
@@ -241,72 +245,67 @@ public class AltaEmpleado extends javax.swing.JPanel {
         jLabel22.setFont(new java.awt.Font("Jaldi", 0, 24)); // NOI18N
         jLabel22.setForeground(new java.awt.Color(82, 146, 222));
         jLabel22.setText("Informacion personal");
-        jPanel1.add(jLabel22, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 30, 213, -1));
+        jPanel1.add(jLabel22, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 30, 260, -1));
 
         jLabel23.setFont(new java.awt.Font("Jaldi", 0, 18)); // NOI18N
         jLabel23.setForeground(new java.awt.Color(118, 125, 142));
         jLabel23.setText("Nombre");
         jPanel1.add(jLabel23, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 70, 90, 40));
 
-        jCheckBox1.setFont(new java.awt.Font("Jaldi", 0, 16)); // NOI18N
-        jCheckBox1.setForeground(new java.awt.Color(118, 125, 142));
-        jCheckBox1.setText("Por definir");
-        jPanel1.add(jCheckBox1, new org.netbeans.lib.awtextra.AbsoluteConstraints(870, 460, -1, -1));
-
         jLabel24.setFont(new java.awt.Font("Jaldi", 0, 18)); // NOI18N
         jLabel24.setForeground(new java.awt.Color(118, 125, 142));
         jLabel24.setText("Recursos Humanos");
         jPanel1.add(jLabel24, new org.netbeans.lib.awtextra.AbsoluteConstraints(850, 300, 210, 40));
 
-        jCheckBox2.setFont(new java.awt.Font("Jaldi", 0, 16)); // NOI18N
-        jCheckBox2.setForeground(new java.awt.Color(118, 125, 142));
-        jCheckBox2.setText("Mercancia disponible");
-        jPanel1.add(jCheckBox2, new org.netbeans.lib.awtextra.AbsoluteConstraints(1200, 140, -1, -1));
+        checkOrders.setFont(new java.awt.Font("Jaldi", 0, 16)); // NOI18N
+        checkOrders.setForeground(new java.awt.Color(118, 125, 142));
+        checkOrders.setText("Pedidos entranates");
+        jPanel1.add(checkOrders, new org.netbeans.lib.awtextra.AbsoluteConstraints(1200, 170, -1, -1));
 
-        jCheckBox3.setFont(new java.awt.Font("Jaldi", 0, 16)); // NOI18N
-        jCheckBox3.setForeground(new java.awt.Color(118, 125, 142));
-        jCheckBox3.setText("ver registros globales");
-        jPanel1.add(jCheckBox3, new org.netbeans.lib.awtextra.AbsoluteConstraints(1200, 260, -1, -1));
+        checkSettingsApp.setFont(new java.awt.Font("Jaldi", 0, 16)); // NOI18N
+        checkSettingsApp.setForeground(new java.awt.Color(118, 125, 142));
+        checkSettingsApp.setText("Ajustes del aplicativo");
+        jPanel1.add(checkSettingsApp, new org.netbeans.lib.awtextra.AbsoluteConstraints(1200, 260, -1, -1));
 
-        jCheckBox4.setFont(new java.awt.Font("Jaldi", 0, 16)); // NOI18N
-        jCheckBox4.setForeground(new java.awt.Color(118, 125, 142));
-        jCheckBox4.setText("Historial de actividades");
-        jPanel1.add(jCheckBox4, new org.netbeans.lib.awtextra.AbsoluteConstraints(1200, 310, -1, -1));
+        checkSettingsCompany.setFont(new java.awt.Font("Jaldi", 0, 16)); // NOI18N
+        checkSettingsCompany.setForeground(new java.awt.Color(118, 125, 142));
+        checkSettingsCompany.setText("Ajustes emplresariales");
+        jPanel1.add(checkSettingsCompany, new org.netbeans.lib.awtextra.AbsoluteConstraints(1200, 310, -1, -1));
 
-        jCheckBox5.setFont(new java.awt.Font("Jaldi", 0, 16)); // NOI18N
-        jCheckBox5.setForeground(new java.awt.Color(118, 125, 142));
-        jCheckBox5.setText("Generaodr EAN");
-        jPanel1.add(jCheckBox5, new org.netbeans.lib.awtextra.AbsoluteConstraints(870, 140, -1, -1));
+        check.setFont(new java.awt.Font("Jaldi", 0, 16)); // NOI18N
+        check.setForeground(new java.awt.Color(118, 125, 142));
+        check.setText("Mercancia Disponible");
+        jPanel1.add(check, new org.netbeans.lib.awtextra.AbsoluteConstraints(870, 140, -1, -1));
 
-        jCheckBox6.setFont(new java.awt.Font("Jaldi", 0, 16)); // NOI18N
-        jCheckBox6.setForeground(new java.awt.Color(118, 125, 142));
-        jCheckBox6.setText("Reportes ");
-        jPanel1.add(jCheckBox6, new org.netbeans.lib.awtextra.AbsoluteConstraints(870, 180, -1, -1));
+        checkInventory.setFont(new java.awt.Font("Jaldi", 0, 16)); // NOI18N
+        checkInventory.setForeground(new java.awt.Color(118, 125, 142));
+        checkInventory.setText("Reportes generales");
+        jPanel1.add(checkInventory, new org.netbeans.lib.awtextra.AbsoluteConstraints(870, 180, -1, -1));
 
-        jCheckBox7.setFont(new java.awt.Font("Jaldi", 0, 16)); // NOI18N
-        jCheckBox7.setForeground(new java.awt.Color(118, 125, 142));
-        jCheckBox7.setText("Registro de productos ");
-        jPanel1.add(jCheckBox7, new org.netbeans.lib.awtextra.AbsoluteConstraints(870, 220, -1, -1));
+        checkRegisterProducts.setFont(new java.awt.Font("Jaldi", 0, 16)); // NOI18N
+        checkRegisterProducts.setForeground(new java.awt.Color(118, 125, 142));
+        checkRegisterProducts.setText("Registro de productos ");
+        jPanel1.add(checkRegisterProducts, new org.netbeans.lib.awtextra.AbsoluteConstraints(870, 220, -1, -1));
 
         jCheckBox8.setFont(new java.awt.Font("Jaldi", 0, 16)); // NOI18N
         jCheckBox8.setForeground(new java.awt.Color(118, 125, 142));
         jCheckBox8.setText("Aplicativo de ciclos ");
         jPanel1.add(jCheckBox8, new org.netbeans.lib.awtextra.AbsoluteConstraints(870, 260, -1, -1));
 
-        jCheckBox9.setFont(new java.awt.Font("Jaldi", 0, 16)); // NOI18N
-        jCheckBox9.setForeground(new java.awt.Color(118, 125, 142));
-        jCheckBox9.setText("Registro de empleados");
-        jPanel1.add(jCheckBox9, new org.netbeans.lib.awtextra.AbsoluteConstraints(870, 350, -1, -1));
+        checkRegisterEmploy.setFont(new java.awt.Font("Jaldi", 0, 16)); // NOI18N
+        checkRegisterEmploy.setForeground(new java.awt.Color(118, 125, 142));
+        checkRegisterEmploy.setText("Registro de empleados");
+        jPanel1.add(checkRegisterEmploy, new org.netbeans.lib.awtextra.AbsoluteConstraints(870, 350, -1, -1));
 
-        jCheckBox10.setFont(new java.awt.Font("Jaldi", 0, 16)); // NOI18N
-        jCheckBox10.setForeground(new java.awt.Color(118, 125, 142));
-        jCheckBox10.setText("Modificacion de empleados");
-        jPanel1.add(jCheckBox10, new org.netbeans.lib.awtextra.AbsoluteConstraints(870, 390, -1, -1));
+        updateEmployes.setFont(new java.awt.Font("Jaldi", 0, 16)); // NOI18N
+        updateEmployes.setForeground(new java.awt.Color(118, 125, 142));
+        updateEmployes.setText("Modificacion de empleados");
+        jPanel1.add(updateEmployes, new org.netbeans.lib.awtextra.AbsoluteConstraints(870, 390, -1, -1));
 
-        jCheckBox11.setFont(new java.awt.Font("Jaldi", 0, 16)); // NOI18N
-        jCheckBox11.setForeground(new java.awt.Color(118, 125, 142));
-        jCheckBox11.setText("Por definir");
-        jPanel1.add(jCheckBox11, new org.netbeans.lib.awtextra.AbsoluteConstraints(870, 420, -1, -1));
+        checkListEmployes.setFont(new java.awt.Font("Jaldi", 0, 16)); // NOI18N
+        checkListEmployes.setForeground(new java.awt.Color(118, 125, 142));
+        checkListEmployes.setText("Lista de Empleados");
+        jPanel1.add(checkListEmployes, new org.netbeans.lib.awtextra.AbsoluteConstraints(870, 420, -1, -1));
 
         jLabel25.setFont(new java.awt.Font("Jaldi", 0, 18)); // NOI18N
         jLabel25.setForeground(new java.awt.Color(118, 125, 142));
@@ -318,37 +317,64 @@ public class AltaEmpleado extends javax.swing.JPanel {
         jLabel26.setText("Almacen");
         jPanel1.add(jLabel26, new org.netbeans.lib.awtextra.AbsoluteConstraints(850, 90, 120, 40));
 
-        jButton2.setBackground(new java.awt.Color(153, 11, 11));
-        jButton2.setFont(new java.awt.Font("Jaldi", 0, 20)); // NOI18N
-        jButton2.setForeground(new java.awt.Color(255, 255, 255));
-        jButton2.setText("Descartar");
-        jPanel1.add(jButton2, new org.netbeans.lib.awtextra.AbsoluteConstraints(940, 730, 270, 70));
+        buttonDiscard.setBackground(new java.awt.Color(153, 11, 11));
+        buttonDiscard.setFont(new java.awt.Font("Jaldi", 0, 20)); // NOI18N
+        buttonDiscard.setForeground(new java.awt.Color(255, 255, 255));
+        buttonDiscard.setText("Descartar");
+        jPanel1.add(buttonDiscard, new org.netbeans.lib.awtextra.AbsoluteConstraints(940, 690, 230, 60));
 
-        jButton3.setBackground(new java.awt.Color(51, 204, 0));
-        jButton3.setFont(new java.awt.Font("Jaldi", 0, 20)); // NOI18N
-        jButton3.setForeground(new java.awt.Color(255, 255, 255));
-        jButton3.setText("Guardar");
-        jPanel1.add(jButton3, new org.netbeans.lib.awtextra.AbsoluteConstraints(1280, 730, 280, 70));
+        buttonSave.setBackground(new java.awt.Color(51, 204, 0));
+        buttonSave.setFont(new java.awt.Font("Jaldi", 0, 20)); // NOI18N
+        buttonSave.setForeground(new java.awt.Color(255, 255, 255));
+        buttonSave.setText("Guardar");
+        jPanel1.add(buttonSave, new org.netbeans.lib.awtextra.AbsoluteConstraints(1280, 690, 240, 60));
+
+        checkSalePoint.setFont(new java.awt.Font("Jaldi", 0, 16)); // NOI18N
+        checkSalePoint.setForeground(new java.awt.Color(118, 125, 142));
+        checkSalePoint.setText("Punto de venta");
+        jPanel1.add(checkSalePoint, new org.netbeans.lib.awtextra.AbsoluteConstraints(1200, 140, -1, -1));
+
+        jLabel27.setFont(new java.awt.Font("Jaldi", 0, 18)); // NOI18N
+        jLabel27.setForeground(new java.awt.Color(118, 125, 142));
+        jLabel27.setText("Contabilidad");
+        jPanel1.add(jLabel27, new org.netbeans.lib.awtextra.AbsoluteConstraints(1200, 370, 110, 40));
+
+        checkCourt.setFont(new java.awt.Font("Jaldi", 0, 16)); // NOI18N
+        checkCourt.setForeground(new java.awt.Color(118, 125, 142));
+        checkCourt.setText("Corte de caja");
+        jPanel1.add(checkCourt, new org.netbeans.lib.awtextra.AbsoluteConstraints(1220, 430, -1, -1));
+
+        checkRegisterExpenses.setFont(new java.awt.Font("Jaldi", 0, 16)); // NOI18N
+        checkRegisterExpenses.setForeground(new java.awt.Color(118, 125, 142));
+        checkRegisterExpenses.setText("Registrar gastos");
+        jPanel1.add(checkRegisterExpenses, new org.netbeans.lib.awtextra.AbsoluteConstraints(1220, 480, -1, -1));
+
+        checkExpensesHistory.setFont(new java.awt.Font("Jaldi", 0, 16)); // NOI18N
+        checkExpensesHistory.setForeground(new java.awt.Color(118, 125, 142));
+        checkExpensesHistory.setText("Historial de gastos");
+        jPanel1.add(checkExpensesHistory, new org.netbeans.lib.awtextra.AbsoluteConstraints(1220, 520, -1, -1));
 
         add(jPanel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(50, 70, 1590, 830));
     }// </editor-fold>//GEN-END:initComponents
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JButton buttonDiscard;
+    private javax.swing.JButton buttonSave;
+    private javax.swing.JCheckBox check;
+    private javax.swing.JCheckBox checkCourt;
+    private javax.swing.JCheckBox checkExpensesHistory;
+    private javax.swing.JCheckBox checkInventory;
+    private javax.swing.JCheckBox checkListEmployes;
+    private javax.swing.JCheckBox checkOrders;
+    private javax.swing.JCheckBox checkRegisterEmploy;
+    private javax.swing.JCheckBox checkRegisterExpenses;
+    private javax.swing.JCheckBox checkRegisterProducts;
+    private javax.swing.JCheckBox checkSalePoint;
+    private javax.swing.JCheckBox checkSettingsApp;
+    private javax.swing.JCheckBox checkSettingsCompany;
     private javax.swing.JButton jButton1;
-    private javax.swing.JButton jButton2;
-    private javax.swing.JButton jButton3;
-    private javax.swing.JCheckBox jCheckBox1;
-    private javax.swing.JCheckBox jCheckBox10;
-    private javax.swing.JCheckBox jCheckBox11;
-    private javax.swing.JCheckBox jCheckBox2;
-    private javax.swing.JCheckBox jCheckBox3;
-    private javax.swing.JCheckBox jCheckBox4;
-    private javax.swing.JCheckBox jCheckBox5;
-    private javax.swing.JCheckBox jCheckBox6;
-    private javax.swing.JCheckBox jCheckBox7;
     private javax.swing.JCheckBox jCheckBox8;
-    private javax.swing.JCheckBox jCheckBox9;
     private javax.swing.JComboBox<String> jComboBox10;
     private javax.swing.JComboBox<String> jComboBox11;
     private javax.swing.JComboBox<String> jComboBox12;
@@ -376,6 +402,7 @@ public class AltaEmpleado extends javax.swing.JPanel {
     private javax.swing.JLabel jLabel24;
     private javax.swing.JLabel jLabel25;
     private javax.swing.JLabel jLabel26;
+    private javax.swing.JLabel jLabel27;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;
     private javax.swing.JLabel jLabel5;
@@ -392,5 +419,6 @@ public class AltaEmpleado extends javax.swing.JPanel {
     private javax.swing.JTextField jTextField6;
     private javax.swing.JTextField jTextField7;
     private javax.swing.JTextField jTextField8;
+    private javax.swing.JCheckBox updateEmployes;
     // End of variables declaration//GEN-END:variables
 }

@@ -34,6 +34,7 @@ public class PanelContainer extends javax.swing.JPanel {
                 item.setForeground(Color.WHITE);
                 item.setBackground(new Color(60, 75, 112));
                 item.setOpaque(true);
+                item.setPreferredSize(new Dimension(toolBar.getWidth(), HEIGHT));
                 menu.add(item);
             }
         }
@@ -54,7 +55,6 @@ public class PanelContainer extends javax.swing.JPanel {
 
         HashSet<String> areas = new HashSet<>(titleAreas);
 
-        JButton button;
         for (String area : areas) {
             final JButton buttonWrapper = new JButton(area); // Envuelve 'button' en un array final
             buttonWrapper.setBackground(new Color(17, 57, 103));
@@ -90,12 +90,8 @@ public class PanelContainer extends javax.swing.JPanel {
 
         labelHomewore = new javax.swing.JLabel();
         menuHomeware = new javax.swing.JPopupMenu();
-        toolBar = new javax.swing.JToolBar();
         buttonHomeware = new javax.swing.JButton();
-        buttonHomeware1 = new javax.swing.JButton();
-        buttonHomeware2 = new javax.swing.JButton();
-        buttonHomeware3 = new javax.swing.JButton();
-        buttonHomeware4 = new javax.swing.JButton();
+        toolBar = new javax.swing.JToolBar();
 
         labelHomewore.setBackground(new java.awt.Color(17, 57, 103));
         labelHomewore.setForeground(new java.awt.Color(255, 255, 255));
@@ -104,17 +100,6 @@ public class PanelContainer extends javax.swing.JPanel {
         menuHomeware.setBackground(new java.awt.Color(60, 75, 112));
         menuHomeware.setForeground(new java.awt.Color(255, 255, 255));
         menuHomeware.setBorder(javax.swing.BorderFactory.createBevelBorder(javax.swing.border.BevelBorder.RAISED));
-
-        setBackground(new java.awt.Color(60, 75, 112));
-        setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
-
-        toolBar.setBackground(new java.awt.Color(60, 75, 112));
-        toolBar.setBorder(javax.swing.BorderFactory.createBevelBorder(javax.swing.border.BevelBorder.RAISED));
-        toolBar.setFloatable(false);
-        toolBar.setOrientation(javax.swing.SwingConstants.VERTICAL);
-        toolBar.setMaximumSize(new java.awt.Dimension(220, 50));
-        toolBar.setMinimumSize(new java.awt.Dimension(220, 106));
-        toolBar.setPreferredSize(new java.awt.Dimension(220, 106));
 
         buttonHomeware.setBackground(new java.awt.Color(17, 57, 103));
         buttonHomeware.setForeground(new java.awt.Color(255, 255, 255));
@@ -131,78 +116,17 @@ public class PanelContainer extends javax.swing.JPanel {
                 buttonHomewareActionPerformed(evt);
             }
         });
-        toolBar.add(buttonHomeware);
 
-        buttonHomeware1.setBackground(new java.awt.Color(17, 57, 103));
-        buttonHomeware1.setForeground(new java.awt.Color(255, 255, 255));
-        buttonHomeware1.setText("Ajustes");
-        buttonHomeware1.setBorder(javax.swing.BorderFactory.createBevelBorder(javax.swing.border.BevelBorder.RAISED));
-        buttonHomeware1.setContentAreaFilled(false);
-        buttonHomeware1.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
-        buttonHomeware1.setFocusable(false);
-        buttonHomeware1.setHorizontalTextPosition(javax.swing.SwingConstants.RIGHT);
-        buttonHomeware1.setMaximumSize(new java.awt.Dimension(220, 30));
-        buttonHomeware1.setPreferredSize(new java.awt.Dimension(220, 30));
-        buttonHomeware1.setVerticalTextPosition(javax.swing.SwingConstants.BOTTOM);
-        buttonHomeware1.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                buttonHomeware1ActionPerformed(evt);
-            }
-        });
-        toolBar.add(buttonHomeware1);
+        setBackground(new java.awt.Color(60, 75, 112));
+        setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
-        buttonHomeware2.setBackground(new java.awt.Color(17, 57, 103));
-        buttonHomeware2.setForeground(new java.awt.Color(255, 255, 255));
-        buttonHomeware2.setText("Ventas");
-        buttonHomeware2.setBorder(javax.swing.BorderFactory.createBevelBorder(javax.swing.border.BevelBorder.RAISED));
-        buttonHomeware2.setContentAreaFilled(false);
-        buttonHomeware2.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
-        buttonHomeware2.setFocusable(false);
-        buttonHomeware2.setHorizontalTextPosition(javax.swing.SwingConstants.RIGHT);
-        buttonHomeware2.setMaximumSize(new java.awt.Dimension(220, 30));
-        buttonHomeware2.setPreferredSize(new java.awt.Dimension(220, 30));
-        buttonHomeware2.setVerticalTextPosition(javax.swing.SwingConstants.BOTTOM);
-        buttonHomeware2.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                buttonHomeware2ActionPerformed(evt);
-            }
-        });
-        toolBar.add(buttonHomeware2);
-
-        buttonHomeware3.setBackground(new java.awt.Color(17, 57, 103));
-        buttonHomeware3.setForeground(new java.awt.Color(255, 255, 255));
-        buttonHomeware3.setText("Ventas");
-        buttonHomeware3.setBorder(javax.swing.BorderFactory.createBevelBorder(javax.swing.border.BevelBorder.RAISED));
-        buttonHomeware3.setContentAreaFilled(false);
-        buttonHomeware3.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
-        buttonHomeware3.setFocusable(false);
-        buttonHomeware3.setHorizontalTextPosition(javax.swing.SwingConstants.RIGHT);
-        buttonHomeware3.setMaximumSize(new java.awt.Dimension(220, 30));
-        buttonHomeware3.setPreferredSize(new java.awt.Dimension(220, 30));
-        buttonHomeware3.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                buttonHomeware3ActionPerformed(evt);
-            }
-        });
-        toolBar.add(buttonHomeware3);
-
-        buttonHomeware4.setBackground(new java.awt.Color(17, 57, 103));
-        buttonHomeware4.setForeground(new java.awt.Color(255, 255, 255));
-        buttonHomeware4.setText("Recursos humanos");
-        buttonHomeware4.setBorder(javax.swing.BorderFactory.createBevelBorder(javax.swing.border.BevelBorder.RAISED));
-        buttonHomeware4.setContentAreaFilled(false);
-        buttonHomeware4.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
-        buttonHomeware4.setFocusable(false);
-        buttonHomeware4.setHorizontalTextPosition(javax.swing.SwingConstants.RIGHT);
-        buttonHomeware4.setMaximumSize(new java.awt.Dimension(220, 30));
-        buttonHomeware4.setPreferredSize(new java.awt.Dimension(220, 30));
-        buttonHomeware4.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                buttonHomeware4ActionPerformed(evt);
-            }
-        });
-        toolBar.add(buttonHomeware4);
-
+        toolBar.setBackground(new java.awt.Color(60, 75, 112));
+        toolBar.setBorder(javax.swing.BorderFactory.createBevelBorder(javax.swing.border.BevelBorder.RAISED));
+        toolBar.setFloatable(false);
+        toolBar.setOrientation(javax.swing.SwingConstants.VERTICAL);
+        toolBar.setMaximumSize(new java.awt.Dimension(220, 50));
+        toolBar.setMinimumSize(new java.awt.Dimension(220, 106));
+        toolBar.setPreferredSize(new java.awt.Dimension(220, 106));
         add(toolBar, new org.netbeans.lib.awtextra.AbsoluteConstraints(-4, -5, 220, 160));
     }// </editor-fold>//GEN-END:initComponents
 
@@ -210,29 +134,9 @@ public class PanelContainer extends javax.swing.JPanel {
         menuHomeware.show(buttonHomeware, 5, buttonHomeware.getHeight());
     }//GEN-LAST:event_buttonHomewareActionPerformed
 
-    private void buttonHomeware1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_buttonHomeware1ActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_buttonHomeware1ActionPerformed
-
-    private void buttonHomeware2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_buttonHomeware2ActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_buttonHomeware2ActionPerformed
-
-    private void buttonHomeware3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_buttonHomeware3ActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_buttonHomeware3ActionPerformed
-
-    private void buttonHomeware4ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_buttonHomeware4ActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_buttonHomeware4ActionPerformed
-
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton buttonHomeware;
-    private javax.swing.JButton buttonHomeware1;
-    private javax.swing.JButton buttonHomeware2;
-    private javax.swing.JButton buttonHomeware3;
-    private javax.swing.JButton buttonHomeware4;
     private javax.swing.JLabel labelHomewore;
     private javax.swing.JPopupMenu menuHomeware;
     private javax.swing.JToolBar toolBar;
