@@ -4,6 +4,7 @@
  */
 package com.unsis.view.panel;
 
+import com.unsis.view.Main;
 import java.awt.Color;
 import java.awt.Font;
 import javax.swing.BorderFactory;
@@ -14,10 +15,11 @@ import javax.swing.BorderFactory;
  */
 public class ListEmployes extends javax.swing.JPanel {
 
+    private final Main mainWindow;
     /**
      * Creates new form HumanResourcesPanel
      */
-    public ListEmployes() {
+    public ListEmployes(Main mainWindow) {
         initComponents();
 
         this.setBounds(217, 0, 1200, 692);
@@ -27,6 +29,7 @@ public class ListEmployes extends javax.swing.JPanel {
         table.getTableHeader().setBackground(new Color(32, 136, 203));
         table.getTableHeader().setForeground(Color.WHITE);
 
+        this.mainWindow = mainWindow;
     }
 
     /**
@@ -63,6 +66,11 @@ public class ListEmployes extends javax.swing.JPanel {
         buttonCreate.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
         buttonCreate.setMaximumSize(new java.awt.Dimension(157, 38));
         buttonCreate.setMinimumSize(new java.awt.Dimension(157, 38));
+        buttonCreate.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                buttonCreateActionPerformed(evt);
+            }
+        });
         jPanel1.add(buttonCreate, new org.netbeans.lib.awtextra.AbsoluteConstraints(50, 10, 170, 60));
 
         buttonExport.setBackground(new java.awt.Color(0, 102, 0));
@@ -181,6 +189,10 @@ public class ListEmployes extends javax.swing.JPanel {
                 .addGap(66, 66, 66))
         );
     }// </editor-fold>//GEN-END:initComponents
+
+    private void buttonCreateActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_buttonCreateActionPerformed
+        this.mainWindow.setView("Alta de Empleado");
+    }//GEN-LAST:event_buttonCreateActionPerformed
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables

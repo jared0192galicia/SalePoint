@@ -58,12 +58,12 @@ public class Main extends javax.swing.JFrame {
 
         defaultPanel.add(MAINMENU, new MainMenu(this));
         defaultPanel.add("Punto de Venta", new SalePoint());
-        defaultPanel.add("Lista Empleados", new ListEmployes());
+        defaultPanel.add("Lista Empleados", new ListEmployes(this));
         defaultPanel.add("Alta de Empleado", new RegisterEmployed());
         defaultPanel.add("Gastos", new RegisterExpenses());
         defaultPanel.add("Alta de Producto", new RegisterProduct());
         defaultPanel.add("Ordenes entrantes", new ventasDesp());
-        defaultPanel.add("Lista Productos", new ListProducts());
+        defaultPanel.add("Lista Productos", new ListProducts(this));
         defaultPanel.add("Corte de caja", new ClosingSales());
         defaultPanel.add("Gastos", new RegisterExpenses());
         defaultPanel.add("Ajustes del generales", new GeneralSettings());

@@ -7,6 +7,7 @@ package com.unsis.view.panel;
 import com.toedter.calendar.JCalendar;
 import com.unsis.clases.Tools;
 import java.awt.Image;
+import java.net.URL;
 import java.util.Date;
 import javax.swing.Icon;
 import javax.swing.ImageIcon;
@@ -58,6 +59,7 @@ public class RegisterEmployed extends javax.swing.JPanel {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
+        fileChooser = new javax.swing.JFileChooser();
         jLabel1 = new javax.swing.JLabel();
         panelInternal = new javax.swing.JPanel();
         jLabel2 = new javax.swing.JLabel();
@@ -109,7 +111,10 @@ public class RegisterEmployed extends javax.swing.JPanel {
         jLabel26 = new javax.swing.JLabel();
         jLabel9 = new javax.swing.JLabel();
         jLabel17 = new javax.swing.JLabel();
-        jFileChooser1 = new javax.swing.JFileChooser();
+        buttonSelectImage = new javax.swing.JToggleButton();
+
+        fileChooser.setDialogTitle("Seleccionar imagen");
+        fileChooser.setFileHidingEnabled(false);
 
         setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
@@ -124,7 +129,7 @@ public class RegisterEmployed extends javax.swing.JPanel {
         jLabel2.setFont(new java.awt.Font("Jaldi", 0, 24)); // NOI18N
         jLabel2.setForeground(new java.awt.Color(82, 146, 222));
         jLabel2.setText("Informacion empresarial");
-        panelInternal.add(jLabel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 260, 280, -1));
+        panelInternal.add(jLabel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 260, 360, -1));
         panelInternal.add(jTextField1, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 350, 150, 30));
 
         jLabel4.setFont(new java.awt.Font("Jaldi", 0, 18)); // NOI18N
@@ -351,8 +356,18 @@ public class RegisterEmployed extends javax.swing.JPanel {
         jLabel17.setFont(new java.awt.Font("Jaldi", 0, 24)); // NOI18N
         jLabel17.setForeground(new java.awt.Color(82, 146, 222));
         jLabel17.setText("Foto de Empleado");
-        panelInternal.add(jLabel17, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 490, 210, -1));
-        panelInternal.add(jFileChooser1, new org.netbeans.lib.awtextra.AbsoluteConstraints(70, 520, 510, 270));
+        panelInternal.add(jLabel17, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 490, 240, -1));
+
+        buttonSelectImage.setBackground(new java.awt.Color(0, 102, 102));
+        buttonSelectImage.setForeground(new java.awt.Color(255, 255, 255));
+        buttonSelectImage.setText("Elegir Imagen");
+        buttonSelectImage.setBorder(javax.swing.BorderFactory.createBevelBorder(javax.swing.border.BevelBorder.RAISED));
+        buttonSelectImage.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                buttonSelectImageActionPerformed(evt);
+            }
+        });
+        panelInternal.add(buttonSelectImage, new org.netbeans.lib.awtextra.AbsoluteConstraints(50, 540, 150, 30));
 
         add(panelInternal, new org.netbeans.lib.awtextra.AbsoluteConstraints(50, 70, 1610, 800));
     }// </editor-fold>//GEN-END:initComponents
@@ -368,11 +383,22 @@ public class RegisterEmployed extends javax.swing.JPanel {
         }
     }//GEN-LAST:event_buttonCalendarActionPerformed
 
+    private void buttonSelectImageActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_buttonSelectImageActionPerformed
+        String response = "";
+        fileChooser.showDialog(this, "Aceptar");
+        
+        System.out.println("res: " + fileChooser.getSelectedFile());
+        
+        this.buttonSelectImage.setSize(50, 50);
+        this.buttonSelectImage.setIcon(new ImageIcon(fileChooser.getSelectedFile().getPath()));
+    }//GEN-LAST:event_buttonSelectImageActionPerformed
+
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JToggleButton buttonCalendar;
     private javax.swing.JButton buttonDiscard;
     private javax.swing.JButton buttonSave;
+    private javax.swing.JToggleButton buttonSelectImage;
     private javax.swing.JCheckBox check;
     private javax.swing.JCheckBox checkCourt;
     private javax.swing.JCheckBox checkExpensesHistory;
@@ -385,12 +411,12 @@ public class RegisterEmployed extends javax.swing.JPanel {
     private javax.swing.JCheckBox checkSalePoint;
     private javax.swing.JCheckBox checkSettingsApp;
     private javax.swing.JCheckBox checkSettingsCompany;
+    private javax.swing.JFileChooser fileChooser;
     private javax.swing.JCheckBox jCheckBox8;
     private javax.swing.JComboBox<String> jComboBox10;
     private javax.swing.JComboBox<String> jComboBox6;
     private javax.swing.JComboBox<String> jComboBox7;
     private javax.swing.JComboBox<String> jComboBox9;
-    private javax.swing.JFileChooser jFileChooser1;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel10;
     private javax.swing.JLabel jLabel11;

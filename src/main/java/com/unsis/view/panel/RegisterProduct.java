@@ -108,7 +108,7 @@ public class RegisterProduct extends javax.swing.JPanel {
         jLabel5.setFont(new java.awt.Font("Jaldi", 0, 18)); // NOI18N
         jLabel5.setForeground(new java.awt.Color(118, 125, 142));
         jLabel5.setText(" Precio de compra");
-        panelInternal.add(jLabel5, new org.netbeans.lib.awtextra.AbsoluteConstraints(490, 90, 160, -1));
+        panelInternal.add(jLabel5, new org.netbeans.lib.awtextra.AbsoluteConstraints(490, 90, 180, -1));
         panelInternal.add(jTextField3, new org.netbeans.lib.awtextra.AbsoluteConstraints(490, 120, 170, 30));
 
         jLabel6.setBackground(new java.awt.Color(255, 255, 255));
@@ -120,8 +120,8 @@ public class RegisterProduct extends javax.swing.JPanel {
 
         jLabel7.setFont(new java.awt.Font("Jaldi", 0, 18)); // NOI18N
         jLabel7.setForeground(new java.awt.Color(118, 125, 142));
-        jLabel7.setText("Código EAN");
-        panelInternal.add(jLabel7, new org.netbeans.lib.awtextra.AbsoluteConstraints(300, 180, -1, -1));
+        jLabel7.setText("Código de barras");
+        panelInternal.add(jLabel7, new org.netbeans.lib.awtextra.AbsoluteConstraints(300, 180, 170, -1));
         panelInternal.add(jTextField5, new org.netbeans.lib.awtextra.AbsoluteConstraints(300, 210, 170, 30));
 
         jLabel8.setFont(new java.awt.Font("Jaldi", 0, 18)); // NOI18N
@@ -303,11 +303,11 @@ public class RegisterProduct extends javax.swing.JPanel {
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addGap(47, 47, 47)
+                .addGap(26, 26, 26)
                 .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(40, 40, 40)
+                .addGap(31, 31, 31)
                 .addComponent(panelInternal, javax.swing.GroupLayout.PREFERRED_SIZE, 623, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(91, Short.MAX_VALUE))
+                .addContainerGap(121, Short.MAX_VALUE))
         );
     }// </editor-fold>//GEN-END:initComponents
 
