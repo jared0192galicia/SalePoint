@@ -35,7 +35,7 @@ public class RegisterEmployed extends javax.swing.JPanel {
         panelInternal.setComponentZOrder(dateIngres, 0);
         resizeImages();
     }
-    
+
     /**
      * Redimenciona las imagenes de los botones para que se ajusten a el tamaño
      * necesario
@@ -111,7 +111,7 @@ public class RegisterEmployed extends javax.swing.JPanel {
         jLabel26 = new javax.swing.JLabel();
         jLabel9 = new javax.swing.JLabel();
         jLabel17 = new javax.swing.JLabel();
-        buttonSelectImage = new javax.swing.JToggleButton();
+        buttonSelectImage = new javax.swing.JButton();
 
         fileChooser.setDialogTitle("Seleccionar imagen");
         fileChooser.setFileHidingEnabled(false);
@@ -221,14 +221,14 @@ public class RegisterEmployed extends javax.swing.JPanel {
         buttonDiscard.setForeground(new java.awt.Color(255, 255, 255));
         buttonDiscard.setIcon(new javax.swing.ImageIcon(getClass().getResource("/iconCircleMin.png"))); // NOI18N
         buttonDiscard.setText("Descartar");
-        panelInternal.add(buttonDiscard, new org.netbeans.lib.awtextra.AbsoluteConstraints(990, 720, 210, 50));
+        panelInternal.add(buttonDiscard, new org.netbeans.lib.awtextra.AbsoluteConstraints(990, 650, 210, 50));
 
         buttonSave.setBackground(new java.awt.Color(46, 125, 18));
         buttonSave.setFont(new java.awt.Font("Jaldi", 0, 20)); // NOI18N
         buttonSave.setForeground(new java.awt.Color(255, 255, 255));
         buttonSave.setIcon(new javax.swing.ImageIcon(getClass().getResource("/save.png"))); // NOI18N
         buttonSave.setText("Guardar");
-        panelInternal.add(buttonSave, new org.netbeans.lib.awtextra.AbsoluteConstraints(1260, 720, 220, 50));
+        panelInternal.add(buttonSave, new org.netbeans.lib.awtextra.AbsoluteConstraints(1260, 650, 220, 50));
 
         buttonCalendar.setText("-- : -- : ----");
         buttonCalendar.addActionListener(new java.awt.event.ActionListener() {
@@ -356,7 +356,7 @@ public class RegisterEmployed extends javax.swing.JPanel {
         jLabel17.setFont(new java.awt.Font("Jaldi", 0, 24)); // NOI18N
         jLabel17.setForeground(new java.awt.Color(82, 146, 222));
         jLabel17.setText("Foto de Empleado");
-        panelInternal.add(jLabel17, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 490, 240, -1));
+        panelInternal.add(jLabel17, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 520, 240, -1));
 
         buttonSelectImage.setBackground(new java.awt.Color(0, 102, 102));
         buttonSelectImage.setForeground(new java.awt.Color(255, 255, 255));
@@ -367,7 +367,7 @@ public class RegisterEmployed extends javax.swing.JPanel {
                 buttonSelectImageActionPerformed(evt);
             }
         });
-        panelInternal.add(buttonSelectImage, new org.netbeans.lib.awtextra.AbsoluteConstraints(50, 540, 150, 30));
+        panelInternal.add(buttonSelectImage, new org.netbeans.lib.awtextra.AbsoluteConstraints(60, 570, 150, 140));
 
         add(panelInternal, new org.netbeans.lib.awtextra.AbsoluteConstraints(50, 70, 1610, 800));
     }// </editor-fold>//GEN-END:initComponents
@@ -384,13 +384,19 @@ public class RegisterEmployed extends javax.swing.JPanel {
     }//GEN-LAST:event_buttonCalendarActionPerformed
 
     private void buttonSelectImageActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_buttonSelectImageActionPerformed
-        String response = "";
         fileChooser.showDialog(this, "Aceptar");
-        
-        System.out.println("res: " + fileChooser.getSelectedFile());
-        
-        this.buttonSelectImage.setSize(50, 50);
-        this.buttonSelectImage.setIcon(new ImageIcon(fileChooser.getSelectedFile().getPath()));
+
+        String path = fileChooser.getSelectedFile().getPath();
+
+        if (!path.isEmpty()) {
+            Tools tools = new Tools();
+            this.buttonSelectImage.setIcon(tools.resizeIcon(
+                    new ImageIcon(path), 140, 140));
+
+            this.buttonSelectImage.setOpaque(false);
+            this.buttonSelectImage.setText("");
+
+        }
     }//GEN-LAST:event_buttonSelectImageActionPerformed
 
 
@@ -398,7 +404,7 @@ public class RegisterEmployed extends javax.swing.JPanel {
     private javax.swing.JToggleButton buttonCalendar;
     private javax.swing.JButton buttonDiscard;
     private javax.swing.JButton buttonSave;
-    private javax.swing.JToggleButton buttonSelectImage;
+    private javax.swing.JButton buttonSelectImage;
     private javax.swing.JCheckBox check;
     private javax.swing.JCheckBox checkCourt;
     private javax.swing.JCheckBox checkExpensesHistory;
