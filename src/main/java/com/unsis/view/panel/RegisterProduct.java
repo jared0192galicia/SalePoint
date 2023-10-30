@@ -253,7 +253,7 @@ public class RegisterProduct extends javax.swing.JPanel {
         buttonTemplate.setBackground(new java.awt.Color(0, 102, 0));
         buttonTemplate.setFont(new java.awt.Font("Dialog", 1, 16)); // NOI18N
         buttonTemplate.setForeground(new java.awt.Color(255, 255, 255));
-        buttonTemplate.setIcon(new javax.swing.ImageIcon(getClass().getResource("/exportExcel .png"))); // NOI18N
+        buttonTemplate.setIcon(new javax.swing.ImageIcon(getClass().getResource("/exportExcelHD.png"))); // NOI18N
         buttonTemplate.setText("Plantilla");
         buttonTemplate.setToolTipText("Plantilla para cargar datos");
         buttonTemplate.setBorder(null);
@@ -283,9 +283,9 @@ public class RegisterProduct extends javax.swing.JPanel {
                 .addGap(23, 23, 23)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                     .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                        .addComponent(buttonTemplate, javax.swing.GroupLayout.DEFAULT_SIZE, 54, Short.MAX_VALUE)
+                        .addComponent(buttonTemplate, javax.swing.GroupLayout.PREFERRED_SIZE, 0, Short.MAX_VALUE)
                         .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addComponent(buttonUpload, javax.swing.GroupLayout.PREFERRED_SIZE, 0, Short.MAX_VALUE))
+                    .addComponent(buttonUpload, javax.swing.GroupLayout.PREFERRED_SIZE, 54, Short.MAX_VALUE))
                 .addGap(16, 16, 16))
         );
 
@@ -307,7 +307,7 @@ public class RegisterProduct extends javax.swing.JPanel {
                 .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(31, 31, 31)
                 .addComponent(panelInternal, javax.swing.GroupLayout.PREFERRED_SIZE, 623, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(121, Short.MAX_VALUE))
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
     }// </editor-fold>//GEN-END:initComponents
 
