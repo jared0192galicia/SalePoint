@@ -3,7 +3,7 @@ package com.unsis.view;
 import com.mycompany.cafe.GeneralSettings;
 import com.unsis.models.constants.Constants;
 import com.unsis.view.panel.Accounting;
-import com.unsis.view.panel.AltaEmpleado;
+import com.unsis.view.panel.RegisterEmployed;
 import com.unsis.view.panel.ClosingSales;
 import com.unsis.view.panel.ListEmployes;
 import com.unsis.view.panel.ListProducts;
@@ -29,7 +29,6 @@ public class Main extends javax.swing.JFrame {
 
     /**
      * Creates new form Home
-     *
      */
     public Main() {
         initComponents();
@@ -39,7 +38,7 @@ public class Main extends javax.swing.JFrame {
         Constants.fillContants();
 
         NavBar navigator = new NavBar(this);
-        ToolBar toolBar = new ToolBar();
+        ToolBar toolBar = new ToolBar(this);
         navigator.setBounds(0, 0, 216, 1024);
         navigator.buttonHome.addActionListener((e) -> {
             setView(MAINMENU);
@@ -57,15 +56,14 @@ public class Main extends javax.swing.JFrame {
         defaultPanel = new JPanel(new CardLayout());
         defaultPanel.setBounds(217, 85, 1696, 894);
 
-        defaultPanel.add(MAINMENU, new MainMenu());
+        defaultPanel.add(MAINMENU, new MainMenu(this));
         defaultPanel.add("Punto de Venta", new SalePoint());
         defaultPanel.add("Lista Empleados", new ListEmployes());
-        defaultPanel.add("Alta de Empleado", new AltaEmpleado());
+        defaultPanel.add("Alta de Empleado", new RegisterEmployed());
         defaultPanel.add("Gastos", new RegisterExpenses());
         defaultPanel.add("Alta de Producto", new RegisterProduct());
         defaultPanel.add("Ordenes entrantes", new ventasDesp());
         defaultPanel.add("Lista Productos", new ListProducts());
-        defaultPanel.add("Lista Productos", new GeneralSettings());
         defaultPanel.add("Corte de caja", new ClosingSales());
         defaultPanel.add("Gastos", new RegisterExpenses());
         defaultPanel.add("Ajustes del generales", new GeneralSettings());
@@ -81,23 +79,6 @@ public class Main extends javax.swing.JFrame {
     public void setView(String name) {
         CardLayout c1 = (CardLayout) (defaultPanel.getLayout());
         c1.show(defaultPanel, name);
-    }
-
-    /**
-     * Change the panel view
-     *
-     * @param name key for JPanel to show
-     */
-    public void setView(String name, String subSection) {
-        this.setView(name);
-        try {
-            Accounting ac = (Accounting) (defaultPanel.getComponent(9));
-            ac.setView(subSection);
-
-        } catch (Exception e) {
-            System.out.println(e.getMessage() + "\n" );
-        }
-
     }
 
     @SuppressWarnings("unchecked")
@@ -120,16 +101,6 @@ public class Main extends javax.swing.JFrame {
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
-    /**
-     * @param args the command line arguments
-     */
-    public static void main(String args[]) {
-        java.awt.EventQueue.invokeLater(new Runnable() {
-            public void run() {
-                new Main().setVisible(true);
-            }
-        });
-    }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     // End of variables declaration//GEN-END:variables

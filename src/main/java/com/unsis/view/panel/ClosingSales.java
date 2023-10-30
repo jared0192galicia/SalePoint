@@ -16,7 +16,7 @@ public class ClosingSales extends javax.swing.JPanel {
         initComponents();
         
         // Obtener el JTableHeader (encabezado de la tabla)
-        table.getTableHeader().setFont(new Font("Arial", Font.BOLD, 18));
+        table.getTableHeader().setFont(new Font("Arial", Font.BOLD, 16));
         table.getTableHeader().setOpaque(false);
         table.getTableHeader().setBackground(new Color(32, 136, 203));
         table.getTableHeader().setForeground(Color.WHITE);
@@ -32,7 +32,6 @@ public class ClosingSales extends javax.swing.JPanel {
     private void initComponents() {
 
         jPanel1 = new javax.swing.JPanel();
-        jLabel3 = new javax.swing.JLabel();
         jScrollPane1 = new javax.swing.JScrollPane();
         table = new javax.swing.JTable();
         jLabel1 = new javax.swing.JLabel();
@@ -41,14 +40,10 @@ public class ClosingSales extends javax.swing.JPanel {
         jLabel5 = new javax.swing.JLabel();
         jButton4 = new javax.swing.JButton();
         jLabel6 = new javax.swing.JLabel();
+        jLabel3 = new javax.swing.JLabel();
 
         jPanel1.setBackground(new java.awt.Color(255, 255, 255));
         jPanel1.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
-
-        jLabel3.setFont(new java.awt.Font("Jaldi", 1, 28)); // NOI18N
-        jLabel3.setForeground(new java.awt.Color(7, 56, 112));
-        jLabel3.setText("Corte de Caja");
-        jPanel1.add(jLabel3, new org.netbeans.lib.awtextra.AbsoluteConstraints(60, 60, 240, -1));
 
         table.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
@@ -61,55 +56,69 @@ public class ClosingSales extends javax.swing.JPanel {
                 "Producto", "Descripcion", "Cantidad", "Precio por pz", "Total"
             }
         ));
-        table.setSelectionBackground(new java.awt.Color(0, 51, 204));
+        table.setSelectionBackground(new java.awt.Color(0, 102, 102));
+        table.setSelectionForeground(new java.awt.Color(255, 255, 255));
         jScrollPane1.setViewportView(table);
 
-        jPanel1.add(jScrollPane1, new org.netbeans.lib.awtextra.AbsoluteConstraints(130, 230, 590, 510));
+        jPanel1.add(jScrollPane1, new org.netbeans.lib.awtextra.AbsoluteConstraints(100, 110, 650, 510));
 
-        jLabel1.setFont(new java.awt.Font("Dialog", 1, 16)); // NOI18N
+        jLabel1.setFont(new java.awt.Font("Chandas", 1, 18)); // NOI18N
         jLabel1.setForeground(new java.awt.Color(51, 51, 51));
         jLabel1.setText(" Fecha: 18/10/2023");
-        jPanel1.add(jLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(880, 310, 150, -1));
+        jPanel1.add(jLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(860, 210, 220, -1));
 
-        jLabel2.setFont(new java.awt.Font("Dialog", 1, 16)); // NOI18N
+        jLabel2.setFont(new java.awt.Font("Chandas", 1, 18)); // NOI18N
         jLabel2.setForeground(new java.awt.Color(51, 51, 51));
         jLabel2.setText(" Usuario: Jared Galicia");
-        jPanel1.add(jLabel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(1050, 310, 190, -1));
+        jPanel1.add(jLabel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(1090, 210, 240, -1));
 
-        jLabel4.setFont(new java.awt.Font("Dialog", 1, 16)); // NOI18N
+        jLabel4.setFont(new java.awt.Font("Chandas", 1, 18)); // NOI18N
         jLabel4.setForeground(new java.awt.Color(51, 51, 51));
         jLabel4.setText(" Saldo a mantener en caja: 2,000.00");
-        jPanel1.add(jLabel4, new org.netbeans.lib.awtextra.AbsoluteConstraints(910, 380, 280, -1));
+        jPanel1.add(jLabel4, new org.netbeans.lib.awtextra.AbsoluteConstraints(920, 280, 390, -1));
 
-        jLabel5.setFont(new java.awt.Font("Dialog", 1, 16)); // NOI18N
+        jLabel5.setFont(new java.awt.Font("Chandas", 1, 18)); // NOI18N
         jLabel5.setForeground(new java.awt.Color(51, 51, 51));
         jLabel5.setText(" Saldo total en caja: $10,000.00");
-        jPanel1.add(jLabel5, new org.netbeans.lib.awtextra.AbsoluteConstraints(930, 450, 250, -1));
+        jPanel1.add(jLabel5, new org.netbeans.lib.awtextra.AbsoluteConstraints(940, 350, 360, -1));
 
         jButton4.setBackground(new java.awt.Color(51, 102, 255));
         jButton4.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
         jButton4.setForeground(new java.awt.Color(255, 255, 255));
         jButton4.setText("Confirmar corte");
-        jPanel1.add(jButton4, new org.netbeans.lib.awtextra.AbsoluteConstraints(940, 520, 230, 40));
+        jPanel1.add(jButton4, new org.netbeans.lib.awtextra.AbsoluteConstraints(1000, 420, 230, 40));
 
         jLabel6.setFont(new java.awt.Font("Jaldi", 0, 24)); // NOI18N
         jLabel6.setForeground(new java.awt.Color(82, 146, 222));
         jLabel6.setText("Movimientos de caja");
-        jPanel1.add(jLabel6, new org.netbeans.lib.awtextra.AbsoluteConstraints(90, 150, 240, -1));
+        jPanel1.add(jLabel6, new org.netbeans.lib.awtextra.AbsoluteConstraints(100, 50, 290, -1));
+
+        jLabel3.setFont(new java.awt.Font("Jaldi", 1, 28)); // NOI18N
+        jLabel3.setForeground(new java.awt.Color(7, 56, 112));
+        jLabel3.setText("Corte de Caja");
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
         this.setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, 1391, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(0, 0, Short.MAX_VALUE))
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(layout.createSequentialGroup()
+                        .addGap(35, 35, 35)
+                        .addComponent(jLabel3, javax.swing.GroupLayout.PREFERRED_SIZE, 240, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addGroup(layout.createSequentialGroup()
+                        .addGap(46, 46, 46)
+                        .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, 1457, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                .addContainerGap(102, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, 794, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(0, 52, Short.MAX_VALUE))
+                .addGap(30, 30, 30)
+                .addComponent(jLabel3)
+                .addGap(32, 32, 32)
+                .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, 699, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(52, Short.MAX_VALUE))
         );
     }// </editor-fold>//GEN-END:initComponents
 

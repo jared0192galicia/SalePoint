@@ -41,11 +41,12 @@ public class NavBar extends javax.swing.JPanel {
 
         buttonHome.setBackground(new java.awt.Color(17, 57, 103));
         buttonHome.setForeground(new java.awt.Color(255, 255, 255));
-        buttonHome.setIcon(new javax.swing.ImageIcon("C:\\Users\\jared\\OneDrive\\Documentos\\NetBeansProjects\\Unsis\\SalePoint\\src\\main\\java\\com\\unsis\\images\\homeIcon.png")); // NOI18N
+        buttonHome.setIcon(new javax.swing.ImageIcon(getClass().getResource("/homeIcon.png"))); // NOI18N
         buttonHome.setText("Inicio");
         buttonHome.setToolTipText("");
         buttonHome.setBorder(javax.swing.BorderFactory.createBevelBorder(javax.swing.border.BevelBorder.RAISED));
         buttonHome.setContentAreaFilled(false);
+        buttonHome.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
         this.setLayout(layout);

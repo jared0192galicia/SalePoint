@@ -15,14 +15,14 @@ import javax.swing.ImageIcon;
  *
  * @author labtecweb09
  */
-public class AltaEmpleado extends javax.swing.JPanel {
+public class RegisterEmployed extends javax.swing.JPanel {
 
     JCalendar dateIngres;
 
     /**
      * Creates new form AltaEmpleado
      */
-    public AltaEmpleado() {
+    public RegisterEmployed() {
         initComponents();
         panelInternal.setSize(1696, 894);
         this.setSize(1696, 894);

@@ -1,6 +1,7 @@
 package com.unsis.view.panel;
 
 import com.unsis.clases.Tools;
+import com.unsis.view.Main;
 import javax.swing.Icon;
 
 /**
@@ -9,14 +10,18 @@ import javax.swing.Icon;
  */
 public class ToolBar extends javax.swing.JPanel {
 
+    private Main mainWindow;
     /**
      * Creates new form ToolBar
+     * @param mainWindow
      */
-    public ToolBar() {
+    public ToolBar(Main mainWindow) {
         initComponents();
         this.setSize(1700, 60);
         this.setBounds(217, 0, 1700, 70);
         this.resizeImages();
+        
+        this.mainWindow = mainWindow;
     }
     
      /**
@@ -55,6 +60,11 @@ public class ToolBar extends javax.swing.JPanel {
         buttonCloseSesion.setBorder(null);
         buttonCloseSesion.setContentAreaFilled(false);
         buttonCloseSesion.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+        buttonCloseSesion.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                buttonCloseSesionMouseClicked(evt);
+            }
+        });
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
         this.setLayout(layout);
@@ -78,6 +88,11 @@ public class ToolBar extends javax.swing.JPanel {
             .addComponent(jLabel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
         );
     }// </editor-fold>//GEN-END:initComponents
+
+    private void buttonCloseSesionMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_buttonCloseSesionMouseClicked
+        mainWindow.dispose();
+        new Login().setVisible(true);
+    }//GEN-LAST:event_buttonCloseSesionMouseClicked
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables

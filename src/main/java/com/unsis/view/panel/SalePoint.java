@@ -316,7 +316,7 @@ public class SalePoint extends javax.swing.JPanel {
 
         jPanel1.add(jScrollPane1, new org.netbeans.lib.awtextra.AbsoluteConstraints(70, 90, 820, 560));
 
-        add(jPanel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(60, 90, 960, 760));
+        add(jPanel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(60, 90, 960, 720));
 
         jPanel2.setBackground(new java.awt.Color(255, 255, 255));
         jPanel2.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
@@ -324,7 +324,7 @@ public class SalePoint extends javax.swing.JPanel {
         jLabel22.setFont(new java.awt.Font("Jaldi", 0, 24)); // NOI18N
         jLabel22.setForeground(new java.awt.Color(7, 56, 112));
         jLabel22.setText("Captura de producto");
-        jPanel2.add(jLabel22, new org.netbeans.lib.awtextra.AbsoluteConstraints(160, 40, 240, -1));
+        jPanel2.add(jLabel22, new org.netbeans.lib.awtextra.AbsoluteConstraints(150, 40, 260, -1));
 
         jLabel6.setBackground(new java.awt.Color(255, 255, 255));
         jLabel6.setFont(new java.awt.Font("Jaldi", 0, 18)); // NOI18N
@@ -418,7 +418,7 @@ public class SalePoint extends javax.swing.JPanel {
         jLabel13.setText("Por confirmar");
         jPanel2.add(jLabel13, new org.netbeans.lib.awtextra.AbsoluteConstraints(60, 370, -1, -1));
 
-        add(jPanel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(1050, 90, 560, 760));
+        add(jPanel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(1050, 90, 560, 720));
     }// </editor-fold>//GEN-END:initComponents
 
     private void buttonAddOrderMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_buttonAddOrderMouseClicked
