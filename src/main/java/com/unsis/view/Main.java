@@ -23,28 +23,34 @@ public class Main extends javax.swing.JFrame {
     private final MainMenu mainMenu = new MainMenu();
     private final HumanResourcesPanel humanResources = new HumanResourcesPanel();
     private final Venta sale = new Venta();
-    
+    private JPanel currentPanel;
+
     /**
      * Creates new form Home
+     *
      * @param access
      */
     public Main() {
         initComponents();
-        
+
         this.setExtendedState(JFrame.MAXIMIZED_BOTH);
         this.setSize(1237, 1224);
-        
         Constants.fillContants();
-        
-        NavBar navigator = new NavBar();
-        navigator.setBounds(0,0, 216, 1024);
-        
+
+        NavBar navigator = new NavBar(this);
+        navigator.setBounds(0, 0, 216, 1024);
+        currentPanel = mainMenu;
+
         this.add(navigator);
-        this.add(mainMenu);
+        this.add(currentPanel);
     }
-    
-    private void setView(JPanel panel) {
-        panel.setLocation(217, 0);
+
+    public void setView(JPanel panel) {
+        this.remove(currentPanel);
+        currentPanel = panel;
+        this.add(currentPanel);
+        System.out.println("Change panel to " + panel);
+        this.repaint();
     }
 
     /**

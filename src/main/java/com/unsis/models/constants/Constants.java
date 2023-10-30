@@ -1,6 +1,8 @@
 package com.unsis.models.constants;
 
+import com.unsis.view.panel.AltaEmpleado;
 import java.util.ArrayList;
+import javax.swing.JPanel;
 
 /**
  *
@@ -15,7 +17,7 @@ public class Constants {
         sections.add(new Section("Lista Empleados", "Recursos Humanos", "Accede a la lista de empleados", 0));
         sections.add(new Section("Corte de caja", "Contabilidad", "Reliza tu corte de caja", 1));
         sections.add(new Section("Ordenes entrantes", "Ventas", "Accede a la lista de pedidos mas reciente", 2));
-        sections.add(new Section("Alta de Empleado", "Recursos Humanos", "Registra un nuevo empleado", 3));
+        sections.add(new Section("Alta de Empleado", "Recursos Humanos", "Registra un nuevo empleado", 3, new AltaEmpleado()));
         sections.add(new Section("Alta de Producto", "Almacen", "Registra un producto nuevo", 4));
         sections.add(new Section("Punto de Venta", "Ventas", "Reliza las ventas del dia", 5));
         sections.add(new Section("Lista Productos", "Almacen", "Accede a la lista de los productos", 6));
@@ -30,6 +32,15 @@ public class Constants {
         private String area;
         private String descripcion;
         private int id;
+        private JPanel panel;
+
+        public Section(String nombre, String area, String descripcion, int id, JPanel panel) {
+            this.nombre = nombre;
+            this.area = area;
+            this.descripcion = descripcion;
+            this.id = id;
+            this.panel = panel;
+        }
 
         /**
          *
@@ -43,6 +54,14 @@ public class Constants {
             this.area = area;
             this.descripcion = descripcion;
             this.id = id;
+        }
+
+        public JPanel getPanel() {
+            return panel;
+        }
+
+        public void setPanel(JPanel panel) {
+            this.panel = panel;
         }
 
         public String getNombre() {

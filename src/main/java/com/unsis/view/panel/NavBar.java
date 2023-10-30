@@ -1,5 +1,7 @@
 package com.unsis.view.panel;
 
+import com.unsis.view.Main;
+
 /**
  *
  * @author labtecweb10
@@ -10,10 +12,10 @@ public class NavBar extends javax.swing.JPanel {
      * Creates new form NavBar
      * @param access
      */
-    public NavBar() {
+    public NavBar(Main main) {
         initComponents();
         this.setSize(207, 1024);
-        PanelContainer options = new PanelContainer();
+        PanelContainer options = new PanelContainer(main);
         options.setBounds(5, 140, 204, 191);
         this.add(options);
     }

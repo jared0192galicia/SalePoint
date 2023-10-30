@@ -1,6 +1,7 @@
 package com.unsis.view.panel;
 
 import com.unsis.models.constants.Constants;
+import com.unsis.view.Main;
 import java.awt.Color;
 import java.awt.Cursor;
 import java.awt.Dimension;
@@ -15,8 +16,10 @@ import javax.swing.JPopupMenu;
 public class PanelContainer extends javax.swing.JPanel {
 
     private ArrayList<JButton> areas;
+    private Main mainWindow;
 
-    public PanelContainer() {
+    public PanelContainer(Main main) {
+        this.mainWindow = main;
         initComponents();
         areas = new ArrayList<>();
         this.generateAreas();
@@ -33,6 +36,10 @@ public class PanelContainer extends javax.swing.JPanel {
                 item.setBackground(new Color(60, 75, 112));
                 item.setOpaque(true);
                 item.setPreferredSize(new Dimension(parent.getWidth() - 5, item.getPreferredSize().height));
+
+                item.addActionListener((e) -> {
+                    mainWindow.setView(section.getPanel());
+                });
                 menu.add(item);
             }
         }
