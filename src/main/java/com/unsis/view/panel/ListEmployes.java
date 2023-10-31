@@ -7,10 +7,6 @@ package com.unsis.view.panel;
 import java.awt.Color;
 import java.awt.Font;
 import javax.swing.BorderFactory;
-import javax.swing.SwingConstants;
-import javax.swing.table.DefaultTableCellRenderer;
-import javax.swing.table.JTableHeader;
-import javax.swing.table.TableColumnModel;
 
 /**
  *
@@ -31,8 +27,6 @@ public class ListEmployes extends javax.swing.JPanel {
         table.getTableHeader().setBackground(new Color(32, 136, 203));
         table.getTableHeader().setForeground(Color.WHITE);
 
-//        TableColumnModel modelColumn = table.getColumnModel();
-//        modelColumn.setColumnMargin(35);
     }
 
     /**

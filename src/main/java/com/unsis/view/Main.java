@@ -10,6 +10,7 @@ import com.unsis.view.panel.ListEmployes;
 import com.unsis.view.panel.MainMenu;
 import com.unsis.view.panel.NavBar;
 import com.unsis.view.panel.RegisterExpenses;
+import com.unsis.view.panel.RegisterProduct;
 import com.unsis.view.panel.ToolBar;
 import com.unsis.view.panel.SalePoint;
 import java.awt.CardLayout;
@@ -60,6 +61,7 @@ public class Main extends javax.swing.JFrame {
         defaultPanel.add("Lista Empleados", new ListEmployes());
         defaultPanel.add("Alta de Empleado", new AltaEmpleado());
         defaultPanel.add("Gastos", new RegisterExpenses());
+        defaultPanel.add("Alta de Producto", new RegisterProduct());
         
         
         this.add(defaultPanel);
