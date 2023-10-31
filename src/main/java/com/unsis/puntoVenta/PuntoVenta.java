@@ -2,7 +2,7 @@ package com.unsis.puntoVenta;
 
 import com.unsis.view.panel.FirstEjecutation;
 import com.unsis.view.panel.Login;
-import com.unsis.view.panel.RegisterCompany;
+import io.github.cdimascio.dotenv.Dotenv;
 
 /**
  *
@@ -42,7 +42,15 @@ public class PuntoVenta {
         System.out.println("End of the execution");
     }
 
+    /**
+     * 
+     * @return 
+     */
     private boolean loadedMarch() {
+        Dotenv env = Dotenv.load();
+        String environment = env.get("ENVIRONMENT");
+        if (environment != null) 
+            System.out.println("ENVIRONMENT = " + environment);
         return true;
     }
 }

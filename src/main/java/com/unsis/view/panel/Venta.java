@@ -23,12 +23,9 @@ public class Venta extends javax.swing.JPanel {
     public Venta() {
         initComponents();
 
-        //jTableProduct tableProduct = new jTableProduct();
+        JTableHeader TableProduct = tableProduct.getTableHeader();
 
-        // Obtener el JTableHeader (encabezado de la tabla)
-       JTableHeader TableProduct = tableProduct.getTableHeader();
-
-       // Crear un renderizador de encabezado personalizado
+        // Crear un renderizador de encabezado personalizado
         DefaultTableCellRenderer headerRenderer = new DefaultTableCellRenderer();
         headerRenderer.setHorizontalAlignment(SwingConstants.CENTER); // Alineación del texto en el encabezado
         headerRenderer.setVerticalAlignment(SwingConstants.CENTER);
@@ -36,10 +33,9 @@ public class Venta extends javax.swing.JPanel {
         headerRenderer.setForeground(Color.BLUE); // Cambia el color del texto del encabezado
         headerRenderer.setFont(new Font("Jaldi", Font.BOLD, 32)); // Cambia el color del texto del encabezado
 
-// Asignar el renderizador personalizado al encabezado
-       TableProduct.setDefaultRenderer(headerRenderer);
+        // Asignar el renderizador personalizado al encabezado
+        TableProduct.setDefaultRenderer(headerRenderer);
 
-        TableColumnModel modelColumn = TableProduct.getColumnModel();
     }
 
     /**
@@ -55,7 +51,6 @@ public class Venta extends javax.swing.JPanel {
         jRadioButton1 = new javax.swing.JRadioButton();
         buttonGroup2 = new javax.swing.ButtonGroup();
         jLabel1 = new javax.swing.JLabel();
-        jLabel2 = new javax.swing.JLabel();
         jPanel1 = new javax.swing.JPanel();
         jLabel3 = new javax.swing.JLabel();
         jScrollPane1 = new javax.swing.JScrollPane();
@@ -88,12 +83,7 @@ public class Venta extends javax.swing.JPanel {
         jLabel1.setFont(new java.awt.Font("Jaldi", 0, 36)); // NOI18N
         jLabel1.setForeground(new java.awt.Color(1, 41, 87));
         jLabel1.setText("Realiza Venta");
-        add(jLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(110, 100, 281, 46));
-
-        jLabel2.setFont(new java.awt.Font("Jaldi", 0, 36)); // NOI18N
-        jLabel2.setForeground(new java.awt.Color(1, 41, 87));
-        jLabel2.setText("Alta de empleado");
-        add(jLabel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(51, 15, 330, 46));
+        add(jLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(60, 30, 281, 46));
 
         jPanel1.setBackground(new java.awt.Color(255, 255, 255));
         jPanel1.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
@@ -118,7 +108,7 @@ public class Venta extends javax.swing.JPanel {
 
         jPanel1.add(jScrollPane1, new org.netbeans.lib.awtextra.AbsoluteConstraints(70, 90, 760, 560));
 
-        add(jPanel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(50, 170, 960, 790));
+        add(jPanel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(60, 90, 960, 790));
 
         jPanel2.setBackground(new java.awt.Color(255, 255, 255));
         jPanel2.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
@@ -204,7 +194,7 @@ public class Venta extends javax.swing.JPanel {
         jButton2.setText("Agregar pedido");
         jPanel2.add(jButton2, new org.netbeans.lib.awtextra.AbsoluteConstraints(100, 600, 370, 50));
 
-        add(jPanel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(1100, 180, 560, 780));
+        add(jPanel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(1050, 90, 560, 780));
     }// </editor-fold>//GEN-END:initComponents
 
 
@@ -219,7 +209,6 @@ public class Venta extends javax.swing.JPanel {
     private javax.swing.JLabel jLabel10;
     private javax.swing.JLabel jLabel11;
     private javax.swing.JLabel jLabel12;
-    private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel22;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel6;

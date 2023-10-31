@@ -28,10 +28,9 @@ public class NavBar extends javax.swing.JPanel {
     @SuppressWarnings("unchecked")
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
-        java.awt.GridBagConstraints gridBagConstraints;
 
         jLabel1 = new javax.swing.JLabel();
-        jButton1 = new javax.swing.JButton();
+        buttonHome = new javax.swing.JButton();
 
         setBackground(new java.awt.Color(17, 57, 103));
 
@@ -40,13 +39,13 @@ public class NavBar extends javax.swing.JPanel {
         jLabel1.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         jLabel1.setText("Empresa");
 
-        jButton1.setBackground(new java.awt.Color(17, 57, 103));
-        jButton1.setForeground(new java.awt.Color(255, 255, 255));
-        jButton1.setIcon(new javax.swing.ImageIcon("C:\\Users\\jared\\OneDrive\\Documentos\\NetBeansProjects\\Unsis\\SalePoint\\src\\main\\java\\com\\unsis\\images\\homeIcon.png")); // NOI18N
-        jButton1.setText("Inicio");
-        jButton1.setToolTipText("");
-        jButton1.setBorder(javax.swing.BorderFactory.createBevelBorder(javax.swing.border.BevelBorder.RAISED));
-        jButton1.setContentAreaFilled(false);
+        buttonHome.setBackground(new java.awt.Color(17, 57, 103));
+        buttonHome.setForeground(new java.awt.Color(255, 255, 255));
+        buttonHome.setIcon(new javax.swing.ImageIcon("C:\\Users\\jared\\OneDrive\\Documentos\\NetBeansProjects\\Unsis\\SalePoint\\src\\main\\java\\com\\unsis\\images\\homeIcon.png")); // NOI18N
+        buttonHome.setText("Inicio");
+        buttonHome.setToolTipText("");
+        buttonHome.setBorder(javax.swing.BorderFactory.createBevelBorder(javax.swing.border.BevelBorder.RAISED));
+        buttonHome.setContentAreaFilled(false);
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
         this.setLayout(layout);
@@ -55,7 +54,7 @@ public class NavBar extends javax.swing.JPanel {
             .addGroup(layout.createSequentialGroup()
                 .addContainerGap()
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                    .addComponent(jButton1, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.PREFERRED_SIZE, 83, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(buttonHome, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.PREFERRED_SIZE, 83, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 204, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
@@ -65,14 +64,14 @@ public class NavBar extends javax.swing.JPanel {
                 .addGap(16, 16, 16)
                 .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 67, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jButton1, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(buttonHome, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap(893, Short.MAX_VALUE))
         );
     }// </editor-fold>//GEN-END:initComponents
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JButton jButton1;
+    public javax.swing.JButton buttonHome;
     private javax.swing.JLabel jLabel1;
     // End of variables declaration//GEN-END:variables
 }

@@ -6,10 +6,12 @@ package com.unsis.view;
 
 import com.unsis.models.constants.Constants;
 import com.unsis.view.panel.AltaEmpleado;
-import com.unsis.view.panel.HumanResourcesPanel;
+import com.unsis.view.panel.ListEmployes;
 import com.unsis.view.panel.MainMenu;
 import com.unsis.view.panel.NavBar;
+import com.unsis.view.panel.RegisterExpenses;
 import com.unsis.view.panel.Venta;
+import java.awt.CardLayout;
 import javax.swing.JFrame;
 import javax.swing.JPanel;
 
@@ -19,16 +21,12 @@ import javax.swing.JPanel;
  */
 public class Main extends javax.swing.JFrame {
 
-    private final AltaEmpleado altaEmpleado = new AltaEmpleado();
-    private final MainMenu mainMenu = new MainMenu();
-    private final HumanResourcesPanel humanResources = new HumanResourcesPanel();
-    private final Venta sale = new Venta();
-    private JPanel currentPanel;
+    private JPanel defaultPanel;
+    private final String MAINMENU = "Main Menu";
 
     /**
      * Creates new form Home
      *
-     * @param access
      */
     public Main() {
         initComponents();
@@ -39,18 +37,39 @@ public class Main extends javax.swing.JFrame {
 
         NavBar navigator = new NavBar(this);
         navigator.setBounds(0, 0, 216, 1024);
-        currentPanel = mainMenu;
-
+        navigator.buttonHome.addActionListener((e) -> {
+            setView(MAINMENU);
+        });
         this.add(navigator);
-        this.add(currentPanel);
+        this.setCardPanel();
     }
 
-    public void setView(JPanel panel) {
-        this.remove(currentPanel);
-        currentPanel = panel;
-        this.add(currentPanel);
-        System.out.println("Change panel to " + panel);
-        this.repaint();
+    /**
+     * Create a Panel with CardLayout for container all sections Setter it to
+     * this Frame
+     */
+    private void setCardPanel() {
+        defaultPanel = new JPanel(new CardLayout());
+        defaultPanel.setBounds(217, 0, 1696, 894);
+
+        defaultPanel.add(MAINMENU, new MainMenu());
+        defaultPanel.add("Punto de Venta", new Venta());
+        defaultPanel.add("Lista Empleados", new ListEmployes());
+        defaultPanel.add("Alta de Empleado", new AltaEmpleado());
+        defaultPanel.add("Gastos", new RegisterExpenses());
+        
+        
+        this.add(defaultPanel);
+    }
+
+    /**
+     * Change the panel view
+     *
+     * @param name key for JPanel to show
+     */
+    public void setView(String name) {
+        CardLayout c1 = (CardLayout) (defaultPanel.getLayout());
+        c1.show(defaultPanel, name);
     }
 
     /**

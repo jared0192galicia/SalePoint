@@ -16,14 +16,15 @@ import javax.swing.table.TableColumnModel;
  *
  * @author jared
  */
-public class HumanResourcesPanel extends javax.swing.JPanel {
+public class ListEmployes extends javax.swing.JPanel {
 
     /**
      * Creates new form HumanResourcesPanel
      */
-    public HumanResourcesPanel() {
+    public ListEmployes() {
         initComponents();
 
+        this.setBounds(217, 0, 1200, 692);
         // Obtener el JTableHeader (encabezado de la tabla)
         JTableHeader tableHeader = table.getTableHeader();
         tableHeader.setFont(new Font("monospaced", Font.BOLD, 24));

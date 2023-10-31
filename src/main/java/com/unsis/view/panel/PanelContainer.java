@@ -38,7 +38,7 @@ public class PanelContainer extends javax.swing.JPanel {
                 item.setPreferredSize(new Dimension(parent.getWidth() - 5, item.getPreferredSize().height));
 
                 item.addActionListener((e) -> {
-                    mainWindow.setView(section.getPanel());
+                    mainWindow.setView(section.getNombre());
                 });
                 menu.add(item);
             }

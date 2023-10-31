@@ -18,12 +18,19 @@ public class Constants {
         sections.add(new Section("Corte de caja", "Contabilidad", "Reliza tu corte de caja", 1));
         sections.add(new Section("Ordenes entrantes", "Ventas", "Accede a la lista de pedidos mas reciente", 2));
         sections.add(new Section("Alta de Empleado", "Recursos Humanos", "Registra un nuevo empleado", 3, new AltaEmpleado()));
+
         sections.add(new Section("Alta de Producto", "Almacen", "Registra un producto nuevo", 4));
         sections.add(new Section("Punto de Venta", "Ventas", "Reliza las ventas del dia", 5));
+
         sections.add(new Section("Lista Productos", "Almacen", "Accede a la lista de los productos", 6));
         sections.add(new Section("Gastos", "Contabilidad", "Registra los gastos permitidos", 7));
+
         sections.add(new Section("Ajustes del aplicativo", "Ajustes", "Ajustes del programa", 8));
         sections.add(new Section("Ajuste de valores", "Ajustes", "Ajusta los valores del programa", 9));
+    }
+    
+    public static void getIds () {
+        
     }
 
     public static class Section {

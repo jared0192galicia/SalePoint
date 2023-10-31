@@ -25,7 +25,7 @@ public class AltaEmpleado extends javax.swing.JPanel {
         initComponents();
         panelInternal.setSize(1696, 894);
         this.setSize(1696, 894);
-        this.setBounds(217, 0, this.getWidth(), this.getHeight());
+        this.setBounds(0, 0, this.getWidth(), this.getHeight());
 
         dateIngres = new JCalendar(new Date());
         dateIngres.setVisible(false);
