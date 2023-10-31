@@ -5,6 +5,7 @@
 package com.unsis.view.panel;
 
 import com.toedter.calendar.JCalendar;
+import com.unsis.clases.Tools;
 import java.awt.Image;
 import java.util.Date;
 import javax.swing.Icon;
@@ -33,40 +34,19 @@ public class AltaEmpleado extends javax.swing.JPanel {
         panelInternal.setComponentZOrder(dateIngres, 0);
         resizeImages();
     }
-
+    
     /**
      * Redimenciona las imagenes de los botones para que se ajusten a el tamaño
      * necesario
      */
     private void resizeImages() {
-        Icon resizedIcon = resizeIcon(buttonSave.getIcon(), 30, 30);
+        Tools tools = new Tools();
+        Icon resizedIcon = tools.resizeIcon(buttonSave.getIcon(), 30, 30);
         buttonSave.setIcon(resizedIcon);
 
-        resizedIcon = resizeIcon(buttonDiscard.getIcon(), 35, 35);
+        resizedIcon = tools.resizeIcon(buttonDiscard.getIcon(), 35, 35);
         buttonDiscard.setIcon(resizedIcon);
 
-    }
-
-    /**
-     * Resize image for 
-     * @param icon image for resize
-     * @param width Width for image
-     * @param height height for image
-     * @return
-     */
-    private Icon resizeIcon(Icon icon, int width, int height) {
-        if (icon instanceof ImageIcon) {
-            ImageIcon imageIcon = (ImageIcon) icon;
-            Image image = imageIcon.getImage();
-
-            // Redimensionar la imagen al tamaño deseado
-            Image resizedImage = image.getScaledInstance(width, height, Image.SCALE_SMOOTH);
-
-            // Crear un nuevo ImageIcon con la imagen redimensionada
-            return new ImageIcon(resizedImage);
-        }
-
-        return icon; // Devolver el icono original si no es un ImageIcon
     }
 
     /**

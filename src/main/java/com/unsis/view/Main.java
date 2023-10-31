@@ -10,6 +10,7 @@ import com.unsis.view.panel.ListEmployes;
 import com.unsis.view.panel.MainMenu;
 import com.unsis.view.panel.NavBar;
 import com.unsis.view.panel.RegisterExpenses;
+import com.unsis.view.panel.ToolBar;
 import com.unsis.view.panel.Venta;
 import java.awt.CardLayout;
 import javax.swing.JFrame;
@@ -36,11 +37,13 @@ public class Main extends javax.swing.JFrame {
         Constants.fillContants();
 
         NavBar navigator = new NavBar(this);
+        ToolBar toolBar = new ToolBar();
         navigator.setBounds(0, 0, 216, 1024);
         navigator.buttonHome.addActionListener((e) -> {
             setView(MAINMENU);
         });
         this.add(navigator);
+        this.add(toolBar);
         this.setCardPanel();
     }
 
@@ -50,7 +53,7 @@ public class Main extends javax.swing.JFrame {
      */
     private void setCardPanel() {
         defaultPanel = new JPanel(new CardLayout());
-        defaultPanel.setBounds(217, 0, 1696, 894);
+        defaultPanel.setBounds(217, 85, 1696, 894);
 
         defaultPanel.add(MAINMENU, new MainMenu());
         defaultPanel.add("Punto de Venta", new Venta());

@@ -15,7 +15,6 @@ public class MainMenu extends javax.swing.JPanel {
      */
     public MainMenu() {
         initComponents();
-        
         this.setSize(1700, 861);
         this.setBounds(217, 0, this.getWidth(), this.getHeight());
     }
@@ -62,12 +61,13 @@ public class MainMenu extends javax.swing.JPanel {
 
         setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
-        jLabel2.setFont(new java.awt.Font("Jaldi", 0, 36)); // NOI18N
+        jLabel2.setFont(new java.awt.Font("Jaldi", 0, 30)); // NOI18N
         jLabel2.setForeground(new java.awt.Color(7, 56, 112));
-        jLabel2.setText("MENÚ PRINCIPAL");
+        jLabel2.setText("Bienvenido Jared");
         add(jLabel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 30, 330, 46));
 
         jPanel1.setBackground(new java.awt.Color(255, 255, 255));
+        jPanel1.setOpaque(false);
         jPanel1.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
         buttonInventory.setBackground(new java.awt.Color(51, 153, 255));
