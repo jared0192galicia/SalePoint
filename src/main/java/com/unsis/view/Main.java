@@ -13,6 +13,7 @@ import com.unsis.view.panel.RegisterExpenses;
 import com.unsis.view.panel.RegisterProduct;
 import com.unsis.view.panel.ToolBar;
 import com.unsis.view.panel.SalePoint;
+import com.unsis.view.panel.ventasDesp;
 import java.awt.CardLayout;
 import javax.swing.JFrame;
 import javax.swing.JPanel;
@@ -62,6 +63,7 @@ public class Main extends javax.swing.JFrame {
         defaultPanel.add("Alta de Empleado", new AltaEmpleado());
         defaultPanel.add("Gastos", new RegisterExpenses());
         defaultPanel.add("Alta de Producto", new RegisterProduct());
+        defaultPanel.add("Ordenes entrantes", new ventasDesp());
         
         
         this.add(defaultPanel);
