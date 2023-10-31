@@ -26,26 +26,14 @@ public class ListEmployes extends javax.swing.JPanel {
 
         this.setBounds(217, 0, 1200, 692);
         // Obtener el JTableHeader (encabezado de la tabla)
-        JTableHeader tableHeader = table.getTableHeader();
-        tableHeader.setFont(new Font("monospaced", Font.BOLD, 24));
-        tableHeader.setForeground(Color.DARK_GRAY); // Alineación del texto en el encabezado
-        tableHeader.setAlignmentX(SwingConstants.CENTER);
+        table.getTableHeader().setFont(new Font("Arial", Font.BOLD, 18));
+        table.getTableHeader().setOpaque(false);
+        table.getTableHeader().setBackground(new Color(32, 136, 203));
+        table.getTableHeader().setForeground(Color.WHITE);
 
-        // Crear un renderizador de encabezado personalizado
-        DefaultTableCellRenderer headerRenderer = new DefaultTableCellRenderer();
-        headerRenderer.setHorizontalAlignment(SwingConstants.CENTER); // Alineación del texto en el encabezado
-        headerRenderer.setVerticalAlignment(SwingConstants.CENTER);
-        headerRenderer.setBackground(Color.WHITE); // Cambia el color de fondo del encabezado
-        headerRenderer.setForeground(Color.DARK_GRAY); // Cambia el color del texto del encabezado
-        headerRenderer.setFont(new Font("monospaced", Font.BOLD, 24)); // Cambia el color del texto del encabezado
-
-        // Asignar el renderizador personalizado al encabezado
-        tableHeader.setDefaultRenderer(headerRenderer);
-
-        TableColumnModel modelColumn = table.getColumnModel();
-        modelColumn.setColumnMargin(35);
+//        TableColumnModel modelColumn = table.getColumnModel();
+//        modelColumn.setColumnMargin(35);
     }
-    
 
     /**
      * This method is called from within the constructor to initialize the form.
@@ -64,6 +52,7 @@ public class ListEmployes extends javax.swing.JPanel {
         jPanel2 = new javax.swing.JPanel();
         jScrollPane1 = new javax.swing.JScrollPane();
         table = new javax.swing.JTable();
+        jLabel2 = new javax.swing.JLabel();
 
         setBackground(new java.awt.Color(240, 240, 240));
 
@@ -80,14 +69,18 @@ public class ListEmployes extends javax.swing.JPanel {
         buttonCreate.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
         buttonCreate.setMaximumSize(new java.awt.Dimension(157, 38));
         buttonCreate.setMinimumSize(new java.awt.Dimension(157, 38));
-        jPanel1.add(buttonCreate, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 10, 170, 60));
+        jPanel1.add(buttonCreate, new org.netbeans.lib.awtextra.AbsoluteConstraints(50, 10, 170, 60));
 
         buttonExport.setBackground(new java.awt.Color(0, 102, 0));
         buttonExport.setFont(new java.awt.Font("Dialog", 1, 16)); // NOI18N
         buttonExport.setForeground(new java.awt.Color(255, 255, 255));
-        buttonExport.setText("+ Exportar");
+        buttonExport.setIcon(new javax.swing.ImageIcon(getClass().getResource("/exportExcel .png"))); // NOI18N
+        buttonExport.setText("Exportar");
         buttonExport.setBorder(null);
-        jPanel1.add(buttonExport, new org.netbeans.lib.awtextra.AbsoluteConstraints(928, 23, 136, 34));
+        buttonExport.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+        buttonExport.setHorizontalTextPosition(javax.swing.SwingConstants.RIGHT);
+        buttonExport.setVerticalTextPosition(javax.swing.SwingConstants.BOTTOM);
+        jPanel1.add(buttonExport, new org.netbeans.lib.awtextra.AbsoluteConstraints(1340, 25, 136, 40));
 
         buttonModify.setBackground(new java.awt.Color(255, 255, 255));
         buttonModify.setFont(new java.awt.Font("Dialog", 1, 16)); // NOI18N
@@ -99,7 +92,7 @@ public class ListEmployes extends javax.swing.JPanel {
         buttonModify.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
         buttonModify.setMaximumSize(new java.awt.Dimension(157, 35));
         buttonModify.setMinimumSize(new java.awt.Dimension(157, 35));
-        jPanel1.add(buttonModify, new org.netbeans.lib.awtextra.AbsoluteConstraints(190, 10, 170, 60));
+        jPanel1.add(buttonModify, new org.netbeans.lib.awtextra.AbsoluteConstraints(280, 10, 170, 60));
 
         buttonDelete.setBackground(new java.awt.Color(255, 255, 255));
         buttonDelete.setFont(new java.awt.Font("Dialog", 1, 16)); // NOI18N
@@ -111,9 +104,10 @@ public class ListEmployes extends javax.swing.JPanel {
         buttonDelete.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
         buttonDelete.setMaximumSize(new java.awt.Dimension(157, 35));
         buttonDelete.setMinimumSize(new java.awt.Dimension(157, 35));
-        jPanel1.add(buttonDelete, new org.netbeans.lib.awtextra.AbsoluteConstraints(370, 10, 170, 60));
+        jPanel1.add(buttonDelete, new org.netbeans.lib.awtextra.AbsoluteConstraints(510, 10, 170, 60));
 
         jPanel2.setBackground(new java.awt.Color(255, 255, 255));
+        jPanel2.setOpaque(false);
         jPanel2.setPreferredSize(new java.awt.Dimension(453, 500));
 
         table.setBackground(new java.awt.Color(255, 255, 255));
@@ -139,6 +133,8 @@ public class ListEmployes extends javax.swing.JPanel {
             }
         ));
         table.setGridColor(new java.awt.Color(204, 204, 204));
+        table.setRowHeight(25);
+        table.setRowMargin(3);
         table.setShowGrid(true);
         table.setShowVerticalLines(false);
         jScrollPane1.setViewportView(table);
@@ -147,34 +143,48 @@ public class ListEmployes extends javax.swing.JPanel {
         jPanel2.setLayout(jPanel2Layout);
         jPanel2Layout.setHorizontalGroup(
             jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 1073, Short.MAX_VALUE)
+            .addGroup(jPanel2Layout.createSequentialGroup()
+                .addGap(82, 82, 82)
+                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 1309, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(313, Short.MAX_VALUE))
         );
         jPanel2Layout.setVerticalGroup(
             jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel2Layout.createSequentialGroup()
-                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 499, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(0, 1, Short.MAX_VALUE))
+                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 501, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(0, 83, Short.MAX_VALUE))
         );
+
+        jLabel2.setFont(new java.awt.Font("Jaldi", 0, 30)); // NOI18N
+        jLabel2.setForeground(new java.awt.Color(7, 56, 112));
+        jLabel2.setText("Empleados");
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
         this.setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addGap(57, 57, 57)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                    .addComponent(jPanel2, javax.swing.GroupLayout.PREFERRED_SIZE, 1073, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addContainerGap(70, Short.MAX_VALUE))
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(layout.createSequentialGroup()
+                        .addGap(60, 60, 60)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(jLabel2, javax.swing.GroupLayout.PREFERRED_SIZE, 330, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, 1517, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                    .addGroup(layout.createSequentialGroup()
+                        .addGap(69, 69, 69)
+                        .addComponent(jPanel2, javax.swing.GroupLayout.PREFERRED_SIZE, 1704, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                .addContainerGap(127, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addGap(31, 31, 31)
+                .addGap(37, 37, 37)
+                .addComponent(jLabel2, javax.swing.GroupLayout.PREFERRED_SIZE, 46, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(27, 27, 27)
                 .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, 85, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(30, 30, 30)
-                .addComponent(jPanel2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(46, Short.MAX_VALUE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 65, Short.MAX_VALUE)
+                .addComponent(jPanel2, javax.swing.GroupLayout.PREFERRED_SIZE, 584, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(66, 66, 66))
         );
     }// </editor-fold>//GEN-END:initComponents
 
@@ -184,6 +194,7 @@ public class ListEmployes extends javax.swing.JPanel {
     private javax.swing.JButton buttonDelete;
     private javax.swing.JButton buttonExport;
     private javax.swing.JButton buttonModify;
+    private javax.swing.JLabel jLabel2;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanel2;
     private javax.swing.JScrollPane jScrollPane1;

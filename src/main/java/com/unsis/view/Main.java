@@ -11,7 +11,7 @@ import com.unsis.view.panel.MainMenu;
 import com.unsis.view.panel.NavBar;
 import com.unsis.view.panel.RegisterExpenses;
 import com.unsis.view.panel.ToolBar;
-import com.unsis.view.panel.Venta;
+import com.unsis.view.panel.SalePoint;
 import java.awt.CardLayout;
 import javax.swing.JFrame;
 import javax.swing.JPanel;
@@ -33,7 +33,7 @@ public class Main extends javax.swing.JFrame {
         initComponents();
 
         this.setExtendedState(JFrame.MAXIMIZED_BOTH);
-        this.setSize(1237, 1224);
+        this.setSize(1900, 1224);
         Constants.fillContants();
 
         NavBar navigator = new NavBar(this);
@@ -56,7 +56,7 @@ public class Main extends javax.swing.JFrame {
         defaultPanel.setBounds(217, 85, 1696, 894);
 
         defaultPanel.add(MAINMENU, new MainMenu());
-        defaultPanel.add("Punto de Venta", new Venta());
+        defaultPanel.add("Punto de Venta", new SalePoint());
         defaultPanel.add("Lista Empleados", new ListEmployes());
         defaultPanel.add("Alta de Empleado", new AltaEmpleado());
         defaultPanel.add("Gastos", new RegisterExpenses());
@@ -90,11 +90,11 @@ public class Main extends javax.swing.JFrame {
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 684, Short.MAX_VALUE)
+            .addGap(0, 1900, Short.MAX_VALUE)
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 502, Short.MAX_VALUE)
+            .addGap(0, 700, Short.MAX_VALUE)
         );
 
         pack();

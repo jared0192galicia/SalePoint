@@ -25,10 +25,8 @@ public class ToolBar extends javax.swing.JPanel {
      */
     private void resizeImages() {
         Tools tools = new Tools();
-        Icon resizedIcon = tools.resizeIcon(jButton1.getIcon(), 50, 50);
-        jButton1.setIcon(resizedIcon);
-
-
+        Icon resizedIcon = tools.resizeIcon(buttonCloseSesion.getIcon(), 50, 50);
+        buttonCloseSesion.setIcon(resizedIcon);
     }
 
     /**
@@ -42,7 +40,7 @@ public class ToolBar extends javax.swing.JPanel {
 
         labelProfile = new javax.swing.JLabel();
         jLabel1 = new javax.swing.JLabel();
-        jButton1 = new javax.swing.JButton();
+        buttonCloseSesion = new javax.swing.JButton();
 
         setBackground(new java.awt.Color(255, 255, 255));
 
@@ -52,11 +50,11 @@ public class ToolBar extends javax.swing.JPanel {
         jLabel1.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         jLabel1.setText("Jared Galicia");
 
-        jButton1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/closeSession.jpg"))); // NOI18N
-        jButton1.setToolTipText("Cerrar Sesión");
-        jButton1.setBorder(null);
-        jButton1.setContentAreaFilled(false);
-        jButton1.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+        buttonCloseSesion.setIcon(new javax.swing.ImageIcon(getClass().getResource("/closeSession.jpg"))); // NOI18N
+        buttonCloseSesion.setToolTipText("Cerrar Sesión");
+        buttonCloseSesion.setBorder(null);
+        buttonCloseSesion.setContentAreaFilled(false);
+        buttonCloseSesion.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
         this.setLayout(layout);
@@ -68,7 +66,7 @@ public class ToolBar extends javax.swing.JPanel {
                 .addGap(18, 18, 18)
                 .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 151, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(18, 18, 18)
-                .addComponent(jButton1, javax.swing.GroupLayout.PREFERRED_SIZE, 59, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(buttonCloseSesion, javax.swing.GroupLayout.PREFERRED_SIZE, 59, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap())
         );
         layout.setVerticalGroup(
@@ -76,7 +74,7 @@ public class ToolBar extends javax.swing.JPanel {
             .addGroup(layout.createSequentialGroup()
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(labelProfile, javax.swing.GroupLayout.PREFERRED_SIZE, 0, Short.MAX_VALUE)
-                    .addComponent(jButton1, javax.swing.GroupLayout.PREFERRED_SIZE, 0, Short.MAX_VALUE)
+                    .addComponent(buttonCloseSesion, javax.swing.GroupLayout.PREFERRED_SIZE, 0, Short.MAX_VALUE)
                     .addGroup(layout.createSequentialGroup()
                         .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 52, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGap(0, 2, Short.MAX_VALUE)))
@@ -86,7 +84,7 @@ public class ToolBar extends javax.swing.JPanel {
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JButton jButton1;
+    private javax.swing.JButton buttonCloseSesion;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel labelProfile;
     // End of variables declaration//GEN-END:variables
