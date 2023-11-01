@@ -65,6 +65,7 @@ public class HeadWrapperPanel extends javax.swing.JPanel {
         pedidoLabel = new javax.swing.JLabel();
         labelName = new javax.swing.JLabel();
         jLabel1 = new javax.swing.JLabel();
+        pedidoLabel1 = new javax.swing.JLabel();
 
         setBackground(new java.awt.Color(255, 255, 255));
 
@@ -74,18 +75,27 @@ public class HeadWrapperPanel extends javax.swing.JPanel {
         nombreLabel.setForeground(new java.awt.Color(132, 143, 165));
         nombreLabel.setText("de ventas dio de alta un pedido");
 
+        horaLabel.setFont(new java.awt.Font("Dialog", 1, 14)); // NOI18N
         horaLabel.setForeground(new java.awt.Color(132, 139, 188));
         horaLabel.setText("Hoy a las 2:35 PM");
 
-        pedidoLabel.setFont(new java.awt.Font("Dialog", 1, 18)); // NOI18N
+        pedidoLabel.setFont(new java.awt.Font("Dialog", 1, 16)); // NOI18N
         pedidoLabel.setForeground(new java.awt.Color(51, 51, 51));
         pedidoLabel.setText("2 Tortas de cuero");
+        pedidoLabel.setVerticalAlignment(javax.swing.SwingConstants.TOP);
+        pedidoLabel.setVerticalTextPosition(javax.swing.SwingConstants.TOP);
 
         labelName.setFont(new java.awt.Font("Dialog", 1, 14)); // NOI18N
         labelName.setForeground(new java.awt.Color(3, 43, 89));
         labelName.setText("Hugo");
 
         jLabel1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/dropDawn.png"))); // NOI18N
+
+        pedidoLabel1.setFont(new java.awt.Font("Dialog", 1, 16)); // NOI18N
+        pedidoLabel1.setForeground(new java.awt.Color(51, 51, 51));
+        pedidoLabel1.setText("2 Tortas de cuero");
+        pedidoLabel1.setVerticalAlignment(javax.swing.SwingConstants.TOP);
+        pedidoLabel1.setVerticalTextPosition(javax.swing.SwingConstants.TOP);
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
         this.setLayout(layout);
@@ -94,17 +104,20 @@ public class HeadWrapperPanel extends javax.swing.JPanel {
             .addGroup(layout.createSequentialGroup()
                 .addGap(39, 39, 39)
                 .addComponent(imgLabel, javax.swing.GroupLayout.PREFERRED_SIZE, 62, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addGap(14, 14, 14)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(horaLabel, javax.swing.GroupLayout.PREFERRED_SIZE, 166, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addGroup(layout.createSequentialGroup()
-                        .addGap(2, 2, 2)
-                        .addComponent(labelName, javax.swing.GroupLayout.PREFERRED_SIZE, 47, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(6, 6, 6)
+                        .addComponent(horaLabel, javax.swing.GroupLayout.PREFERRED_SIZE, 166, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addGroup(layout.createSequentialGroup()
+                        .addComponent(labelName, javax.swing.GroupLayout.PREFERRED_SIZE, 41, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(nombreLabel, javax.swing.GroupLayout.PREFERRED_SIZE, 286, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 168, Short.MAX_VALUE)
-                .addComponent(pedidoLabel, javax.swing.GroupLayout.PREFERRED_SIZE, 194, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(33, 33, 33)
+                        .addComponent(nombreLabel, javax.swing.GroupLayout.PREFERRED_SIZE, 205, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                .addGap(52, 52, 52)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(pedidoLabel, javax.swing.GroupLayout.PREFERRED_SIZE, 194, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(pedidoLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 194, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 453, Short.MAX_VALUE)
                 .addComponent(jLabel1)
                 .addGap(34, 34, 34))
         );
@@ -116,14 +129,17 @@ public class HeadWrapperPanel extends javax.swing.JPanel {
                     .addComponent(imgLabel, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
                         .addGap(0, 0, Short.MAX_VALUE)
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                            .addComponent(nombreLabel, javax.swing.GroupLayout.PREFERRED_SIZE, 16, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(labelName))
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                                .addComponent(nombreLabel, javax.swing.GroupLayout.PREFERRED_SIZE, 16, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addComponent(labelName))
+                            .addComponent(pedidoLabel1))
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(horaLabel)
-                        .addGap(15, 15, 15)))
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(horaLabel)
+                            .addComponent(pedidoLabel))
+                        .addGap(7, 7, 7)))
                 .addContainerGap())
-            .addComponent(pedidoLabel, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
             .addComponent(jLabel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
         );
     }// </editor-fold>//GEN-END:initComponents
@@ -136,5 +152,6 @@ public class HeadWrapperPanel extends javax.swing.JPanel {
     private javax.swing.JLabel labelName;
     private javax.swing.JLabel nombreLabel;
     private javax.swing.JLabel pedidoLabel;
+    private javax.swing.JLabel pedidoLabel1;
     // End of variables declaration//GEN-END:variables
 }

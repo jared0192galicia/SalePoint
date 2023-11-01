@@ -23,7 +23,7 @@ public class ventasDesp extends javax.swing.JPanel {
         HeadWrapperPanel hPanel2 = new HeadWrapperPanel();
         ChildWrapperPanel chPanel1 = new ChildWrapperPanel();
 
-        hPanel1.getImgLabel().setIcon(new ImageIcon(getClass().getResource("/user0.png")));
+//        hPanel1.getImgLabel().setIcon(new ImageIcon(getClass().getResource("/user0.png")));
         hPanel2.getImgLabel().setIcon(new ImageIcon(getClass().getResource("/user1.png")));
         
         /*

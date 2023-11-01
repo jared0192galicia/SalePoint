@@ -41,7 +41,7 @@ public class ChildWrapperPanel extends javax.swing.JPanel {
         txtOrder.setRows(5);
         txtOrder.setText("1.- 2 Tortas de Tasajo\n2.- 1 Agua 600ml\n3.- 2 Tlayudas\n4.- 5 Tacos de chorizo\n");
         txtOrder.setAutoscrolls(false);
-        txtOrder.setBorder(javax.swing.BorderFactory.createBevelBorder(javax.swing.border.BevelBorder.RAISED));
+        txtOrder.setBorder(null);
         txtOrder.setMinimumSize(new java.awt.Dimension(199, 25));
         jScrollPane1.setViewportView(txtOrder);
 
@@ -51,7 +51,7 @@ public class ChildWrapperPanel extends javax.swing.JPanel {
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
                 .addContainerGap()
-                .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 399, Short.MAX_VALUE)
+                .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 698, Short.MAX_VALUE)
                 .addContainerGap())
         );
         layout.setVerticalGroup(

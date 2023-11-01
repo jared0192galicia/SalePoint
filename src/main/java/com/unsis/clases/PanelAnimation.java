@@ -4,7 +4,6 @@ import java.awt.Component;
 import net.miginfocom.swing.MigLayout;
 import org.jdesktop.animation.timing.Animator;
 import org.jdesktop.animation.timing.TimingTargetAdapter;
-import com.unsis.clases.PanelChild;
 
 public class PanelAnimation {
 

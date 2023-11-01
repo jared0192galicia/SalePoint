@@ -35,7 +35,7 @@ public class PanelDesp extends JComponent {
 
     public PanelDesp(JPanel[][] menuPanelItems) {      
         this.menuPanelItems = menuPanelItems;
-        init();
+        this.init();
     }
 
     private void init() {
@@ -100,16 +100,9 @@ public class PanelDesp extends JComponent {
     private void addSubMenu(PanelChild item, int index, int length, int indexZorder) {
         JPanel panel = new JPanel(new MigLayout("wrap 1, fillx, inset 0, gapy 0", "fill"));
         panel.setName(index + "");
-//        panel.setBackground(new Color(18, 99, 63));
         for (int i = 1; i < length; i++) {
             PanelChild subItem = new PanelChild(menuPanelItems[index][i], i, false);
             subItem.addMouseListener(new MouseListener() {
-//                @Override
-//                public void actionPerformed(ActionEvent ae) {
-//                    if (event != null) {
-//                        event.selected(index, subItem.getIndex());
-//                    }
-//                }
 
                 @Override
                 public void mouseClicked(MouseEvent e) {

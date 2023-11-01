@@ -103,7 +103,7 @@ public class RegisterProduct extends javax.swing.JPanel {
         jLabel4.setFont(new java.awt.Font("Jaldi", 0, 18)); // NOI18N
         jLabel4.setForeground(new java.awt.Color(118, 125, 142));
         jLabel4.setText("Proveedor");
-        panelInternal.add(jLabel4, new org.netbeans.lib.awtextra.AbsoluteConstraints(450, 470, -1, -1));
+        panelInternal.add(jLabel4, new org.netbeans.lib.awtextra.AbsoluteConstraints(450, 470, 130, -1));
 
         jLabel5.setFont(new java.awt.Font("Jaldi", 0, 18)); // NOI18N
         jLabel5.setForeground(new java.awt.Color(118, 125, 142));
