@@ -1,7 +1,3 @@
-/*
- * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
- * Click nbfs://nbhost/SystemFileSystem/Templates/GUIForms/JPanel.java to edit this template
- */
 package com.unsis.view.panel;
 
 import com.unsis.clases.Tools;
@@ -73,9 +69,9 @@ public class RegisterExpenses extends javax.swing.JPanel {
         Panel1gastos.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
         Labebillsl.setFont(new java.awt.Font("Jaldi", 0, 48)); // NOI18N
-        Labebillsl.setForeground(new java.awt.Color(82, 146, 222));
+        Labebillsl.setForeground(new java.awt.Color(7, 56, 112));
         Labebillsl.setText("Gastos");
-        Panel1gastos.add(Labebillsl, new org.netbeans.lib.awtextra.AbsoluteConstraints(50, 50, -1, -1));
+        Panel1gastos.add(Labebillsl, new org.netbeans.lib.awtextra.AbsoluteConstraints(120, 40, -1, -1));
 
         table.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
@@ -90,70 +86,70 @@ public class RegisterExpenses extends javax.swing.JPanel {
         ));
         jScrollPane1.setViewportView(table);
 
-        Panel1gastos.add(jScrollPane1, new org.netbeans.lib.awtextra.AbsoluteConstraints(50, 140, 620, 660));
+        Panel1gastos.add(jScrollPane1, new org.netbeans.lib.awtextra.AbsoluteConstraints(170, 130, 620, 660));
 
         labelfilter.setFont(new java.awt.Font("Jaldi", 0, 24)); // NOI18N
         labelfilter.setForeground(new java.awt.Color(82, 146, 222));
         labelfilter.setText("Filtro de busqueda");
-        Panel1gastos.add(labelfilter, new org.netbeans.lib.awtextra.AbsoluteConstraints(770, 430, 233, 39));
+        Panel1gastos.add(labelfilter, new org.netbeans.lib.awtextra.AbsoluteConstraints(1060, 440, 233, 39));
 
         labeldescription.setFont(new java.awt.Font("Jaldi", 0, 20)); // NOI18N
         labeldescription.setForeground(new java.awt.Color(118, 125, 142));
         labeldescription.setText("Descripcion");
-        Panel1gastos.add(labeldescription, new org.netbeans.lib.awtextra.AbsoluteConstraints(1110, 210, 130, -1));
+        Panel1gastos.add(labeldescription, new org.netbeans.lib.awtextra.AbsoluteConstraints(1400, 220, 130, -1));
 
         labelvoucher.setFont(new java.awt.Font("Jaldi", 0, 20)); // NOI18N
         labelvoucher.setForeground(new java.awt.Color(118, 125, 142));
         labelvoucher.setText("Adjunte de comprobante");
-        Panel1gastos.add(labelvoucher, new org.netbeans.lib.awtextra.AbsoluteConstraints(1110, 600, 250, -1));
+        Panel1gastos.add(labelvoucher, new org.netbeans.lib.awtextra.AbsoluteConstraints(1400, 600, 250, -1));
 
         labelamount.setFont(new java.awt.Font("Jaldi", 0, 20)); // NOI18N
         labelamount.setForeground(new java.awt.Color(118, 125, 142));
         labelamount.setText("Monto");
-        Panel1gastos.add(labelamount, new org.netbeans.lib.awtextra.AbsoluteConstraints(1120, 310, 90, -1));
+        Panel1gastos.add(labelamount, new org.netbeans.lib.awtextra.AbsoluteConstraints(1410, 310, 90, -1));
 
         labelcategory.setFont(new java.awt.Font("Jaldi", 0, 20)); // NOI18N
         labelcategory.setForeground(new java.awt.Color(118, 125, 142));
         labelcategory.setText("Categoria");
-        Panel1gastos.add(labelcategory, new org.netbeans.lib.awtextra.AbsoluteConstraints(810, 310, 160, -1));
+        Panel1gastos.add(labelcategory, new org.netbeans.lib.awtextra.AbsoluteConstraints(1100, 310, 160, -1));
 
         LabelGeneral.setFont(new java.awt.Font("Jaldi", 0, 24)); // NOI18N
         LabelGeneral.setForeground(new java.awt.Color(82, 146, 222));
         LabelGeneral.setText("Informacion general ");
-        Panel1gastos.add(LabelGeneral, new org.netbeans.lib.awtextra.AbsoluteConstraints(750, 140, 270, 39));
+        Panel1gastos.add(LabelGeneral, new org.netbeans.lib.awtextra.AbsoluteConstraints(1040, 150, 270, 39));
 
         labeldate.setFont(new java.awt.Font("Jaldi", 0, 20)); // NOI18N
         labeldate.setForeground(new java.awt.Color(118, 125, 142));
         labeldate.setText("Fecha");
-        Panel1gastos.add(labeldate, new org.netbeans.lib.awtextra.AbsoluteConstraints(810, 210, 90, -1));
+        Panel1gastos.add(labeldate, new org.netbeans.lib.awtextra.AbsoluteConstraints(1100, 220, 90, -1));
 
         labelmonth.setFont(new java.awt.Font("Jaldi", 0, 20)); // NOI18N
         labelmonth.setForeground(new java.awt.Color(118, 125, 142));
         labelmonth.setText("Mes de compra");
-        Panel1gastos.add(labelmonth, new org.netbeans.lib.awtextra.AbsoluteConstraints(810, 480, 170, -1));
+        Panel1gastos.add(labelmonth, new org.netbeans.lib.awtextra.AbsoluteConstraints(1100, 490, 170, -1));
 
         labelproduct.setFont(new java.awt.Font("Jaldi", 0, 20)); // NOI18N
         labelproduct.setForeground(new java.awt.Color(118, 125, 142));
         labelproduct.setText("Tipo de producto");
-        Panel1gastos.add(labelproduct, new org.netbeans.lib.awtextra.AbsoluteConstraints(1110, 480, 190, -1));
+        Panel1gastos.add(labelproduct, new org.netbeans.lib.awtextra.AbsoluteConstraints(1400, 490, 190, -1));
 
         jLabel13.setFont(new java.awt.Font("Jaldi", 0, 20)); // NOI18N
         jLabel13.setForeground(new java.awt.Color(118, 125, 142));
         jLabel13.setText("Tipo de producto");
-        Panel1gastos.add(jLabel13, new org.netbeans.lib.awtextra.AbsoluteConstraints(810, 600, 190, -1));
-        Panel1gastos.add(txtamount, new org.netbeans.lib.awtextra.AbsoluteConstraints(1120, 340, 250, 35));
-        Panel1gastos.add(txtdate, new org.netbeans.lib.awtextra.AbsoluteConstraints(810, 240, 250, 35));
-        Panel1gastos.add(txtdescription, new org.netbeans.lib.awtextra.AbsoluteConstraints(1110, 240, 250, 35));
-        Panel1gastos.add(txtproduct, new org.netbeans.lib.awtextra.AbsoluteConstraints(810, 640, 250, 35));
+        Panel1gastos.add(jLabel13, new org.netbeans.lib.awtextra.AbsoluteConstraints(1100, 600, 190, -1));
+        Panel1gastos.add(txtamount, new org.netbeans.lib.awtextra.AbsoluteConstraints(1400, 340, 250, 35));
+        Panel1gastos.add(txtdate, new org.netbeans.lib.awtextra.AbsoluteConstraints(1100, 250, 250, 35));
+        Panel1gastos.add(txtdescription, new org.netbeans.lib.awtextra.AbsoluteConstraints(1400, 250, 250, 35));
+        Panel1gastos.add(txtproduct, new org.netbeans.lib.awtextra.AbsoluteConstraints(1100, 630, 250, 35));
 
         comboboxcategory.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
-        Panel1gastos.add(comboboxcategory, new org.netbeans.lib.awtextra.AbsoluteConstraints(810, 340, 250, 35));
+        Panel1gastos.add(comboboxcategory, new org.netbeans.lib.awtextra.AbsoluteConstraints(1100, 340, 250, 35));
 
         comboboxmonth.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
-        Panel1gastos.add(comboboxmonth, new org.netbeans.lib.awtextra.AbsoluteConstraints(810, 520, 250, 35));
+        Panel1gastos.add(comboboxmonth, new org.netbeans.lib.awtextra.AbsoluteConstraints(1100, 530, 250, 35));
 
         comboboxproduct.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
-        Panel1gastos.add(comboboxproduct, new org.netbeans.lib.awtextra.AbsoluteConstraints(1110, 520, 250, 35));
+        Panel1gastos.add(comboboxproduct, new org.netbeans.lib.awtextra.AbsoluteConstraints(1400, 530, 250, 35));
 
         buttonAdd.setBackground(new java.awt.Color(25, 130, 206));
         buttonAdd.setFont(new java.awt.Font("Jaldi", 1, 18)); // NOI18N
@@ -161,15 +157,15 @@ public class RegisterExpenses extends javax.swing.JPanel {
         buttonAdd.setIcon(new javax.swing.ImageIcon(getClass().getResource("/iconCirclePlus.png"))); // NOI18N
         buttonAdd.setText("Agregar");
         buttonAdd.setBorder(javax.swing.BorderFactory.createCompoundBorder());
-        Panel1gastos.add(buttonAdd, new org.netbeans.lib.awtextra.AbsoluteConstraints(930, 740, 300, 50));
+        Panel1gastos.add(buttonAdd, new org.netbeans.lib.awtextra.AbsoluteConstraints(1240, 710, 300, 50));
 
         buttonvoucher1.setBackground(new java.awt.Color(204, 255, 255));
         buttonvoucher1.setFont(new java.awt.Font("Jaldi", 0, 12)); // NOI18N
         buttonvoucher1.setText("Seleccionar archivo");
         buttonvoucher1.setBorder(javax.swing.BorderFactory.createCompoundBorder());
-        Panel1gastos.add(buttonvoucher1, new org.netbeans.lib.awtextra.AbsoluteConstraints(1110, 640, 250, 35));
+        Panel1gastos.add(buttonvoucher1, new org.netbeans.lib.awtextra.AbsoluteConstraints(1400, 630, 250, 35));
 
-        add(Panel1gastos, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 1500, 890));
+        add(Panel1gastos, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 1800, 890));
     }// </editor-fold>//GEN-END:initComponents
 
 

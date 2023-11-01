@@ -4,6 +4,7 @@ import com.mycompany.cafe.GeneralSettings;
 import com.unsis.models.constants.Constants;
 import com.unsis.view.panel.Accounting;
 import com.unsis.view.panel.AltaEmpleado;
+import com.unsis.view.panel.ClosingSales;
 import com.unsis.view.panel.ListEmployes;
 import com.unsis.view.panel.ListProducts;
 import com.unsis.view.panel.MainMenu;
@@ -65,7 +66,9 @@ public class Main extends javax.swing.JFrame {
         defaultPanel.add("Ordenes entrantes", new ventasDesp());
         defaultPanel.add("Lista Productos", new ListProducts());
         defaultPanel.add("Lista Productos", new GeneralSettings());
-        defaultPanel.add("Contabilidad", new Accounting());
+        defaultPanel.add("Corte de caja", new ClosingSales());
+        defaultPanel.add("Gastos", new RegisterExpenses());
+        defaultPanel.add("Ajustes del generales", new GeneralSettings());
 
         this.add(defaultPanel);
     }

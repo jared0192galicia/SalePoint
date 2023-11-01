@@ -15,8 +15,8 @@ import javax.swing.JPopupMenu;
 
 public class PanelContainer extends javax.swing.JPanel {
 
-    private ArrayList<JButton> areas;
-    private Main mainWindow;
+    private final ArrayList<JButton> areas;
+    private final Main mainWindow;
 
     public PanelContainer(Main main) {
         this.mainWindow = main;
@@ -25,6 +25,12 @@ public class PanelContainer extends javax.swing.JPanel {
         this.generateAreas();
     }
 
+    /**
+     * Generate opcions in nav var for area. 
+     * @param area Area of the sections
+     * @param parent Component parent for add opctions
+     * @return Menu with all options for it area
+     */
     private JPopupMenu generateOptions(String area, JButton parent) {
         JPopupMenu menu = new JPopupMenu();
         JMenuItem item;
@@ -35,6 +41,7 @@ public class PanelContainer extends javax.swing.JPanel {
                 item.setForeground(Color.WHITE);
                 item.setBackground(new Color(60, 75, 112));
                 item.setOpaque(true);
+                item.setCursor(Cursor.getPredefinedCursor(Cursor.HAND_CURSOR));
                 item.setPreferredSize(new Dimension(parent.getWidth() - 5, item.getPreferredSize().height));
 
                 item.addActionListener((e) -> {
@@ -123,16 +130,18 @@ public class PanelContainer extends javax.swing.JPanel {
         });
 
         setBackground(new java.awt.Color(60, 75, 112));
+        setOpaque(false);
         setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
-        toolBar.setBackground(new java.awt.Color(60, 75, 112));
-        toolBar.setBorder(javax.swing.BorderFactory.createBevelBorder(javax.swing.border.BevelBorder.RAISED));
+        toolBar.setBackground(new java.awt.Color(7, 56, 112));
+        toolBar.setBorder(null);
         toolBar.setFloatable(false);
         toolBar.setOrientation(javax.swing.SwingConstants.VERTICAL);
         toolBar.setMaximumSize(new java.awt.Dimension(220, 50));
         toolBar.setMinimumSize(new java.awt.Dimension(220, 106));
+        toolBar.setOpaque(false);
         toolBar.setPreferredSize(new java.awt.Dimension(220, 106));
-        add(toolBar, new org.netbeans.lib.awtextra.AbsoluteConstraints(-4, -5, 220, 160));
+        add(toolBar, new org.netbeans.lib.awtextra.AbsoluteConstraints(-4, -5, 220, 200));
     }// </editor-fold>//GEN-END:initComponents
 
     private void buttonHomewareActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_buttonHomewareActionPerformed
