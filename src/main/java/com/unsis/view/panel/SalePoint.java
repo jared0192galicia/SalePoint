@@ -11,7 +11,6 @@ import javax.swing.Icon;
 import javax.swing.SwingConstants;
 import javax.swing.table.DefaultTableCellRenderer;
 import javax.swing.table.JTableHeader;
-import javax.swing.table.TableColumnModel;
 
 /**
  *
@@ -39,10 +38,10 @@ public class SalePoint extends javax.swing.JPanel {
         TableProduct.setDefaultRenderer(headerRenderer);
 
         resizeImages();
+        dialogConfirm.setLocationRelativeTo(null);
     }
-    
-    
-     /**
+
+    /**
      * Redimenciona las imagenes de los botones para que se ajusten a el tamaño
      * necesario
      */
@@ -51,7 +50,6 @@ public class SalePoint extends javax.swing.JPanel {
         Icon resizedIcon = tools.resizeIcon(buttonAdd.getIcon(), 20, 20);
         buttonAdd.setIcon(resizedIcon);
     }
-
 
     /**
      * This method is called from within the constructor to initialize the form.
@@ -64,7 +62,23 @@ public class SalePoint extends javax.swing.JPanel {
 
         buttonGroup1 = new javax.swing.ButtonGroup();
         jRadioButton1 = new javax.swing.JRadioButton();
-        buttonGroup2 = new javax.swing.ButtonGroup();
+        dialogConfirm = new javax.swing.JDialog();
+        jPanel3 = new javax.swing.JPanel();
+        jPanel4 = new javax.swing.JPanel();
+        jLabel2 = new javax.swing.JLabel();
+        jSeparator1 = new javax.swing.JSeparator();
+        vendedorLabel = new javax.swing.JLabel();
+        compradorLabel = new javax.swing.JLabel();
+        montoLabel = new javax.swing.JLabel();
+        fechaLabel = new javax.swing.JLabel();
+        nameVendedorLabel = new javax.swing.JLabel();
+        nameCompradorLabel = new javax.swing.JLabel();
+        ingresoMontoLabel = new javax.swing.JLabel();
+        ingresarFechaLabel = new javax.swing.JLabel();
+        confirmarBoton = new javax.swing.JButton();
+        jScrollPane2 = new javax.swing.JScrollPane();
+        table = new javax.swing.JTable();
+        buttonClose = new javax.swing.JButton();
         jLabel1 = new javax.swing.JLabel();
         jPanel1 = new javax.swing.JPanel();
         jLabel3 = new javax.swing.JLabel();
@@ -89,16 +103,195 @@ public class SalePoint extends javax.swing.JPanel {
         jTextField4 = new javax.swing.JTextField();
         buttonAdd = new javax.swing.JButton();
         jTextField5 = new javax.swing.JTextField();
-        jButton2 = new javax.swing.JButton();
+        buttonAddOrder = new javax.swing.JButton();
+        jLabel13 = new javax.swing.JLabel();
 
         jRadioButton1.setText("jRadioButton1");
+
+        dialogConfirm.setAlwaysOnTop(true);
+        dialogConfirm.setUndecorated(true);
+        dialogConfirm.setResizable(false);
+        dialogConfirm.setSize(new java.awt.Dimension(925, 446));
+        dialogConfirm.setType(java.awt.Window.Type.UTILITY);
+
+        jPanel3.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
+
+        jPanel4.setBackground(new java.awt.Color(255, 255, 255));
+
+        jLabel2.setBackground(new java.awt.Color(15, 36, 109));
+        jLabel2.setFont(new java.awt.Font("Jaldi", 0, 28)); // NOI18N
+        jLabel2.setForeground(new java.awt.Color(15, 36, 109));
+        jLabel2.setText("Detalles de la venta");
+
+        jSeparator1.setForeground(new java.awt.Color(204, 204, 204));
+
+        vendedorLabel.setBackground(new java.awt.Color(118, 125, 142));
+        vendedorLabel.setFont(new java.awt.Font("Jaldi", 0, 16)); // NOI18N
+        vendedorLabel.setForeground(new java.awt.Color(118, 125, 142));
+        vendedorLabel.setText("Vendedor");
+
+        compradorLabel.setBackground(new java.awt.Color(118, 125, 142));
+        compradorLabel.setFont(new java.awt.Font("Jaldi", 0, 16)); // NOI18N
+        compradorLabel.setForeground(new java.awt.Color(118, 125, 142));
+        compradorLabel.setText("Comprador");
+
+        montoLabel.setBackground(new java.awt.Color(118, 125, 142));
+        montoLabel.setFont(new java.awt.Font("Jaldi", 0, 16)); // NOI18N
+        montoLabel.setForeground(new java.awt.Color(118, 125, 142));
+        montoLabel.setText("Monto de la venta");
+
+        fechaLabel.setBackground(new java.awt.Color(118, 125, 142));
+        fechaLabel.setFont(new java.awt.Font("Jaldi", 0, 16)); // NOI18N
+        fechaLabel.setForeground(new java.awt.Color(118, 125, 142));
+        fechaLabel.setText("Fecha y hora de venta");
+
+        nameVendedorLabel.setBackground(new java.awt.Color(118, 125, 142));
+        nameVendedorLabel.setFont(new java.awt.Font("Jaldi", 0, 12)); // NOI18N
+        nameVendedorLabel.setForeground(new java.awt.Color(118, 125, 142));
+        nameVendedorLabel.setText("Hugo López");
+        nameVendedorLabel.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(204, 204, 204)));
+
+        nameCompradorLabel.setBackground(new java.awt.Color(118, 125, 142));
+        nameCompradorLabel.setFont(new java.awt.Font("Jaldi", 0, 12)); // NOI18N
+        nameCompradorLabel.setForeground(new java.awt.Color(118, 125, 142));
+        nameCompradorLabel.setText("Pedro (taxista)");
+        nameCompradorLabel.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(204, 204, 204)));
+
+        ingresoMontoLabel.setForeground(new java.awt.Color(118, 125, 142));
+        ingresoMontoLabel.setText("$__.__");
+        ingresoMontoLabel.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(204, 204, 204)));
+
+        ingresarFechaLabel.setBackground(new java.awt.Color(118, 125, 142));
+        ingresarFechaLabel.setFont(new java.awt.Font("Jaldi", 0, 12)); // NOI18N
+        ingresarFechaLabel.setForeground(new java.awt.Color(118, 125, 142));
+        ingresarFechaLabel.setText("3 de Octubre 2023 10:15:45");
+        ingresarFechaLabel.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(204, 204, 204)));
+
+        confirmarBoton.setBackground(new java.awt.Color(25, 130, 206));
+        confirmarBoton.setFont(new java.awt.Font("Jaldi", 0, 12)); // NOI18N
+        confirmarBoton.setForeground(new java.awt.Color(255, 255, 255));
+        confirmarBoton.setText("Confirmar compra");
+        confirmarBoton.setBorder(new javax.swing.border.SoftBevelBorder(javax.swing.border.BevelBorder.RAISED));
+        confirmarBoton.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+        confirmarBoton.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                confirmarBotonActionPerformed(evt);
+            }
+        });
+
+        javax.swing.GroupLayout jPanel4Layout = new javax.swing.GroupLayout(jPanel4);
+        jPanel4.setLayout(jPanel4Layout);
+        jPanel4Layout.setHorizontalGroup(
+            jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanel4Layout.createSequentialGroup()
+                .addGroup(jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                    .addGroup(jPanel4Layout.createSequentialGroup()
+                        .addGap(17, 17, 17)
+                        .addComponent(jSeparator1, javax.swing.GroupLayout.PREFERRED_SIZE, 356, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(11, 11, 11))
+                    .addGroup(javax.swing.GroupLayout.Alignment.LEADING, jPanel4Layout.createSequentialGroup()
+                        .addGap(32, 32, 32)
+                        .addGroup(jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addGroup(jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
+                                .addComponent(nameVendedorLabel, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                .addComponent(ingresoMontoLabel, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                .addComponent(montoLabel, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                            .addComponent(vendedorLabel))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 61, Short.MAX_VALUE)
+                        .addGroup(jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(ingresarFechaLabel)
+                            .addComponent(compradorLabel)
+                            .addComponent(nameCompradorLabel, javax.swing.GroupLayout.PREFERRED_SIZE, 127, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(fechaLabel, javax.swing.GroupLayout.PREFERRED_SIZE, 174, javax.swing.GroupLayout.PREFERRED_SIZE))))
+                .addGap(46, 46, 46))
+            .addGroup(jPanel4Layout.createSequentialGroup()
+                .addGroup(jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(jPanel4Layout.createSequentialGroup()
+                        .addGap(72, 72, 72)
+                        .addComponent(jLabel2))
+                    .addGroup(jPanel4Layout.createSequentialGroup()
+                        .addGap(148, 148, 148)
+                        .addComponent(confirmarBoton, javax.swing.GroupLayout.PREFERRED_SIZE, 137, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+        );
+        jPanel4Layout.setVerticalGroup(
+            jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanel4Layout.createSequentialGroup()
+                .addContainerGap()
+                .addComponent(jLabel2, javax.swing.GroupLayout.PREFERRED_SIZE, 24, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(jSeparator1, javax.swing.GroupLayout.PREFERRED_SIZE, 10, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addGroup(jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(vendedorLabel)
+                    .addComponent(compradorLabel))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addGroup(jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(nameVendedorLabel, javax.swing.GroupLayout.PREFERRED_SIZE, 28, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(nameCompradorLabel, javax.swing.GroupLayout.PREFERRED_SIZE, 28, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(70, 70, 70)
+                .addGroup(jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(montoLabel)
+                    .addComponent(fechaLabel))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addGroup(jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(ingresoMontoLabel, javax.swing.GroupLayout.PREFERRED_SIZE, 22, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(ingresarFechaLabel, javax.swing.GroupLayout.PREFERRED_SIZE, 22, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(50, 50, 50)
+                .addComponent(confirmarBoton, javax.swing.GroupLayout.PREFERRED_SIZE, 36, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(56, Short.MAX_VALUE))
+        );
+
+        jPanel3.add(jPanel4, new org.netbeans.lib.awtextra.AbsoluteConstraints(470, 60, 440, 380));
+
+        table.setFont(new java.awt.Font("Jaldi", 0, 12)); // NOI18N
+        table.setModel(new javax.swing.table.DefaultTableModel(
+            new Object [][] {
+                {"Text", "Text", "1", "Text", "Text"},
+                {"Text", "Text", "2", "Text", "Text"},
+                {"Text", "Text", "4", "Text", "Text"},
+                {"Text", "Text", "5", "Text", "Text"},
+                {"Text", "Text", "7", "Text", "Text"},
+                {"Text", "Text", "7", "Text", "Text"},
+                {"Text", "Text", "1", "Text", "Text"},
+                {"Text", "Text", "5", "Text", "Text"},
+                {"Text", "Text", "5", "Text", "Text"},
+                {"Text", "Text", "8", "Text", "Text"},
+                {"Text", "Text", "5", "Text", "Text"},
+                {"Text", "Text", "5", "Text", "Text"},
+                {"Text", "Text", "7", "Text", "Text"},
+                {"Text", "Text", "2", "Text", "Text"},
+                {"Text", "Text", "2", "Text", "Text"}
+            },
+            new String [] {
+                "Productos", "Descripción", "Cantidad", "Precio por pieza", "Total"
+            }
+        ));
+        table.setSelectionBackground(new java.awt.Color(0, 102, 102));
+        table.setSelectionForeground(new java.awt.Color(250, 250, 250));
+        jScrollPane2.setViewportView(table);
+
+        jPanel3.add(jScrollPane2, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 60, -1, 380));
+
+        buttonClose.setBackground(new java.awt.Color(242, 242, 242));
+        buttonClose.setIcon(new javax.swing.ImageIcon(getClass().getResource("/iconClose.png"))); // NOI18N
+        buttonClose.setBorder(null);
+        buttonClose.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+        buttonClose.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                buttonCloseActionPerformed(evt);
+            }
+        });
+        jPanel3.add(buttonClose, new org.netbeans.lib.awtextra.AbsoluteConstraints(880, 10, 30, 30));
+
+        dialogConfirm.getContentPane().add(jPanel3, java.awt.BorderLayout.CENTER);
 
         setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
         jLabel1.setFont(new java.awt.Font("Jaldi", 0, 36)); // NOI18N
         jLabel1.setForeground(new java.awt.Color(1, 41, 87));
         jLabel1.setText("Realizar Venta");
-        add(jLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(100, 30, 281, 46));
+        add(jLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(60, 20, 281, 46));
 
         jPanel1.setBackground(new java.awt.Color(255, 255, 255));
         jPanel1.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
@@ -131,103 +324,140 @@ public class SalePoint extends javax.swing.JPanel {
         jLabel22.setFont(new java.awt.Font("Jaldi", 0, 24)); // NOI18N
         jLabel22.setForeground(new java.awt.Color(7, 56, 112));
         jLabel22.setText("Captura de producto");
-        jPanel2.add(jLabel22, new org.netbeans.lib.awtextra.AbsoluteConstraints(170, 20, 240, -1));
+        jPanel2.add(jLabel22, new org.netbeans.lib.awtextra.AbsoluteConstraints(160, 40, 240, -1));
 
         jLabel6.setBackground(new java.awt.Color(255, 255, 255));
         jLabel6.setFont(new java.awt.Font("Jaldi", 0, 18)); // NOI18N
         jLabel6.setForeground(new java.awt.Color(118, 125, 142));
-        jLabel6.setText("Nombre");
-        jPanel2.add(jLabel6, new org.netbeans.lib.awtextra.AbsoluteConstraints(60, 80, -1, -1));
+        jLabel6.setText("Producto");
+        jPanel2.add(jLabel6, new org.netbeans.lib.awtextra.AbsoluteConstraints(60, 110, 80, -1));
 
         jLabel7.setBackground(new java.awt.Color(255, 255, 255));
         jLabel7.setFont(new java.awt.Font("Jaldi", 0, 18)); // NOI18N
         jLabel7.setForeground(new java.awt.Color(118, 125, 142));
         jLabel7.setText("Sabor");
-        jPanel2.add(jLabel7, new org.netbeans.lib.awtextra.AbsoluteConstraints(330, 80, -1, -1));
+        jPanel2.add(jLabel7, new org.netbeans.lib.awtextra.AbsoluteConstraints(330, 110, -1, -1));
 
         jLabel8.setBackground(new java.awt.Color(255, 255, 255));
         jLabel8.setFont(new java.awt.Font("Jaldi", 0, 18)); // NOI18N
         jLabel8.setForeground(new java.awt.Color(118, 125, 142));
-        jLabel8.setText("Por confirmar");
-        jPanel2.add(jLabel8, new org.netbeans.lib.awtextra.AbsoluteConstraints(60, 340, -1, -1));
+        jLabel8.setText("Código de barras");
+        jPanel2.add(jLabel8, new org.netbeans.lib.awtextra.AbsoluteConstraints(100, 470, 370, -1));
 
         jLabel9.setBackground(new java.awt.Color(255, 255, 255));
         jLabel9.setFont(new java.awt.Font("Jaldi", 0, 18)); // NOI18N
         jLabel9.setForeground(new java.awt.Color(118, 125, 142));
         jLabel9.setText("Tipo de orden");
-        jPanel2.add(jLabel9, new org.netbeans.lib.awtextra.AbsoluteConstraints(330, 160, 150, -1));
+        jPanel2.add(jLabel9, new org.netbeans.lib.awtextra.AbsoluteConstraints(330, 200, 150, -1));
 
         jLabel10.setBackground(new java.awt.Color(255, 255, 255));
         jLabel10.setFont(new java.awt.Font("Jaldi", 0, 18)); // NOI18N
         jLabel10.setForeground(new java.awt.Color(118, 125, 142));
         jLabel10.setText("Comentarios");
-        jPanel2.add(jLabel10, new org.netbeans.lib.awtextra.AbsoluteConstraints(60, 250, -1, -1));
+        jPanel2.add(jLabel10, new org.netbeans.lib.awtextra.AbsoluteConstraints(60, 280, -1, -1));
 
         jLabel11.setBackground(new java.awt.Color(255, 255, 255));
         jLabel11.setFont(new java.awt.Font("Jaldi", 0, 18)); // NOI18N
         jLabel11.setForeground(new java.awt.Color(118, 125, 142));
         jLabel11.setText("Nombre del comprador");
-        jPanel2.add(jLabel11, new org.netbeans.lib.awtextra.AbsoluteConstraints(330, 250, -1, -1));
+        jPanel2.add(jLabel11, new org.netbeans.lib.awtextra.AbsoluteConstraints(330, 280, -1, -1));
 
         jComboBox1.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
-        jPanel2.add(jComboBox1, new org.netbeans.lib.awtextra.AbsoluteConstraints(330, 110, 160, 30));
+        jPanel2.add(jComboBox1, new org.netbeans.lib.awtextra.AbsoluteConstraints(330, 140, 160, 30));
 
         jComboBox2.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
         jComboBox2.setOpaque(false);
-        jPanel2.add(jComboBox2, new org.netbeans.lib.awtextra.AbsoluteConstraints(60, 110, 160, 30));
+        jPanel2.add(jComboBox2, new org.netbeans.lib.awtextra.AbsoluteConstraints(60, 140, 160, 30));
 
         jTextField1.setBorder(javax.swing.BorderFactory.createEtchedBorder());
-        jPanel2.add(jTextField1, new org.netbeans.lib.awtextra.AbsoluteConstraints(60, 200, 160, 30));
+        jPanel2.add(jTextField1, new org.netbeans.lib.awtextra.AbsoluteConstraints(60, 230, 160, 30));
 
         buttonGroup1.add(jRadioButton2);
         jRadioButton2.setText("Normal");
         jRadioButton2.setHorizontalTextPosition(javax.swing.SwingConstants.RIGHT);
         jRadioButton2.setOpaque(false);
-        jPanel2.add(jRadioButton2, new org.netbeans.lib.awtextra.AbsoluteConstraints(330, 200, -1, -1));
+        jPanel2.add(jRadioButton2, new org.netbeans.lib.awtextra.AbsoluteConstraints(330, 230, -1, -1));
 
         buttonGroup1.add(jRadioButton3);
         jRadioButton3.setText("Para llevar");
         jRadioButton3.setOpaque(false);
-        jPanel2.add(jRadioButton3, new org.netbeans.lib.awtextra.AbsoluteConstraints(430, 200, -1, -1));
-        jPanel2.add(jTextField2, new org.netbeans.lib.awtextra.AbsoluteConstraints(60, 280, 164, 30));
-        jPanel2.add(jTextField3, new org.netbeans.lib.awtextra.AbsoluteConstraints(60, 370, 164, 33));
+        jPanel2.add(jRadioButton3, new org.netbeans.lib.awtextra.AbsoluteConstraints(430, 230, -1, -1));
+        jPanel2.add(jTextField2, new org.netbeans.lib.awtextra.AbsoluteConstraints(60, 310, 164, 30));
+        jPanel2.add(jTextField3, new org.netbeans.lib.awtextra.AbsoluteConstraints(60, 400, 164, 33));
 
         jLabel12.setBackground(new java.awt.Color(255, 255, 255));
         jLabel12.setFont(new java.awt.Font("Jaldi", 0, 18)); // NOI18N
         jLabel12.setForeground(new java.awt.Color(118, 125, 142));
         jLabel12.setText("Cantidad");
-        jPanel2.add(jLabel12, new org.netbeans.lib.awtextra.AbsoluteConstraints(60, 170, -1, -1));
-        jPanel2.add(jTextField4, new org.netbeans.lib.awtextra.AbsoluteConstraints(330, 280, 164, 33));
+        jPanel2.add(jLabel12, new org.netbeans.lib.awtextra.AbsoluteConstraints(60, 200, -1, -1));
+        jPanel2.add(jTextField4, new org.netbeans.lib.awtextra.AbsoluteConstraints(330, 310, 164, 30));
 
         buttonAdd.setBackground(new java.awt.Color(82, 146, 222));
         buttonAdd.setFont(new java.awt.Font("Jaldi", 0, 20)); // NOI18N
         buttonAdd.setForeground(new java.awt.Color(255, 255, 255));
         buttonAdd.setIcon(new javax.swing.ImageIcon(getClass().getResource("/iconCirclePlus.png"))); // NOI18N
         buttonAdd.setText("Agregar");
-        jPanel2.add(buttonAdd, new org.netbeans.lib.awtextra.AbsoluteConstraints(332, 370, -1, 33));
-        jPanel2.add(jTextField5, new org.netbeans.lib.awtextra.AbsoluteConstraints(100, 500, 370, 50));
+        jPanel2.add(buttonAdd, new org.netbeans.lib.awtextra.AbsoluteConstraints(340, 400, 160, 33));
+        jPanel2.add(jTextField5, new org.netbeans.lib.awtextra.AbsoluteConstraints(100, 500, 370, 40));
 
-        jButton2.setBackground(new java.awt.Color(82, 146, 222));
-        jButton2.setFont(new java.awt.Font("Jaldi", 0, 24)); // NOI18N
-        jButton2.setForeground(new java.awt.Color(255, 255, 255));
-        jButton2.setText("Agregar pedido");
-        jPanel2.add(jButton2, new org.netbeans.lib.awtextra.AbsoluteConstraints(100, 600, 370, 50));
+        buttonAddOrder.setBackground(new java.awt.Color(82, 146, 222));
+        buttonAddOrder.setFont(new java.awt.Font("Jaldi", 0, 24)); // NOI18N
+        buttonAddOrder.setForeground(new java.awt.Color(255, 255, 255));
+        buttonAddOrder.setText("Agregar pedido");
+        buttonAddOrder.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+        buttonAddOrder.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                buttonAddOrderMouseClicked(evt);
+            }
+        });
+        jPanel2.add(buttonAddOrder, new org.netbeans.lib.awtextra.AbsoluteConstraints(100, 580, 370, 50));
+
+        jLabel13.setBackground(new java.awt.Color(255, 255, 255));
+        jLabel13.setFont(new java.awt.Font("Jaldi", 0, 18)); // NOI18N
+        jLabel13.setForeground(new java.awt.Color(118, 125, 142));
+        jLabel13.setText("Por confirmar");
+        jPanel2.add(jLabel13, new org.netbeans.lib.awtextra.AbsoluteConstraints(60, 370, -1, -1));
 
         add(jPanel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(1050, 90, 560, 760));
     }// </editor-fold>//GEN-END:initComponents
 
+    private void buttonAddOrderMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_buttonAddOrderMouseClicked
+//        new SalesDetails(this).setVisible(true);
+        dialogConfirm.show(true);
+    }//GEN-LAST:event_buttonAddOrderMouseClicked
+
+    private void confirmarBotonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_confirmarBotonActionPerformed
+//        this.wrapper.setEnabled(true);
+        dialogConfirm.show(false);
+// this.dispose();
+    }//GEN-LAST:event_confirmarBotonActionPerformed
+
+    private void buttonCloseActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_buttonCloseActionPerformed
+//        this.wrapper.setEnabled(true);
+//        this.dispose();
+        dialogConfirm.show(false);
+    }//GEN-LAST:event_buttonCloseActionPerformed
+
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton buttonAdd;
+    private javax.swing.JButton buttonAddOrder;
+    private javax.swing.JButton buttonClose;
     private javax.swing.ButtonGroup buttonGroup1;
-    private javax.swing.ButtonGroup buttonGroup2;
-    private javax.swing.JButton jButton2;
+    private javax.swing.JLabel compradorLabel;
+    private javax.swing.JButton confirmarBoton;
+    private javax.swing.JDialog dialogConfirm;
+    private javax.swing.JLabel fechaLabel;
+    private javax.swing.JLabel ingresarFechaLabel;
+    private javax.swing.JLabel ingresoMontoLabel;
     private javax.swing.JComboBox<String> jComboBox1;
     private javax.swing.JComboBox<String> jComboBox2;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel10;
     private javax.swing.JLabel jLabel11;
     private javax.swing.JLabel jLabel12;
+    private javax.swing.JLabel jLabel13;
+    private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel22;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel6;
@@ -236,15 +466,24 @@ public class SalePoint extends javax.swing.JPanel {
     private javax.swing.JLabel jLabel9;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanel2;
+    private javax.swing.JPanel jPanel3;
+    private javax.swing.JPanel jPanel4;
     private javax.swing.JRadioButton jRadioButton1;
     private javax.swing.JRadioButton jRadioButton2;
     private javax.swing.JRadioButton jRadioButton3;
     private javax.swing.JScrollPane jScrollPane1;
+    private javax.swing.JScrollPane jScrollPane2;
+    private javax.swing.JSeparator jSeparator1;
     private javax.swing.JTextField jTextField1;
     private javax.swing.JTextField jTextField2;
     private javax.swing.JTextField jTextField3;
     private javax.swing.JTextField jTextField4;
     private javax.swing.JTextField jTextField5;
+    private javax.swing.JLabel montoLabel;
+    private javax.swing.JLabel nameCompradorLabel;
+    private javax.swing.JLabel nameVendedorLabel;
+    private javax.swing.JTable table;
     private javax.swing.JTable tableProduct;
+    private javax.swing.JLabel vendedorLabel;
     // End of variables declaration//GEN-END:variables
 }

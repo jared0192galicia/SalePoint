@@ -1,7 +1,3 @@
-/*
- * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
- * Click nbfs://nbhost/SystemFileSystem/Templates/GUIForms/JPanel.java to edit this template
- */
 package com.unsis.view.panel;
 
 import java.awt.Color;
@@ -12,17 +8,16 @@ import javax.swing.BorderFactory;
  *
  * @author jared
  */
-public class ListEmployes extends javax.swing.JPanel {
+public class ListProducts extends javax.swing.JPanel {
 
     /**
-     * Creates new form HumanResourcesPanel
+     * Creates new form ListProducts
      */
-    public ListEmployes() {
+    public ListProducts() {
         initComponents();
-
         this.setBounds(217, 0, 1200, 692);
         // Obtener el JTableHeader (encabezado de la tabla)
-        table.getTableHeader().setFont(new Font("Arial", Font.BOLD, 18));
+        table.getTableHeader().setFont(new Font("Arial", Font.BOLD, 20));
         table.getTableHeader().setOpaque(false);
         table.getTableHeader().setBackground(new Color(32, 136, 203));
         table.getTableHeader().setForeground(Color.WHITE);
@@ -38,6 +33,7 @@ public class ListEmployes extends javax.swing.JPanel {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
+        jLabel2 = new javax.swing.JLabel();
         jPanel1 = new javax.swing.JPanel();
         buttonCreate = new javax.swing.JButton();
         buttonExport = new javax.swing.JButton();
@@ -46,9 +42,12 @@ public class ListEmployes extends javax.swing.JPanel {
         jPanel2 = new javax.swing.JPanel();
         jScrollPane1 = new javax.swing.JScrollPane();
         table = new javax.swing.JTable();
-        jLabel2 = new javax.swing.JLabel();
 
         setBackground(new java.awt.Color(240, 240, 240));
+
+        jLabel2.setFont(new java.awt.Font("Jaldi", 0, 30)); // NOI18N
+        jLabel2.setForeground(new java.awt.Color(7, 56, 112));
+        jLabel2.setText("Productos");
 
         jPanel1.setBackground(new java.awt.Color(255, 255, 255));
         jPanel1.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
@@ -74,7 +73,7 @@ public class ListEmployes extends javax.swing.JPanel {
         buttonExport.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
         buttonExport.setHorizontalTextPosition(javax.swing.SwingConstants.RIGHT);
         buttonExport.setVerticalTextPosition(javax.swing.SwingConstants.BOTTOM);
-        jPanel1.add(buttonExport, new org.netbeans.lib.awtextra.AbsoluteConstraints(1340, 25, 136, 40));
+        jPanel1.add(buttonExport, new org.netbeans.lib.awtextra.AbsoluteConstraints(1270, 25, 136, 40));
 
         buttonModify.setBackground(new java.awt.Color(255, 255, 255));
         buttonModify.setFont(new java.awt.Font("Dialog", 1, 16)); // NOI18N
@@ -123,7 +122,7 @@ public class ListEmployes extends javax.swing.JPanel {
                 {null, null, null, null, null}
             },
             new String [] {
-                "Número Empleado", "Nombre", "Apellidos", "Area", "Estatus"
+                "Nombre", "Descripción", "Precio Venta", "Disponibles", "Estado"
             }
         ));
         table.setGridColor(new java.awt.Color(204, 204, 204));
@@ -149,10 +148,6 @@ public class ListEmployes extends javax.swing.JPanel {
                 .addGap(0, 83, Short.MAX_VALUE))
         );
 
-        jLabel2.setFont(new java.awt.Font("Jaldi", 0, 30)); // NOI18N
-        jLabel2.setForeground(new java.awt.Color(7, 56, 112));
-        jLabel2.setText("Empleados");
-
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
         this.setLayout(layout);
         layout.setHorizontalGroup(
@@ -160,25 +155,25 @@ public class ListEmployes extends javax.swing.JPanel {
             .addGroup(layout.createSequentialGroup()
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(layout.createSequentialGroup()
-                        .addGap(60, 60, 60)
+                        .addGap(74, 74, 74)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addComponent(jLabel2, javax.swing.GroupLayout.PREFERRED_SIZE, 330, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, 1517, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                            .addComponent(jPanel2, javax.swing.GroupLayout.PREFERRED_SIZE, 1704, javax.swing.GroupLayout.PREFERRED_SIZE)))
                     .addGroup(layout.createSequentialGroup()
-                        .addGap(69, 69, 69)
-                        .addComponent(jPanel2, javax.swing.GroupLayout.PREFERRED_SIZE, 1704, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                        .addGap(96, 96, 96)
+                        .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, 1440, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                .addContainerGap(122, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addGap(37, 37, 37)
+                .addGap(18, 18, 18)
                 .addComponent(jLabel2, javax.swing.GroupLayout.PREFERRED_SIZE, 46, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(27, 27, 27)
+                .addGap(18, 18, 18)
                 .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, 85, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 65, Short.MAX_VALUE)
+                .addGap(65, 65, 65)
                 .addComponent(jPanel2, javax.swing.GroupLayout.PREFERRED_SIZE, 584, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(66, 66, 66))
+                .addContainerGap(94, Short.MAX_VALUE))
         );
     }// </editor-fold>//GEN-END:initComponents
 

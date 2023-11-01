@@ -68,6 +68,7 @@ public class HeadWrapperPanel extends javax.swing.JPanel {
         pedidoLabel1 = new javax.swing.JLabel();
 
         setBackground(new java.awt.Color(255, 255, 255));
+        setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
 
         imgLabel.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         imgLabel.setIcon(new javax.swing.ImageIcon(getClass().getResource("/user0.png"))); // NOI18N

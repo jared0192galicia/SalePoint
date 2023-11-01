@@ -1,15 +1,6 @@
-/*
- * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
- * Click nbfs://nbhost/SystemFileSystem/Templates/GUIForms/JPanel.java to edit this template
- */
 package com.unsis.view.panel;
 
-import java.awt.Color;
-import java.awt.Font;
-import javax.swing.SwingConstants;
-import javax.swing.table.DefaultTableCellRenderer;
-import javax.swing.table.JTableHeader;
-import javax.swing.table.TableColumnModel;
+import java.awt.CardLayout;
 
 /**
  *
@@ -23,23 +14,25 @@ public class Accounting extends javax.swing.JPanel {
     public Accounting() {
         initComponents();
 
-        //jTableProduct tableProduct = new jTableProduct();
+        configureCardPanel();
+    }
 
-        // Obtener el JTableHeader (encabezado de la tabla)
-       JTableHeader TableProduct = tableProduct.getTableHeader();
+    /**
+     * Add JPanels to panel with card layout for change
+     */
+    private void configureCardPanel() {
+        panelDefault.add("Corte de caja", new ClosingSales());
+        panelDefault.add("Gastos", new RegisterExpenses());
+    }
 
-       // Crear un renderizador de encabezado personalizado
-        DefaultTableCellRenderer headerRenderer = new DefaultTableCellRenderer();
-        headerRenderer.setHorizontalAlignment(SwingConstants.CENTER); // Alineación del texto en el encabezado
-        headerRenderer.setVerticalAlignment(SwingConstants.CENTER);
-        headerRenderer.setBackground(Color.BLUE); // Cambia el color de fondo del encabezado
-        headerRenderer.setForeground(Color.DARK_GRAY); // Cambia el color del texto del encabezado
-        headerRenderer.setFont(new Font("Arial", Font.BOLD, 20)); // Cambia el color del texto del encabezado
-
-// Asignar el renderizador personalizado al encabezado
-       TableProduct.setDefaultRenderer(headerRenderer);
-
-        TableColumnModel modelColumn = TableProduct.getColumnModel();
+    /**
+     * Change the panel view
+     *
+     * @param name key for JPanel to show
+     */
+    public void setView(String name) {
+        CardLayout c1 = (CardLayout) (panelDefault.getLayout());
+        c1.show(panelDefault, name);
     }
 
     /**
@@ -51,136 +44,58 @@ public class Accounting extends javax.swing.JPanel {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
-        buttonGroup1 = new javax.swing.ButtonGroup();
         jRadioButton1 = new javax.swing.JRadioButton();
-        jPanel1 = new javax.swing.JPanel();
-        jLabel3 = new javax.swing.JLabel();
-        jScrollPane1 = new javax.swing.JScrollPane();
-        tableProduct = new javax.swing.JTable();
-        jPanel2 = new javax.swing.JPanel();
-        jButton1 = new javax.swing.JButton();
-        jButton2 = new javax.swing.JButton();
-        jButton3 = new javax.swing.JButton();
-        jLabel1 = new javax.swing.JLabel();
-        jLabel2 = new javax.swing.JLabel();
-        jLabel4 = new javax.swing.JLabel();
-        jLabel5 = new javax.swing.JLabel();
-        jButton4 = new javax.swing.JButton();
+        buttonGroupPanel = new javax.swing.ButtonGroup();
+        panelDefault = new javax.swing.JPanel();
+        buttonGast = new javax.swing.JToggleButton();
+        buttonCourt = new javax.swing.JToggleButton();
 
         jRadioButton1.setText("jRadioButton1");
 
         setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
-        jPanel1.setBackground(new java.awt.Color(255, 255, 255));
-        jPanel1.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
+        panelDefault.setLayout(new java.awt.CardLayout());
+        add(panelDefault, new org.netbeans.lib.awtextra.AbsoluteConstraints(230, 50, 1370, 920));
 
-        jLabel3.setFont(new java.awt.Font("Jaldi", 0, 24)); // NOI18N
-        jLabel3.setForeground(new java.awt.Color(82, 146, 222));
-        jLabel3.setText("Movimientos de caja");
-        jPanel1.add(jLabel3, new org.netbeans.lib.awtextra.AbsoluteConstraints(280, 50, 240, -1));
+        buttonGast.setBackground(new java.awt.Color(153, 153, 255));
+        buttonGroupPanel.add(buttonGast);
+        buttonGast.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
+        buttonGast.setForeground(new java.awt.Color(255, 255, 255));
+        buttonGast.setIcon(new javax.swing.ImageIcon(getClass().getResource("/courtIcon.png"))); // NOI18N
+        buttonGast.setText("Gastos");
+        buttonGast.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
+        buttonGast.setVerticalTextPosition(javax.swing.SwingConstants.BOTTOM);
+        add(buttonGast, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 580, 130, 90));
 
-        tableProduct.setModel(new javax.swing.table.DefaultTableModel(
-            new Object [][] {
-                {null, null, null, null, null},
-                {null, null, null, null, null},
-                {null, null, null, null, null},
-                {null, null, null, null, null}
-            },
-            new String [] {
-                "Producto", "Descripcion", "Cantidad", "Precio por pz", "Total"
-            }
-        ));
-        tableProduct.setSelectionBackground(new java.awt.Color(0, 51, 204));
-        jScrollPane1.setViewportView(tableProduct);
-
-        jPanel1.add(jScrollPane1, new org.netbeans.lib.awtextra.AbsoluteConstraints(280, 100, 590, 510));
-
-        jPanel2.setBackground(new java.awt.Color(255, 255, 255));
-        jPanel2.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
-
-        jButton1.setBackground(new java.awt.Color(255, 153, 51));
-        jButton1.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
-        jButton1.setForeground(new java.awt.Color(255, 255, 255));
-        jButton1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Imagenes/download-removebg-preview 1.png"))); // NOI18N
-        jButton1.setText("Corte de caja");
-        jButton1.setHorizontalTextPosition(javax.swing.SwingConstants.RIGHT);
-        jButton1.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton1ActionPerformed(evt);
+        buttonCourt.setBackground(new java.awt.Color(255, 213, 131));
+        buttonGroupPanel.add(buttonCourt);
+        buttonCourt.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
+        buttonCourt.setForeground(new java.awt.Color(255, 255, 255));
+        buttonCourt.setIcon(new javax.swing.ImageIcon(getClass().getResource("/courtIcon.png"))); // NOI18N
+        buttonCourt.setSelected(true);
+        buttonCourt.setText("Corte de Caja");
+        buttonCourt.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
+        buttonCourt.setVerticalTextPosition(javax.swing.SwingConstants.BOTTOM);
+        buttonCourt.addChangeListener(new javax.swing.event.ChangeListener() {
+            public void stateChanged(javax.swing.event.ChangeEvent evt) {
+                buttonCourtStateChanged(evt);
             }
         });
-        jPanel2.add(jButton1, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 70, 150, 60));
-
-        jButton2.setBackground(new java.awt.Color(153, 153, 255));
-        jButton2.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
-        jButton2.setForeground(new java.awt.Color(255, 255, 255));
-        jButton2.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Imagenes/istockphoto-1348960860-612x612-removebg-preview 1.png"))); // NOI18N
-        jButton2.setText("Gastos");
-        jButton2.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton2ActionPerformed(evt);
-            }
-        });
-        jPanel2.add(jButton2, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 230, 150, 60));
-
-        jButton3.setBackground(new java.awt.Color(0, 204, 153));
-        jButton3.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
-        jButton3.setForeground(new java.awt.Color(255, 255, 255));
-        jButton3.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Imagenes/3534063-removebg-preview 1.png"))); // NOI18N
-        jButton3.setText("Reportes");
-        jPanel2.add(jButton3, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 150, 150, 60));
-
-        jPanel1.add(jPanel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 190, 240, 390));
-
-        jLabel1.setFont(new java.awt.Font("Dialog", 1, 14)); // NOI18N
-        jLabel1.setText(" Fecha: 18/10/2023");
-        jPanel1.add(jLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(1020, 130, -1, -1));
-
-        jLabel2.setFont(new java.awt.Font("Dialog", 1, 14)); // NOI18N
-        jLabel2.setText(" Usuario: Jared Galicia");
-        jPanel1.add(jLabel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(1210, 130, -1, -1));
-
-        jLabel4.setFont(new java.awt.Font("Dialog", 1, 14)); // NOI18N
-        jLabel4.setText(" Saldo a mantener en caja: 2,000.00");
-        jPanel1.add(jLabel4, new org.netbeans.lib.awtextra.AbsoluteConstraints(1070, 180, -1, -1));
-
-        jLabel5.setFont(new java.awt.Font("Dialog", 1, 14)); // NOI18N
-        jLabel5.setText(" Saldo total en caja: $10,000.00");
-        jPanel1.add(jLabel5, new org.netbeans.lib.awtextra.AbsoluteConstraints(1070, 210, -1, -1));
-
-        jButton4.setBackground(new java.awt.Color(51, 102, 255));
-        jButton4.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
-        jButton4.setForeground(new java.awt.Color(255, 255, 255));
-        jButton4.setText("Confirmar corte");
-        jPanel1.add(jButton4, new org.netbeans.lib.awtextra.AbsoluteConstraints(1100, 350, 160, 40));
-
-        add(jPanel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 70, 1660, 750));
+        add(buttonCourt, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 470, 130, 90));
     }// </editor-fold>//GEN-END:initComponents
 
-    private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_jButton1ActionPerformed
+    private void buttonCourtStateChanged(javax.swing.event.ChangeEvent evt) {//GEN-FIRST:event_buttonCourtStateChanged
+        String window = buttonCourt.isSelected() ? "Corte de caja" : "Gastos";
+        setView(window);
 
-    private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_jButton2ActionPerformed
+    }//GEN-LAST:event_buttonCourtStateChanged
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.ButtonGroup buttonGroup1;
-    private javax.swing.JButton jButton1;
-    private javax.swing.JButton jButton2;
-    private javax.swing.JButton jButton3;
-    private javax.swing.JButton jButton4;
-    private javax.swing.JLabel jLabel1;
-    private javax.swing.JLabel jLabel2;
-    private javax.swing.JLabel jLabel3;
-    private javax.swing.JLabel jLabel4;
-    private javax.swing.JLabel jLabel5;
-    private javax.swing.JPanel jPanel1;
-    private javax.swing.JPanel jPanel2;
+    private javax.swing.JToggleButton buttonCourt;
+    private javax.swing.JToggleButton buttonGast;
+    private javax.swing.ButtonGroup buttonGroupPanel;
     private javax.swing.JRadioButton jRadioButton1;
-    private javax.swing.JScrollPane jScrollPane1;
-    private javax.swing.JTable tableProduct;
+    private javax.swing.JPanel panelDefault;
     // End of variables declaration//GEN-END:variables
 }
