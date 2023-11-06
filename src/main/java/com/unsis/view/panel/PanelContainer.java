@@ -26,7 +26,8 @@ public class PanelContainer extends javax.swing.JPanel {
     }
 
     /**
-     * Generate opcions in nav var for area. 
+     * Generate opcions in nav var for area.
+     *
      * @param area Area of the sections
      * @param parent Component parent for add opctions
      * @return Menu with all options for it area
@@ -65,9 +66,9 @@ public class PanelContainer extends javax.swing.JPanel {
             titleAreas.add(section.getArea());
         }
 
-        HashSet<String> areas = new HashSet<>(titleAreas);
+        HashSet<String> areasSet = new HashSet<>(titleAreas);
 
-        for (String area : areas) {
+        for (String area : areasSet) {
             final JButton buttonWrapper = new JButton(area); // Envuelve 'button' en un array final
             buttonWrapper.setBackground(new Color(17, 57, 103));
             buttonWrapper.setForeground(Color.WHITE);
@@ -78,9 +79,25 @@ public class PanelContainer extends javax.swing.JPanel {
             buttonWrapper.setMargin(new Insets(2, 14, 2, 14));
             buttonWrapper.setMaximumSize(new Dimension(220, 30));
             buttonWrapper.setPreferredSize(new Dimension(220, 30));
+            buttonWrapper.addMouseListener(new java.awt.event.MouseAdapter() {
+                public void mouseEntered(java.awt.event.MouseEvent evt) {
+                    buttonWrapper.setForeground(new Color(17, 57, 103));
+                    buttonWrapper.setBackground(Color.WHITE);
+                }
+            });
+
+            buttonWrapper.addMouseListener(new java.awt.event.MouseAdapter() {
+                public void mouseExited(java.awt.event.MouseEvent evt) {
+                    buttonWrapper.setBackground(new Color(17, 57, 103));
+                    buttonWrapper.setForeground(Color.WHITE);
+                }
+            });
 
             buttonWrapper.addActionListener((e) -> {
                 generateOptions(area, buttonWrapper).show(buttonWrapper, 0, buttonWrapper.getHeight());
+                buttonWrapper.setForeground(Color.WHITE);
+                
+                buttonWrapper.setBackground(new Color(17, 57, 103));
             });
 
             this.areas.add(buttonWrapper);

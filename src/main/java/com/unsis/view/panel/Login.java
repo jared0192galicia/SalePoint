@@ -1,6 +1,9 @@
 package com.unsis.view.panel;
 
+import com.unsis.controller.Crud;
+import com.unsis.models.entity.Account;
 import com.unsis.view.Main;
+import javax.swing.JOptionPane;
 
 /**
  *
@@ -295,8 +298,20 @@ public class Login extends javax.swing.JFrame {
     }//GEN-LAST:event_txtUserActionPerformed
 
     private void buttonLoginActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_buttonLoginActionPerformed
-        new Main().setVisible(true);
-        this.dispose();
+        String user = txtUser.getText().trim();
+        String pass = txtPass.getText().trim();
+
+        if (!user.equals("") && !pass.equals("")) {
+
+            Account looger = new Account(user, pass);
+            Crud<Account> sesion = new Crud<>(looger);
+
+            new Main().setVisible(true);
+            this.dispose();
+        } else {
+            JOptionPane.showMessageDialog(null, "Debe llenar todos los campos");
+        }
+
     }//GEN-LAST:event_buttonLoginActionPerformed
 
     private void labelCloseMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_labelCloseMouseClicked

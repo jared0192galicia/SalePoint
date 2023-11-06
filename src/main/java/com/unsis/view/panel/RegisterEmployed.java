@@ -103,7 +103,6 @@ public class RegisterEmployed extends javax.swing.JPanel {
         checkRegisterEmploy = new javax.swing.JCheckBox();
         checkRegisterProducts = new javax.swing.JCheckBox();
         checkInventory = new javax.swing.JCheckBox();
-        jCheckBox8 = new javax.swing.JCheckBox();
         jLabel27 = new javax.swing.JLabel();
         jLabel24 = new javax.swing.JLabel();
         jLabel3 = new javax.swing.JLabel();
@@ -112,6 +111,11 @@ public class RegisterEmployed extends javax.swing.JPanel {
         jLabel9 = new javax.swing.JLabel();
         jLabel17 = new javax.swing.JLabel();
         buttonSelectImage = new javax.swing.JButton();
+        jLabel14 = new javax.swing.JLabel();
+        jLabel18 = new javax.swing.JLabel();
+        jTextField2 = new javax.swing.JTextField();
+        jLabel19 = new javax.swing.JLabel();
+        jTextField6 = new javax.swing.JTextField();
 
         fileChooser.setDialogTitle("Seleccionar imagen");
         fileChooser.setFileHidingEnabled(false);
@@ -241,7 +245,7 @@ public class RegisterEmployed extends javax.swing.JPanel {
 
         check.setFont(new java.awt.Font("Jaldi", 0, 16)); // NOI18N
         check.setForeground(new java.awt.Color(118, 125, 142));
-        check.setText("Mercancia Disponible");
+        check.setText("Lista de productos");
         check.setOpaque(false);
         panelInternal.add(check, new org.netbeans.lib.awtextra.AbsoluteConstraints(980, 140, -1, -1));
 
@@ -291,37 +295,31 @@ public class RegisterEmployed extends javax.swing.JPanel {
         checkListEmployes.setForeground(new java.awt.Color(118, 125, 142));
         checkListEmployes.setText("Lista de Empleados");
         checkListEmployes.setOpaque(false);
-        panelInternal.add(checkListEmployes, new org.netbeans.lib.awtextra.AbsoluteConstraints(980, 430, -1, -1));
+        panelInternal.add(checkListEmployes, new org.netbeans.lib.awtextra.AbsoluteConstraints(970, 320, -1, -1));
 
         updateEmployes.setFont(new java.awt.Font("Jaldi", 0, 16)); // NOI18N
         updateEmployes.setForeground(new java.awt.Color(118, 125, 142));
-        updateEmployes.setText("Modificacion de empleados");
+        updateEmployes.setText("Modificación de empleados");
         updateEmployes.setOpaque(false);
-        panelInternal.add(updateEmployes, new org.netbeans.lib.awtextra.AbsoluteConstraints(980, 390, -1, -1));
+        panelInternal.add(updateEmployes, new org.netbeans.lib.awtextra.AbsoluteConstraints(970, 400, -1, -1));
 
         checkRegisterEmploy.setFont(new java.awt.Font("Jaldi", 0, 16)); // NOI18N
         checkRegisterEmploy.setForeground(new java.awt.Color(118, 125, 142));
         checkRegisterEmploy.setText("Registro de empleados");
         checkRegisterEmploy.setOpaque(false);
-        panelInternal.add(checkRegisterEmploy, new org.netbeans.lib.awtextra.AbsoluteConstraints(980, 350, -1, -1));
+        panelInternal.add(checkRegisterEmploy, new org.netbeans.lib.awtextra.AbsoluteConstraints(970, 360, -1, -1));
 
         checkRegisterProducts.setFont(new java.awt.Font("Jaldi", 0, 16)); // NOI18N
         checkRegisterProducts.setForeground(new java.awt.Color(118, 125, 142));
-        checkRegisterProducts.setText("Registro de productos ");
+        checkRegisterProducts.setText("Modificación de productos");
         checkRegisterProducts.setOpaque(false);
         panelInternal.add(checkRegisterProducts, new org.netbeans.lib.awtextra.AbsoluteConstraints(980, 220, -1, -1));
 
         checkInventory.setFont(new java.awt.Font("Jaldi", 0, 16)); // NOI18N
         checkInventory.setForeground(new java.awt.Color(118, 125, 142));
-        checkInventory.setText("Reportes generales");
+        checkInventory.setText("Alta de productos");
         checkInventory.setOpaque(false);
         panelInternal.add(checkInventory, new org.netbeans.lib.awtextra.AbsoluteConstraints(980, 180, -1, -1));
-
-        jCheckBox8.setFont(new java.awt.Font("Jaldi", 0, 16)); // NOI18N
-        jCheckBox8.setForeground(new java.awt.Color(118, 125, 142));
-        jCheckBox8.setText("Aplicativo de ciclos ");
-        jCheckBox8.setOpaque(false);
-        panelInternal.add(jCheckBox8, new org.netbeans.lib.awtextra.AbsoluteConstraints(980, 260, -1, -1));
 
         jLabel27.setFont(new java.awt.Font("Jaldi", 0, 18)); // NOI18N
         jLabel27.setForeground(new java.awt.Color(118, 125, 142));
@@ -331,7 +329,7 @@ public class RegisterEmployed extends javax.swing.JPanel {
         jLabel24.setFont(new java.awt.Font("Jaldi", 0, 18)); // NOI18N
         jLabel24.setForeground(new java.awt.Color(118, 125, 142));
         jLabel24.setText("Recursos Humanos");
-        panelInternal.add(jLabel24, new org.netbeans.lib.awtextra.AbsoluteConstraints(960, 300, 210, 40));
+        panelInternal.add(jLabel24, new org.netbeans.lib.awtextra.AbsoluteConstraints(950, 270, 210, 40));
 
         jLabel3.setFont(new java.awt.Font("Jaldi", 0, 18)); // NOI18N
         jLabel3.setForeground(new java.awt.Color(118, 125, 142));
@@ -356,20 +354,39 @@ public class RegisterEmployed extends javax.swing.JPanel {
         jLabel17.setFont(new java.awt.Font("Jaldi", 0, 24)); // NOI18N
         jLabel17.setForeground(new java.awt.Color(82, 146, 222));
         jLabel17.setText("Foto de Empleado");
-        panelInternal.add(jLabel17, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 520, 240, -1));
+        panelInternal.add(jLabel17, new org.netbeans.lib.awtextra.AbsoluteConstraints(360, 500, 240, -1));
 
         buttonSelectImage.setBackground(new java.awt.Color(0, 102, 102));
         buttonSelectImage.setForeground(new java.awt.Color(255, 255, 255));
         buttonSelectImage.setText("Elegir Imagen");
         buttonSelectImage.setBorder(javax.swing.BorderFactory.createBevelBorder(javax.swing.border.BevelBorder.RAISED));
+        buttonSelectImage.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
         buttonSelectImage.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 buttonSelectImageActionPerformed(evt);
             }
         });
-        panelInternal.add(buttonSelectImage, new org.netbeans.lib.awtextra.AbsoluteConstraints(60, 570, 150, 140));
+        panelInternal.add(buttonSelectImage, new org.netbeans.lib.awtextra.AbsoluteConstraints(380, 550, 150, 140));
 
-        add(panelInternal, new org.netbeans.lib.awtextra.AbsoluteConstraints(50, 70, 1610, 800));
+        jLabel14.setFont(new java.awt.Font("Jaldi", 0, 24)); // NOI18N
+        jLabel14.setForeground(new java.awt.Color(82, 146, 222));
+        jLabel14.setText("Información de cuenta");
+        panelInternal.add(jLabel14, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 500, 310, -1));
+
+        jLabel18.setBackground(new java.awt.Color(255, 255, 255));
+        jLabel18.setFont(new java.awt.Font("Jaldi", 0, 18)); // NOI18N
+        jLabel18.setForeground(new java.awt.Color(118, 125, 142));
+        jLabel18.setText("Usuario");
+        panelInternal.add(jLabel18, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 560, -1, -1));
+        panelInternal.add(jTextField2, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 670, 210, 30));
+
+        jLabel19.setFont(new java.awt.Font("Jaldi", 0, 18)); // NOI18N
+        jLabel19.setForeground(new java.awt.Color(118, 125, 142));
+        jLabel19.setText("Contraseña temporal");
+        panelInternal.add(jLabel19, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 640, 240, -1));
+        panelInternal.add(jTextField6, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 590, 210, 30));
+
+        add(panelInternal, new org.netbeans.lib.awtextra.AbsoluteConstraints(60, 70, 1610, 770));
     }// </editor-fold>//GEN-END:initComponents
 
     private void buttonCalendarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_buttonCalendarActionPerformed
@@ -418,7 +435,6 @@ public class RegisterEmployed extends javax.swing.JPanel {
     private javax.swing.JCheckBox checkSettingsApp;
     private javax.swing.JCheckBox checkSettingsCompany;
     private javax.swing.JFileChooser fileChooser;
-    private javax.swing.JCheckBox jCheckBox8;
     private javax.swing.JComboBox<String> jComboBox10;
     private javax.swing.JComboBox<String> jComboBox6;
     private javax.swing.JComboBox<String> jComboBox7;
@@ -428,9 +444,12 @@ public class RegisterEmployed extends javax.swing.JPanel {
     private javax.swing.JLabel jLabel11;
     private javax.swing.JLabel jLabel12;
     private javax.swing.JLabel jLabel13;
+    private javax.swing.JLabel jLabel14;
     private javax.swing.JLabel jLabel15;
     private javax.swing.JLabel jLabel16;
     private javax.swing.JLabel jLabel17;
+    private javax.swing.JLabel jLabel18;
+    private javax.swing.JLabel jLabel19;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel22;
     private javax.swing.JLabel jLabel23;
@@ -446,9 +465,11 @@ public class RegisterEmployed extends javax.swing.JPanel {
     private javax.swing.JLabel jLabel8;
     private javax.swing.JLabel jLabel9;
     private javax.swing.JTextField jTextField1;
+    private javax.swing.JTextField jTextField2;
     private javax.swing.JTextField jTextField3;
     private javax.swing.JTextField jTextField4;
     private javax.swing.JTextField jTextField5;
+    private javax.swing.JTextField jTextField6;
     private javax.swing.JTextField jTextField7;
     private javax.swing.JTextField jTextField8;
     private javax.swing.JTextField jTextField9;

@@ -357,7 +357,7 @@
           </AuxValues>
           <Constraints>
             <Constraint layoutClass="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout" value="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout$AbsoluteConstraintsDescription">
-              <AbsoluteConstraints x="10" y="90" width="750" height="40"/>
+              <AbsoluteConstraints x="10" y="90" width="750" height="100"/>
             </Constraint>
           </Constraints>
 
@@ -367,7 +367,7 @@
               <Properties>
                 <Property name="columns" type="int" value="20"/>
                 <Property name="rows" type="int" value="5"/>
-                <Property name="text" type="java.lang.String" value="A partir de la proxima semana a las bebidas de la marca Boing tendran un aumento de precios del&#xa; 5% por pieza, los cambios se haran automaticamente en el sistema."/>
+                <Property name="text" type="java.lang.String" value="   &#x25cf;  A partir de la proxima semana a las bebidas de la marca Boing tendran un aumento de precios del&#xa;          5% por pieza, los cambios se haran automaticamente en el sistema."/>
               </Properties>
             </Component>
           </SubComponents>

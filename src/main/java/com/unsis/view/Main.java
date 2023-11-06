@@ -1,6 +1,7 @@
 package com.unsis.view;
 
 import com.mycompany.cafe.GeneralSettings;
+import com.unsis.dao.Conexion;
 import com.unsis.models.constants.Constants;
 import com.unsis.view.panel.Accounting;
 import com.unsis.view.panel.RegisterEmployed;
@@ -46,6 +47,8 @@ public class Main extends javax.swing.JFrame {
         this.add(navigator);
         this.add(toolBar);
         this.setCardPanel();
+        
+        Conexion.getConexion();
     }
 
     /**

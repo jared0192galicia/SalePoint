@@ -197,10 +197,10 @@ public class MainMenu extends javax.swing.JPanel {
 
         jTextArea1.setColumns(20);
         jTextArea1.setRows(5);
-        jTextArea1.setText("A partir de la proxima semana a las bebidas de la marca Boing tendran un aumento de precios del\n 5% por pieza, los cambios se haran automaticamente en el sistema.");
+        jTextArea1.setText("   ●  A partir de la proxima semana a las bebidas de la marca Boing tendran un aumento de precios del\n          5% por pieza, los cambios se haran automaticamente en el sistema.");
         jScrollPane1.setViewportView(jTextArea1);
 
-        jPanel4.add(jScrollPane1, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 90, 750, 40));
+        jPanel4.add(jScrollPane1, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 90, 750, 100));
 
         add(jPanel4, new org.netbeans.lib.awtextra.AbsoluteConstraints(100, 470, 1110, 270));
 
