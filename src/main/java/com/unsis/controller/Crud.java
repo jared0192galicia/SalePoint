@@ -4,7 +4,7 @@ import com.unsis.models.entity.Account;
 
 /**
  *
- * @author labtecweb10
+ * @author jared
  */
 public class Crud<T> {
 

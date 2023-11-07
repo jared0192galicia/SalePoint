@@ -3,7 +3,6 @@ package com.unsis.view;
 import com.mycompany.cafe.GeneralSettings;
 import com.unsis.dao.Conexion;
 import com.unsis.models.constants.Constants;
-import com.unsis.view.panel.Accounting;
 import com.unsis.view.panel.RegisterEmployed;
 import com.unsis.view.panel.ClosingSales;
 import com.unsis.view.panel.ListEmployes;

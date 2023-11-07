@@ -29,11 +29,6 @@ public class PuntoVenta {
         Dotenv env = Dotenv.load();
         String environment = env.get("ENVIRONMENT");
 
-        String user = env.get("USER_NAME");
-        String pass = env.get("PASSWORD_SERVER");
-        String dataBase = env.get("DATA_BASE");
-
-        System.out.println("Cadena: " + user + " " + pass + " " + dataBase);
         if (environment != null) {
             System.out.println("ENVIRONMENT = " + environment);
         }
