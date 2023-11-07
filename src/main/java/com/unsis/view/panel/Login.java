@@ -1,8 +1,10 @@
 package com.unsis.view.panel;
 
 import com.unsis.controller.Crud;
+import com.unsis.controller.controllerAccount;
 import com.unsis.models.entity.Account;
 import com.unsis.view.Main;
+import java.util.Arrays;
 import javax.swing.JOptionPane;
 
 /**
@@ -299,15 +301,20 @@ public class Login extends javax.swing.JFrame {
 
     private void buttonLoginActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_buttonLoginActionPerformed
         String user = txtUser.getText().trim();
-        String pass = txtPass.getText().trim();
+        var pass = txtPass.getPassword();
 
         if (!user.equals("") && !pass.equals("")) {
 
-            Account looger = new Account(user, pass);
-            Crud<Account> sesion = new Crud<>(looger);
+            var looger = new Account(user, Arrays.toString(pass));
+            controllerAccount<Account> sesion = new controllerAccount<>(looger);
 
-            new Main().setVisible(true);
-            this.dispose();
+            if (sesion.auth(user, Arrays.toString(pass))) {
+                new Main().setVisible(true);
+                this.dispose();
+            } else {
+                JOptionPane.showMessageDialog(null, "Usuario o contraseña incorrectos");
+            }
+
         } else {
             JOptionPane.showMessageDialog(null, "Debe llenar todos los campos");
         }

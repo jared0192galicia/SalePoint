@@ -1,39 +1,17 @@
 package com.unsis.controller;
 
-import com.unsis.models.entity.Account;
-
 /**
  *
  * @author jared
+ * @param <T>
  */
-public class Crud<T> {
+public interface Crud<T> {
+    
+    public boolean create(T obj);
 
-    public Crud(T obj) {
-        
-    }
+    public boolean update(T obj);
 
-    public boolean create(T obj) {
-        return true;
-    }
+    public boolean select(T obj);
 
-    public boolean update(T obj) {
-        return true;
-    }
-
-    public boolean select(T obj) {
-        return true;
-    }
-
-    public boolean delete(T obj) {
-        return true;
-    }
-
-    public boolean verify(T obj) {
-        return true;
-    }
-
-    public boolean fill(T obj) {
-        
-        return (obj.getClass().equals(Account.class));
-    }
+    public boolean delete(T obj);
 }
