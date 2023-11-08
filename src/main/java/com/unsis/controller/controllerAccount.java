@@ -4,40 +4,53 @@
  */
 package com.unsis.controller;
 
+import com.unsis.dao.AccountDao;
+import org.mindrot.jbcrypt.BCrypt;
 
-public class controllerAccount<T> implements Crud<T> {
-    
-    public controllerAccount(T obj) {
+public class controllerAccount<Account> implements Crud<Account> {
+
+    AccountDao dao = new AccountDao();
+
+    public controllerAccount(Account obj) {
     }
 
     @Override
-    public boolean create(T obj) {
+    public boolean create(Account obj) {
         return true;
     }
 
     @Override
-    public boolean update(T obj) {
+    public boolean update(Account obj) {
         return true;
     }
 
     @Override
-    public boolean select(T obj) {
+    public boolean select(Account obj) {
         return true;
     }
 
     @Override
-    public boolean delete(T obj) {
+    public boolean delete(Account obj) {
         return true;
     }
-    
+
     /**
      *
      * @param user
      * @param pass
      * @return
      */
-    public boolean auth (String user, String pass) {
+    public boolean auth(String user, String pass) {
+        var account = dao.auth(user);
+
+        if (account == null) {
+            return false;
+        }
+
+        // Verificar si la contraseña ingresada coincide con la contraseña hasheada
+//        return  BCrypt.checkpw(pass, account.getPass());
         return true;
+
     }
-    
+
 }

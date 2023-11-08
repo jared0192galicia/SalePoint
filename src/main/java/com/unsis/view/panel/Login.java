@@ -301,14 +301,14 @@ public class Login extends javax.swing.JFrame {
 
     private void buttonLoginActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_buttonLoginActionPerformed
         String user = txtUser.getText().trim();
-        var pass = txtPass.getPassword();
-
+        char[] pass = txtPass.getPassword();
+        
         if (!user.equals("") && !pass.equals("")) {
 
-            var looger = new Account(user, Arrays.toString(pass));
-            controllerAccount<Account> sesion = new controllerAccount<>(looger);
+            var logger = new Account(user, Arrays.toString(pass));
+            controllerAccount<Account> sesion = new controllerAccount<>(logger);
 
-            if (sesion.auth(user, Arrays.toString(pass))) {
+            if (sesion.auth(user, logger.getPass())) {
                 new Main().setVisible(true);
                 this.dispose();
             } else {

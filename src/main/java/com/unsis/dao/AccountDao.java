@@ -1,9 +1,9 @@
 package com.unsis.dao;
 
+import com.unsis.models.entity.Account;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
-import java.sql.Statement;
 
 /**
  *
@@ -11,26 +11,23 @@ import java.sql.Statement;
  */
 public class AccountDao {
 
-    private final Connection cn;
+    private final Connection cn = Conexion.getConexion();
 
-    public AccountDao(Connection cn) {
-        this.cn = cn;
-    }
+    public Account auth(String user) {
 
-    public boolean auth(String user, String pass) {
-
-        String query = "SELECT * FROM \"usuario\" WHERE name = ?";
+        String query = "SELECT * FROM \"cuenta\" WHERE usuario = ?";
         try (PreparedStatement pst = cn.prepareStatement(query)) {
             pst.setString(1, user);
             
             ResultSet rs = pst.executeQuery();  
 
             while (rs.next()) {
-                System.out.println(rs.getString("nombre"));
+                System.out.println(rs.getString("numcuenta"));
+                return new Account();
             }
         } catch (Exception e) {
         }
 
-        return true;
+        return null;
     }
 }

@@ -40,3 +40,11 @@
 * Timing Framework
 * MigLayout
 * Driver Postgresql
+
+### Estandar de desarrollo
+
+1. El nombre las variables debe ser en ingles
+2. Comentar los metodos y procesos complejos en ingles
+3. Las variables deben empesar con minuscula y primera letra de la segunda palabra en mayuscula. Ejemplo ```unoDos```
+4. No renombrar ningun archivo, en caso de querer hacerlo avisar antes.
+5. Por cada commit creado crear un Pull Request en gitHub
