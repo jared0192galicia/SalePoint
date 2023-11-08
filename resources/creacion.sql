@@ -18,6 +18,7 @@ CREATE TABLE Area (
   descripcion VARCHAR(75),
   PRIMARY KEY (id)
 );
+
 CREATE TABLE Seccion (
   id serial,
   idArea INT,
@@ -45,4 +46,6 @@ CREATE TABLE Cuenta (
   PRIMARY KEY(id),
   FOREIGN KEY (idEmpleado) REFERENCES Empleado(id)
 );
+
+DROP Table Cuenta;
 
