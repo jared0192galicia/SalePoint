@@ -10,9 +10,22 @@ public class Employee extends People {
     private String number;
     private Date dateEntry;
     private boolean status;
-    private String location;
     private String area;
     private String position;
+    private int numEmploye;
+
+    public Employee() {
+    }
+    
+    public Employee(int numEmploye, String number, Date dateEntry, boolean status, String area, String position, String name, String matherLastName, String fatherLastName, Date birthday, String mail, String cell) {
+        super(name, matherLastName, fatherLastName, birthday, mail, cell);
+        this.number = number;
+        this.dateEntry = dateEntry;
+        this.status = status;
+        this.area = area;
+        this.position = position;
+    }
+    
 
     public String getNumber() {
         return number;
@@ -20,6 +33,13 @@ public class Employee extends People {
 
     public void setNumber(String number) {
         this.number = number;
+    }
+    public void setNumEmploye(int numEmploye) {
+        this.numEmploye = numEmploye;
+    }
+
+    public int getNumEmploye() {
+        return numEmploye;
     }
 
     public Date getDateEntry() {
@@ -36,14 +56,6 @@ public class Employee extends People {
 
     public void setStatus(boolean status) {
         this.status = status;
-    }
-
-    public String getLocation() {
-        return location;
-    }
-
-    public void setLocation(String location) {
-        this.location = location;
     }
 
     public String getArea() {
