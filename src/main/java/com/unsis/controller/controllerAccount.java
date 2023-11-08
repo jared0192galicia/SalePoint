@@ -4,9 +4,11 @@
  */
 package com.unsis.controller;
 
+import com.unsis.dao.AccountDao;
+
 
 public class controllerAccount<T> implements Crud<T> {
-    
+    AccountDao dao = new AccountDao();
     public controllerAccount(T obj) {
     }
 

@@ -15,6 +15,10 @@ import com.unsis.view.panel.ToolBar;
 import com.unsis.view.panel.SalePoint;
 import com.unsis.view.panel.ventasDesp;
 import java.awt.CardLayout;
+import java.awt.event.WindowAdapter;
+import java.awt.event.WindowEvent;
+import java.sql.SQLException;
+import java.util.logging.Level;
 import javax.swing.JFrame;
 import javax.swing.JPanel;
 
@@ -46,8 +50,21 @@ public class Main extends javax.swing.JFrame {
         this.add(navigator);
         this.add(toolBar);
         this.setCardPanel();
-        
+
         Conexion.getConexion();
+        
+        // Agrega un WindowListener al JFrame para capturar el evento de cierre
+        this.addWindowListener(new WindowAdapter() {
+            @Override
+            public void windowClosing(WindowEvent e) {
+                try {
+                    // Coloca aquí el código que deseas ejecutar cuando se cierra la ventana
+                    Conexion.closeConecction();
+                } catch (SQLException ex) {
+                    System.err.println("Error al cerrar la conexion\n" + ex.getMessage());
+                }
+            }
+        });
     }
 
     /**

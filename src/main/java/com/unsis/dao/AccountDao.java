@@ -3,7 +3,6 @@ package com.unsis.dao;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
-import java.sql.Statement;
 
 /**
  *
@@ -11,11 +10,7 @@ import java.sql.Statement;
  */
 public class AccountDao {
 
-    private final Connection cn;
-
-    public AccountDao(Connection cn) {
-        this.cn = cn;
-    }
+    private final Connection cn = Conexion.getConexion();
 
     public boolean auth(String user, String pass) {
 
