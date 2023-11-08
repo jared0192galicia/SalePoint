@@ -26,6 +26,7 @@ public class AccountDao {
                 return new Account();
             }
         } catch (Exception e) {
+            System.err.println("Error in select user: " + e.getMessage() + " for \n" + e.getCause().toString());
         }
 
         return null;
