@@ -23,7 +23,7 @@ public class AccountDao {
         try (PreparedStatement pst = cn.prepareStatement(query)) {
             pst.setString(1, user);
             
-            ResultSet rs = pst.executeQuery(); 
+            ResultSet rs = pst.executeQuery();  
 
             while (rs.next()) {
                 System.out.println(rs.getString("nombre"));
