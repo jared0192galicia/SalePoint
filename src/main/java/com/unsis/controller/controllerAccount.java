@@ -4,6 +4,7 @@
  */
 package com.unsis.controller;
 
+import com.unsis.clases.Session;
 import com.unsis.dao.AccountDao;
 import org.mindrot.jbcrypt.BCrypt;
 
@@ -46,10 +47,11 @@ public class controllerAccount<Account> implements Crud<Account> {
         if (account == null) {
             return false;
         }
-
+        
+        Session.setAccount(account);
         // Verificar si la contraseña ingresada coincide con la contraseña hasheada
-//        return  BCrypt.checkpw(pass, account.getPass());
-        return true;
+        return  BCrypt.checkpw(pass, account.getPass());
+//        return true;
 
     }
 

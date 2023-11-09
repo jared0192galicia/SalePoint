@@ -1,9 +1,6 @@
-/*
- * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
- * Click nbfs://nbhost/SystemFileSystem/Templates/GUIForms/JPanel.java to edit this template
- */
 package com.unsis.view.panel;
 
+import com.unsis.clases.Session;
 import com.unsis.view.Main;
 
 /**
@@ -16,7 +13,6 @@ public class MainMenu extends javax.swing.JPanel {
 
     /**
      * Creates new form Venta
-     *
      * @param mainWindow
      */
     public MainMenu(Main mainWindow) {
@@ -25,6 +21,8 @@ public class MainMenu extends javax.swing.JPanel {
         this.mainWindow = mainWindow;
         this.setSize(1700, 861);
         this.setBounds(217, 0, this.getWidth(), this.getHeight());
+        
+        this.labelWelcome.setText("Bienvenido " + Session.getAccount().getName());
     }
 
     @SuppressWarnings("unchecked")
@@ -33,7 +31,7 @@ public class MainMenu extends javax.swing.JPanel {
 
         buttonGroup1 = new javax.swing.ButtonGroup();
         jRadioButton1 = new javax.swing.JRadioButton();
-        jLabel2 = new javax.swing.JLabel();
+        labelWelcome = new javax.swing.JLabel();
         jPanel1 = new javax.swing.JPanel();
         buttonInventory = new javax.swing.JButton();
         buttonHumanResources = new javax.swing.JButton();
@@ -62,10 +60,10 @@ public class MainMenu extends javax.swing.JPanel {
 
         setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
-        jLabel2.setFont(new java.awt.Font("Jaldi", 0, 30)); // NOI18N
-        jLabel2.setForeground(new java.awt.Color(7, 56, 112));
-        jLabel2.setText("Bienvenido Jared");
-        add(jLabel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 30, 330, 46));
+        labelWelcome.setFont(new java.awt.Font("Jaldi", 0, 30)); // NOI18N
+        labelWelcome.setForeground(new java.awt.Color(7, 56, 112));
+        labelWelcome.setText("Bienvenido");
+        add(labelWelcome, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 30, 330, 46));
 
         jPanel1.setBackground(new java.awt.Color(255, 255, 255));
         jPanel1.setOpaque(false);
@@ -271,7 +269,6 @@ public class MainMenu extends javax.swing.JPanel {
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel11;
     private javax.swing.JLabel jLabel14;
-    private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel23;
     private javax.swing.JLabel jLabel24;
     private javax.swing.JLabel jLabel25;
@@ -286,5 +283,6 @@ public class MainMenu extends javax.swing.JPanel {
     private javax.swing.JRadioButton jRadioButton1;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JTextArea jTextArea1;
+    private javax.swing.JLabel labelWelcome;
     // End of variables declaration//GEN-END:variables
 }

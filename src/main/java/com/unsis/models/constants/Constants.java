@@ -12,7 +12,7 @@ public class Constants {
     public static ArrayList<Section> sections = new ArrayList<>();
 
     public static void fillContants() {
-        sections = new ConstantsController().loadSecctions();
+        sections = new ConstantsController().loadSections();
     }
     
     public static class Section {

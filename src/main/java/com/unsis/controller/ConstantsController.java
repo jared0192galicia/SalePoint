@@ -1,28 +1,37 @@
 package com.unsis.controller;
 
+import com.unsis.clases.Session;
+import com.unsis.dao.ConstantsDao;
 import com.unsis.models.constants.Constants;
+import java.sql.ResultSet;
+import java.sql.SQLException;
 import java.util.ArrayList;
 
 /**
  *
  * @author jared
  */
-public class ConstantsController  {
-    
-    public ArrayList<Constants.Section> loadSecctions () {
+public class ConstantsController {
+
+    ConstantsDao dao = new ConstantsDao();
+
+    public ArrayList<Constants.Section> loadSections() {
         ArrayList<Constants.Section> sections = new ArrayList<>();
-        sections.add(new Constants.Section("Lista Empleados", "Recursos Humanos", "Accede a la lista de empleados", 0));
-        sections.add(new Constants.Section("Corte de caja", "Contabilidad", "Reliza tu corte de caja", 1));
-        sections.add(new Constants.Section("Ordenes entrantes", "Ventas", "Accede a la lista de pedidos mas reciente", 2));
-        sections.add(new Constants.Section("Alta de Empleado", "Recursos Humanos", "Registra un nuevo empleado", 3));
-        sections.add(new Constants.Section("Alta de Producto", "Almacen", "Registra un producto nuevo", 4));
-        sections.add(new Constants.Section("Punto de Venta", "Ventas", "Reliza las ventas del dia", 5));
-        sections.add(new Constants.Section("Lista Productos", "Almacen", "Accede a la lista de los productos", 6));
-        sections.add(new Constants.Section("Gastos", "Contabilidad", "Registra los gastos permitidos", 7));
-        sections.add(new Constants.Section("Ajustes del generales", "Ajustes", "Ajusta valores del programa", 8));
-        sections.add(new Constants.Section("Ajuste de valores", "Ajustes", "Ajusta los valores del programa", 9));
-        sections.add(new Constants.Section("Contabilidad", "Contabilidad", "Menu de contabilidad", 10));
-    
+
+        ResultSet rs = dao.queryLoadSections(Session.getAccount().getUser());
+
+        if (rs == null) return null;
+
+        try {
+            while (rs.next()) {
+                sections.add(new Constants.Section(rs.getString("seccion"), rs.getString("area"),
+                        rs.getString("descripcion"), 0));
+            }
+        } catch (SQLException e) {
+            System.err.println("Error in constants\n" + e.getMessage());
+        }
+
         return sections;
     }
+
 }

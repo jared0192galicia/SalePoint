@@ -6,8 +6,6 @@ package com.unsis.view.panel;
 
 import com.toedter.calendar.JCalendar;
 import com.unsis.clases.Tools;
-import java.awt.Image;
-import java.net.URL;
 import java.util.Date;
 import javax.swing.Icon;
 import javax.swing.ImageIcon;

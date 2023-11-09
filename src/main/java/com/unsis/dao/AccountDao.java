@@ -2,7 +2,6 @@ package com.unsis.dao;
 
 import com.unsis.models.entity.Account;
 import java.sql.Connection;
-import java.sql.Date;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 
@@ -29,13 +28,12 @@ public class AccountDao {
             ResultSet rs = pst.executeQuery();
 
             while (rs.next()) {
-                System.out.println(rs.getString("numcuenta"));
-                return new Account.Builder(user, rs.getString("contrasena"))
+                Account account = new Account.Builder(user, rs.getString("contrasena"))
                         .withNumber(rs.getString("telefono"))
                         .withNumEmploye(rs.getInt("numempleado"))
                         .withDateEntry(rs.getDate("fechaing"))
                         .withStatus("Activo".equals(rs.getString("estado")))
-                        .withArea(rs.getString("Área"))
+                        .withArea(rs.getString("puesto"))
                         .withPosition(rs.getString("puesto"))
                         .withName(rs.getString("nombre"))
                         .withMatherLastName(rs.getString("apellidom"))
@@ -44,10 +42,10 @@ public class AccountDao {
                         .withMail(rs.getString("correo"))
                         .withCell(rs.getString("telefono"))
                         .build();
-//                return new Account();
+                return account;
             }
         } catch (Exception e) {
-            System.err.println("Error in select user: " + e.getMessage() + " for \n" + e.getCause().toString());
+            System.err.println("Error in select user: " + e.getMessage());
         }
 
         return null;

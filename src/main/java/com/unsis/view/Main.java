@@ -50,8 +50,6 @@ public class Main extends javax.swing.JFrame {
         this.add(toolBar);
         this.setCardPanel();
 
-        Conexion.getConexion();
-        
         // Agrega un WindowListener al JFrame para capturar el evento de cierre
         this.addWindowListener(new WindowAdapter() {
             @Override
