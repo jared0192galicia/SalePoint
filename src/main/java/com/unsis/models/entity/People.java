@@ -18,6 +18,17 @@ public class People {
     private String mail;
     private String cell;
 
+    public People() {}
+
+    public People(String name, String matherLastName, String fatherLastName, Date birthday, String mail, String cell) {
+        this.name = name;
+        this.matherLastName = matherLastName;
+        this.fatherLastName = fatherLastName;
+        this.birthday = birthday;
+        this.mail = mail;
+        this.cell = cell;
+    }
+    
     public String getName() {
         return name;
     }
