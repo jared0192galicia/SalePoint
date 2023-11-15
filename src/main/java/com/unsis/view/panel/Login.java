@@ -7,7 +7,7 @@ import javax.swing.JOptionPane;
 
 /**
  *
- * @author labtecweb04
+ * @author Elio
  */
 public class Login extends javax.swing.JFrame {
 
@@ -20,9 +20,15 @@ public class Login extends javax.swing.JFrame {
         this.setLocationRelativeTo(null);
         this.setTitle("Inicio de Sesión");
 
-        this.textMessage.setText("\n\n    Por favor, escribe tu correo electrónico.\n    Recibirás un mensaje con tu contraseña\n    nueva por correo electrónico.");
-        this.resetPass.setLocationRelativeTo(this);
+        this.textMessage.setText("""
+                                       Recibir\u00e1s un mensaje con tu contrase\u00f1a
+                                 
+                                 
+                                            Por favor, escribe tu correo electr\u00f3nico.
+                                            nueva por correo electr\u00f3nico.""");
+        this.resetPass.setLocationRelativeTo(null);
         this.resetPass.setSize(450, 506);
+        this.resetPass.setBounds(this.getX() + 300, this.getY() - 25, 450, 506);
         this.resetPass.setTitle("Resetear contraseña");
 
     }
@@ -53,6 +59,13 @@ public class Login extends javax.swing.JFrame {
         jLabel6 = new javax.swing.JLabel();
         labelClose = new javax.swing.JLabel();
         jLabel4 = new javax.swing.JLabel();
+
+        resetPass.setTitle("Restablecer contraseña");
+        resetPass.setAlwaysOnTop(true);
+        resetPass.setFocusTraversalPolicyProvider(true);
+        resetPass.setLocationByPlatform(true);
+        resetPass.setModal(true);
+        resetPass.setUndecorated(true);
 
         jPanel3.setBackground(new java.awt.Color(245, 248, 251));
         jPanel3.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
@@ -297,7 +310,7 @@ public class Login extends javax.swing.JFrame {
     private void buttonLoginActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_buttonLoginActionPerformed
         String user = txtUser.getText().trim();
         String pass = txtPass.getText().trim();
-        
+
         if (!user.equals("") && !pass.equals("")) {
 
             var logger = new Account(user, pass);
@@ -332,34 +345,8 @@ public class Login extends javax.swing.JFrame {
      * @param args the command line arguments
      */
     public static void main(String args[]) {
-        /* Set the Nimbus look and feel */
-        //<editor-fold defaultstate="collapsed" desc=" Look and feel setting code (optional) ">
-        /* If Nimbus (introduced in Java SE 6) is not available, stay with the default look and feel.
-         * For details see http://download.oracle.com/javase/tutorial/uiswing/lookandfeel/plaf.html 
-         */
-        try {
-            for (javax.swing.UIManager.LookAndFeelInfo info : javax.swing.UIManager.getInstalledLookAndFeels()) {
-                if ("Nimbus".equals(info.getName())) {
-                    javax.swing.UIManager.setLookAndFeel(info.getClassName());
-                    break;
-                }
-            }
-        } catch (ClassNotFoundException ex) {
-            java.util.logging.Logger.getLogger(Login.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        } catch (InstantiationException ex) {
-            java.util.logging.Logger.getLogger(Login.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        } catch (IllegalAccessException ex) {
-            java.util.logging.Logger.getLogger(Login.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        } catch (javax.swing.UnsupportedLookAndFeelException ex) {
-            java.util.logging.Logger.getLogger(Login.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        }
-        //</editor-fold>
-
-        /* Create and display the form */
-        java.awt.EventQueue.invokeLater(new Runnable() {
-            public void run() {
-                new Login().setVisible(true);
-            }
+        java.awt.EventQueue.invokeLater(() -> {
+            new Login().setVisible(true);
         });
     }
 

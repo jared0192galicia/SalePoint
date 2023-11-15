@@ -31,7 +31,7 @@ VALUES
   (1029, 'Alejandro', 'Gomez', 'Gomez', '1992-12-01', 'alejandro.gomez@email.com', '888-999-2222', '2017-09-01', 'Activo', 'Ingeniero'),
   (1030, 'Lucia', 'Fernandez', 'Ramirez', '1998-06-05', 'lucia.fernandez@email.com', '222-111-3333', '2016-02-15', 'Activo', 'Programador');
   
-  INSERT INTO Area (nombre, descripcion)
+INSERT INTO Area (nombre, descripcion)
 VALUES 
 ('Recursos Humanos', 'Area para gestionar los empleados'),
 ('Almacen', 'Area para la administración de productos'),
@@ -55,4 +55,25 @@ VALUES
 INSERT INTO cuenta (idempleado, numcuenta, "usuario", contrasena)
 VALUES 
 (1, 1, 'jGalicia', '1234');
+
+INSERT INTO acceso (idcuenta, idseccion)
+VALUES (1, 1),(1, 2), (1, 3), (1, 4), (1, 5), (1, 6), (1, 7);
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
