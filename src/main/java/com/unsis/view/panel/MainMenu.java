@@ -1,7 +1,9 @@
 package com.unsis.view.panel;
 
 import com.unsis.clases.Session;
+import com.unsis.models.constants.Constants;
 import com.unsis.view.Main;
+import java.util.ArrayList;
 
 /**
  *
@@ -10,24 +12,51 @@ import com.unsis.view.Main;
 public class MainMenu extends javax.swing.JPanel {
 
     private final Main mainWindow;
-
+    private final ArrayList<String> areas;
+    
     /**
      * Creates new form Venta
      * @param mainWindow
      */
     public MainMenu(Main mainWindow) {
+        this.areas = Constants.getAreas();
         initComponents();
 
         this.mainWindow = mainWindow;
         this.setSize(1700, 861);
         this.setBounds(217, 0, this.getWidth(), this.getHeight());
-        
         this.labelWelcome.setText("Bienvenido " + Session.getAccount().getName());
+        this.showAreaButtons();
+    }
+    
+    /**
+     * Quita los botones a los que no se tiene acceso en el menu principal
+     */
+    private void showAreaButtons() {
+        if (!areas.contains(buttonConta.getName())) {
+            buttonConta.setVisible(false);
+        }
+        if (!areas.contains(buttonHumanResources.getName())) {
+            buttonHumanResources.setVisible(false);
+        }
+        if (!areas.contains(buttonInventory.getName())) {
+            buttonInventory.setVisible(false);
+        }
+        if (!areas.contains(buttonSalePoint.getName())) {
+            buttonSalePoint.setVisible(false);
+        }
+        if (!areas.contains(buttonSales.getName())) {
+            buttonSales.setVisible(false);
+        }
+        if (!areas.contains(buttonSettings.getName())) {
+            buttonSettings.setVisible(false);
+        }
     }
 
     @SuppressWarnings("unchecked")
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
+        java.awt.GridBagConstraints gridBagConstraints;
 
         buttonGroup1 = new javax.swing.ButtonGroup();
         jRadioButton1 = new javax.swing.JRadioButton();
@@ -67,7 +96,7 @@ public class MainMenu extends javax.swing.JPanel {
 
         jPanel1.setBackground(new java.awt.Color(255, 255, 255));
         jPanel1.setOpaque(false);
-        jPanel1.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
+        jPanel1.setLayout(new java.awt.GridBagLayout());
 
         buttonInventory.setBackground(new java.awt.Color(51, 153, 255));
         buttonInventory.setFont(new java.awt.Font("Liberation Sans", 0, 18)); // NOI18N
@@ -77,13 +106,21 @@ public class MainMenu extends javax.swing.JPanel {
         buttonInventory.setBorder(null);
         buttonInventory.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
         buttonInventory.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
+        buttonInventory.setName("Almacen"); // NOI18N
         buttonInventory.setVerticalTextPosition(javax.swing.SwingConstants.BOTTOM);
         buttonInventory.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 buttonInventoryActionPerformed(evt);
             }
         });
-        jPanel1.add(buttonInventory, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 45, 240, 160));
+        gridBagConstraints = new java.awt.GridBagConstraints();
+        gridBagConstraints.gridx = 0;
+        gridBagConstraints.gridy = 0;
+        gridBagConstraints.ipadx = 162;
+        gridBagConstraints.ipady = 75;
+        gridBagConstraints.anchor = java.awt.GridBagConstraints.NORTHWEST;
+        gridBagConstraints.insets = new java.awt.Insets(45, 30, 45, 0);
+        jPanel1.add(buttonInventory, gridBagConstraints);
 
         buttonHumanResources.setBackground(new java.awt.Color(255, 153, 204));
         buttonHumanResources.setFont(new java.awt.Font("Liberation Sans", 0, 18)); // NOI18N
@@ -93,14 +130,24 @@ public class MainMenu extends javax.swing.JPanel {
         buttonHumanResources.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
         buttonHumanResources.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
         buttonHumanResources.setIconTextGap(0);
-        buttonHumanResources.setPreferredSize(new java.awt.Dimension(76, 79));
+        buttonHumanResources.setMaximumSize(new java.awt.Dimension(112, 85));
+        buttonHumanResources.setMinimumSize(new java.awt.Dimension(112, 85));
+        buttonHumanResources.setName("Recursos Humanos"); // NOI18N
+        buttonHumanResources.setPreferredSize(new java.awt.Dimension(112, 85));
         buttonHumanResources.setVerticalTextPosition(javax.swing.SwingConstants.BOTTOM);
         buttonHumanResources.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 buttonHumanResourcesActionPerformed(evt);
             }
         });
-        jPanel1.add(buttonHumanResources, new org.netbeans.lib.awtextra.AbsoluteConstraints(290, 45, 260, 160));
+        gridBagConstraints = new java.awt.GridBagConstraints();
+        gridBagConstraints.gridx = 1;
+        gridBagConstraints.gridy = 0;
+        gridBagConstraints.ipadx = 128;
+        gridBagConstraints.ipady = 75;
+        gridBagConstraints.anchor = java.awt.GridBagConstraints.NORTHWEST;
+        gridBagConstraints.insets = new java.awt.Insets(45, 20, 45, 0);
+        jPanel1.add(buttonHumanResources, gridBagConstraints);
 
         buttonConta.setBackground(new java.awt.Color(0, 153, 0));
         buttonConta.setFont(new java.awt.Font("Liberation Sans", 0, 18)); // NOI18N
@@ -109,13 +156,21 @@ public class MainMenu extends javax.swing.JPanel {
         buttonConta.setText("Contabilidad");
         buttonConta.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
         buttonConta.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
+        buttonConta.setName("Contabilidad"); // NOI18N
         buttonConta.setVerticalTextPosition(javax.swing.SwingConstants.BOTTOM);
         buttonConta.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 buttonContaActionPerformed(evt);
             }
         });
-        jPanel1.add(buttonConta, new org.netbeans.lib.awtextra.AbsoluteConstraints(570, 45, 240, 160));
+        gridBagConstraints = new java.awt.GridBagConstraints();
+        gridBagConstraints.gridx = 2;
+        gridBagConstraints.gridy = 0;
+        gridBagConstraints.ipadx = 128;
+        gridBagConstraints.ipady = 75;
+        gridBagConstraints.anchor = java.awt.GridBagConstraints.NORTHWEST;
+        gridBagConstraints.insets = new java.awt.Insets(45, 20, 45, 0);
+        jPanel1.add(buttonConta, gridBagConstraints);
 
         buttonSales.setBackground(new java.awt.Color(102, 102, 255));
         buttonSales.setFont(new java.awt.Font("Liberation Sans", 0, 18)); // NOI18N
@@ -124,13 +179,21 @@ public class MainMenu extends javax.swing.JPanel {
         buttonSales.setText("Ventas");
         buttonSales.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
         buttonSales.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
+        buttonSales.setName("Ventas"); // NOI18N
         buttonSales.setVerticalTextPosition(javax.swing.SwingConstants.BOTTOM);
         buttonSales.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 buttonSalesActionPerformed(evt);
             }
         });
-        jPanel1.add(buttonSales, new org.netbeans.lib.awtextra.AbsoluteConstraints(830, 45, 230, 160));
+        gridBagConstraints = new java.awt.GridBagConstraints();
+        gridBagConstraints.gridx = 3;
+        gridBagConstraints.gridy = 0;
+        gridBagConstraints.ipadx = 163;
+        gridBagConstraints.ipady = 78;
+        gridBagConstraints.anchor = java.awt.GridBagConstraints.NORTHWEST;
+        gridBagConstraints.insets = new java.awt.Insets(45, 20, 45, 0);
+        jPanel1.add(buttonSales, gridBagConstraints);
 
         buttonSalePoint.setBackground(new java.awt.Color(0, 204, 102));
         buttonSalePoint.setFont(new java.awt.Font("Liberation Sans", 0, 18)); // NOI18N
@@ -139,13 +202,21 @@ public class MainMenu extends javax.swing.JPanel {
         buttonSalePoint.setText("Punto de Venta");
         buttonSalePoint.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
         buttonSalePoint.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
+        buttonSalePoint.setName("Almacen"); // NOI18N
         buttonSalePoint.setVerticalTextPosition(javax.swing.SwingConstants.BOTTOM);
         buttonSalePoint.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 buttonSalePointActionPerformed(evt);
             }
         });
-        jPanel1.add(buttonSalePoint, new org.netbeans.lib.awtextra.AbsoluteConstraints(1080, 45, 230, 160));
+        gridBagConstraints = new java.awt.GridBagConstraints();
+        gridBagConstraints.gridx = 4;
+        gridBagConstraints.gridy = 0;
+        gridBagConstraints.ipadx = 95;
+        gridBagConstraints.ipady = 77;
+        gridBagConstraints.anchor = java.awt.GridBagConstraints.NORTHWEST;
+        gridBagConstraints.insets = new java.awt.Insets(45, 20, 45, 0);
+        jPanel1.add(buttonSalePoint, gridBagConstraints);
 
         buttonSettings.setBackground(new java.awt.Color(255, 153, 51));
         buttonSettings.setFont(new java.awt.Font("Liberation Sans", 0, 18)); // NOI18N
@@ -154,13 +225,21 @@ public class MainMenu extends javax.swing.JPanel {
         buttonSettings.setText("Ajustes");
         buttonSettings.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
         buttonSettings.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
+        buttonSettings.setName("Ajustes"); // NOI18N
         buttonSettings.setVerticalTextPosition(javax.swing.SwingConstants.BOTTOM);
         buttonSettings.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 buttonSettingsActionPerformed(evt);
             }
         });
-        jPanel1.add(buttonSettings, new org.netbeans.lib.awtextra.AbsoluteConstraints(1330, 45, 220, 160));
+        gridBagConstraints = new java.awt.GridBagConstraints();
+        gridBagConstraints.gridx = 5;
+        gridBagConstraints.gridy = 0;
+        gridBagConstraints.ipadx = 145;
+        gridBagConstraints.ipady = 67;
+        gridBagConstraints.anchor = java.awt.GridBagConstraints.NORTHWEST;
+        gridBagConstraints.insets = new java.awt.Insets(45, 20, 45, 40);
+        jPanel1.add(buttonSettings, gridBagConstraints);
 
         add(jPanel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(50, 90, 1590, 250));
 
@@ -233,7 +312,7 @@ public class MainMenu extends javax.swing.JPanel {
     }// </editor-fold>//GEN-END:initComponents
 
     private void buttonInventoryActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_buttonInventoryActionPerformed
-        mainWindow.setView("Lista Productos");
+       mainWindow.setView(Constants.getSecctionsOf("Almacen").get(0));
     }//GEN-LAST:event_buttonInventoryActionPerformed
 
     private void buttonHumanResourcesActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_buttonHumanResourcesActionPerformed

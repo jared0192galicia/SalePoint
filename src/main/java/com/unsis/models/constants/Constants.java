@@ -9,12 +9,64 @@ import java.util.ArrayList;
  */
 public class Constants {
 
+    public static String PU_NAME= "com.unsis_puntoVenta_jar_1.0-SNAPSHOTPU";
     public static ArrayList<Section> sections = new ArrayList<>();
 
     public static void fillContants() {
         sections = new ConstantsController().loadSections();
     }
     
+
+    /**
+     * Method for get all areas of the user permise
+     *
+     * @return ArrayList with all areas with acces
+     */
+    public static ArrayList<String> getAreas() {
+        ArrayList<String> areas = new ArrayList<>();
+
+        for (Section section : sections) {
+            areas.add(section.area);
+        }
+
+        return areas;
+    }
+
+    /**
+     * Method for get all sections of the user permise
+     *
+     * @return ArrayList with all areas with acces
+     */
+    public static ArrayList<String[][]> getSecctions() {
+        ArrayList<String[][]> sectionsAcces = new ArrayList<>();
+
+        for (Section section : sections) {
+            String[][] aux = {
+                {section.area, section.nombre}
+            };
+            sectionsAcces.add(aux);
+        }
+
+        return sectionsAcces;
+    }
+
+    /**
+     * Method for get all sections of the user permise
+     *
+     * @param area area de la que se quieren obtener las areas
+     * @return ArrayList with all areas with acces
+     */
+    public static ArrayList<String> getSecctionsOf(String area) {
+        ArrayList<String> sectionsAcces = new ArrayList<>();
+
+        for (Section section : sections) {
+            if (section.area.equals(area))
+                sectionsAcces.add(section.nombre);
+        }
+
+        return sectionsAcces;
+    }
+
     public static class Section {
 
         private String nombre;
