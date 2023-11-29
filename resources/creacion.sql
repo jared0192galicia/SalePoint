@@ -1,4 +1,4 @@
-CREATE TABLE Empleado (
+CREATE TABLE "Employee" (
   id serial,
   numEmpleado INT,
   nombre VARCHAR,
@@ -12,40 +12,38 @@ CREATE TABLE Empleado (
   puesto VARCHAR,
   PRIMARY KEY (id)
 );
-CREATE TABLE Area (
+CREATE TABLE "Area" (
   id serial,
   nombre VARCHAR(25),
   descripcion VARCHAR(75),
   PRIMARY KEY (id)
 );
 
-CREATE TABLE Seccion (
+CREATE TABLE "Section" (
   id serial,
-  idArea INT,
+  idArea INT,   
   nombre VARCHAR(25),
   descripcion VARCHAR(75),
   PRIMARY KEY (id),
-  FOREIGN KEY (idArea) REFERENCES Area(id)
+  FOREIGN KEY (idArea) REFERENCES "Area"(id)
 );
 
-CREATE TABLE Acceso (
-  id serial,
-  idCuenta INT,
-  idSeccion INT,
-  PRIMARY KEY(id),
-  FOREIGN KEY (idCuenta) REFERENCES Cuenta(id),
-  FOREIGN KEY (idSeccion) REFERENCES Seccion(id)
-);
 
-CREATE TABLE Cuenta (
+CREATE TABLE "Account" (
   id SERIAL,
   numCuenta INT,
   idEmpleado INT,
   usuario VARCHAR(20),
   contrasena VARCHAR(256),
   PRIMARY KEY(id),
-  FOREIGN KEY (idEmpleado) REFERENCES Empleado(id)
+  FOREIGN KEY (idEmpleado) REFERENCES "Employee"(id)
 );
 
-DROP Table Cuenta;
-
+CREATE TABLE "Access" (
+  id serial,
+  idCuenta INT,
+  idSeccion INT,
+  PRIMARY KEY(id),
+  FOREIGN KEY (idCuenta) REFERENCES "Account"(id),
+  FOREIGN KEY (idSeccion) REFERENCES "Section"(id)
+);

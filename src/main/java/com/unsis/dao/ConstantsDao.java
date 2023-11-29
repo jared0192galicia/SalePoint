@@ -14,13 +14,13 @@ public class ConstantsDao {
     private final Connection cn = Conexion.getConexion();
 
     public ResultSet queryLoadSections(String user) {
-        String query = "SELECT seccion.nombre as seccion, "
-                + "area.nombre as area, "
-                + "seccion.descripcion as descripcion FROM acceso "
-                + "LEFT JOIN cuenta on cuenta.id = acceso.idcuenta "
-                + "LEFT JOIN seccion on seccion.id = acceso.idseccion "
-                + "LEFT JOIN area on area.id = seccion.idarea "
-                + "WHERE cuenta.usuario = ?";
+        String query = "SELECT \"Section\".nombre as seccion, "
+                + "\"Area\".nombre as area, "
+                + "\"Section\".descripcion as descripcion FROM \"Access\" "
+                + "LEFT JOIN \"Account\" on \"Account\".id = \"Access\".idcuenta "
+                + "LEFT JOIN \"Section\" on \"Section\".id = \"Access\".idseccion "
+                + "LEFT JOIN \"Area\" on \"Area\".id = \"Section\".idarea "
+                + "WHERE \"Account\".usuario = ?";
 
         try {
             PreparedStatement pst = cn.prepareStatement(query);

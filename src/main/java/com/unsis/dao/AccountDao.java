@@ -1,6 +1,6 @@
 package com.unsis.dao;
 
-import com.unsis.models.entity.Account;
+import com.unsis.models.entity.Account1;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
@@ -19,16 +19,16 @@ public class AccountDao {
      * @param user user for search account
      * @return Object Account with data
      */
-    public Account auth(String user) {
-        String query = "SELECT * FROM cuenta "
-                + "LEFT JOIN empleado ON cuenta.idempleado = empleado.id WHERE usuario = ?";
+    public Account1 auth(String user) {
+        String query = "SELECT * FROM \"Account\""
+                + "LEFT JOIN \"Employee\" ON \"Account\".idempleado = \"Employee\".id WHERE usuario = ?";
         try (PreparedStatement pst = cn.prepareStatement(query)) {
             pst.setString(1, user);
 
             ResultSet rs = pst.executeQuery();
 
             while (rs.next()) {
-                Account account = new Account.Builder(user, rs.getString("contrasena"))
+                Account1 account = new Account1.Builder(user, rs.getString("contrasena"))
                         .withNumber(rs.getString("telefono"))
                         .withNumEmploye(rs.getInt("numempleado"))
                         .withDateEntry(rs.getDate("fechaing"))

@@ -1,4 +1,4 @@
-INSERT INTO Empleado (numEmpleado, nombre, apellidoP, apellidoM, fechaNac, correo, telefono, fechaIng, estado, puesto)
+INSERT INTO "Employee" (numEmpleado, nombre, apellidoP, apellidoM, fechaNac, correo, telefono, fechaIng, estado, puesto)
 VALUES
   (1001, 'Juan', 'Perez', 'Gomez', '1990-05-15', 'juan.perez@email.com', '123-456-7890', '2020-03-10', 'Activo', 'Desarrollador'),
   (1002, 'Maria', 'Lopez', 'Rodriguez', '1985-09-22', 'maria.lopez@email.com', '987-654-3210', '2019-07-05', 'Activo', 'Diseñador'),
@@ -30,8 +30,8 @@ VALUES
   (1028, 'Marta', 'Lopez', 'Perez', '1984-07-20', 'marta.lopez@email.com', '333-444-7777', '2018-04-30', 'Activo', 'Diseñador'),
   (1029, 'Alejandro', 'Gomez', 'Gomez', '1992-12-01', 'alejandro.gomez@email.com', '888-999-2222', '2017-09-01', 'Activo', 'Ingeniero'),
   (1030, 'Lucia', 'Fernandez', 'Ramirez', '1998-06-05', 'lucia.fernandez@email.com', '222-111-3333', '2016-02-15', 'Activo', 'Programador');
-  
-INSERT INTO Area (nombre, descripcion)
+
+  INSERT INTO "Area" (nombre, descripcion)
 VALUES 
 ('Recursos Humanos', 'Area para gestionar los empleados'),
 ('Almacen', 'Area para la administración de productos'),
@@ -39,7 +39,7 @@ VALUES
 ('Ajustes', 'Area de ajustes del programa'),
 ('Contabilidad', 'Area de manejo de efectivo');
 
-INSERT INTO seccion (idArea, nombre, descripcion)
+  INSERT INTO "Section" (idArea, nombre, descripcion)
 VALUES 
 (1, 'Lista Empleados', 'Accede a la lista de empleados'),
 (1, 'Alta de Empleado', 'Registra un nuevo empleado'),
@@ -51,29 +51,13 @@ VALUES
 (5, 'Corte de caja', 'Reliza tu corte de caja'),
 (5, 'Gastos', 'Registra los gastos permitidos');
 
--- Cambia el usuario por el tuyo
-INSERT INTO cuenta (idempleado, numcuenta, "usuario", contrasena)
+INSERT INTO "Account" (idempleado, numcuenta, "usuario", contrasena)
 VALUES 
-(1, 1, 'jGalicia', '1234');
-
-INSERT INTO acceso (idcuenta, idseccion)
-VALUES (1, 1),(1, 2), (1, 3), (1, 4), (1, 5), (1, 6), (1, 7);
+(1, 1, 'jGalicia', '$2a$12$r40Db2wKdLX75r/fS2pBxeEl0v.29j0/JPt/uVBENmL0lZsT9dxMK');
 
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
+INSERT INTO "Access" (idcuenta, idseccion)
+VALUES (1, 2), (1, 3), (1, 4), (1, 5), (1, 6), (1, 7), (1, 8), (1, 9);
 
 
 

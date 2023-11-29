@@ -2,6 +2,7 @@ package com.unsis.view.panel;
 
 import com.unsis.controller.controllerAccount;
 import com.unsis.models.entity.Account;
+import com.unsis.models.entity.Account1;
 import com.unsis.view.Main;
 import javax.swing.JOptionPane;
 
@@ -316,7 +317,7 @@ public class Login extends javax.swing.JFrame {
             var logger = new Account(user, pass);
             controllerAccount<Account> sesion = new controllerAccount<>(logger);
 
-            if (sesion.auth(user, logger.getPass())) {
+            if (sesion.auth(user, logger.getContrasena())) {
                 new Main().setVisible(true);
                 this.dispose();
             } else {
