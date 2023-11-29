@@ -20,8 +20,8 @@ public class AccountDao {
      * @return Object Account with data
      */
     public Account auth(String user) {
-        String query = "SELECT * FROM cuenta "
-                + "LEFT JOIN empleado ON cuenta.idempleado = empleado.id WHERE usuario = ?";
+        String query = "SELECT * FROM \"Account\""
+                + "LEFT JOIN \"Employee\" ON \"Account\".idempleado = \"Employee\".id WHERE usuario = ?";
         try (PreparedStatement pst = cn.prepareStatement(query)) {
             pst.setString(1, user);
 
