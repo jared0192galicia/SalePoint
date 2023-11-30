@@ -6,9 +6,11 @@ package com.unsis.view.panel;
 
 import com.toedter.calendar.JCalendar;
 import com.unsis.clases.Tools;
+import java.awt.event.KeyEvent;
 import java.util.Date;
 import javax.swing.Icon;
 import javax.swing.ImageIcon;
+import javax.swing.JTextField;
 
 /**
  *
@@ -32,6 +34,28 @@ public class RegisterEmployed extends javax.swing.JPanel {
         panelInternal.add(dateIngres, new org.netbeans.lib.awtextra.AbsoluteConstraints(180, 380, 230, 250));
         panelInternal.setComponentZOrder(dateIngres, 0);
         resizeImages();
+    }
+
+    private void verify(KeyEvent evt, JTextField field, String regex) {
+       
+        char c = evt.getKeyChar();
+        int keyCode = evt.getKeyCode();
+        
+        if (evt.getKeyText(keyCode).length() > 1)
+            return;
+
+        // Verifica si el carácter ingresado no es válido
+        if (!Character.toString(c).matches(regex)) {
+            // Consume el evento para evitar que el carácter no válido se agregue al JTextField// Obtiene el texto actual del JTextField
+            String textoActual = field.getText();
+
+            // Elimina el último carácter del texto actual
+            if (textoActual.length() > 0) {
+                String textoSinUltimoCaracter = textoActual.substring(0, textoActual.length() - 1);
+                field.setText(textoSinUltimoCaracter);
+                System.out.println("consume");
+            }
+        }
     }
 
     /**
@@ -64,16 +88,15 @@ public class RegisterEmployed extends javax.swing.JPanel {
         jTextField1 = new javax.swing.JTextField();
         jLabel4 = new javax.swing.JLabel();
         jLabel5 = new javax.swing.JLabel();
-        jTextField3 = new javax.swing.JTextField();
+        txtLastNameMaternal = new javax.swing.JTextField();
         jLabel6 = new javax.swing.JLabel();
-        jTextField4 = new javax.swing.JTextField();
         jLabel7 = new javax.swing.JLabel();
-        jTextField5 = new javax.swing.JTextField();
+        txtEmail = new javax.swing.JTextField();
         jLabel8 = new javax.swing.JLabel();
         jLabel10 = new javax.swing.JLabel();
-        jTextField7 = new javax.swing.JTextField();
+        txtName = new javax.swing.JTextField();
         jLabel11 = new javax.swing.JLabel();
-        jTextField8 = new javax.swing.JTextField();
+        txtLastNamePaternal = new javax.swing.JTextField();
         jComboBox6 = new javax.swing.JComboBox<>();
         jLabel12 = new javax.swing.JLabel();
         jLabel13 = new javax.swing.JLabel();
@@ -87,7 +110,7 @@ public class RegisterEmployed extends javax.swing.JPanel {
         buttonDiscard = new javax.swing.JButton();
         buttonSave = new javax.swing.JButton();
         buttonCalendar = new javax.swing.JToggleButton();
-        jTextField9 = new javax.swing.JTextField();
+        txtNumberPhone = new javax.swing.JTextField();
         check = new javax.swing.JCheckBox();
         checkSalePoint = new javax.swing.JCheckBox();
         checkOrders = new javax.swing.JCheckBox();
@@ -114,6 +137,7 @@ public class RegisterEmployed extends javax.swing.JPanel {
         jTextField2 = new javax.swing.JTextField();
         jLabel19 = new javax.swing.JLabel();
         jTextField6 = new javax.swing.JTextField();
+        buttonCalendar1 = new javax.swing.JToggleButton();
 
         fileChooser.setDialogTitle("Seleccionar imagen");
         fileChooser.setFileHidingEnabled(false);
@@ -143,20 +167,25 @@ public class RegisterEmployed extends javax.swing.JPanel {
         jLabel5.setForeground(new java.awt.Color(118, 125, 142));
         jLabel5.setText("Apellido materno");
         panelInternal.add(jLabel5, new org.netbeans.lib.awtextra.AbsoluteConstraints(420, 70, -1, -1));
-        panelInternal.add(jTextField3, new org.netbeans.lib.awtextra.AbsoluteConstraints(420, 110, 170, 30));
+
+        txtLastNameMaternal.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyReleased(java.awt.event.KeyEvent evt) {
+                txtLastNameMaternalKeyReleased(evt);
+            }
+        });
+        panelInternal.add(txtLastNameMaternal, new org.netbeans.lib.awtextra.AbsoluteConstraints(420, 110, 170, 30));
 
         jLabel6.setBackground(new java.awt.Color(255, 255, 255));
         jLabel6.setFont(new java.awt.Font("Jaldi", 0, 18)); // NOI18N
         jLabel6.setForeground(new java.awt.Color(118, 125, 142));
         jLabel6.setText("N.Empleado");
         panelInternal.add(jLabel6, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 320, -1, -1));
-        panelInternal.add(jTextField4, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 210, 180, 30));
 
         jLabel7.setFont(new java.awt.Font("Jaldi", 0, 18)); // NOI18N
         jLabel7.setForeground(new java.awt.Color(118, 125, 142));
         jLabel7.setText("Correo");
         panelInternal.add(jLabel7, new org.netbeans.lib.awtextra.AbsoluteConstraints(240, 170, -1, -1));
-        panelInternal.add(jTextField5, new org.netbeans.lib.awtextra.AbsoluteConstraints(240, 210, 150, 30));
+        panelInternal.add(txtEmail, new org.netbeans.lib.awtextra.AbsoluteConstraints(240, 210, 150, 30));
 
         jLabel8.setFont(new java.awt.Font("Jaldi", 0, 18)); // NOI18N
         jLabel8.setForeground(new java.awt.Color(118, 125, 142));
@@ -168,13 +197,25 @@ public class RegisterEmployed extends javax.swing.JPanel {
         jLabel10.setForeground(new java.awt.Color(118, 125, 142));
         jLabel10.setText("Fecha Nacimiento");
         panelInternal.add(jLabel10, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 170, -1, -1));
-        panelInternal.add(jTextField7, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 110, 150, 30));
+
+        txtName.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyReleased(java.awt.event.KeyEvent evt) {
+                txtNameKeyReleased(evt);
+            }
+        });
+        panelInternal.add(txtName, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 110, 150, 30));
 
         jLabel11.setFont(new java.awt.Font("Jaldi", 0, 18)); // NOI18N
         jLabel11.setForeground(new java.awt.Color(118, 125, 142));
         jLabel11.setText("Apellido paterno");
         panelInternal.add(jLabel11, new org.netbeans.lib.awtextra.AbsoluteConstraints(220, 70, -1, -1));
-        panelInternal.add(jTextField8, new org.netbeans.lib.awtextra.AbsoluteConstraints(220, 110, 170, 30));
+
+        txtLastNamePaternal.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyReleased(java.awt.event.KeyEvent evt) {
+                txtLastNamePaternalKeyReleased(evt);
+            }
+        });
+        panelInternal.add(txtLastNamePaternal, new org.netbeans.lib.awtextra.AbsoluteConstraints(220, 110, 170, 30));
 
         jComboBox6.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
         panelInternal.add(jComboBox6, new org.netbeans.lib.awtextra.AbsoluteConstraints(390, 440, 140, 30));
@@ -238,8 +279,8 @@ public class RegisterEmployed extends javax.swing.JPanel {
                 buttonCalendarActionPerformed(evt);
             }
         });
-        panelInternal.add(buttonCalendar, new org.netbeans.lib.awtextra.AbsoluteConstraints(210, 350, 170, 30));
-        panelInternal.add(jTextField9, new org.netbeans.lib.awtextra.AbsoluteConstraints(420, 210, 170, 30));
+        panelInternal.add(buttonCalendar, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 210, 170, 30));
+        panelInternal.add(txtNumberPhone, new org.netbeans.lib.awtextra.AbsoluteConstraints(420, 210, 170, 30));
 
         check.setFont(new java.awt.Font("Jaldi", 0, 16)); // NOI18N
         check.setForeground(new java.awt.Color(118, 125, 142));
@@ -384,6 +425,14 @@ public class RegisterEmployed extends javax.swing.JPanel {
         panelInternal.add(jLabel19, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 640, 240, -1));
         panelInternal.add(jTextField6, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 590, 210, 30));
 
+        buttonCalendar1.setText("-- : -- : ----");
+        buttonCalendar1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                buttonCalendar1ActionPerformed(evt);
+            }
+        });
+        panelInternal.add(buttonCalendar1, new org.netbeans.lib.awtextra.AbsoluteConstraints(210, 350, 170, 30));
+
         add(panelInternal, new org.netbeans.lib.awtextra.AbsoluteConstraints(60, 70, 1610, 770));
     }// </editor-fold>//GEN-END:initComponents
 
@@ -414,9 +463,26 @@ public class RegisterEmployed extends javax.swing.JPanel {
         }
     }//GEN-LAST:event_buttonSelectImageActionPerformed
 
+    private void txtNameKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtNameKeyReleased
+        verify(evt, txtName, "^[A-Za-zÁ-úüÜñÑ]*$");
+    }//GEN-LAST:event_txtNameKeyReleased
+
+    private void txtLastNamePaternalKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtLastNamePaternalKeyReleased
+        verify(evt, txtLastNamePaternal, "^[A-Za-zÁ-úüÜñÑ]*$");
+    }//GEN-LAST:event_txtLastNamePaternalKeyReleased
+
+    private void txtLastNameMaternalKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtLastNameMaternalKeyReleased
+        verify(evt, txtLastNameMaternal, "^[A-Za-zÁ-úüÜñÑ]*$");
+    }//GEN-LAST:event_txtLastNameMaternalKeyReleased
+
+    private void buttonCalendar1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_buttonCalendar1ActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_buttonCalendar1ActionPerformed
+
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JToggleButton buttonCalendar;
+    private javax.swing.JToggleButton buttonCalendar1;
     private javax.swing.JButton buttonDiscard;
     private javax.swing.JButton buttonSave;
     private javax.swing.JButton buttonSelectImage;
@@ -464,14 +530,13 @@ public class RegisterEmployed extends javax.swing.JPanel {
     private javax.swing.JLabel jLabel9;
     private javax.swing.JTextField jTextField1;
     private javax.swing.JTextField jTextField2;
-    private javax.swing.JTextField jTextField3;
-    private javax.swing.JTextField jTextField4;
-    private javax.swing.JTextField jTextField5;
     private javax.swing.JTextField jTextField6;
-    private javax.swing.JTextField jTextField7;
-    private javax.swing.JTextField jTextField8;
-    private javax.swing.JTextField jTextField9;
     private javax.swing.JPanel panelInternal;
+    private javax.swing.JTextField txtEmail;
+    private javax.swing.JTextField txtLastNameMaternal;
+    private javax.swing.JTextField txtLastNamePaternal;
+    private javax.swing.JTextField txtName;
+    private javax.swing.JTextField txtNumberPhone;
     private javax.swing.JCheckBox updateEmployes;
     // End of variables declaration//GEN-END:variables
 }
