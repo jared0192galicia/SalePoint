@@ -47,3 +47,7 @@ CREATE TABLE "Access" (
   FOREIGN KEY (idCuenta) REFERENCES "Account"(id),
   FOREIGN KEY (idSeccion) REFERENCES "Section"(id)
 );
+
+
+---------------------
+
