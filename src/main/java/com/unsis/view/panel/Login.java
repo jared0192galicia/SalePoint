@@ -1,5 +1,6 @@
 package com.unsis.view.panel;
 
+import com.unsis.controller.JpaController;
 import com.unsis.controller.controllerAccount;
 import com.unsis.models.entity.Account;
 import com.unsis.models.entity.Account1;
@@ -315,7 +316,7 @@ public class Login extends javax.swing.JFrame {
         if (!user.equals("") && !pass.equals("")) {
 
             var logger = new Account(user, pass);
-            controllerAccount<Account> sesion = new controllerAccount<>(logger);
+            JpaController sesion = new JpaController();
 
             if (sesion.auth(user, logger.getContrasena())) {
                 new Main().setVisible(true);
