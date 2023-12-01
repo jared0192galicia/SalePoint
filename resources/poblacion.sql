@@ -63,4 +63,58 @@ VALUES (1, 1), (1, 2), (1, 3), (1, 4), (1, 5), (1, 6), (1, 7), (1, 8), (1, 9);
 -------------------------------
 
 
+-- Insertar datos en la tabla "Supplier"
+INSERT INTO "Supplier" (nombre, marca) VALUES
+('Distribuidora ABC', 'MarcaX'),
+('Suministros Comerciales S.A.', 'MarcaY'),
+('Proveeduría Zeta', 'MarcaZ'),
+('Productos Industriales del Norte', 'MarcaW'),
+('Importadora Global', 'MarcaV'),
+('Logística y Suministros Integrados', 'MarcaU'),
+('Comercializadora Innovadora', 'MarcaT'),
+('Abastecedora Regional', 'MarcaS'),
+('Proveedor Logístico Rápido', 'MarcaR'),
+('Distribuciones Omega', 'MarcaQ'),
+('Suministros Estratégicos', 'MarcaP'),
+('Productos del Sur', 'MarcaO'),
+('Comercio Eficiente', 'MarcaN'),
+('Logística Avanzada', 'MarcaM'),
+('Suministros Esenciales', 'MarcaL');
+
+-- Insertar datos en la tabla "Sales"
+INSERT INTO "Sales" (sabor, tipo_orden, comentarios, nombre_comprador, codigo_barra) VALUES
+('Chocolate', 'Venta Online', 'Cliente habitual', 'Ana Martínez', 'CB-001'),
+('Vainilla', 'Pedido Local', 'Sin azúcar', 'Carlos Rodríguez', 'CB-002'),
+('Fresa', 'Venta al por mayor', 'Entrega urgente', 'Laura Gómez', 'CB-003'),
+('Café', 'Pedido Especial', 'Embalaje personalizado', 'Miguel Sánchez', 'CB-004'),
+('Nuez', 'Venta Online', 'Edición limitada', 'Isabel Pérez', 'CB-005'),
+('Caramelo', 'Venta al por menor', 'Promoción del mes', 'Javier López', 'CB-006'),
+('Menta', 'Pedido Local', 'Cliente nuevo', 'María García', 'CB-007'),
+('Limón', 'Venta al por mayor', 'Descuento corporativo', 'Roberto Fernández', 'CB-008'),
+('Coco', 'Venta Online', 'Sin gluten', 'Elena Díaz', 'CB-009'),
+('Frutas Tropicales', 'Pedido Especial', 'Empaque ecológico', 'Alejandro Torres', 'CB-010'),
+('Avellana', 'Venta al por menor', 'Regalo con compra', 'Sofía Ramírez', 'CB-011'),
+('Almendra', 'Venta Online', 'Envío gratis', 'Daniel Herrera', 'CB-012'),
+('Manzana', 'Pedido Local', 'Cliente leal', 'Luisa González', 'CB-013'),
+('Piña', 'Venta al por mayor', 'Oferta Flash', 'Fernando López', 'CB-014'),
+('Plátano', 'Venta al por menor', 'Promoción de temporada', 'Raquel Jiménez', 'CB-015');
+
+-- Insertar datos en la tabla "Product"
+INSERT INTO "Product" (nombre, precioCom, precioVenta, codigoBarra, tipo, descripcion, numProducto, estado, disponible, variante) VALUES
+('Chocolate Premium', 8.99, 15.99, 'CB-101', 'Tableta', 'Tableta de chocolate premium', 1001, 'Activo', 50, '80% cacao'),
+('Helado de Vainilla', 12.99, 24.99, 'CB-102', 'Helado', 'Envase de helado de vainilla', 1002, 'Inactivo', 30, 'Familiar'),
+('Salsa de Tomate Orgánica', 5.99, 11.99, 'CB-103', 'Salsa', 'Frascos de salsa de tomate orgánica', 1003, 'Activo', 40, 'Sin conservantes'),
+('Aceite de Oliva Extra Virgen', 14.99, 27.99, 'CB-104', 'Aceite', 'Botella de aceite de oliva extra virgen', 1004, 'Activo', 60, '500 ml'),
+('Galletas Integrales', 7.99, 14.99, 'CB-105', 'Galletas', 'Paquete de galletas integrales', 1005, 'Inactivo', 25, 'Multigrano'),
+('Café Premium en Grano', 10.99, 19.99, 'CB-106', 'Café', 'Bolsa de café premium en grano', 1006, 'Activo', 35, '250g'),
+('Agua Mineral Natural', 1.99, 3.99, 'CB-107', 'Agua', 'Botella de agua mineral natural', 1007, 'Activo', 55, '1 litro'),
+('Jugo de Naranja Fresco', 3.99, 7.99, 'CB-108', 'Jugo', 'Botella de jugo de naranja fresco', 1008, 'Inactivo', 20, 'Sin azúcar'),
+('Barrita de Granola', 2.99, 5.99, 'CB-109', 'Snack', 'Caja de barritas de granola', 1009, 'Activo', 45, 'Variado'),
+('Yogur Natural sin Azúcar', 4.99, 9.99, 'CB-110', 'Yogur', 'Envase de yogur natural sin azúcar', 1010, 'Inactivo', 15, '250g'),
+('Sopa Instantánea de Verduras', 6.99, 12.99, 'CB-111', 'Sopa', 'Caja de sopas instantáneas de verduras', 1011, 'Activo', 65, 'Pack de 6 unidades'),
+('Cereal Integral con Frutas', 8.99, 15.99, 'CB-112', 'Cereal', 'Caja de cereal integral con frutas', 1012, 'Activo', 30, '300g'),
+('Pasta de Trigo Integral', 3.99, 7.99, 'CB-113', 'Pasta', 'Paquete de pasta de trigo integral', 1013, 'Inactivo', 40, '500g'),
+('Miel Pura de Abeja', 9.99, 17.99, 'CB-114', 'Miel', 'Frascos de miel pura de abeja', 1014, 'Activo', 50, '250g'),
+('Vinagre Balsámico de Modena', 11.99, 21.99, 'CB-115', 'Vinagre', 'Botella de vinagre balsámico de Modena', 1015, 'Inactivo', 25, '250ml');
+
 
