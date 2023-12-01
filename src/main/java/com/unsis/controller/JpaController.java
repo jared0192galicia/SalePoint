@@ -202,7 +202,7 @@ public class JpaController {
      * @return
      */
     public boolean auth(String user, String pass) {
-        var account = dao.auth(user);
+        Account account = dao.auth(user);
 
         if (account == null) {
             return false;
