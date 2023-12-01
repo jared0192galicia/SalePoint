@@ -13,14 +13,13 @@ import javax.persistence.criteria.CriteriaQuery;
 import javax.persistence.criteria.Root;
 import com.unsis.models.entity.Section;
 import java.util.ArrayList;
-import java.util.Collection;
 import java.util.List;
 import javax.persistence.EntityManager;
 import javax.persistence.EntityManagerFactory;
 
 /**
  *
- * @author labtecweb10
+ * @author jared
  */
 public class AreaJpaController implements Serializable {
 
@@ -34,27 +33,27 @@ public class AreaJpaController implements Serializable {
     }
 
     public void create(Area area) {
-        if (area.getSectionCollection() == null) {
-            area.setSectionCollection(new ArrayList<Section>());
+        if (area.getSectionList() == null) {
+            area.setSectionList(new ArrayList<Section>());
         }
         EntityManager em = null;
         try {
             em = getEntityManager();
             em.getTransaction().begin();
-            Collection<Section> attachedSectionCollection = new ArrayList<Section>();
-            for (Section sectionCollectionSectionToAttach : area.getSectionCollection()) {
-                sectionCollectionSectionToAttach = em.getReference(sectionCollectionSectionToAttach.getClass(), sectionCollectionSectionToAttach.getId());
-                attachedSectionCollection.add(sectionCollectionSectionToAttach);
+            List<Section> attachedSectionList = new ArrayList<Section>();
+            for (Section sectionListSectionToAttach : area.getSectionList()) {
+                sectionListSectionToAttach = em.getReference(sectionListSectionToAttach.getClass(), sectionListSectionToAttach.getId());
+                attachedSectionList.add(sectionListSectionToAttach);
             }
-            area.setSectionCollection(attachedSectionCollection);
+            area.setSectionList(attachedSectionList);
             em.persist(area);
-            for (Section sectionCollectionSection : area.getSectionCollection()) {
-                Area oldIdareaOfSectionCollectionSection = sectionCollectionSection.getIdarea();
-                sectionCollectionSection.setIdarea(area);
-                sectionCollectionSection = em.merge(sectionCollectionSection);
-                if (oldIdareaOfSectionCollectionSection != null) {
-                    oldIdareaOfSectionCollectionSection.getSectionCollection().remove(sectionCollectionSection);
-                    oldIdareaOfSectionCollectionSection = em.merge(oldIdareaOfSectionCollectionSection);
+            for (Section sectionListSection : area.getSectionList()) {
+                Area oldIdareaOfSectionListSection = sectionListSection.getIdarea();
+                sectionListSection.setIdarea(area);
+                sectionListSection = em.merge(sectionListSection);
+                if (oldIdareaOfSectionListSection != null) {
+                    oldIdareaOfSectionListSection.getSectionList().remove(sectionListSection);
+                    oldIdareaOfSectionListSection = em.merge(oldIdareaOfSectionListSection);
                 }
             }
             em.getTransaction().commit();
@@ -71,30 +70,30 @@ public class AreaJpaController implements Serializable {
             em = getEntityManager();
             em.getTransaction().begin();
             Area persistentArea = em.find(Area.class, area.getId());
-            Collection<Section> sectionCollectionOld = persistentArea.getSectionCollection();
-            Collection<Section> sectionCollectionNew = area.getSectionCollection();
-            Collection<Section> attachedSectionCollectionNew = new ArrayList<Section>();
-            for (Section sectionCollectionNewSectionToAttach : sectionCollectionNew) {
-                sectionCollectionNewSectionToAttach = em.getReference(sectionCollectionNewSectionToAttach.getClass(), sectionCollectionNewSectionToAttach.getId());
-                attachedSectionCollectionNew.add(sectionCollectionNewSectionToAttach);
+            List<Section> sectionListOld = persistentArea.getSectionList();
+            List<Section> sectionListNew = area.getSectionList();
+            List<Section> attachedSectionListNew = new ArrayList<Section>();
+            for (Section sectionListNewSectionToAttach : sectionListNew) {
+                sectionListNewSectionToAttach = em.getReference(sectionListNewSectionToAttach.getClass(), sectionListNewSectionToAttach.getId());
+                attachedSectionListNew.add(sectionListNewSectionToAttach);
             }
-            sectionCollectionNew = attachedSectionCollectionNew;
-            area.setSectionCollection(sectionCollectionNew);
+            sectionListNew = attachedSectionListNew;
+            area.setSectionList(sectionListNew);
             area = em.merge(area);
-            for (Section sectionCollectionOldSection : sectionCollectionOld) {
-                if (!sectionCollectionNew.contains(sectionCollectionOldSection)) {
-                    sectionCollectionOldSection.setIdarea(null);
-                    sectionCollectionOldSection = em.merge(sectionCollectionOldSection);
+            for (Section sectionListOldSection : sectionListOld) {
+                if (!sectionListNew.contains(sectionListOldSection)) {
+                    sectionListOldSection.setIdarea(null);
+                    sectionListOldSection = em.merge(sectionListOldSection);
                 }
             }
-            for (Section sectionCollectionNewSection : sectionCollectionNew) {
-                if (!sectionCollectionOld.contains(sectionCollectionNewSection)) {
-                    Area oldIdareaOfSectionCollectionNewSection = sectionCollectionNewSection.getIdarea();
-                    sectionCollectionNewSection.setIdarea(area);
-                    sectionCollectionNewSection = em.merge(sectionCollectionNewSection);
-                    if (oldIdareaOfSectionCollectionNewSection != null && !oldIdareaOfSectionCollectionNewSection.equals(area)) {
-                        oldIdareaOfSectionCollectionNewSection.getSectionCollection().remove(sectionCollectionNewSection);
-                        oldIdareaOfSectionCollectionNewSection = em.merge(oldIdareaOfSectionCollectionNewSection);
+            for (Section sectionListNewSection : sectionListNew) {
+                if (!sectionListOld.contains(sectionListNewSection)) {
+                    Area oldIdareaOfSectionListNewSection = sectionListNewSection.getIdarea();
+                    sectionListNewSection.setIdarea(area);
+                    sectionListNewSection = em.merge(sectionListNewSection);
+                    if (oldIdareaOfSectionListNewSection != null && !oldIdareaOfSectionListNewSection.equals(area)) {
+                        oldIdareaOfSectionListNewSection.getSectionList().remove(sectionListNewSection);
+                        oldIdareaOfSectionListNewSection = em.merge(oldIdareaOfSectionListNewSection);
                     }
                 }
             }
@@ -127,10 +126,10 @@ public class AreaJpaController implements Serializable {
             } catch (EntityNotFoundException enfe) {
                 throw new NonexistentEntityException("The area with id " + id + " no longer exists.", enfe);
             }
-            Collection<Section> sectionCollection = area.getSectionCollection();
-            for (Section sectionCollectionSection : sectionCollection) {
-                sectionCollectionSection.setIdarea(null);
-                sectionCollectionSection = em.merge(sectionCollectionSection);
+            List<Section> sectionList = area.getSectionList();
+            for (Section sectionListSection : sectionList) {
+                sectionListSection.setIdarea(null);
+                sectionListSection = em.merge(sectionListSection);
             }
             em.remove(area);
             em.getTransaction().commit();

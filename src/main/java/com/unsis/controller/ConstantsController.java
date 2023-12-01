@@ -18,7 +18,7 @@ public class ConstantsController {
     public ArrayList<Constants.Section> loadSections() {
         ArrayList<Constants.Section> sections = new ArrayList<>();
 
-        ResultSet rs = dao.queryLoadSections(Session.getAccount().getUser());
+        ResultSet rs = dao.queryLoadSections(Session.getAccount().getUsuario());
 
         if (rs == null) return null;
 

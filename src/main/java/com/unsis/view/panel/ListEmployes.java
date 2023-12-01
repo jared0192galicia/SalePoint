@@ -11,6 +11,9 @@ import java.util.ArrayList;
 import javax.swing.BorderFactory;
 import javax.swing.table.DefaultTableModel;
 import com.unsis.controller.JpaController;
+import com.unsis.models.entity.Account;
+import java.util.Objects;
+import javax.swing.JOptionPane;
 
 /**
  *
@@ -22,6 +25,7 @@ public class ListEmployes extends javax.swing.JPanel {
     private final JpaController jpaController;
     /**
      * Creates new form HumanResourcesPanel
+     *
      * @param mainWindow
      */
     public ListEmployes(Main mainWindow) {
@@ -112,6 +116,11 @@ public class ListEmployes extends javax.swing.JPanel {
         buttonDelete.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
         buttonDelete.setMaximumSize(new java.awt.Dimension(157, 35));
         buttonDelete.setMinimumSize(new java.awt.Dimension(157, 35));
+        buttonDelete.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                buttonDeleteActionPerformed(evt);
+            }
+        });
         jPanel1.add(buttonDelete, new org.netbeans.lib.awtextra.AbsoluteConstraints(510, 10, 170, 60));
 
         jPanel2.setBackground(new java.awt.Color(255, 255, 255));
@@ -121,20 +130,7 @@ public class ListEmployes extends javax.swing.JPanel {
         table.setBackground(new java.awt.Color(255, 255, 255));
         table.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
-                {null, null, null, null, null},
-                {null, null, null, null, null},
-                {null, null, null, null, null},
-                {null, null, null, null, null},
-                {null, null, null, null, null},
-                {null, null, null, null, null},
-                {null, null, null, null, null},
-                {null, null, null, null, null},
-                {null, null, null, null, null},
-                {null, null, null, null, null},
-                {null, null, null, null, null},
-                {null, null, null, null, null},
-                {null, null, null, null, null},
-                {null, null, null, null, null}
+
             },
             new String [] {
                 "Número Empleado", "Nombre", "Apellidos", "Area", "Estatus"
@@ -200,6 +196,27 @@ public class ListEmployes extends javax.swing.JPanel {
         this.mainWindow.setView("Alta de Empleado");
     }//GEN-LAST:event_buttonCreateActionPerformed
 
+    public void showModel() {
+        // Llamada al método findAllEntities para obtener la lista de empleados
+        ArrayList<Employee> employees = jpaController.findAllEntities(Employee.class);
+
+        // Configuración del modelo de la tabla
+        DefaultTableModel tableModel = (DefaultTableModel) table.getModel();
+        // Eliminar filas existentes
+        tableModel.setRowCount(0);
+        table.setModel(tableModel);
+
+        for (Employee employee : employees) {
+            Object[] rowData = {
+                employee.getNumempleado(),
+                employee.getNombre(),
+                employee.getApellidop() + " " + employee.getApellidom(),
+                employee.getPuesto(),
+                employee.getEstado()
+            };
+            tableModel.addRow(rowData);
+        }
+    }
     private void formComponentShown(java.awt.event.ComponentEvent evt) {//GEN-FIRST:event_formComponentShown
         // Llamada al método findAllEntities para obtener la lista de empleados
         ArrayList<Employee> employees = jpaController.findAllEntities(Employee.class);
@@ -228,6 +245,60 @@ public class ListEmployes extends javax.swing.JPanel {
         }
         System.out.println("Mostrado");
     }//GEN-LAST:event_formComponentShown
+
+    public Employee findEmployee() {
+        int filaSeleccionada = table.getSelectedRow();
+
+        if (filaSeleccionada != -1) { // Verifica que haya una fila seleccionada
+            var codeEmployee = table.getValueAt(filaSeleccionada, 0);
+
+            ArrayList<Employee> employees = jpaController.findAllEntities(Employee.class);
+
+            for (Employee employee : employees) {
+                if (employee.getNumempleado() == codeEmployee) {
+                    return employee;
+
+                }
+            }
+        }
+        return null;
+    }
+
+    public Account findAccount(Employee employee) {
+
+        ArrayList<Account> accounts = jpaController.findAllEntities(Account.class);
+
+        for (Account account : accounts) {
+            if (Objects.equals(account.getIdempleado().getNumempleado(), employee.getNumempleado())) {
+                return account;
+
+            }
+        }
+        return null;
+    }
+
+    private void buttonDeleteActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_buttonDeleteActionPerformed
+
+        Employee employee = findEmployee();
+
+        if (employee != null) {
+            int opcion = JOptionPane.showConfirmDialog(null,
+                    "¿Estás seguro de continuar?", "Confirmación", JOptionPane.YES_NO_OPTION);
+
+            if (opcion == JOptionPane.YES_OPTION) {
+                Account account = findAccount(employee);
+                if (account != null) {
+                    jpaController.destroy(findAccount(employee));
+                }
+
+                jpaController.destroy(employee);
+                this.showModel();
+
+            }
+
+        }
+
+    }//GEN-LAST:event_buttonDeleteActionPerformed
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables

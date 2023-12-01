@@ -14,14 +14,13 @@ import com.unsis.models.entity.Area;
 import com.unsis.models.entity.Access;
 import com.unsis.models.entity.Section;
 import java.util.ArrayList;
-import java.util.Collection;
 import java.util.List;
 import javax.persistence.EntityManager;
 import javax.persistence.EntityManagerFactory;
 
 /**
  *
- * @author labtecweb10
+ * @author jared
  */
 public class SectionJpaController implements Serializable {
 
@@ -35,8 +34,8 @@ public class SectionJpaController implements Serializable {
     }
 
     public void create(Section section) {
-        if (section.getAccessCollection() == null) {
-            section.setAccessCollection(new ArrayList<Access>());
+        if (section.getAccessList() == null) {
+            section.setAccessList(new ArrayList<Access>());
         }
         EntityManager em = null;
         try {
@@ -47,24 +46,24 @@ public class SectionJpaController implements Serializable {
                 idarea = em.getReference(idarea.getClass(), idarea.getId());
                 section.setIdarea(idarea);
             }
-            Collection<Access> attachedAccessCollection = new ArrayList<Access>();
-            for (Access accessCollectionAccessToAttach : section.getAccessCollection()) {
-                accessCollectionAccessToAttach = em.getReference(accessCollectionAccessToAttach.getClass(), accessCollectionAccessToAttach.getId());
-                attachedAccessCollection.add(accessCollectionAccessToAttach);
+            List<Access> attachedAccessList = new ArrayList<Access>();
+            for (Access accessListAccessToAttach : section.getAccessList()) {
+                accessListAccessToAttach = em.getReference(accessListAccessToAttach.getClass(), accessListAccessToAttach.getId());
+                attachedAccessList.add(accessListAccessToAttach);
             }
-            section.setAccessCollection(attachedAccessCollection);
+            section.setAccessList(attachedAccessList);
             em.persist(section);
             if (idarea != null) {
-                idarea.getSectionCollection().add(section);
+                idarea.getSectionList().add(section);
                 idarea = em.merge(idarea);
             }
-            for (Access accessCollectionAccess : section.getAccessCollection()) {
-                Section oldIdseccionOfAccessCollectionAccess = accessCollectionAccess.getIdseccion();
-                accessCollectionAccess.setIdseccion(section);
-                accessCollectionAccess = em.merge(accessCollectionAccess);
-                if (oldIdseccionOfAccessCollectionAccess != null) {
-                    oldIdseccionOfAccessCollectionAccess.getAccessCollection().remove(accessCollectionAccess);
-                    oldIdseccionOfAccessCollectionAccess = em.merge(oldIdseccionOfAccessCollectionAccess);
+            for (Access accessListAccess : section.getAccessList()) {
+                Section oldIdseccionOfAccessListAccess = accessListAccess.getIdseccion();
+                accessListAccess.setIdseccion(section);
+                accessListAccess = em.merge(accessListAccess);
+                if (oldIdseccionOfAccessListAccess != null) {
+                    oldIdseccionOfAccessListAccess.getAccessList().remove(accessListAccess);
+                    oldIdseccionOfAccessListAccess = em.merge(oldIdseccionOfAccessListAccess);
                 }
             }
             em.getTransaction().commit();
@@ -83,42 +82,42 @@ public class SectionJpaController implements Serializable {
             Section persistentSection = em.find(Section.class, section.getId());
             Area idareaOld = persistentSection.getIdarea();
             Area idareaNew = section.getIdarea();
-            Collection<Access> accessCollectionOld = persistentSection.getAccessCollection();
-            Collection<Access> accessCollectionNew = section.getAccessCollection();
+            List<Access> accessListOld = persistentSection.getAccessList();
+            List<Access> accessListNew = section.getAccessList();
             if (idareaNew != null) {
                 idareaNew = em.getReference(idareaNew.getClass(), idareaNew.getId());
                 section.setIdarea(idareaNew);
             }
-            Collection<Access> attachedAccessCollectionNew = new ArrayList<Access>();
-            for (Access accessCollectionNewAccessToAttach : accessCollectionNew) {
-                accessCollectionNewAccessToAttach = em.getReference(accessCollectionNewAccessToAttach.getClass(), accessCollectionNewAccessToAttach.getId());
-                attachedAccessCollectionNew.add(accessCollectionNewAccessToAttach);
+            List<Access> attachedAccessListNew = new ArrayList<Access>();
+            for (Access accessListNewAccessToAttach : accessListNew) {
+                accessListNewAccessToAttach = em.getReference(accessListNewAccessToAttach.getClass(), accessListNewAccessToAttach.getId());
+                attachedAccessListNew.add(accessListNewAccessToAttach);
             }
-            accessCollectionNew = attachedAccessCollectionNew;
-            section.setAccessCollection(accessCollectionNew);
+            accessListNew = attachedAccessListNew;
+            section.setAccessList(accessListNew);
             section = em.merge(section);
             if (idareaOld != null && !idareaOld.equals(idareaNew)) {
-                idareaOld.getSectionCollection().remove(section);
+                idareaOld.getSectionList().remove(section);
                 idareaOld = em.merge(idareaOld);
             }
             if (idareaNew != null && !idareaNew.equals(idareaOld)) {
-                idareaNew.getSectionCollection().add(section);
+                idareaNew.getSectionList().add(section);
                 idareaNew = em.merge(idareaNew);
             }
-            for (Access accessCollectionOldAccess : accessCollectionOld) {
-                if (!accessCollectionNew.contains(accessCollectionOldAccess)) {
-                    accessCollectionOldAccess.setIdseccion(null);
-                    accessCollectionOldAccess = em.merge(accessCollectionOldAccess);
+            for (Access accessListOldAccess : accessListOld) {
+                if (!accessListNew.contains(accessListOldAccess)) {
+                    accessListOldAccess.setIdseccion(null);
+                    accessListOldAccess = em.merge(accessListOldAccess);
                 }
             }
-            for (Access accessCollectionNewAccess : accessCollectionNew) {
-                if (!accessCollectionOld.contains(accessCollectionNewAccess)) {
-                    Section oldIdseccionOfAccessCollectionNewAccess = accessCollectionNewAccess.getIdseccion();
-                    accessCollectionNewAccess.setIdseccion(section);
-                    accessCollectionNewAccess = em.merge(accessCollectionNewAccess);
-                    if (oldIdseccionOfAccessCollectionNewAccess != null && !oldIdseccionOfAccessCollectionNewAccess.equals(section)) {
-                        oldIdseccionOfAccessCollectionNewAccess.getAccessCollection().remove(accessCollectionNewAccess);
-                        oldIdseccionOfAccessCollectionNewAccess = em.merge(oldIdseccionOfAccessCollectionNewAccess);
+            for (Access accessListNewAccess : accessListNew) {
+                if (!accessListOld.contains(accessListNewAccess)) {
+                    Section oldIdseccionOfAccessListNewAccess = accessListNewAccess.getIdseccion();
+                    accessListNewAccess.setIdseccion(section);
+                    accessListNewAccess = em.merge(accessListNewAccess);
+                    if (oldIdseccionOfAccessListNewAccess != null && !oldIdseccionOfAccessListNewAccess.equals(section)) {
+                        oldIdseccionOfAccessListNewAccess.getAccessList().remove(accessListNewAccess);
+                        oldIdseccionOfAccessListNewAccess = em.merge(oldIdseccionOfAccessListNewAccess);
                     }
                 }
             }
@@ -153,13 +152,13 @@ public class SectionJpaController implements Serializable {
             }
             Area idarea = section.getIdarea();
             if (idarea != null) {
-                idarea.getSectionCollection().remove(section);
+                idarea.getSectionList().remove(section);
                 idarea = em.merge(idarea);
             }
-            Collection<Access> accessCollection = section.getAccessCollection();
-            for (Access accessCollectionAccess : accessCollection) {
-                accessCollectionAccess.setIdseccion(null);
-                accessCollectionAccess = em.merge(accessCollectionAccess);
+            List<Access> accessList = section.getAccessList();
+            for (Access accessListAccess : accessList) {
+                accessListAccess.setIdseccion(null);
+                accessListAccess = em.merge(accessListAccess);
             }
             em.remove(section);
             em.getTransaction().commit();

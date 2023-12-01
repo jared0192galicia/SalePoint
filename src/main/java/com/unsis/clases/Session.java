@@ -1,18 +1,17 @@
 package com.unsis.clases;
 
-import com.unsis.models.entity.Account1;
+import com.unsis.models.entity.Account;
 
 public class Session {
-    private static Account1 account;
+    private static Account account;
 //    private static Account account;
 
-    public static Account1 getAccount() {
+    public static Account getAccount() {
         return account;
     }
 
-    public static void setAccount(Account1 account) {
+    public static void setAccount(Account account) {
         Session.account = account;
     }
-    
     
 }

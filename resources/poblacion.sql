@@ -57,10 +57,34 @@ VALUES
 
 
 INSERT INTO "Access" (idcuenta, idseccion)
-VALUES (1, 2), (1, 3), (1, 4), (1, 5), (1, 6), (1, 7), (1, 8), (1, 9);
+VALUES (1, 1), (1, 2), (1, 3), (1, 4), (1, 5), (1, 6), (1, 7), (1, 8), (1, 9);
 
 
 -------------------------------
 
+
+-- Población de la tabla Supplier
+INSERT INTO "Supplier" (nombre, marca) VALUES
+('Proveedor A', 'Marca A'),
+('Proveedor B', 'Marca B'),
+('Proveedor C', 'Marca C'),
+('Proveedor D', 'Marca D'),
+('Proveedor E', 'Marca E');
+
+-- Población de la tabla Sales
+INSERT INTO "Sales" (idEmpleado, sabor, tipo_orden, comentarios, nombre_comprador, codigo_barra) VALUES
+(1, 'Chocolate', 'Online', 'Entrega rápida', 'Cliente 1', '123456789012'),
+(2, 'Fresa', 'In-Store', 'Sin comentarios', 'Cliente 2', '234567890123'),
+(3, 'Vainilla', 'Delivery', 'Producto defectuoso', 'Cliente 3', '345678901234'),
+(1, 'Café', 'Online', 'Entrega demorada', 'Cliente 4', '456789012345'),
+(2, 'Mango', 'In-Store', 'Buen servicio', 'Cliente 5', '567890123456');
+
+-- Población de la tabla Product
+INSERT INTO "Product" (nombre, precioCom, precioVenta, codigoBarra, tipo, descripcion, numProducto, estado, disponible, variante) VALUES
+('Producto 1', 10.5, 15.99, '111111', 'Postre', 'Descripción 1', 1001, 'Activo', 20, 'Variante A'),
+('Producto 2', 8.75, 12.49, '222222', 'Helado', 'Descripción 2', 1002, 'Activo', 15, 'Variante B'),
+('Producto 3', 12.0, 19.99, '333333', 'Pastel', 'Descripción 3', 1003, 'Inactivo', 0, 'Variante C'),
+('Producto 4', 15.25, 24.99, '444444', 'Gelato', 'Descripción 4', 1004, 'Activo', 30, 'Variante D'),
+('Producto 5', 9.99, 16.99, '555555', 'Cupcake', 'Descripción 5', 1005, 'Activo', 25, 'Variante E');
 
 

@@ -47,7 +47,39 @@ CREATE TABLE "Access" (
   FOREIGN KEY (idCuenta) REFERENCES "Account"(id),
   FOREIGN KEY (idSeccion) REFERENCES "Section"(id)
 );
-
-
+ 
 ---------------------
 
+CREATE TABLE "Supplier"(
+id serial,
+nombre VARCHAR,
+marca VARCHAR,
+PRIMARY KEY(id)
+);
+
+CREATE TABLE "Sales"(
+id serial,
+idEmpleado int,
+sabor VARCHAR,
+tipo_orden VARCHAR,
+comentarios VARCHAR,
+nombre_comprador VARCHAR,
+codigo_barra VARCHAR,
+PRIMARY KEY(id),
+FOREIGN KEY (idEmpleado) REFERENCES "Employee"(id)
+);
+
+CREATE TABLE "Product"(
+id serial,
+nombre varchar,
+precioCom float,
+precioVenta float,
+codigoBarra VARCHAR,
+tipo VARCHAR,
+descripcion VARCHAR(25),
+numProducto INT,
+estado VARCHAR(4),
+disponible int,
+variante VARCHAR,
+PRIMARY KEY(id)
+);

@@ -19,7 +19,7 @@ import javax.persistence.EntityManagerFactory;
 
 /**
  *
- * @author labtecweb10
+ * @author jared
  */
 public class AccessJpaController implements Serializable {
 
@@ -49,11 +49,11 @@ public class AccessJpaController implements Serializable {
             }
             em.persist(access);
             if (idcuenta != null) {
-                idcuenta.getAccessCollection().add(access);
+                idcuenta.getAccessList().add(access);
                 idcuenta = em.merge(idcuenta);
             }
             if (idseccion != null) {
-                idseccion.getAccessCollection().add(access);
+                idseccion.getAccessList().add(access);
                 idseccion = em.merge(idseccion);
             }
             em.getTransaction().commit();
@@ -84,19 +84,19 @@ public class AccessJpaController implements Serializable {
             }
             access = em.merge(access);
             if (idcuentaOld != null && !idcuentaOld.equals(idcuentaNew)) {
-                idcuentaOld.getAccessCollection().remove(access);
+                idcuentaOld.getAccessList().remove(access);
                 idcuentaOld = em.merge(idcuentaOld);
             }
             if (idcuentaNew != null && !idcuentaNew.equals(idcuentaOld)) {
-                idcuentaNew.getAccessCollection().add(access);
+                idcuentaNew.getAccessList().add(access);
                 idcuentaNew = em.merge(idcuentaNew);
             }
             if (idseccionOld != null && !idseccionOld.equals(idseccionNew)) {
-                idseccionOld.getAccessCollection().remove(access);
+                idseccionOld.getAccessList().remove(access);
                 idseccionOld = em.merge(idseccionOld);
             }
             if (idseccionNew != null && !idseccionNew.equals(idseccionOld)) {
-                idseccionNew.getAccessCollection().add(access);
+                idseccionNew.getAccessList().add(access);
                 idseccionNew = em.merge(idseccionNew);
             }
             em.getTransaction().commit();
@@ -130,12 +130,12 @@ public class AccessJpaController implements Serializable {
             }
             Account idcuenta = access.getIdcuenta();
             if (idcuenta != null) {
-                idcuenta.getAccessCollection().remove(access);
+                idcuenta.getAccessList().remove(access);
                 idcuenta = em.merge(idcuenta);
             }
             Section idseccion = access.getIdseccion();
             if (idseccion != null) {
-                idseccion.getAccessCollection().remove(access);
+                idseccion.getAccessList().remove(access);
                 idseccion = em.merge(idseccion);
             }
             em.remove(access);

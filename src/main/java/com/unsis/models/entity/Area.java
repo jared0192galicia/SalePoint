@@ -5,7 +5,7 @@
 package com.unsis.models.entity;
 
 import java.io.Serializable;
-import java.util.Collection;
+import java.util.List;
 import javax.persistence.Basic;
 import javax.persistence.Column;
 import javax.persistence.Entity;
@@ -19,7 +19,7 @@ import javax.persistence.Table;
 
 /**
  *
- * @author labtecweb10
+ * @author jared
  */
 @Entity
 @Table(name = "Area")
@@ -41,7 +41,7 @@ public class Area implements Serializable {
     @Column(name = "descripcion")
     private String descripcion;
     @OneToMany(mappedBy = "idarea")
-    private Collection<Section> sectionCollection;
+    private List<Section> sectionList;
 
     public Area() {
     }
@@ -74,12 +74,12 @@ public class Area implements Serializable {
         this.descripcion = descripcion;
     }
 
-    public Collection<Section> getSectionCollection() {
-        return sectionCollection;
+    public List<Section> getSectionList() {
+        return sectionList;
     }
 
-    public void setSectionCollection(Collection<Section> sectionCollection) {
-        this.sectionCollection = sectionCollection;
+    public void setSectionList(List<Section> sectionList) {
+        this.sectionList = sectionList;
     }
 
     @Override

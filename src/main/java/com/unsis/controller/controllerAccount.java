@@ -1,7 +1,3 @@
-/*
- * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
- * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Class.java to edit this template
- */
 package com.unsis.controller;
 
 import com.unsis.clases.Session;
@@ -50,7 +46,7 @@ public class controllerAccount<Account> implements Crud<Account> {
         
         Session.setAccount(account);
         // Verificar si la contraseña ingresada coincide con la contraseña hasheada
-        return  BCrypt.checkpw(pass, account.getPass());
+        return  BCrypt.checkpw(pass, account.getContrasena());
 //        return true;
 
     }
