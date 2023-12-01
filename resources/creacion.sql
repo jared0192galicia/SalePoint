@@ -53,16 +53,20 @@ CREATE TABLE "Access" (
 CREATE TABLE "Supplier"(
 id serial,
 nombre VARCHAR,
-marca VARCHAR
+marca VARCHAR,
+PRIMARY KEY(id)
 );
 
 CREATE TABLE "Sales"(
 id serial,
+idEmpleado int,
 sabor VARCHAR,
 tipo_orden VARCHAR,
 comentarios VARCHAR,
 nombre_comprador VARCHAR,
-codigo_barra VARCHAR
+codigo_barra VARCHAR,
+PRIMARY KEY(id),
+FOREIGN KEY (idEmpleado) REFERENCES "Employee"(id)
 );
 
 CREATE TABLE "Product"(
