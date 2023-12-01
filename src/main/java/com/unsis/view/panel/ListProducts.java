@@ -94,6 +94,11 @@ public class ListProducts extends javax.swing.JPanel {
         buttonModify.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
         buttonModify.setMaximumSize(new java.awt.Dimension(157, 35));
         buttonModify.setMinimumSize(new java.awt.Dimension(157, 35));
+        buttonModify.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                buttonModifyActionPerformed(evt);
+            }
+        });
         jPanel1.add(buttonModify, new org.netbeans.lib.awtextra.AbsoluteConstraints(280, 10, 170, 60));
 
         buttonDelete.setBackground(new java.awt.Color(255, 255, 255));
@@ -189,6 +194,10 @@ public class ListProducts extends javax.swing.JPanel {
     private void buttonCreateActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_buttonCreateActionPerformed
         this.mainWindow.setView("Alta de Producto");
     }//GEN-LAST:event_buttonCreateActionPerformed
+
+    private void buttonModifyActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_buttonModifyActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_buttonModifyActionPerformed
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables

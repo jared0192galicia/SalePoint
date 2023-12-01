@@ -4,17 +4,27 @@
  */
 package com.unsis.view.panel;
 
+import com.toedter.calendar.JCalendar;
+import com.unsis.clases.Tools;
 import com.unsis.controller.JpaController;
+import com.unsis.models.entity.Access;
 import com.unsis.models.entity.Account;
 import com.unsis.models.entity.Employee;
+import com.unsis.models.entity.Section;
 import com.unsis.view.Main;
 import java.awt.Color;
 import java.awt.Font;
-import java.awt.event.ComponentEvent;
+import java.awt.event.KeyEvent;
 import java.util.ArrayList;
+import java.util.Date;
+import java.util.List;
 import java.util.Objects;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
 import javax.swing.BorderFactory;
+import javax.swing.ImageIcon;
 import javax.swing.JOptionPane;
+import javax.swing.JTextField;
 import javax.swing.table.DefaultTableModel;
 
 /**
@@ -34,7 +44,7 @@ public class ListEmployes extends javax.swing.JPanel {
     public ListEmployes(Main mainWindow) {
         initComponents();
 
-        this.setBounds(217, 0, 1200, 692);
+        this.setBounds(217, 0, 1700, 512);
         // Obtener el JTableHeader (encabezado de la tabla)
         table.getTableHeader().setFont(new Font("Arial", Font.BOLD, 18));
         table.getTableHeader().setOpaque(false);
@@ -107,6 +117,11 @@ public class ListEmployes extends javax.swing.JPanel {
         buttonModify.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
         buttonModify.setMaximumSize(new java.awt.Dimension(157, 35));
         buttonModify.setMinimumSize(new java.awt.Dimension(157, 35));
+        buttonModify.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                buttonModifyActionPerformed(evt);
+            }
+        });
         jPanel1.add(buttonModify, new org.netbeans.lib.awtextra.AbsoluteConstraints(280, 10, 170, 60));
 
         buttonDelete.setBackground(new java.awt.Color(255, 255, 255));
@@ -271,12 +286,17 @@ public class ListEmployes extends javax.swing.JPanel {
 
                 jpaController.destroy(employee);
                 this.showModel();
-
             }
-
         }
-
     }//GEN-LAST:event_buttonDeleteActionPerformed
+
+    private void buttonModifyActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_buttonModifyActionPerformed
+        Employee employee = findEmployee();
+        if (employee != null) {
+            UpdateEmployee.setEmploye(employee);
+            mainWindow.setView("Editar Emplado");
+        }
+    }//GEN-LAST:event_buttonModifyActionPerformed
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
