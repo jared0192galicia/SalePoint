@@ -1,13 +1,16 @@
 /*
  * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
  * Click nbfs://nbhost/SystemFileSystem/Templates/GUIForms/JPanel.java to edit this template
- */
-package com.unsis.view.panel;
+ */package com.unsis.view.panel;
 
+import com.unsis.models.entity.Employee;
 import com.unsis.view.Main;
 import java.awt.Color;
 import java.awt.Font;
+import java.util.ArrayList;
 import javax.swing.BorderFactory;
+import javax.swing.table.DefaultTableModel;
+import com.unsis.controller.JpaController;
 
 /**
  *
@@ -16,6 +19,7 @@ import javax.swing.BorderFactory;
 public class ListEmployes extends javax.swing.JPanel {
 
     private final Main mainWindow;
+    private final JpaController jpaController;
     /**
      * Creates new form HumanResourcesPanel
      * @param mainWindow
@@ -31,6 +35,7 @@ public class ListEmployes extends javax.swing.JPanel {
         table.getTableHeader().setForeground(Color.WHITE);
 
         this.mainWindow = mainWindow;
+        this.jpaController = new JpaController();
     }
 
     @SuppressWarnings("unchecked")
@@ -196,6 +201,31 @@ public class ListEmployes extends javax.swing.JPanel {
     }//GEN-LAST:event_buttonCreateActionPerformed
 
     private void formComponentShown(java.awt.event.ComponentEvent evt) {//GEN-FIRST:event_formComponentShown
+        // Llamada al método findAllEntities para obtener la lista de empleados
+        ArrayList<Employee> employees = jpaController.findAllEntities(Employee.class);
+
+        // Configuración del modelo de la tabla
+        DefaultTableModel tableModel = new DefaultTableModel();
+        table.setModel(tableModel);
+
+        // Agregar columnas al modelo
+        tableModel.addColumn("Número Empleado");
+        tableModel.addColumn("Nombre");
+        tableModel.addColumn("Apellidos");
+        tableModel.addColumn("Área");
+        tableModel.addColumn("Estatus");
+
+        // Llenar la tabla con los datos de los empleados
+        for (Employee employee : employees) {
+            Object[] rowData = {
+                employee.getNumempleado(),
+                employee.getNombre(),
+                employee.getApellidop(),
+                employee.getPuesto(),
+                employee.getEstado()
+            };
+            tableModel.addRow(rowData);
+        }
         System.out.println("Mostrado");
     }//GEN-LAST:event_formComponentShown
 
