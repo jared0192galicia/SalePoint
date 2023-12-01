@@ -46,7 +46,7 @@ public class controllerAccount<Account> implements Crud<Account> {
         
         Session.setAccount(account);
         // Verificar si la contraseña ingresada coincide con la contraseña hasheada
-        return  BCrypt.checkpw(pass, account.getPass());
+        return  BCrypt.checkpw(pass, account.getContrasena());
 //        return true;
 
     }

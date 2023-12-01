@@ -5,23 +5,24 @@
 package com.unsis.controller;
 
 import com.unsis.controller.exceptions.NonexistentEntityException;
-import com.unsis.models.entity.Employee;
 import java.io.Serializable;
-import java.util.List;
-import javax.persistence.EntityManager;
-import javax.persistence.EntityManagerFactory;
 import javax.persistence.Query;
 import javax.persistence.EntityNotFoundException;
 import javax.persistence.criteria.CriteriaQuery;
 import javax.persistence.criteria.Root;
+import com.unsis.models.entity.Account;
+import com.unsis.models.entity.Employee;
+import java.util.List;
+import javax.persistence.EntityManager;
+import javax.persistence.EntityManagerFactory;
 
 /**
  *
  * @author jared
  */
-public class EmployeeJpaController implements Serializable {
+public class EmployeeJpaController1 implements Serializable {
 
-    public EmployeeJpaController(EntityManagerFactory emf) {
+    public EmployeeJpaController1(EntityManagerFactory emf) {
         this.emf = emf;
     }
     private EntityManagerFactory emf = null;
@@ -35,7 +36,21 @@ public class EmployeeJpaController implements Serializable {
         try {
             em = getEntityManager();
             em.getTransaction().begin();
+            Account account = employee.getAccount();
+            if (account != null) {
+                account = em.getReference(account.getClass(), account.getId());
+                employee.setAccount(account);
+            }
             em.persist(employee);
+            if (account != null) {
+                Employee oldIdempleadoOfAccount = account.getIdempleado();
+                if (oldIdempleadoOfAccount != null) {
+                    oldIdempleadoOfAccount.setAccount(null);
+                    oldIdempleadoOfAccount = em.merge(oldIdempleadoOfAccount);
+                }
+                account.setIdempleado(employee);
+                account = em.merge(account);
+            }
             em.getTransaction().commit();
         } finally {
             if (em != null) {
@@ -49,7 +64,27 @@ public class EmployeeJpaController implements Serializable {
         try {
             em = getEntityManager();
             em.getTransaction().begin();
+            Employee persistentEmployee = em.find(Employee.class, employee.getId());
+            Account accountOld = persistentEmployee.getAccount();
+            Account accountNew = employee.getAccount();
+            if (accountNew != null) {
+                accountNew = em.getReference(accountNew.getClass(), accountNew.getId());
+                employee.setAccount(accountNew);
+            }
             employee = em.merge(employee);
+            if (accountOld != null && !accountOld.equals(accountNew)) {
+                accountOld.setIdempleado(null);
+                accountOld = em.merge(accountOld);
+            }
+            if (accountNew != null && !accountNew.equals(accountOld)) {
+                Employee oldIdempleadoOfAccount = accountNew.getIdempleado();
+                if (oldIdempleadoOfAccount != null) {
+                    oldIdempleadoOfAccount.setAccount(null);
+                    oldIdempleadoOfAccount = em.merge(oldIdempleadoOfAccount);
+                }
+                accountNew.setIdempleado(employee);
+                accountNew = em.merge(accountNew);
+            }
             em.getTransaction().commit();
         } catch (Exception ex) {
             String msg = ex.getLocalizedMessage();
@@ -78,6 +113,11 @@ public class EmployeeJpaController implements Serializable {
                 employee.getId();
             } catch (EntityNotFoundException enfe) {
                 throw new NonexistentEntityException("The employee with id " + id + " no longer exists.", enfe);
+            }
+            Account account = employee.getAccount();
+            if (account != null) {
+                account.setIdempleado(null);
+                account = em.merge(account);
             }
             em.remove(employee);
             em.getTransaction().commit();

@@ -27,9 +27,13 @@ public class Conexion {
                 String user = env.get("USER_NAME");
                 String pass = env.get("PASSWORD_SERVER");
                 String dataBase = env.get("DATA_BASE");
+                String port = env.get("PORT");
+                if (port == null) {
+                    port = "5432";
+                }
 
                 Class.forName("org.postgresql.Driver");
-                conexion = DriverManager.getConnection("jdbc:postgresql://127.0.0.1:5432/" + dataBase, user, pass);
+                conexion = DriverManager.getConnection("jdbc:postgresql://127.0.0.1:" + port + "/" + dataBase, user, pass);
 
             } catch (ClassNotFoundException | SQLException e) {
                 System.err.println("Error de conexion\n" + e.getMessage());

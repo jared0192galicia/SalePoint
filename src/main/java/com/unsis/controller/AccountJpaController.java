@@ -14,14 +14,13 @@ import com.unsis.models.entity.Employee;
 import com.unsis.models.entity.Access;
 import com.unsis.models.entity.Account;
 import java.util.ArrayList;
-import java.util.Collection;
 import java.util.List;
 import javax.persistence.EntityManager;
 import javax.persistence.EntityManagerFactory;
 
 /**
  *
- * @author labtecweb10
+ * @author jared
  */
 public class AccountJpaController implements Serializable {
 
@@ -35,8 +34,8 @@ public class AccountJpaController implements Serializable {
     }
 
     public void create(Account account) {
-        if (account.getAccessCollection() == null) {
-            account.setAccessCollection(new ArrayList<Access>());
+        if (account.getAccessList() == null) {
+            account.setAccessList(new ArrayList<Access>());
         }
         EntityManager em = null;
         try {
@@ -47,24 +46,29 @@ public class AccountJpaController implements Serializable {
                 idempleado = em.getReference(idempleado.getClass(), idempleado.getId());
                 account.setIdempleado(idempleado);
             }
-            Collection<Access> attachedAccessCollection = new ArrayList<Access>();
-            for (Access accessCollectionAccessToAttach : account.getAccessCollection()) {
-                accessCollectionAccessToAttach = em.getReference(accessCollectionAccessToAttach.getClass(), accessCollectionAccessToAttach.getId());
-                attachedAccessCollection.add(accessCollectionAccessToAttach);
+            List<Access> attachedAccessList = new ArrayList<Access>();
+            for (Access accessListAccessToAttach : account.getAccessList()) {
+                accessListAccessToAttach = em.getReference(accessListAccessToAttach.getClass(), accessListAccessToAttach.getId());
+                attachedAccessList.add(accessListAccessToAttach);
             }
-            account.setAccessCollection(attachedAccessCollection);
+            account.setAccessList(attachedAccessList);
             em.persist(account);
             if (idempleado != null) {
-                idempleado.getAccountCollection().add(account);
+                Account oldAccountOfIdempleado = idempleado.getAccount();
+                if (oldAccountOfIdempleado != null) {
+                    oldAccountOfIdempleado.setIdempleado(null);
+                    oldAccountOfIdempleado = em.merge(oldAccountOfIdempleado);
+                }
+                idempleado.setAccount(account);
                 idempleado = em.merge(idempleado);
             }
-            for (Access accessCollectionAccess : account.getAccessCollection()) {
-                Account oldIdcuentaOfAccessCollectionAccess = accessCollectionAccess.getIdcuenta();
-                accessCollectionAccess.setIdcuenta(account);
-                accessCollectionAccess = em.merge(accessCollectionAccess);
-                if (oldIdcuentaOfAccessCollectionAccess != null) {
-                    oldIdcuentaOfAccessCollectionAccess.getAccessCollection().remove(accessCollectionAccess);
-                    oldIdcuentaOfAccessCollectionAccess = em.merge(oldIdcuentaOfAccessCollectionAccess);
+            for (Access accessListAccess : account.getAccessList()) {
+                Account oldIdcuentaOfAccessListAccess = accessListAccess.getIdcuenta();
+                accessListAccess.setIdcuenta(account);
+                accessListAccess = em.merge(accessListAccess);
+                if (oldIdcuentaOfAccessListAccess != null) {
+                    oldIdcuentaOfAccessListAccess.getAccessList().remove(accessListAccess);
+                    oldIdcuentaOfAccessListAccess = em.merge(oldIdcuentaOfAccessListAccess);
                 }
             }
             em.getTransaction().commit();
@@ -83,42 +87,47 @@ public class AccountJpaController implements Serializable {
             Account persistentAccount = em.find(Account.class, account.getId());
             Employee idempleadoOld = persistentAccount.getIdempleado();
             Employee idempleadoNew = account.getIdempleado();
-            Collection<Access> accessCollectionOld = persistentAccount.getAccessCollection();
-            Collection<Access> accessCollectionNew = account.getAccessCollection();
+            List<Access> accessListOld = persistentAccount.getAccessList();
+            List<Access> accessListNew = account.getAccessList();
             if (idempleadoNew != null) {
                 idempleadoNew = em.getReference(idempleadoNew.getClass(), idempleadoNew.getId());
                 account.setIdempleado(idempleadoNew);
             }
-            Collection<Access> attachedAccessCollectionNew = new ArrayList<Access>();
-            for (Access accessCollectionNewAccessToAttach : accessCollectionNew) {
-                accessCollectionNewAccessToAttach = em.getReference(accessCollectionNewAccessToAttach.getClass(), accessCollectionNewAccessToAttach.getId());
-                attachedAccessCollectionNew.add(accessCollectionNewAccessToAttach);
+            List<Access> attachedAccessListNew = new ArrayList<Access>();
+            for (Access accessListNewAccessToAttach : accessListNew) {
+                accessListNewAccessToAttach = em.getReference(accessListNewAccessToAttach.getClass(), accessListNewAccessToAttach.getId());
+                attachedAccessListNew.add(accessListNewAccessToAttach);
             }
-            accessCollectionNew = attachedAccessCollectionNew;
-            account.setAccessCollection(accessCollectionNew);
+            accessListNew = attachedAccessListNew;
+            account.setAccessList(accessListNew);
             account = em.merge(account);
             if (idempleadoOld != null && !idempleadoOld.equals(idempleadoNew)) {
-                idempleadoOld.getAccountCollection().remove(account);
+                idempleadoOld.setAccount(null);
                 idempleadoOld = em.merge(idempleadoOld);
             }
             if (idempleadoNew != null && !idempleadoNew.equals(idempleadoOld)) {
-                idempleadoNew.getAccountCollection().add(account);
+                Account oldAccountOfIdempleado = idempleadoNew.getAccount();
+                if (oldAccountOfIdempleado != null) {
+                    oldAccountOfIdempleado.setIdempleado(null);
+                    oldAccountOfIdempleado = em.merge(oldAccountOfIdempleado);
+                }
+                idempleadoNew.setAccount(account);
                 idempleadoNew = em.merge(idempleadoNew);
             }
-            for (Access accessCollectionOldAccess : accessCollectionOld) {
-                if (!accessCollectionNew.contains(accessCollectionOldAccess)) {
-                    accessCollectionOldAccess.setIdcuenta(null);
-                    accessCollectionOldAccess = em.merge(accessCollectionOldAccess);
+            for (Access accessListOldAccess : accessListOld) {
+                if (!accessListNew.contains(accessListOldAccess)) {
+                    accessListOldAccess.setIdcuenta(null);
+                    accessListOldAccess = em.merge(accessListOldAccess);
                 }
             }
-            for (Access accessCollectionNewAccess : accessCollectionNew) {
-                if (!accessCollectionOld.contains(accessCollectionNewAccess)) {
-                    Account oldIdcuentaOfAccessCollectionNewAccess = accessCollectionNewAccess.getIdcuenta();
-                    accessCollectionNewAccess.setIdcuenta(account);
-                    accessCollectionNewAccess = em.merge(accessCollectionNewAccess);
-                    if (oldIdcuentaOfAccessCollectionNewAccess != null && !oldIdcuentaOfAccessCollectionNewAccess.equals(account)) {
-                        oldIdcuentaOfAccessCollectionNewAccess.getAccessCollection().remove(accessCollectionNewAccess);
-                        oldIdcuentaOfAccessCollectionNewAccess = em.merge(oldIdcuentaOfAccessCollectionNewAccess);
+            for (Access accessListNewAccess : accessListNew) {
+                if (!accessListOld.contains(accessListNewAccess)) {
+                    Account oldIdcuentaOfAccessListNewAccess = accessListNewAccess.getIdcuenta();
+                    accessListNewAccess.setIdcuenta(account);
+                    accessListNewAccess = em.merge(accessListNewAccess);
+                    if (oldIdcuentaOfAccessListNewAccess != null && !oldIdcuentaOfAccessListNewAccess.equals(account)) {
+                        oldIdcuentaOfAccessListNewAccess.getAccessList().remove(accessListNewAccess);
+                        oldIdcuentaOfAccessListNewAccess = em.merge(oldIdcuentaOfAccessListNewAccess);
                     }
                 }
             }
@@ -153,13 +162,13 @@ public class AccountJpaController implements Serializable {
             }
             Employee idempleado = account.getIdempleado();
             if (idempleado != null) {
-                idempleado.getAccountCollection().remove(account);
+                idempleado.setAccount(null);
                 idempleado = em.merge(idempleado);
             }
-            Collection<Access> accessCollection = account.getAccessCollection();
-            for (Access accessCollectionAccess : accessCollection) {
-                accessCollectionAccess.setIdcuenta(null);
-                accessCollectionAccess = em.merge(accessCollectionAccess);
+            List<Access> accessList = account.getAccessList();
+            for (Access accessListAccess : accessList) {
+                accessListAccess.setIdcuenta(null);
+                accessListAccess = em.merge(accessListAccess);
             }
             em.remove(account);
             em.getTransaction().commit();

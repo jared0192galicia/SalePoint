@@ -19,7 +19,7 @@ import javax.persistence.Table;
 
 /**
  *
- * @author labtecweb10
+ * @author jared
  */
 @Entity
 @Table(name = "Access")
@@ -97,4 +97,34 @@ public class Access implements Serializable {
         return "com.unsis.models.entity.Access[ id=" + id + " ]";
     }
     
+    public static class Builder {
+        private Integer id;
+        private Account idcuenta;
+        private Section idseccion;
+
+        public Builder() {}
+
+        public Builder withId(Integer id) {
+            this.id = id;
+            return this;
+        }
+
+        public Builder withIdCuenta(Account idcuenta) {
+            this.idcuenta = idcuenta;
+            return this;
+        }
+
+        public Builder withIdSeccion(Section idseccion) {
+            this.idseccion = idseccion;
+            return this;
+        }
+
+        public Access build() {
+            Access access = new Access();
+            access.id = this.id;
+            access.idcuenta = this.idcuenta;
+            access.idseccion = this.idseccion;
+            return access;
+        }
+    }
 }

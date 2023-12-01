@@ -5,7 +5,6 @@
 package com.unsis.models.entity;
 
 import java.io.Serializable;
-import java.util.Collection;
 import java.util.Date;
 import javax.persistence.Basic;
 import javax.persistence.Column;
@@ -15,17 +14,17 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.NamedQueries;
 import javax.persistence.NamedQuery;
-import javax.persistence.OneToMany;
+import javax.persistence.OneToOne;
 import javax.persistence.Table;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
 
 /**
  *
- * @author labtecweb10
+ * @author jared
  */
 @Entity
-@Table(name = "Employee")
+@Table(name = "\"Employee\"")
 @NamedQueries({
     @NamedQuery(name = "Employee.findAll", query = "SELECT e FROM Employee e"),
     @NamedQuery(name = "Employee.findById", query = "SELECT e FROM Employee e WHERE e.id = :id"),
@@ -69,8 +68,8 @@ public class Employee implements Serializable {
     private String estado;
     @Column(name = "puesto")
     private String puesto;
-    @OneToMany(mappedBy = "idempleado")
-    private Collection<Account> accountCollection;
+    @OneToOne(mappedBy = "idempleado")
+    private Account account;
 
     public Employee() {
     }
@@ -167,12 +166,12 @@ public class Employee implements Serializable {
         this.puesto = puesto;
     }
 
-    public Collection<Account> getAccountCollection() {
-        return accountCollection;
+    public Account getAccount() {
+        return account;
     }
 
-    public void setAccountCollection(Collection<Account> accountCollection) {
-        this.accountCollection = accountCollection;
+    public void setAccount(Account account) {
+        this.account = account;
     }
 
     @Override
@@ -198,6 +197,79 @@ public class Employee implements Serializable {
     @Override
     public String toString() {
         return "com.unsis.models.entity.Employee[ id=" + id + " ]";
+    }
+    
+    // Inner static Builder class
+    public static class Builder {
+        private Employee employee;
+
+        public Builder() {
+            employee = new Employee();
+        }
+
+        public Builder withId(Integer id) {
+            employee.id = id;
+            return this;
+        }
+
+        public Builder withNumEmpleado(Integer numEmpleado) {
+            employee.numempleado = numEmpleado;
+            return this;
+        }
+
+        public Builder withNombre(String nombre) {
+            employee.nombre = nombre;
+            return this;
+        }
+
+        public Builder withApellidoP(String apellidoP) {
+            employee.apellidop = apellidoP;
+            return this;
+        }
+
+        public Builder withApellidoM(String apellidoM) {
+            employee.apellidom = apellidoM;
+            return this;
+        }
+
+        public Builder withFechaNac(Date fechaNac) {
+            employee.fechanac = fechaNac;
+            return this;
+        }
+
+        public Builder withCorreo(String correo) {
+            employee.correo = correo;
+            return this;
+        }
+
+        public Builder withTelefono(String telefono) {
+            employee.telefono = telefono;
+            return this;
+        }
+
+        public Builder withFechaIng(Date fechaIng) {
+            employee.fechaing = fechaIng;
+            return this;
+        }
+
+        public Builder withEstado(String estado) {
+            employee.estado = estado;
+            return this;
+        }
+
+        public Builder withPuesto(String puesto) {
+            employee.puesto = puesto;
+            return this;
+        }
+
+        public Builder withAccount(Account account) {
+            employee.account = account;
+            return this;
+        }
+
+        public Employee build() {
+            return employee;
+        }
     }
     
 }

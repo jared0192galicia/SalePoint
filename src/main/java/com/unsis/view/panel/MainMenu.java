@@ -25,7 +25,7 @@ public class MainMenu extends javax.swing.JPanel {
         this.mainWindow = mainWindow;
         this.setSize(1700, 861);
         this.setBounds(217, 0, this.getWidth(), this.getHeight());
-        this.labelWelcome.setText("Bienvenido " + Session.getAccount().getName());
+        this.labelWelcome.setText("Bienvenido " + Session.getAccount().getUsuario());
         this.showAreaButtons();
     }
     
