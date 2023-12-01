@@ -315,7 +315,7 @@ public class Login extends javax.swing.JFrame {
 
         if (!user.equals("") && !pass.equals("")) {
 
-            var logger = new Account(user, pass);
+            Account logger = new Account(user, pass);
             JpaController sesion = new JpaController();
 
             if (sesion.auth(user, logger.getContrasena())) {
