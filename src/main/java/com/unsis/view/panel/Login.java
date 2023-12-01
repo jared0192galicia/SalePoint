@@ -3,7 +3,7 @@ package com.unsis.view.panel;
 import com.unsis.controller.JpaController;
 import com.unsis.controller.controllerAccount;
 import com.unsis.models.entity.Account;
-import com.unsis.models.entity.Account1;
+import com.unsis.models.entity.Account;
 import com.unsis.view.Main;
 import javax.swing.JOptionPane;
 

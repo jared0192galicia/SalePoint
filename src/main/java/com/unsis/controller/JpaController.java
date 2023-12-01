@@ -49,7 +49,7 @@ public class JpaController {
             case Account accountObj ->
                 this.account.create(accountObj);
 
-            case Employee employeeObj ->
+            case Employee employeeObj -> 
                 this.employee.create(employeeObj);
 
             case Section sectionObj ->
@@ -210,7 +210,7 @@ public class JpaController {
         
         Session.setAccount(account);
         // Verificar si la contraseña ingresada coincide con la contraseña hasheada
-        return  BCrypt.checkpw(pass, account.getPass());
+        return  BCrypt.checkpw(pass, account.getContrasena());
 //        return true;
 
     }

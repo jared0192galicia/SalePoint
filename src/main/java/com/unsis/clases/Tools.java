@@ -3,6 +3,7 @@ package com.unsis.clases;
 import java.awt.Image;
 import javax.swing.Icon;
 import javax.swing.ImageIcon;
+import org.mindrot.jbcrypt.BCrypt;
 
 /**
  *
@@ -29,5 +30,10 @@ public class Tools {
         }
 
         return icon; // Devolver el icono original si no es un ImageIcon
+    }
+    
+    public static String cryptPassword(String password) {
+        String hashedPassword = BCrypt.hashpw(password, BCrypt.gensalt(12));
+        return hashedPassword;
     }
 }

@@ -5,7 +5,7 @@
 package com.unsis.models.entity;
 
 import java.io.Serializable;
-import java.util.Collection;
+import java.util.List;
 import javax.persistence.Basic;
 import javax.persistence.Column;
 import javax.persistence.Entity;
@@ -13,18 +13,18 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
-import javax.persistence.ManyToOne;
 import javax.persistence.NamedQueries;
 import javax.persistence.NamedQuery;
 import javax.persistence.OneToMany;
+import javax.persistence.OneToOne;
 import javax.persistence.Table;
 
 /**
  *
- * @author labtecweb10
+ * @author jared
  */
 @Entity
-@Table(name = "Account")
+@Table(name = "\"Account\"")
 @NamedQueries({
     @NamedQuery(name = "Account.findAll", query = "SELECT a FROM Account a"),
     @NamedQuery(name = "Account.findById", query = "SELECT a FROM Account a WHERE a.id = :id"),
@@ -46,21 +46,21 @@ public class Account implements Serializable {
     @Column(name = "contrasena")
     private String contrasena;
     @JoinColumn(name = "idempleado", referencedColumnName = "id")
-    @ManyToOne
+    @OneToOne
     private Employee idempleado;
     @OneToMany(mappedBy = "idcuenta")
-    private Collection<Access> accessCollection;
+    private List<Access> accessList;
 
     public Account() {
+    }
+
+    public Account(Integer id) {
+        this.id = id;
     }
 
     public Account(String usuario, String contrasena) {
         this.usuario = usuario;
         this.contrasena = contrasena;
-    }
-
-    public Account(Integer id) {
-        this.id = id;
     }
 
     public Integer getId() {
@@ -103,12 +103,12 @@ public class Account implements Serializable {
         this.idempleado = idempleado;
     }
 
-    public Collection<Access> getAccessCollection() {
-        return accessCollection;
+    public List<Access> getAccessList() {
+        return accessList;
     }
 
-    public void setAccessCollection(Collection<Access> accessCollection) {
-        this.accessCollection = accessCollection;
+    public void setAccessList(List<Access> accessList) {
+        this.accessList = accessList;
     }
 
     @Override
@@ -136,4 +136,46 @@ public class Account implements Serializable {
         return "com.unsis.models.entity.Account[ id=" + id + " ]";
     }
     
+    // Inner static Builder class
+    public static class Builder {
+        private Account account;
+
+        public Builder() {
+            account = new Account();
+        }
+
+        public Builder withId(Integer id) {
+            account.id = id;
+            return this;
+        }
+
+        public Builder withNumCuenta(Integer numCuenta) {
+            account.numcuenta = numCuenta;
+            return this;
+        }
+
+        public Builder withUsuario(String usuario) {
+            account.usuario = usuario;
+            return this;
+        }
+
+        public Builder withContrasena(String contrasena) {
+            account.contrasena = contrasena;
+            return this;
+        }
+
+        public Builder withIdEmpleado(Employee idEmpleado) {
+            account.idempleado = idEmpleado;
+            return this;
+        }
+
+        public Builder withAccessList(List<Access> accessList) {
+            account.accessList = accessList;
+            return this;
+        }
+
+        public Account build() {
+            return account;
+        }
+    }
 }

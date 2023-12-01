@@ -1,6 +1,7 @@
 package com.unsis.dao;
 
-import com.unsis.models.entity.Account1;
+import com.unsis.models.entity.Account;
+import com.unsis.models.entity.Employee;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
@@ -19,28 +20,36 @@ public class AccountDao {
      * @param user user for search account
      * @return Object Account with data
      */
-    public Account1 auth(String user) {
+    public Account auth(String user) {
         String query = "SELECT * FROM \"Account\""
                 + "LEFT JOIN \"Employee\" ON \"Account\".idempleado = \"Employee\".id WHERE usuario = ?";
-        try (PreparedStatement pst = cn.prepareStatement(query)) {
+        try ( PreparedStatement pst = cn.prepareStatement(query)) {
             pst.setString(1, user);
 
             ResultSet rs = pst.executeQuery();
 
             while (rs.next()) {
-                Account1 account = new Account1.Builder(user, rs.getString("contrasena"))
-                        .withNumber(rs.getString("telefono"))
-                        .withNumEmploye(rs.getInt("numempleado"))
-                        .withDateEntry(rs.getDate("fechaing"))
-                        .withStatus("Activo".equals(rs.getString("estado")))
-                        .withArea(rs.getString("puesto"))
-                        .withPosition(rs.getString("puesto"))
-                        .withName(rs.getString("nombre"))
-                        .withMatherLastName(rs.getString("apellidom"))
-                        .withFatherLastName(rs.getString("apellidop"))
-                        .withBirthday(rs.getDate("fechanac"))
-                        .withMail(rs.getString("correo"))
-                        .withCell(rs.getString("telefono"))
+//                Account account = new Account.Builder()
+//                        .withNumber(rs.getString("telefono"))
+//                        .withNumEmploye(rs.getInt("numempleado"))
+//                        .withDateEntry(rs.getDate("fechaing"))
+//                        .withStatus("Activo".equals(rs.getString("estado")))
+//                        .withArea(rs.getString("puesto"))
+//                        .withPosition(rs.getString("puesto"))
+//                        .withName(rs.getString("nombre"))
+//                        .withMatherLastName(rs.getString("apellidom"))
+//                        .withFatherLastName(rs.getString("apellidop"))
+//                        .withBirthday(rs.getDate("fechanac"))
+//                        .withMail(rs.getString("correo"))
+//                        .withCell(rs.getString("telefono"))
+//                        .build();
+                Account account = new Account.Builder()
+                        .withId(rs.getInt("id"))
+                        .withNumCuenta(rs.getInt("numcuenta"))
+                        .withUsuario(rs.getString("usuario"))
+                        .withContrasena(rs.getString("contrasena"))
+//                        .withIdEmpleado(rs.getObject("idempleado", Employee.class))
+//                        .withAccessList()
                         .build();
                 return account;
             }
