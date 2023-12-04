@@ -203,6 +203,7 @@ public class JpaController {
      * @return
      */
     public boolean auth(String user, String pass) {
+        // busca una cuenta que corresponda con los datos de acceso
         Account account = dao.auth(user);
 
         if (account == null) {
@@ -212,7 +213,5 @@ public class JpaController {
         Session.setAccount(account);
         // Verificar si la contraseña ingresada coincide con la contraseña hasheada
         return BCrypt.checkpw(pass, account.getContrasena());
-//        return true;
-
     }
 }

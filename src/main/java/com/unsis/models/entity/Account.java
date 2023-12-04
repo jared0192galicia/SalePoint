@@ -169,6 +169,11 @@ public class Account implements Serializable {
             return this;
         }
 
+        public Builder withFotoPerfil(String path) {
+            account.fotoperfil = path;
+            return this;
+        }
+
         public Builder withContrasena(String contrasena) {
             account.contrasena = contrasena;
             return this;

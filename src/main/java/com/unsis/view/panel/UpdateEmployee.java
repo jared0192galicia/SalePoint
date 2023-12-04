@@ -17,6 +17,7 @@ import java.util.regex.Pattern;
 import javax.swing.Icon;
 import javax.swing.ImageIcon;
 import javax.swing.JCheckBox;
+import javax.swing.JOptionPane;
 import javax.swing.JTextField;
 
 /**
@@ -52,7 +53,22 @@ public class UpdateEmployee extends javax.swing.JPanel {
         panelInternal.add(dateNac, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 240, 400, 210));
         panelInternal.setComponentZOrder(dateNac, 0);
 
+        resizeImages();
+    }
+
+    /**
+     * Redimenciona las imagenes de los botones para que se ajusten a el tamaño
+     * necesario
+     */
+    private void resizeImages() {
+        Tools tools = new Tools();
+        Icon resizedIcon = tools.resizeIcon(buttonSave.getIcon(), 30, 30);
+        buttonSave.setIcon(resizedIcon);
+
+        resizedIcon = tools.resizeIcon(buttonDiscard.getIcon(), 35, 35);
+        buttonDiscard.setIcon(resizedIcon);
         labelInvalidMail.setVisible(false);
+        labelInvalidPhone.setVisible(false);
         labelInvalidPhone.setVisible(false);
         labelInvalidUser.setVisible(false);
     }
@@ -84,10 +100,9 @@ public class UpdateEmployee extends javax.swing.JPanel {
                 access = new Access.Builder()
                         .withId(section.getId())
                         .withIdCuenta(account)
-                        .withIdSeccion(section)
+                        .withIdSeccion(new Section(section))
                         .build();
                 accessList.add(access);
-                System.out.println("Accesos a la seccion: " + section.getAccessList());
             }
         }
         return accessList;
@@ -143,14 +158,17 @@ public class UpdateEmployee extends javax.swing.JPanel {
 
         this.buttonCalendarIngress.setText(dateIngres.getDate().toLocaleString());
         this.buttonCalendarNac.setText(dateNac.getDate().toLocaleString());
-        
+
         String path = employe.getAccount().getFotoperfil();
-        if (path == null) {
-            path = "/profileDefault.png";
+        if ("/profileDefault.png".equals(path)) {
+            Tools tools = new Tools();
+            this.buttonSelectImage.setIcon(tools.resizeIcon(
+                    new ImageIcon(getClass().getResource(path)), 140, 140));
+        } else {
+            Tools tools = new Tools();
+            this.buttonSelectImage.setIcon(tools.resizeIcon(
+                    new ImageIcon(path), 140, 140));
         }
-        Tools tools = new Tools();
-        this.buttonSelectImage.setIcon(tools.resizeIcon(
-                new ImageIcon(getClass().getResource(path)), 140, 140));
 
         this.buttonSelectImage.setOpaque(false);
         this.buttonSelectImage.setText("");
@@ -632,12 +650,24 @@ public class UpdateEmployee extends javax.swing.JPanel {
                 .withEstado(String.valueOf(comboStatus.getSelectedItem()))
                 .withPuesto(txtPosition.getText().trim())
                 .build();
+        String path;
+        try {
+
+            path = fileChooser.getSelectedFile().getPath();
+
+            if (path.isEmpty()) {
+                path = "/profileDefault.png";
+            }
+        } catch (Exception e) {
+            path = "/profileDefault.png";
+        }
 
         Account account = new Account.Builder()
                 .withId(UpdateEmployee.employe.getAccount().getId())
                 .withNumCuenta(Integer.valueOf(txtNumEmploy.getText().trim()))
                 .withUsuario(txtUserName.getText().trim())
                 .withIdEmpleado(employee)
+                .withFotoPerfil(path)
                 .withAccessList(new ArrayList<>())
                 .build();
 
@@ -648,11 +678,22 @@ public class UpdateEmployee extends javax.swing.JPanel {
         account.setContrasena(password);
 
         employee.setAccount(account);
-        controller.edit(employee);
-        controller.edit(account);
 
         account.setAccessList(generateAccess(account));
-        controller.edit(account);
+        System.out.println("seccion 1 = " + controller.findEntityById(1, Section.class));
+        for (Access access : account.getAccessList()) {
+            System.out.println(access.getIdseccion().getId());
+        }
+        try {
+
+            controller.edit(employee);
+            controller.edit(account);
+            JOptionPane.showMessageDialog(null, "Empleado actualizado", "Aviso", JOptionPane.ERROR_MESSAGE);
+
+        } catch (Exception e) {
+            JOptionPane.showMessageDialog(null, "Error actualizado el empleado", "Aviso", JOptionPane.ERROR_MESSAGE);
+
+        }
 
 //        account = controller.findEntityById(1, new Account().getClass());
     }//GEN-LAST:event_buttonSaveActionPerformed

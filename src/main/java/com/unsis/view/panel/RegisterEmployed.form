@@ -530,6 +530,7 @@
               <Color blue="8e" green="7d" red="76" type="rgb"/>
             </Property>
             <Property name="text" type="java.lang.String" value="Modificaci&#xf3;n de empleados"/>
+            <Property name="name" type="java.lang.String" value="10" noResource="true"/>
             <Property name="opaque" type="boolean" value="false"/>
           </Properties>
           <Constraints>
@@ -565,6 +566,7 @@
               <Color blue="8e" green="7d" red="76" type="rgb"/>
             </Property>
             <Property name="text" type="java.lang.String" value="Modificaci&#xf3;n de productos"/>
+            <Property name="name" type="java.lang.String" value="11" noResource="true"/>
             <Property name="opaque" type="boolean" value="false"/>
           </Properties>
           <Constraints>

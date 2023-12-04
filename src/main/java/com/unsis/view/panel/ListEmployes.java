@@ -216,7 +216,7 @@ public class ListEmployes extends javax.swing.JPanel {
 
     public void showModel() {
         // Llamada al método findAllEntities para obtener la lista de empleados
-        ArrayList<Employee> employees = jpaController.findAllEntities(Employee.class);
+        ArrayList<Employee> employees = new  JpaController().findAllEntities(Employee.class);
 
         // Configuración del modelo de la tabla
         DefaultTableModel tableModel = (DefaultTableModel) table.getModel();
