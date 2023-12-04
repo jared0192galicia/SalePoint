@@ -50,3 +50,28 @@ CREATE TABLE "Access" (
  
 ---------------------
 
+ALTER TABLE
+  "Account"
+ADD
+  COLUMN fotoperfil VARCHAR;
+
+ALTER TABLE
+  "Account"
+ALTER COLUMN
+  fotoperfil
+SET
+  DEFAULT '/profileDefault.png' NOTNULL;
+
+UPDATE
+  "Account"
+SET
+  fotoperfil = '/profileDefault.png'
+WHERE
+  fotoperfil IS NULL;
+
+UPDATE
+  "Access"
+SET
+  idcuenta = 1
+WHERE
+  idcuenta IS NULL;

@@ -62,5 +62,14 @@ VALUES (1, 1), (1, 2), (1, 3), (1, 4), (1, 5), (1, 6), (1, 7), (1, 8);
 
 -------------------------------
 
+INSERT INTO
+  "Section" (idArea, nombre, descripcion)
+VALUES
+  (1, 'Editar Empleados', 'Modifica los empleados');
+
+INSERT INTO
+  "Section" (idArea, nombre, descripcion)
+VALUES
+  (2, 'Editar Productos', 'Modifica los productos');
 
 
