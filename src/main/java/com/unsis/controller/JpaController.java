@@ -23,7 +23,7 @@ public class JpaController {
     private final EmployeeJpaController employee;
     private final AccountDao dao = new AccountDao();
     private final SectionJpaController section;
-    
+
     public JpaController() {
         Dotenv env = Dotenv.load();
         String namePu = env.get("PU_NAME");
@@ -49,7 +49,7 @@ public class JpaController {
             case Account accountObj ->
                 this.account.create(accountObj);
 
-            case Employee employeeObj -> 
+            case Employee employeeObj ->
                 this.employee.create(employeeObj);
 
             case Section sectionObj ->
@@ -124,7 +124,8 @@ public class JpaController {
                 }
             }
         } catch (Exception e) {
-            System.err.println("Error on edit generic: " + obj.getClass() + "\n" + e.getMessage());
+            System.err.println("Error on edit generic: " + obj.getClass() + "\n" + e.getMessage()
+            + e.toString());
         }
     }
 
@@ -194,7 +195,7 @@ public class JpaController {
             }
         }
     }
-    
+
     /**
      *
      * @param user
@@ -207,10 +208,10 @@ public class JpaController {
         if (account == null) {
             return false;
         }
-        
+
         Session.setAccount(account);
         // Verificar si la contraseña ingresada coincide con la contraseña hasheada
-        return  BCrypt.checkpw(pass, account.getContrasena());
+        return BCrypt.checkpw(pass, account.getContrasena());
 //        return true;
 
     }

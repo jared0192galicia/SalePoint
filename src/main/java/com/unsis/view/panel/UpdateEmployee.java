@@ -1,7 +1,3 @@
-/*
- * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
- * Click nbfs://nbhost/SystemFileSystem/Templates/GUIForms/JPanel.java to edit this template
- */
 package com.unsis.view.panel;
 
 import com.toedter.calendar.JCalendar;
@@ -14,22 +10,25 @@ import com.unsis.models.entity.Section;
 import java.awt.event.KeyEvent;
 import java.util.ArrayList;
 import java.util.Date;
+import java.util.HashMap;
 import java.util.List;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
+import javax.swing.Icon;
 import javax.swing.ImageIcon;
+import javax.swing.JCheckBox;
 import javax.swing.JTextField;
 
 /**
  *
- * @author labtecweb10
+ * @author Jared
  */
 public class UpdateEmployee extends javax.swing.JPanel {
 
     private final JCalendar dateIngres;
     private final JCalendar dateNac;
     private final JpaController controller;
-    
+
     private static Employee employe;
 
     /**
@@ -52,24 +51,23 @@ public class UpdateEmployee extends javax.swing.JPanel {
         dateNac.setVisible(false);
         panelInternal.add(dateNac, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 240, 400, 210));
         panelInternal.setComponentZOrder(dateNac, 0);
+
+        labelInvalidMail.setVisible(false);
+        labelInvalidPhone.setVisible(false);
+        labelInvalidUser.setVisible(false);
     }
-    
-     // Método para obtener los nombres de los JCheckBox en un ArrayList
+
+    // Método para obtener los nombres de los JCheckBox en un ArrayList
     public ArrayList<String> getCheckBoxNames() {
         ArrayList<String> checkBoxNames = new ArrayList<>();
+        JCheckBox[] allCheckBoxes = {checkCourt, checkExpensesHistory, checkListEmployes, checkListProducts, checkOrders, checkRegisterEmploy, checkRegisterExpenses, checkRegisterProduct, checkSalePoint, checkSettingsApp, checkUpdateEmployes, checkUpdateProducts};
 
-        checkBoxNames.add(checkCourt.getName());
-        checkBoxNames.add(checkExpensesHistory.getName());
-        checkBoxNames.add(checkListEmployes.getName());
-        checkBoxNames.add(checkListProducts.getName());
-        checkBoxNames.add(checkOrders.getName());
-        checkBoxNames.add(checkRegisterEmploy.getName());
-        checkBoxNames.add(checkRegisterExpenses.getName());
-        checkBoxNames.add(checkRegisterProduct.getName());
-        checkBoxNames.add(checkSalePoint.getName());
-        checkBoxNames.add(checkSettingsApp.getName());
-        checkBoxNames.add(checkUpdateEmployes.getName());
-        checkBoxNames.add(checkUpdateProducts.getName());
+        for (JCheckBox checkBox : allCheckBoxes) {
+            if (checkBox.isSelected()) {
+                checkBoxNames.add(checkBox.getName());
+                System.out.println("Agregada la seccion: " + checkBox.getName());
+            }
+        }
 
         return checkBoxNames;
     }
@@ -82,15 +80,14 @@ public class UpdateEmployee extends javax.swing.JPanel {
         List<Access> accessList = new ArrayList<>();
         // Estableces la relación con la sección
         for (Section section : sections) {
-
-            if (ids.contains(section.getId())) {
+            if (ids.contains(String.valueOf(section.getId()))) {
                 access = new Access.Builder()
                         .withId(section.getId())
                         .withIdCuenta(account)
                         .withIdSeccion(section)
                         .build();
-                accessList.add(access); // Agregas el nuevo Access a la lista
-
+                accessList.add(access);
+                System.out.println("Accesos a la seccion: " + section.getAccessList());
             }
         }
         return accessList;
@@ -106,7 +103,6 @@ public class UpdateEmployee extends javax.swing.JPanel {
 
         // Verifica si el carácter ingresado no es válido
         if (!Character.toString(c).matches(regex)) {
-            // Consume el evento para evitar que el carácter no válido se agregue al JTextField// Obtiene el texto actual del JTextField
             String textoActual = field.getText();
 
             // Elimina el último carácter del texto actual
@@ -117,17 +113,84 @@ public class UpdateEmployee extends javax.swing.JPanel {
         }
     }
 
-    public static  Employee getEmploye() {
+    public static Employee getEmploye() {
         return employe;
     }
 
     public static void setEmploye(Employee employe) {
         UpdateEmployee.employe = employe;
     }
-    
-    public void setAllFields(){
-        
+
+    public Icon getResizeImage(String path) {
+        return (new Tools().resizeIcon(
+                new ImageIcon(path), 140, 140));
     }
+
+    public void setAllFields() {
+        this.txtName.setText(employe.getNombre());
+        this.txtLastNamePaternal.setText(employe.getApellidop());
+        this.txtLastNameMaternal.setText(employe.getApellidom());
+        this.txtNumEmploy.setText(String.valueOf(employe.getNumempleado()));
+        this.txtEmail.setText(employe.getCorreo());
+        this.txtNumberPhone.setText(employe.getTelefono());
+        this.txtPosition.setText(employe.getPuesto());
+
+        this.txtUserName.setText(employe.getAccount().getUsuario());
+        this.txtPassword.setText("********");
+
+        this.dateIngres.setDate(employe.getFechaing());
+        this.dateNac.setDate(employe.getFechanac());
+
+        this.buttonCalendarIngress.setText(dateIngres.getDate().toLocaleString());
+        this.buttonCalendarNac.setText(dateNac.getDate().toLocaleString());
+        
+        String path = employe.getAccount().getFotoperfil();
+        if (path == null) {
+            path = "/profileDefault.png";
+        }
+        Tools tools = new Tools();
+        this.buttonSelectImage.setIcon(tools.resizeIcon(
+                new ImageIcon(getClass().getResource(path)), 140, 140));
+
+        this.buttonSelectImage.setOpaque(false);
+        this.buttonSelectImage.setText("");
+
+        comboStatus.setSelectedItem(employe.getEstado());
+        this.fillAllChecks();
+    }
+
+    private void fillAllChecks() {
+        HashMap<String, JCheckBox> checkBoxMap = new HashMap<>();
+        checkBoxMap.put(checkCourt.getName(), checkCourt);
+        checkBoxMap.put(checkExpensesHistory.getName(), checkExpensesHistory);
+        checkBoxMap.put(checkListEmployes.getName(), checkListEmployes);
+        checkBoxMap.put(checkListProducts.getName(), checkListProducts);
+        checkBoxMap.put(checkOrders.getName(), checkOrders);
+        checkBoxMap.put(checkRegisterEmploy.getName(), checkRegisterEmploy);
+        checkBoxMap.put(checkRegisterExpenses.getName(), checkRegisterExpenses);
+        checkBoxMap.put(checkRegisterProduct.getName(), checkRegisterProduct);
+        checkBoxMap.put(checkSalePoint.getName(), checkSalePoint);
+        checkBoxMap.put(checkSettingsApp.getName(), checkSettingsApp);
+        checkBoxMap.put(checkUpdateEmployes.getName(), checkUpdateEmployes);
+        checkBoxMap.put(checkUpdateProducts.getName(), checkUpdateProducts);
+        for (Access access : employe.getAccount().getAccessList()) {
+
+            // Crear un HashMap para mapear los nombres con los JCheckBox
+            // Agregar el resto de las variables en el mismo patrón
+            // Obtener la cadena a comparar
+            String idString = String.valueOf(access.getIdseccion().getId());
+
+            // Verificar si el idString coincide con el nombre y seleccionar el JCheckBox correspondiente
+            if (checkBoxMap.containsKey(idString)) {
+                JCheckBox checkBox = checkBoxMap.get(idString);
+                checkBox.setSelected(true);
+            } else {
+                System.err.println("Algo malio sal");
+            }
+
+        }
+    }
+
     @SuppressWarnings("unchecked")
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
@@ -177,7 +240,6 @@ public class UpdateEmployee extends javax.swing.JPanel {
         buttonSelectImage = new javax.swing.JButton();
         jLabel14 = new javax.swing.JLabel();
         jLabel18 = new javax.swing.JLabel();
-        txtPassword = new javax.swing.JTextField();
         jLabel19 = new javax.swing.JLabel();
         txtUserName = new javax.swing.JTextField();
         buttonCalendarIngress = new javax.swing.JToggleButton();
@@ -186,6 +248,8 @@ public class UpdateEmployee extends javax.swing.JPanel {
         jLabel2 = new javax.swing.JLabel();
         labelInvalidUser = new javax.swing.JLabel();
         txtPosition = new javax.swing.JTextField();
+        txtPassword = new javax.swing.JPasswordField();
+        jLabel1 = new javax.swing.JLabel();
 
         fileChooser.setDialogTitle("Seleccionar imagen");
 
@@ -194,6 +258,7 @@ public class UpdateEmployee extends javax.swing.JPanel {
                 formComponentShown(evt);
             }
         });
+        setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
         panelInternal.setBackground(new java.awt.Color(255, 255, 255));
         panelInternal.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
@@ -386,6 +451,7 @@ public class UpdateEmployee extends javax.swing.JPanel {
         checkUpdateEmployes.setFont(new java.awt.Font("Jaldi", 0, 16)); // NOI18N
         checkUpdateEmployes.setForeground(new java.awt.Color(118, 125, 142));
         checkUpdateEmployes.setText("Modificación de empleados");
+        checkUpdateEmployes.setName("10"); // NOI18N
         checkUpdateEmployes.setOpaque(false);
         panelInternal.add(checkUpdateEmployes, new org.netbeans.lib.awtextra.AbsoluteConstraints(970, 400, -1, -1));
 
@@ -399,6 +465,7 @@ public class UpdateEmployee extends javax.swing.JPanel {
         checkUpdateProducts.setFont(new java.awt.Font("Jaldi", 0, 16)); // NOI18N
         checkUpdateProducts.setForeground(new java.awt.Color(118, 125, 142));
         checkUpdateProducts.setText("Modificación de productos");
+        checkUpdateProducts.setName("11"); // NOI18N
         checkUpdateProducts.setOpaque(false);
         panelInternal.add(checkUpdateProducts, new org.netbeans.lib.awtextra.AbsoluteConstraints(980, 220, -1, -1));
 
@@ -466,7 +533,6 @@ public class UpdateEmployee extends javax.swing.JPanel {
         jLabel18.setForeground(new java.awt.Color(118, 125, 142));
         jLabel18.setText("Usuario");
         panelInternal.add(jLabel18, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 560, -1, -1));
-        panelInternal.add(txtPassword, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 670, 210, 30));
 
         jLabel19.setFont(new java.awt.Font("Jaldi", 0, 18)); // NOI18N
         jLabel19.setForeground(new java.awt.Color(118, 125, 142));
@@ -509,26 +575,16 @@ public class UpdateEmployee extends javax.swing.JPanel {
         panelInternal.add(labelInvalidUser, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 620, 210, -1));
         panelInternal.add(txtPosition, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 450, 150, 30));
 
-        javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
-        this.setLayout(layout);
-        layout.setHorizontalGroup(
-            layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 1610, Short.MAX_VALUE)
-            .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                .addGroup(layout.createSequentialGroup()
-                    .addGap(0, 0, Short.MAX_VALUE)
-                    .addComponent(panelInternal, javax.swing.GroupLayout.PREFERRED_SIZE, 1610, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addGap(0, 0, Short.MAX_VALUE)))
-        );
-        layout.setVerticalGroup(
-            layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 770, Short.MAX_VALUE)
-            .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                .addGroup(layout.createSequentialGroup()
-                    .addGap(0, 0, Short.MAX_VALUE)
-                    .addComponent(panelInternal, javax.swing.GroupLayout.PREFERRED_SIZE, 770, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addGap(0, 0, Short.MAX_VALUE)))
-        );
+        txtPassword.setFont(new java.awt.Font("Dialog", 1, 22)); // NOI18N
+        txtPassword.setText("txtGenerico");
+        panelInternal.add(txtPassword, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 670, 210, 30));
+
+        add(panelInternal, new org.netbeans.lib.awtextra.AbsoluteConstraints(60, 70, 1610, 770));
+
+        jLabel1.setFont(new java.awt.Font("Jaldi", 0, 30)); // NOI18N
+        jLabel1.setForeground(new java.awt.Color(1, 41, 87));
+        jLabel1.setText("Actualizar empleado");
+        add(jLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 20, 360, 40));
     }// </editor-fold>//GEN-END:initComponents
 
     private void txtNumEmployKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtNumEmployKeyReleased
@@ -549,7 +605,6 @@ public class UpdateEmployee extends javax.swing.JPanel {
         if (matcher.matches()) {
             labelInvalidMail.setVisible(false);
         } else {
-            System.out.println("Correo electrónico inválido");
             txtEmail.requestFocus();
             labelInvalidMail.setVisible(true);
         }
@@ -565,7 +620,7 @@ public class UpdateEmployee extends javax.swing.JPanel {
 
     private void buttonSaveActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_buttonSaveActionPerformed
         Employee employee = new Employee.Builder()
-                .withId(35)
+                .withId(UpdateEmployee.employe.getId())
                 .withNumEmpleado(Integer.valueOf(txtNumEmploy.getText().trim()))
                 .withNombre(txtName.getText().trim())
                 .withApellidoP(txtLastNamePaternal.getText().trim())
@@ -578,29 +633,34 @@ public class UpdateEmployee extends javax.swing.JPanel {
                 .withPuesto(txtPosition.getText().trim())
                 .build();
 
-        controller.create(employee);
-
         Account account = new Account.Builder()
-                .withId(1)
+                .withId(UpdateEmployee.employe.getAccount().getId())
                 .withNumCuenta(Integer.valueOf(txtNumEmploy.getText().trim()))
                 .withUsuario(txtUserName.getText().trim())
-                .withContrasena(Tools.cryptPassword(txtPassword.getText().trim()))
-                .withIdEmpleado(employee) // instancia que esta abajo
+                .withIdEmpleado(employee)
+                .withAccessList(new ArrayList<>())
                 .build();
-        controller.create(account);
+
+        // Establece si modificar la contraseña o dejar la actual
+        String password = txtPassword.getText().equals("txtGenerico")
+                ? Tools.cryptPassword(txtPassword.getText().trim())
+                : UpdateEmployee.employe.getAccount().getContrasena();
+        account.setContrasena(password);
+
+        employee.setAccount(account);
+        controller.edit(employee);
+        controller.edit(account);
 
         account.setAccessList(generateAccess(account));
         controller.edit(account);
 
-        account = controller.findEntityById(1, new Account().getClass());
-        System.out.println(account.getContrasena());
+//        account = controller.findEntityById(1, new Account().getClass());
     }//GEN-LAST:event_buttonSaveActionPerformed
 
     private void buttonCalendarNacActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_buttonCalendarNacActionPerformed
         if (dateNac.isVisible()) {
             dateNac.setVisible(false);
             buttonCalendarNac.setText(dateNac.getDate().toLocaleString());
-            System.err.println("Fecha seleccionada: " + dateNac.getDate().toLocaleString());
         } else {
             dateNac.setVisible(true);
             buttonCalendarNac.setText("-- : -- : ----");
@@ -609,13 +669,12 @@ public class UpdateEmployee extends javax.swing.JPanel {
 
     private void txtNumberPhoneFocusLost(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_txtNumberPhoneFocusLost
         String phoneNumber = txtNumberPhone.getText().trim();
-        String regex = "\\d{10}";
+        String regex = "^\\d{3}-\\d{3}-\\d{4}$";
 
         Pattern pattern = Pattern.compile(regex);
         Matcher matcher = pattern.matcher(phoneNumber);
 
         if (matcher.matches()) {
-            System.out.println("Número de teléfono válido");
             labelInvalidPhone.setVisible(false);
         } else {
             txtNumberPhone.requestFocus();
@@ -658,7 +717,6 @@ public class UpdateEmployee extends javax.swing.JPanel {
         if (dateIngres.isVisible()) {
             dateIngres.setVisible(false);
             buttonCalendarIngress.setText(dateIngres.getDate().toLocaleString());
-            System.err.println("Fecha seleccionada: " + dateIngres.getDate().toLocaleString());
         } else {
             dateIngres.setVisible(true);
             buttonCalendarIngress.setText("-- : -- : ----");
@@ -666,7 +724,7 @@ public class UpdateEmployee extends javax.swing.JPanel {
     }//GEN-LAST:event_buttonCalendarIngressActionPerformed
 
     private void formComponentShown(java.awt.event.ComponentEvent evt) {//GEN-FIRST:event_formComponentShown
-        // TODO add your handling code here:
+        this.setAllFields();
     }//GEN-LAST:event_formComponentShown
 
 
@@ -690,6 +748,7 @@ public class UpdateEmployee extends javax.swing.JPanel {
     private javax.swing.JCheckBox checkUpdateProducts;
     private javax.swing.JComboBox<String> comboStatus;
     private javax.swing.JFileChooser fileChooser;
+    private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel10;
     private javax.swing.JLabel jLabel11;
     private javax.swing.JLabel jLabel12;
@@ -722,7 +781,7 @@ public class UpdateEmployee extends javax.swing.JPanel {
     private javax.swing.JTextField txtName;
     private javax.swing.JTextField txtNumEmploy;
     private javax.swing.JTextField txtNumberPhone;
-    private javax.swing.JTextField txtPassword;
+    private javax.swing.JPasswordField txtPassword;
     private javax.swing.JTextField txtPosition;
     private javax.swing.JTextField txtUserName;
     // End of variables declaration//GEN-END:variables

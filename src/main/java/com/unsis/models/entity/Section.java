@@ -24,7 +24,7 @@ import javax.persistence.Table;
  * @author jared
  */
 @Entity
-@Table(name = "Section")
+@Table(name = "\"Section\"")
 @NamedQueries({
     @NamedQuery(name = "Section.findAll", query = "SELECT s FROM Section s"),
     @NamedQuery(name = "Section.findById", query = "SELECT s FROM Section s WHERE s.id = :id"),

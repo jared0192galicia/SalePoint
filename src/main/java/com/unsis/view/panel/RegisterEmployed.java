@@ -51,7 +51,7 @@ public class RegisterEmployed extends javax.swing.JPanel {
         panelInternal.add(dateNac, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 240, 400, 210));
         panelInternal.setComponentZOrder(dateNac, 0);
 
-        resizeImages();
+        this.resizeImages();
     }
 
     // Método para obtener los nombres de los JCheckBox en un ArrayList

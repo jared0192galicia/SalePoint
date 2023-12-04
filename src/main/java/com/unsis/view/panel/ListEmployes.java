@@ -295,7 +295,7 @@ public class ListEmployes extends javax.swing.JPanel {
         if (employee != null) {
             UpdateEmployee.setEmploye(employee);
             mainWindow.setView("Editar Emplado");
-        }
+        } 
     }//GEN-LAST:event_buttonModifyActionPerformed
 
 
