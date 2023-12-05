@@ -11,7 +11,7 @@ public class RecuperarContraseña extends javax.swing.JPanel {
      */
     public RecuperarContraseña() {
         initComponents();
-        labeltext.setText("Por favor, escribe tu correo electrónico.\nRecibirás un mensaje con tu contraseña\nnueva por correo electrónico.");
+        labeltext.setText("Por favor, escriba su correo electronico, recibirás una contraseña nueva mediante un mensaje de texto.");
 
     }
 
@@ -47,8 +47,7 @@ public class RecuperarContraseña extends javax.swing.JPanel {
         );
 
         labeltext.setBackground(new java.awt.Color(255, 255, 255));
-        labeltext.setHorizontalAlignment(javax.swing.SwingConstants.LEFT);
-        labeltext.setVerticalAlignment(javax.swing.SwingConstants.TOP);
+        labeltext.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         labeltext.setIconTextGap(10);
         labeltext.setVerticalTextPosition(javax.swing.SwingConstants.TOP);
 
