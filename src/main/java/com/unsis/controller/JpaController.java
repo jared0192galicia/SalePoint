@@ -6,6 +6,7 @@ import com.unsis.dao.AccountDao;
 import com.unsis.models.entity.Access;
 import com.unsis.models.entity.Account;
 import com.unsis.models.entity.Area;
+import com.unsis.models.entity.Company;
 import com.unsis.models.entity.Employee;
 import com.unsis.models.entity.Section;
 import io.github.cdimascio.dotenv.Dotenv;
@@ -19,6 +20,7 @@ public class JpaController {
 
     private final AccessJpaController access;
     private final AccountJpaController account;
+    private final CompanyJpaController company;
     private final AreaJpaController area;
     private final EmployeeJpaController employee;
     private final AccountDao dao = new AccountDao();
@@ -33,6 +35,7 @@ public class JpaController {
         this.access = new AccessJpaController(emf);
         this.account = new AccountJpaController(emf);
         this.section = new SectionJpaController(emf);
+        this.company = new CompanyJpaController(emf);
         this.employee = new EmployeeJpaController(emf);
     }
 
@@ -57,6 +60,9 @@ public class JpaController {
 
             case Area areaObj ->
                 this.area.create(areaObj);
+
+            case Company companyObj ->
+                this.company.create(companyObj);
 
             default -> {
                 System.err.println("Invalid entity type");
@@ -86,6 +92,9 @@ public class JpaController {
 
                 case Area areaObj ->
                     this.area.destroy(areaObj.getId());
+
+                case Company companyObj ->
+                    this.company.destroy(companyObj.getId());
 
                 default -> {
                     System.err.println("Invalid entity type");
@@ -119,13 +128,16 @@ public class JpaController {
                 case Area areaObj ->
                     this.area.edit(areaObj);
 
+                case Company companyObj ->
+                    this.company.edit(companyObj);
+
                 default -> {
                     System.err.println("Tas mal");
                 }
             }
         } catch (Exception e) {
             System.err.println("Error on edit generic: " + obj.getClass() + "\n" + e.getMessage()
-            + e.toString());
+                    + e.toString());
         }
     }
 
@@ -155,6 +167,9 @@ public class JpaController {
                 }
                 case "Area" -> {
                     return (T) this.section.findSection(id);
+                }
+                case "Company" -> {
+                    return (T) this.company.findCompany(id);
                 }
                 default -> {
                     System.err.println("Invalid entity type");
@@ -188,6 +203,9 @@ public class JpaController {
             }
             case "Section" -> {
                 return new ArrayList<>((Collection<? extends T>) this.section.findSectionEntities());
+            }
+            case "Company" -> {
+                return new ArrayList<>((Collection<? extends T>) this.company.findCompanyEntities());
             }
             default -> {
                 System.err.println("Invalid entity type");
