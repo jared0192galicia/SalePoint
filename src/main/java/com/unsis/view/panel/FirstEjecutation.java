@@ -1,7 +1,3 @@
-/*
- * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
- * Click nbfs://nbhost/SystemFileSystem/Templates/GUIForms/JFrame.java to edit this template
- */
 package com.unsis.view.panel;
 
 import java.awt.Image;
@@ -10,7 +6,7 @@ import javax.swing.ImageIcon;
 
 /**
  *
- * @author labtecweb04
+ * @author Elio
  */
 public class FirstEjecutation extends javax.swing.JFrame {
 
@@ -39,7 +35,6 @@ public class FirstEjecutation extends javax.swing.JFrame {
 
         resizedIcon = resizeIcon(buttonSave.getIcon(), 25, 22);
         buttonSave.setIcon(resizedIcon);
-
     }
 
     /**
@@ -50,8 +45,7 @@ public class FirstEjecutation extends javax.swing.JFrame {
      * @return
      */
     private Icon resizeIcon(Icon icon, int width, int height) {
-        if (icon instanceof ImageIcon) {
-            ImageIcon imageIcon = (ImageIcon) icon;
+        if (icon instanceof ImageIcon imageIcon) {
             Image image = imageIcon.getImage();
 
             // Redimensionar la imagen al tamaño deseado
@@ -74,9 +68,10 @@ public class FirstEjecutation extends javax.swing.JFrame {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
+        fileChooser = new javax.swing.JFileChooser();
         jPanel1 = new javax.swing.JPanel();
+        labelIcon = new javax.swing.JLabel();
         jLabel4 = new javax.swing.JLabel();
-        jLabel3 = new javax.swing.JLabel();
         buttonImport = new javax.swing.JButton();
         jPanel2 = new javax.swing.JPanel();
         txtName = new javax.swing.JTextField();
@@ -94,11 +89,11 @@ public class FirstEjecutation extends javax.swing.JFrame {
         jPanel1.setPreferredSize(new java.awt.Dimension(450, 500));
         jPanel1.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
+        labelIcon.setIcon(new javax.swing.ImageIcon(getClass().getResource("/IconCafe.png"))); // NOI18N
+        jPanel1.add(labelIcon, new org.netbeans.lib.awtextra.AbsoluteConstraints(100, 100, 240, 240));
+
         jLabel4.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Circulo.png"))); // NOI18N
         jPanel1.add(jLabel4, new org.netbeans.lib.awtextra.AbsoluteConstraints(100, 90, 240, 250));
-
-        jLabel3.setIcon(new javax.swing.ImageIcon(getClass().getResource("/IconCafe.png"))); // NOI18N
-        jPanel1.add(jLabel3, new org.netbeans.lib.awtextra.AbsoluteConstraints(110, 100, 240, 240));
 
         buttonImport.setBackground(new java.awt.Color(46, 125, 18));
         buttonImport.setFont(new java.awt.Font("Jaldi", 1, 15)); // NOI18N
@@ -107,6 +102,11 @@ public class FirstEjecutation extends javax.swing.JFrame {
         buttonImport.setText("Importar");
         buttonImport.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(215, 251, 203)));
         buttonImport.setHorizontalAlignment(javax.swing.SwingConstants.RIGHT);
+        buttonImport.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                buttonImportActionPerformed(evt);
+            }
+        });
         jPanel1.add(buttonImport, new org.netbeans.lib.awtextra.AbsoluteConstraints(170, 350, 100, 30));
 
         getContentPane().add(jPanel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, -1, -1));
@@ -151,6 +151,11 @@ public class FirstEjecutation extends javax.swing.JFrame {
         buttonSave.setForeground(new java.awt.Color(255, 255, 255));
         buttonSave.setIcon(new javax.swing.ImageIcon(getClass().getResource("/save.png"))); // NOI18N
         buttonSave.setText("Guardar");
+        buttonSave.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                buttonSaveActionPerformed(evt);
+            }
+        });
         jPanel2.add(buttonSave, new org.netbeans.lib.awtextra.AbsoluteConstraints(230, 320, 140, 33));
 
         labeltext.setHorizontalAlignment(javax.swing.SwingConstants.LEFT);
@@ -204,6 +209,14 @@ public class FirstEjecutation extends javax.swing.JFrame {
         // TODO add your handling code here:
     }//GEN-LAST:event_buttonCancelActionPerformed
 
+    private void buttonSaveActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_buttonSaveActionPerformed
+        String name = txtName.getText().trim();
+    }//GEN-LAST:event_buttonSaveActionPerformed
+
+    private void buttonImportActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_buttonImportActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_buttonImportActionPerformed
+
     /**
      * @param args the command line arguments
      */
@@ -243,13 +256,14 @@ public class FirstEjecutation extends javax.swing.JFrame {
     private javax.swing.JButton buttonCancel;
     private javax.swing.JButton buttonImport;
     private javax.swing.JButton buttonSave;
+    private javax.swing.JFileChooser fileChooser;
     private javax.swing.JLabel jLabel1;
-    private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanel2;
     private javax.swing.JPanel jPanel3;
     private javax.swing.JPanel jPanel4;
+    private javax.swing.JLabel labelIcon;
     private javax.swing.JLabel labeltext;
     private javax.swing.JTextField txtName;
     // End of variables declaration//GEN-END:variables
