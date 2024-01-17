@@ -26,13 +26,12 @@ public class PuntoVenta {
      * @return
      */
     private boolean loadedMarch() {
-        Company company = new JpaController().findEntityById(1, Company.class);
-        System.out.println(company);
-        
-        if (company == null) {
+        try {
+            new JpaController().findAllEntities(Company.class).get(0);
+            return true;
+        } catch (Exception e) {
             return false;
         }
-        return !company.getName().equals("");
     }
 
     public static void main(String[] args) {

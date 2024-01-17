@@ -109,7 +109,6 @@ public class Company implements Serializable {
 
     @Override
     public String toString() {
-        return "com.unsis.models.entity.Company[ id=" + id + " ]";
+        return "Company{" + "id=" + id + ", name=" + name + ", logo=" + logo + ", descripcion=" + descripcion + '}';
     }
-    
 }

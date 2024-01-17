@@ -1,8 +1,12 @@
 package com.unsis.view.panel;
 
+import com.unsis.clases.Tools;
+import com.unsis.controller.JpaController;
+import com.unsis.models.entity.Company;
 import java.awt.Image;
 import javax.swing.Icon;
 import javax.swing.ImageIcon;
+import javax.swing.JOptionPane;
 
 /**
  *
@@ -10,21 +14,25 @@ import javax.swing.ImageIcon;
  */
 public class FirstEjecutation extends javax.swing.JFrame {
 
+    private String logo = "";
+    private String name = "";
+    private String description = "";
+
     /**
      * Creates new form FirstEjecutation
      */
     public FirstEjecutation() {
         initComponents();
-        
+
         this.setResizable(false);
         this.setLocationRelativeTo(null);
         this.setTitle("Iniciar programa");
-        
+
         resizeImages();
-        String text = "<html><body><p style='color: #BBBBBB;'>El nombre de la compañia y logotipo podrán ser cmbiados por usuario con permisos</p></body></html>";
+        String text = "<html><body><p style='color: #BBBBBB;'>El nombre de la compañia y logotipo podrán ser <br/> cambiados por un usuario con permisos</p></body></html>";
         this.labeltext.setText(text);
     }
-    
+
     /**
      * Redimenciona las imagenes de los botones para que se ajusten a el tamaño
      * necesario
@@ -38,7 +46,8 @@ public class FirstEjecutation extends javax.swing.JFrame {
     }
 
     /**
-     * Resize image for 
+     * Resize image for
+     *
      * @param icon image for resize
      * @param width Width for image
      * @param height height for image
@@ -57,7 +66,6 @@ public class FirstEjecutation extends javax.swing.JFrame {
 
         return icon; // Devolver el icono original si no es un ImageIcon
     }
-
 
     /**
      * This method is called from within the constructor to initialize the form.
@@ -81,6 +89,10 @@ public class FirstEjecutation extends javax.swing.JFrame {
         jPanel3 = new javax.swing.JPanel();
         labeltext = new javax.swing.JLabel();
         jPanel4 = new javax.swing.JPanel();
+
+        fileChooser.setApproveButtonText("Abrir");
+        fileChooser.setApproveButtonToolTipText("Selecciona esta imagen");
+        fileChooser.setDialogTitle("Seleccionar imagen");
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         getContentPane().setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
@@ -107,7 +119,7 @@ public class FirstEjecutation extends javax.swing.JFrame {
                 buttonImportActionPerformed(evt);
             }
         });
-        jPanel1.add(buttonImport, new org.netbeans.lib.awtextra.AbsoluteConstraints(170, 350, 100, 30));
+        jPanel1.add(buttonImport, new org.netbeans.lib.awtextra.AbsoluteConstraints(170, 350, 110, 30));
 
         getContentPane().add(jPanel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, -1, -1));
 
@@ -116,7 +128,7 @@ public class FirstEjecutation extends javax.swing.JFrame {
         jPanel2.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
         txtName.setFont(new java.awt.Font("Jaldi", 0, 15)); // NOI18N
-        txtName.setForeground(new java.awt.Color(204, 204, 204));
+        txtName.setForeground(new java.awt.Color(51, 51, 51));
         txtName.setHorizontalAlignment(javax.swing.JTextField.CENTER);
         txtName.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(204, 204, 204)));
         txtName.addActionListener(new java.awt.event.ActionListener() {
@@ -211,10 +223,50 @@ public class FirstEjecutation extends javax.swing.JFrame {
 
     private void buttonSaveActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_buttonSaveActionPerformed
         String name = txtName.getText().trim();
+
+        if (name.equals("")) {
+            JOptionPane.showMessageDialog(null, "Debe ingresar el nombre de la empresa");
+            return;
+        }
+
+        if (logo.equals("")) {
+            int response = JOptionPane.showConfirmDialog(null, "¿Decea conttinuar sin un logotipo?");
+            if (JOptionPane.OK_OPTION != response) {
+                return;
+            }
+        }
+
+        System.out.println("Adios");
+        Company company = new Company(0, name);
+        company.setLogo("/" + (logo.equals("") ? "default" : logo));
+        company.setDescripcion(description);
+        
+        System.out.println(company.toString());
+        
+        new JpaController().create(company);
+        
+        new Login().setVisible(true);
+        this.dispose();
     }//GEN-LAST:event_buttonSaveActionPerformed
 
     private void buttonImportActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_buttonImportActionPerformed
-        // TODO add your handling code here:
+        fileChooser.showOpenDialog(jPanel1);
+        try {
+            String path = fileChooser.getSelectedFile().getPath();
+            System.out.println(path);
+
+            if (!path.equals("")) {
+                String[] partes = path.split("/");
+                logo = partes[partes.length - 1];
+                
+                String destino = Tools.ROOTPATH + "company/" + logo;
+
+                Tools.copyFile(path, destino);
+                
+            }
+        } catch (Exception e) {
+            System.out.println("Cancelado");
+        }
     }//GEN-LAST:event_buttonImportActionPerformed
 
     /**

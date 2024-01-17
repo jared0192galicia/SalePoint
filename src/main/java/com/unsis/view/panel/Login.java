@@ -1,10 +1,9 @@
 package com.unsis.view.panel;
 
 import com.unsis.controller.JpaController;
-import com.unsis.controller.controllerAccount;
-import com.unsis.models.entity.Account;
 import com.unsis.models.entity.Account;
 import com.unsis.view.Main;
+import java.util.ArrayList;
 import javax.swing.JOptionPane;
 
 /**
@@ -32,6 +31,18 @@ public class Login extends javax.swing.JFrame {
         this.resetPass.setSize(450, 506);
         this.resetPass.setBounds(this.getX() + 300, this.getY() - 25, 450, 506);
         this.resetPass.setTitle("Resetear contraseña");
+        
+        this.firtsUser.setLocationRelativeTo(null);
+        this.firtsUser.setSize(1710, 840);
+        this.firtsUser.setBounds(this.getX() + 300, this.getY() - 25, 1710, 860);
+        this.firtsUser.setTitle("Registra tu usuario de Administrador!!");
+        
+        this.firtsUser.add(new RegisterEmployed());
+        
+        if (!existAccount()) {
+            JOptionPane.showMessageDialog(null, "No existe ningun usuario registrado");
+            firtsUser.setVisible(true);
+        }
 
     }
 
@@ -49,6 +60,7 @@ public class Login extends javax.swing.JFrame {
         jLabel5 = new javax.swing.JLabel();
         jTextField1 = new javax.swing.JTextField();
         jButton1 = new javax.swing.JButton();
+        firtsUser = new javax.swing.JDialog();
         jPanel1 = new javax.swing.JPanel();
         jLabel1 = new javax.swing.JLabel();
         buttonLogin = new javax.swing.JButton();
@@ -168,6 +180,19 @@ public class Login extends javax.swing.JFrame {
         resetPassLayout.setVerticalGroup(
             resetPassLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addComponent(jPanel3, javax.swing.GroupLayout.DEFAULT_SIZE, 506, Short.MAX_VALUE)
+        );
+
+        firtsUser.setModal(true);
+
+        javax.swing.GroupLayout firtsUserLayout = new javax.swing.GroupLayout(firtsUser.getContentPane());
+        firtsUser.getContentPane().setLayout(firtsUserLayout);
+        firtsUserLayout.setHorizontalGroup(
+            firtsUserLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 703, Short.MAX_VALUE)
+        );
+        firtsUserLayout.setVerticalGroup(
+            firtsUserLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 409, Short.MAX_VALUE)
         );
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
@@ -309,6 +334,13 @@ public class Login extends javax.swing.JFrame {
         // TODO add your handling code here:
     }//GEN-LAST:event_txtUserActionPerformed
 
+    private boolean existAccount () {
+        ArrayList<Account> allEntities = new JpaController().findAllEntities(Account.class);
+        
+        return !allEntities.isEmpty();
+            
+    }
+    
     private void buttonLoginActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_buttonLoginActionPerformed
         String user = txtUser.getText().trim();
         String pass = txtPass.getText().trim();
@@ -354,6 +386,7 @@ public class Login extends javax.swing.JFrame {
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton buttonLogin;
+    private javax.swing.JDialog firtsUser;
     private javax.swing.JButton jButton1;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
