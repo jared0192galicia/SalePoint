@@ -276,7 +276,7 @@ public class GeneralSettings extends javax.swing.JPanel {
         Labeajustes1.setText("Ajustes");
         add(Labeajustes1, new org.netbeans.lib.awtextra.AbsoluteConstraints(50, 10, -1, -1));
     }// </editor-fold>//GEN-END:initComponents
-//guardar en archivo
+//Guardar en archivo
     private void buttonSaveActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_buttonSaveActionPerformed
             String vat = jTextFieldVAT.getText();
     String decimals = jTextFieldDecimals.getText();
