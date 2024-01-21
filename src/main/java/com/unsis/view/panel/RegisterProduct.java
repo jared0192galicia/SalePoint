@@ -1,10 +1,16 @@
 package com.unsis.view.panel;
 
 import com.unsis.clases.Tools;
+import com.unsis.controller.JpaController;
 import java.awt.Color;
-import java.awt.event.ItemEvent;
+import com.unsis.models.entity.Product;
+import java.awt.event.KeyEvent;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
 import javax.swing.BorderFactory;
 import javax.swing.Icon;
+import javax.swing.JOptionPane;
+import javax.swing.JTextField;
 
 /**
  *
@@ -12,16 +18,45 @@ import javax.swing.Icon;
  */
 public class RegisterProduct extends javax.swing.JPanel {
 
+    static void setProduct(Product product) {
+        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
+    }
+
+    private final JpaController controller;
+
     /**
      * Creates new form RegisterProduct
      */
     public RegisterProduct() {
         initComponents();
+        this.controller = new JpaController();
 
         this.resizeImages();
 
-        comboSaller.addItem("+");
+        // comboSaller.addItem("+");
         this.dialogRegisterSaller.setLocationRelativeTo(null);
+    }
+
+    // este método se asegura de que solo se ingresen caracteres válidos en un campo de texto 
+    private void verify(KeyEvent evt, JTextField field, String regex) {
+        char c = evt.getKeyChar();
+        int keyCode = evt.getKeyCode();
+
+        if (KeyEvent.getKeyText(keyCode).length() > 1) {
+            return;
+        }
+
+        // Verifica si el carácter ingresado no es válido
+        if (!Character.toString(c).matches(regex)) {
+            // Consume el evento para evitar que el carácter no válido se agregue al JTextField// Obtiene el texto actual del JTextField
+            String textoActual = field.getText();
+
+            // Elimina el último carácter del texto actual
+            if (textoActual.length() > 0) {
+                String textoSinUltimoCaracter = textoActual.substring(0, textoActual.length() - 1);
+                field.setText(textoSinUltimoCaracter);
+            }
+        }
     }
 
     /**
@@ -58,42 +93,42 @@ public class RegisterProduct extends javax.swing.JPanel {
         txtDescSaller = new javax.swing.JTextField();
         jLabel9 = new javax.swing.JLabel();
         buttonSaveSaller = new javax.swing.JButton();
+        buttonGroup1 = new javax.swing.ButtonGroup();
         panelInternal = new javax.swing.JPanel();
         jLabel2 = new javax.swing.JLabel();
-        jTextField1 = new javax.swing.JTextField();
-        jLabel4 = new javax.swing.JLabel();
+        txtAvailable = new javax.swing.JTextField();
         jLabel5 = new javax.swing.JLabel();
-        jTextField3 = new javax.swing.JTextField();
+        txtPBuys = new javax.swing.JTextField();
         jLabel6 = new javax.swing.JLabel();
-        jTextField4 = new javax.swing.JTextField();
+        txtPSale = new javax.swing.JTextField();
         jLabel7 = new javax.swing.JLabel();
-        jTextField5 = new javax.swing.JTextField();
+        txtBarcode = new javax.swing.JTextField();
         jLabel8 = new javax.swing.JLabel();
         jLabel10 = new javax.swing.JLabel();
-        jTextField7 = new javax.swing.JTextField();
+        txtPName = new javax.swing.JTextField();
         jLabel11 = new javax.swing.JLabel();
-        jTextField8 = new javax.swing.JTextField();
-        comboSaller = new javax.swing.JComboBox<>();
+        txtDescription = new javax.swing.JTextField();
         jLabel13 = new javax.swing.JLabel();
-        jComboBox7 = new javax.swing.JComboBox<>();
+        ComboProductType = new javax.swing.JComboBox<>();
         jLabel15 = new javax.swing.JLabel();
-        jComboBox9 = new javax.swing.JComboBox<>();
         jLabel16 = new javax.swing.JLabel();
-        jComboBox10 = new javax.swing.JComboBox<>();
         jLabel22 = new javax.swing.JLabel();
         jLabel23 = new javax.swing.JLabel();
         buttonDiscard = new javax.swing.JButton();
         buttonSave = new javax.swing.JButton();
-        jComboBox8 = new javax.swing.JComboBox<>();
         jLabel21 = new javax.swing.JLabel();
         jLabel19 = new javax.swing.JLabel();
-        jTextField6 = new javax.swing.JTextField();
+        txtVariants = new javax.swing.JTextField();
         jLabel14 = new javax.swing.JLabel();
-        jComboBox13 = new javax.swing.JComboBox<>();
         jLabel20 = new javax.swing.JLabel();
-        jComboBox11 = new javax.swing.JComboBox<>();
-        jComboBox15 = new javax.swing.JComboBox<>();
+        comboSchedule = new javax.swing.JComboBox<>();
         jLabel18 = new javax.swing.JLabel();
+        txtNumProduct = new javax.swing.JTextField();
+        RadioButtonAvailable = new javax.swing.JRadioButton();
+        RadioButtonNotavailable = new javax.swing.JRadioButton();
+        txtPortion = new javax.swing.JTextField();
+        txtDiscounts = new javax.swing.JTextField();
+        txtComments = new javax.swing.JTextField();
         jPanel1 = new javax.swing.JPanel();
         buttonUpload = new javax.swing.JButton();
         buttonTemplate = new javax.swing.JButton();
@@ -123,7 +158,7 @@ public class RegisterProduct extends javax.swing.JPanel {
         buttonSaveSaller.setForeground(new java.awt.Color(255, 255, 255));
         buttonSaveSaller.setIcon(new javax.swing.ImageIcon(getClass().getResource("/save.png"))); // NOI18N
         buttonSaveSaller.setText("Guardar");
-        buttonSaveSaller.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+        buttonSaveSaller.setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
 
         javax.swing.GroupLayout panelRegisterDialogLayout = new javax.swing.GroupLayout(panelRegisterDialog);
         panelRegisterDialog.setLayout(panelRegisterDialogLayout);
@@ -187,31 +222,38 @@ public class RegisterProduct extends javax.swing.JPanel {
         jLabel2.setForeground(new java.awt.Color(82, 146, 222));
         jLabel2.setText("Información Especifica");
         panelInternal.add(jLabel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(100, 320, 280, -1));
-        panelInternal.add(jTextField1, new org.netbeans.lib.awtextra.AbsoluteConstraints(100, 410, 150, 30));
-
-        jLabel4.setFont(new java.awt.Font("Jaldi", 0, 18)); // NOI18N
-        jLabel4.setForeground(new java.awt.Color(118, 125, 142));
-        jLabel4.setText("Proveedor");
-        panelInternal.add(jLabel4, new org.netbeans.lib.awtextra.AbsoluteConstraints(450, 470, 130, -1));
+        panelInternal.add(txtAvailable, new org.netbeans.lib.awtextra.AbsoluteConstraints(100, 500, 150, 30));
 
         jLabel5.setFont(new java.awt.Font("Jaldi", 0, 18)); // NOI18N
         jLabel5.setForeground(new java.awt.Color(118, 125, 142));
         jLabel5.setText(" Precio de compra");
         panelInternal.add(jLabel5, new org.netbeans.lib.awtextra.AbsoluteConstraints(490, 90, 180, -1));
-        panelInternal.add(jTextField3, new org.netbeans.lib.awtextra.AbsoluteConstraints(490, 120, 170, 30));
+
+        txtPBuys.addFocusListener(new java.awt.event.FocusAdapter() {
+            public void focusLost(java.awt.event.FocusEvent evt) {
+                txtPBuysFocusLost(evt);
+            }
+        });
+        panelInternal.add(txtPBuys, new org.netbeans.lib.awtextra.AbsoluteConstraints(490, 120, 170, 30));
 
         jLabel6.setBackground(new java.awt.Color(255, 255, 255));
         jLabel6.setFont(new java.awt.Font("Jaldi", 0, 18)); // NOI18N
         jLabel6.setForeground(new java.awt.Color(118, 125, 142));
         jLabel6.setText("N. Producto");
         panelInternal.add(jLabel6, new org.netbeans.lib.awtextra.AbsoluteConstraints(100, 380, -1, -1));
-        panelInternal.add(jTextField4, new org.netbeans.lib.awtextra.AbsoluteConstraints(100, 210, 180, 30));
+
+        txtPSale.addFocusListener(new java.awt.event.FocusAdapter() {
+            public void focusLost(java.awt.event.FocusEvent evt) {
+                txtPSaleFocusLost(evt);
+            }
+        });
+        panelInternal.add(txtPSale, new org.netbeans.lib.awtextra.AbsoluteConstraints(100, 210, 180, 30));
 
         jLabel7.setFont(new java.awt.Font("Jaldi", 0, 18)); // NOI18N
         jLabel7.setForeground(new java.awt.Color(118, 125, 142));
         jLabel7.setText("Código de barras");
         panelInternal.add(jLabel7, new org.netbeans.lib.awtextra.AbsoluteConstraints(300, 180, 170, -1));
-        panelInternal.add(jTextField5, new org.netbeans.lib.awtextra.AbsoluteConstraints(300, 210, 170, 30));
+        panelInternal.add(txtBarcode, new org.netbeans.lib.awtextra.AbsoluteConstraints(300, 210, 170, 30));
 
         jLabel8.setFont(new java.awt.Font("Jaldi", 0, 18)); // NOI18N
         jLabel8.setForeground(new java.awt.Color(118, 125, 142));
@@ -224,45 +266,37 @@ public class RegisterProduct extends javax.swing.JPanel {
         jLabel10.setForeground(new java.awt.Color(118, 125, 142));
         jLabel10.setText("Precio de venta");
         panelInternal.add(jLabel10, new org.netbeans.lib.awtextra.AbsoluteConstraints(100, 180, -1, -1));
-        panelInternal.add(jTextField7, new org.netbeans.lib.awtextra.AbsoluteConstraints(100, 120, 180, 30));
+
+        txtPName.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyReleased(java.awt.event.KeyEvent evt) {
+                txtPNameKeyReleased(evt);
+            }
+        });
+        panelInternal.add(txtPName, new org.netbeans.lib.awtextra.AbsoluteConstraints(100, 120, 180, 30));
 
         jLabel11.setFont(new java.awt.Font("Jaldi", 0, 18)); // NOI18N
         jLabel11.setForeground(new java.awt.Color(118, 125, 142));
         jLabel11.setText("Descripción");
         panelInternal.add(jLabel11, new org.netbeans.lib.awtextra.AbsoluteConstraints(300, 90, -1, -1));
-        panelInternal.add(jTextField8, new org.netbeans.lib.awtextra.AbsoluteConstraints(300, 120, 170, 30));
-
-        comboSaller.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
-        comboSaller.addItemListener(new java.awt.event.ItemListener() {
-            public void itemStateChanged(java.awt.event.ItemEvent evt) {
-                comboSallerItemStateChanged(evt);
-            }
-        });
-        panelInternal.add(comboSaller, new org.netbeans.lib.awtextra.AbsoluteConstraints(450, 500, 140, 30));
+        panelInternal.add(txtDescription, new org.netbeans.lib.awtextra.AbsoluteConstraints(300, 120, 170, 30));
 
         jLabel13.setFont(new java.awt.Font("Jaldi", 0, 18)); // NOI18N
         jLabel13.setForeground(new java.awt.Color(118, 125, 142));
         jLabel13.setText("Estado");
         panelInternal.add(jLabel13, new org.netbeans.lib.awtextra.AbsoluteConstraints(270, 380, -1, -1));
 
-        jComboBox7.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
-        panelInternal.add(jComboBox7, new org.netbeans.lib.awtextra.AbsoluteConstraints(490, 210, 170, 30));
+        ComboProductType.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Alimento ", "Bebidas" }));
+        panelInternal.add(ComboProductType, new org.netbeans.lib.awtextra.AbsoluteConstraints(490, 210, 170, 30));
 
         jLabel15.setFont(new java.awt.Font("Jaldi", 0, 18)); // NOI18N
         jLabel15.setForeground(new java.awt.Color(118, 125, 142));
         jLabel15.setText("Disponible");
         panelInternal.add(jLabel15, new org.netbeans.lib.awtextra.AbsoluteConstraints(100, 470, -1, -1));
 
-        jComboBox9.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
-        panelInternal.add(jComboBox9, new org.netbeans.lib.awtextra.AbsoluteConstraints(270, 500, 140, 30));
-
         jLabel16.setFont(new java.awt.Font("Jaldi", 0, 18)); // NOI18N
         jLabel16.setForeground(new java.awt.Color(118, 125, 142));
         jLabel16.setText("Variantes");
-        panelInternal.add(jLabel16, new org.netbeans.lib.awtextra.AbsoluteConstraints(270, 470, -1, -1));
-
-        jComboBox10.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
-        panelInternal.add(jComboBox10, new org.netbeans.lib.awtextra.AbsoluteConstraints(100, 500, 140, 30));
+        panelInternal.add(jLabel16, new org.netbeans.lib.awtextra.AbsoluteConstraints(280, 470, -1, -1));
 
         jLabel22.setFont(new java.awt.Font("Jaldi", 0, 24)); // NOI18N
         jLabel22.setForeground(new java.awt.Color(82, 146, 222));
@@ -279,7 +313,12 @@ public class RegisterProduct extends javax.swing.JPanel {
         buttonDiscard.setForeground(new java.awt.Color(255, 255, 255));
         buttonDiscard.setIcon(new javax.swing.ImageIcon(getClass().getResource("/iconCircleMin.png"))); // NOI18N
         buttonDiscard.setText("Descartar");
-        buttonDiscard.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+        buttonDiscard.setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
+        buttonDiscard.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                buttonDiscardActionPerformed(evt);
+            }
+        });
         panelInternal.add(buttonDiscard, new org.netbeans.lib.awtextra.AbsoluteConstraints(1000, 490, 190, 50));
 
         buttonSave.setBackground(new java.awt.Color(46, 125, 18));
@@ -287,11 +326,13 @@ public class RegisterProduct extends javax.swing.JPanel {
         buttonSave.setForeground(new java.awt.Color(255, 255, 255));
         buttonSave.setIcon(new javax.swing.ImageIcon(getClass().getResource("/save.png"))); // NOI18N
         buttonSave.setText("Guardar");
-        buttonSave.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+        buttonSave.setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
+        buttonSave.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                buttonSaveActionPerformed(evt);
+            }
+        });
         panelInternal.add(buttonSave, new org.netbeans.lib.awtextra.AbsoluteConstraints(1220, 490, 200, 50));
-
-        jComboBox8.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
-        panelInternal.add(jComboBox8, new org.netbeans.lib.awtextra.AbsoluteConstraints(270, 410, 140, 30));
 
         jLabel21.setFont(new java.awt.Font("Jaldi", 0, 24)); // NOI18N
         jLabel21.setForeground(new java.awt.Color(82, 146, 222));
@@ -303,7 +344,7 @@ public class RegisterProduct extends javax.swing.JPanel {
         jLabel19.setForeground(new java.awt.Color(118, 125, 142));
         jLabel19.setText("Comentarios");
         panelInternal.add(jLabel19, new org.netbeans.lib.awtextra.AbsoluteConstraints(1010, 90, -1, -1));
-        panelInternal.add(jTextField6, new org.netbeans.lib.awtextra.AbsoluteConstraints(1010, 120, 170, 30));
+        panelInternal.add(txtVariants, new org.netbeans.lib.awtextra.AbsoluteConstraints(270, 500, 170, 30));
 
         jLabel14.setBackground(new java.awt.Color(255, 255, 255));
         jLabel14.setFont(new java.awt.Font("Jaldi", 0, 18)); // NOI18N
@@ -311,20 +352,14 @@ public class RegisterProduct extends javax.swing.JPanel {
         jLabel14.setText("Descuentos");
         panelInternal.add(jLabel14, new org.netbeans.lib.awtextra.AbsoluteConstraints(1220, 90, -1, -1));
 
-        jComboBox13.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
-        panelInternal.add(jComboBox13, new org.netbeans.lib.awtextra.AbsoluteConstraints(1220, 120, 170, 30));
-
         jLabel20.setBackground(new java.awt.Color(255, 255, 255));
         jLabel20.setFont(new java.awt.Font("Jaldi", 0, 18)); // NOI18N
         jLabel20.setForeground(new java.awt.Color(118, 125, 142));
         jLabel20.setText("Porción de comida");
         panelInternal.add(jLabel20, new org.netbeans.lib.awtextra.AbsoluteConstraints(1010, 180, -1, -1));
 
-        jComboBox11.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
-        panelInternal.add(jComboBox11, new org.netbeans.lib.awtextra.AbsoluteConstraints(1010, 210, 170, 30));
-
-        jComboBox15.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
-        panelInternal.add(jComboBox15, new org.netbeans.lib.awtextra.AbsoluteConstraints(1220, 210, 170, 30));
+        comboSchedule.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Todo el dia", "Mañana ", "Tarde", "Noche", " " }));
+        panelInternal.add(comboSchedule, new org.netbeans.lib.awtextra.AbsoluteConstraints(1220, 210, 170, 30));
 
         jLabel18.setBackground(new java.awt.Color(255, 255, 255));
         jLabel18.setFont(new java.awt.Font("Jaldi", 0, 18)); // NOI18N
@@ -332,16 +367,38 @@ public class RegisterProduct extends javax.swing.JPanel {
         jLabel18.setText("Horario de venta");
         panelInternal.add(jLabel18, new org.netbeans.lib.awtextra.AbsoluteConstraints(1220, 180, -1, -1));
 
+        txtNumProduct.addFocusListener(new java.awt.event.FocusAdapter() {
+            public void focusLost(java.awt.event.FocusEvent evt) {
+                txtNumProductFocusLost(evt);
+            }
+        });
+        panelInternal.add(txtNumProduct, new org.netbeans.lib.awtextra.AbsoluteConstraints(100, 410, 150, 30));
+
+        RadioButtonAvailable.setText("Disponible");
+        RadioButtonAvailable.setHorizontalTextPosition(javax.swing.SwingConstants.RIGHT);
+        panelInternal.add(RadioButtonAvailable, new org.netbeans.lib.awtextra.AbsoluteConstraints(280, 420, -1, -1));
+
+        RadioButtonNotavailable.setText("No disponible");
+        panelInternal.add(RadioButtonNotavailable, new org.netbeans.lib.awtextra.AbsoluteConstraints(380, 420, -1, -1));
+        panelInternal.add(txtPortion, new org.netbeans.lib.awtextra.AbsoluteConstraints(1010, 210, 170, 30));
+
+        txtDiscounts.addFocusListener(new java.awt.event.FocusAdapter() {
+            public void focusLost(java.awt.event.FocusEvent evt) {
+                txtDiscountsFocusLost(evt);
+            }
+        });
+        panelInternal.add(txtDiscounts, new org.netbeans.lib.awtextra.AbsoluteConstraints(1220, 120, 170, 30));
+        panelInternal.add(txtComments, new org.netbeans.lib.awtextra.AbsoluteConstraints(1010, 120, 170, 30));
+
         jPanel1.setBackground(new java.awt.Color(255, 255, 255));
 
-        buttonUpload.setBackground(new java.awt.Color(255, 255, 255));
         buttonUpload.setFont(new java.awt.Font("Dialog", 1, 16)); // NOI18N
         buttonUpload.setForeground(new java.awt.Color(0, 102, 0));
         buttonUpload.setIcon(new javax.swing.ImageIcon(getClass().getResource("/uploadIcon.png"))); // NOI18N
         buttonUpload.setText("Cargar");
         buttonUpload.setToolTipText("Cargar desde Excel");
         buttonUpload.setBorder(BorderFactory.createLineBorder(new Color(0,102,0), 2));
-        buttonUpload.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+        buttonUpload.setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
         buttonUpload.setHorizontalTextPosition(javax.swing.SwingConstants.RIGHT);
 
         buttonTemplate.setBackground(new java.awt.Color(0, 102, 0));
@@ -351,7 +408,7 @@ public class RegisterProduct extends javax.swing.JPanel {
         buttonTemplate.setText("Plantilla");
         buttonTemplate.setToolTipText("Plantilla para cargar datos");
         buttonTemplate.setBorder(null);
-        buttonTemplate.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+        buttonTemplate.setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
         buttonTemplate.setHorizontalTextPosition(javax.swing.SwingConstants.RIGHT);
 
         jLabel1.setFont(new java.awt.Font("Jaldi", 0, 30)); // NOI18N
@@ -405,38 +462,157 @@ public class RegisterProduct extends javax.swing.JPanel {
         );
     }// </editor-fold>//GEN-END:initComponents
 
-    /**
-     * comprueba si el item seleccionado es el icono de +
-     * en caso de ser verdadero muestra el dialog para registrar
-     * a un nuevo proveedor
-     * @param evt 
-     */
-    private void comboSallerItemStateChanged(java.awt.event.ItemEvent evt) {//GEN-FIRST:event_comboSallerItemStateChanged
-        if (evt.getStateChange() == ItemEvent.SELECTED) {
-            String selection = (String) comboSaller.getSelectedItem();
-            if (selection.equals("+")) {
-                System.out.println("Mostrar registro");
-                dialogRegisterSaller.show();
-            }
-        }
-    }//GEN-LAST:event_comboSallerItemStateChanged
+    private void txtPNameKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtPNameKeyReleased
+        verify(evt, txtPName, "^[A-Za-zÁ-úüÜñÑ]*$");
+    }//GEN-LAST:event_txtPNameKeyReleased
 
+    private void txtPBuysFocusLost(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_txtPBuysFocusLost
+        String price = txtPBuys.getText().trim();
+        String regex = "^(\\d+\\.?\\d*|\\d*\\.\\d+)$";  // Acepta números flotantes (con o sin parte entera)
+
+        Pattern pattern = Pattern.compile(regex);
+        Matcher matcher = pattern.matcher(price);
+
+        if (matcher.matches()) {
+            System.out.println("Precio válido");
+            // Puedes realizar acciones adicionales si el precio es válido
+        } else {
+            txtPBuys.requestFocus();
+            // Puedes mostrar un mensaje de error o realizar otras acciones si el precio no es válido
+        }
+    }//GEN-LAST:event_txtPBuysFocusLost
+
+    private void txtPSaleFocusLost(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_txtPSaleFocusLost
+        String price = txtPSale.getText().trim();
+        String regex = "^(\\d+\\.?\\d*|\\d*\\.\\d+)$";  // Acepta números flotantes (con o sin parte entera)
+
+        Pattern pattern = Pattern.compile(regex);
+        Matcher matcher = pattern.matcher(price);
+
+        if (matcher.matches()) {
+            System.out.println("Precio válido");
+            // Puedes realizar acciones adicionales si el precio es válido
+        } else {
+            txtPSale.requestFocus();
+            // Puedes mostrar un mensaje de error o realizar otras acciones si el precio no es válido
+        }
+    }//GEN-LAST:event_txtPSaleFocusLost
+
+    private void txtNumProductFocusLost(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_txtNumProductFocusLost
+        String price = txtNumProduct.getText().trim();
+        String regex = "^\\d+$";  // Acepta números enteros
+
+        Pattern pattern = Pattern.compile(regex);
+        Matcher matcher = pattern.matcher(price);
+
+        if (matcher.matches()) {
+            System.out.println("Número entero válido");
+            // Puedes realizar acciones adicionales si el número entero es válido
+        } else {
+            txtNumProduct.requestFocus();
+            // Puedes mostrar un mensaje de error o realizar otras acciones si el número no es válido
+        }
+    }//GEN-LAST:event_txtNumProductFocusLost
+
+    private void txtDiscountsFocusLost(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_txtDiscountsFocusLost
+
+        String discountStr = txtDiscounts.getText().trim();
+
+        // Expresión regular que acepta números enteros del 0 al 100
+        String regex = "^(100|[0-9]{1,2})$";
+
+        Pattern pattern = Pattern.compile(regex);
+        Matcher matcher = pattern.matcher(discountStr);
+
+        if (matcher.matches()) {
+            int discount = Integer.parseInt(discountStr);
+            System.out.println("Descuento válido: " + discount + "%");
+            // Puedes realizar acciones adicionales si el descuento es válido
+        } else {
+            txtDiscounts.requestFocus();
+            // Puedes mostrar un mensaje de error o realizar otras acciones si el descuento no es válido
+        }
+    }//GEN-LAST:event_txtDiscountsFocusLost
+
+    //boton para guardar los productos en la base de datos
+    private void buttonSaveActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_buttonSaveActionPerformed
+        // Verificar que todos los campos estén llenos
+        if (camposEstanLlenos()) {
+            // Todos los campos están llenos, proceder a crear y guardar el producto
+            Product product = new Product.Builder()
+                    .withId(35)
+                    .withNumProducto(Integer.valueOf(txtNumProduct.getText().trim()))
+                    .withNombre(txtPName.getText().trim())
+                    .withPreciocom(Double.valueOf(txtPBuys.getText().trim()))
+                   .withPrecioventa(Double.valueOf(txtPSale.getText().trim()))
+                    .withCodigobarra(txtBarcode.getText().trim())
+                    .withTipo(String.valueOf(ComboProductType.getSelectedItem()))
+                    .withDescripcion(txtDescription.getText().trim())
+                    .withEstado(RadioButtonAvailable.isSelected() ? "Disponible" : "No disponible")
+                    .withDisponible(txtAvailable.getText().trim())
+                    .withVariente(txtVariants.getText().trim())
+                   
+                    .build();
+
+            controller.create(product);
+        } else {
+            // Mostrar un mensaje indicando que todos los campos deben estar llenos
+            JOptionPane.showMessageDialog(null, "Todos los campos deben estar llenos", "Error", JOptionPane.ERROR_MESSAGE);
+        }
+    }//GEN-LAST:event_buttonSaveActionPerformed
+
+    private void buttonDiscardActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_buttonDiscardActionPerformed
+        limpiarCampos();
+    }//GEN-LAST:event_buttonDiscardActionPerformed
+
+    //verifica que el usuario rellene todos los caompos y en caso de que no, deja guardar 
+    private boolean camposEstanLlenos() {
+        // Verificar que todos los campos estén llenos
+        return !txtNumProduct.getText().trim().isEmpty()
+                && !txtPName.getText().trim().isEmpty()
+                && !txtPBuys.getText().trim().isEmpty()
+                && !txtPSale.getText().trim().isEmpty()
+                && !txtBarcode.getText().trim().isEmpty()
+                && ComboProductType.getSelectedItem() != null
+                && !txtDescription.getText().trim().isEmpty()
+                && !txtAvailable.getText().trim().isEmpty()
+                && !txtVariants.getText().trim().isEmpty()
+                && !txtComments.getText().trim().isEmpty()
+                && !txtDiscounts.getText().trim().isEmpty()
+                && !txtPortion.getText().trim().isEmpty()
+                && comboSchedule.getSelectedItem() != null;
+    }
+
+    private void limpiarCampos() {
+        // Limpiar todos los campos del formulario
+        txtNumProduct.setText("");
+        txtPName.setText("");
+        txtPBuys.setText("");
+        txtPSale.setText("");
+        txtBarcode.setText("");
+        ComboProductType.setSelectedItem(null);
+        txtDescription.setText("");
+        RadioButtonAvailable.setSelected(false);  // Desmarcar el botón de opción
+        txtAvailable.setText("");
+        txtVariants.setText("");
+        txtComments.setText("");
+        txtDiscounts.setText("");
+        txtPortion.setText("");
+        comboSchedule.setSelectedItem(null);
+    }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JComboBox<String> ComboProductType;
+    private javax.swing.JRadioButton RadioButtonAvailable;
+    private javax.swing.JRadioButton RadioButtonNotavailable;
     private javax.swing.JButton buttonDiscard;
+    private javax.swing.ButtonGroup buttonGroup1;
     private javax.swing.JButton buttonSave;
     private javax.swing.JButton buttonSaveSaller;
     private javax.swing.JButton buttonTemplate;
     private javax.swing.JButton buttonUpload;
-    private javax.swing.JComboBox<String> comboSaller;
+    private javax.swing.JComboBox<String> comboSchedule;
     private javax.swing.JDialog dialogRegisterSaller;
-    private javax.swing.JComboBox<String> jComboBox10;
-    private javax.swing.JComboBox<String> jComboBox11;
-    private javax.swing.JComboBox<String> jComboBox13;
-    private javax.swing.JComboBox<String> jComboBox15;
-    private javax.swing.JComboBox<String> jComboBox7;
-    private javax.swing.JComboBox<String> jComboBox8;
-    private javax.swing.JComboBox<String> jComboBox9;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel10;
     private javax.swing.JLabel jLabel11;
@@ -452,23 +628,26 @@ public class RegisterProduct extends javax.swing.JPanel {
     private javax.swing.JLabel jLabel22;
     private javax.swing.JLabel jLabel23;
     private javax.swing.JLabel jLabel3;
-    private javax.swing.JLabel jLabel4;
     private javax.swing.JLabel jLabel5;
     private javax.swing.JLabel jLabel6;
     private javax.swing.JLabel jLabel7;
     private javax.swing.JLabel jLabel8;
     private javax.swing.JLabel jLabel9;
     private javax.swing.JPanel jPanel1;
-    private javax.swing.JTextField jTextField1;
-    private javax.swing.JTextField jTextField3;
-    private javax.swing.JTextField jTextField4;
-    private javax.swing.JTextField jTextField5;
-    private javax.swing.JTextField jTextField6;
-    private javax.swing.JTextField jTextField7;
-    private javax.swing.JTextField jTextField8;
     private javax.swing.JPanel panelInternal;
     private javax.swing.JPanel panelRegisterDialog;
+    private javax.swing.JTextField txtAvailable;
+    private javax.swing.JTextField txtBarcode;
+    private javax.swing.JTextField txtComments;
     private javax.swing.JTextField txtDescSaller;
+    private javax.swing.JTextField txtDescription;
+    private javax.swing.JTextField txtDiscounts;
     private javax.swing.JTextField txtNameSaller;
+    private javax.swing.JTextField txtNumProduct;
+    private javax.swing.JTextField txtPBuys;
+    private javax.swing.JTextField txtPName;
+    private javax.swing.JTextField txtPSale;
+    private javax.swing.JTextField txtPortion;
+    private javax.swing.JTextField txtVariants;
     // End of variables declaration//GEN-END:variables
 }

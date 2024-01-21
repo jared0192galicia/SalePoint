@@ -1,7 +1,5 @@
-/*
- * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
- * Click nbfs://nbhost/SystemFileSystem/Templates/GUIForms/JPanel.java to edit this template
- */package com.unsis.view.panel;
+
+package com.unsis.view.panel;
 
 import com.unsis.models.entity.Employee;
 import com.unsis.view.Main;
@@ -31,7 +29,7 @@ public class ListEmployes extends javax.swing.JPanel {
     public ListEmployes(Main mainWindow) {
         initComponents();
 
-        this.setBounds(217, 0, 1200, 692);
+        this.setBounds(217, 0, 1700, 512);
         // Obtener el JTableHeader (encabezado de la tabla)
         table.getTableHeader().setFont(new Font("Arial", Font.BOLD, 18));
         table.getTableHeader().setOpaque(false);
@@ -66,7 +64,6 @@ public class ListEmployes extends javax.swing.JPanel {
         jPanel1.setBackground(new java.awt.Color(255, 255, 255));
         jPanel1.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
-        buttonCreate.setBackground(new java.awt.Color(255, 255, 255));
         buttonCreate.setFont(new java.awt.Font("Dialog", 1, 16)); // NOI18N
         buttonCreate.setForeground(new java.awt.Color(0, 153, 0));
         buttonCreate.setIcon(new javax.swing.ImageIcon(getClass().getResource("/iconPlus.png"))); // NOI18N
@@ -94,7 +91,6 @@ public class ListEmployes extends javax.swing.JPanel {
         buttonExport.setVerticalTextPosition(javax.swing.SwingConstants.BOTTOM);
         jPanel1.add(buttonExport, new org.netbeans.lib.awtextra.AbsoluteConstraints(1340, 25, 136, 40));
 
-        buttonModify.setBackground(new java.awt.Color(255, 255, 255));
         buttonModify.setFont(new java.awt.Font("Dialog", 1, 16)); // NOI18N
         buttonModify.setForeground(new java.awt.Color(101, 128, 223));
         buttonModify.setIcon(new javax.swing.ImageIcon(getClass().getResource("/iconEdit.png"))); // NOI18N
@@ -104,9 +100,13 @@ public class ListEmployes extends javax.swing.JPanel {
         buttonModify.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
         buttonModify.setMaximumSize(new java.awt.Dimension(157, 35));
         buttonModify.setMinimumSize(new java.awt.Dimension(157, 35));
+        buttonModify.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                buttonModifyActionPerformed(evt);
+            }
+        });
         jPanel1.add(buttonModify, new org.netbeans.lib.awtextra.AbsoluteConstraints(280, 10, 170, 60));
 
-        buttonDelete.setBackground(new java.awt.Color(255, 255, 255));
         buttonDelete.setFont(new java.awt.Font("Dialog", 1, 16)); // NOI18N
         buttonDelete.setForeground(new java.awt.Color(255, 0, 51));
         buttonDelete.setIcon(new javax.swing.ImageIcon(getClass().getResource("/iconTrash.png"))); // NOI18N
@@ -127,7 +127,6 @@ public class ListEmployes extends javax.swing.JPanel {
         jPanel2.setOpaque(false);
         jPanel2.setPreferredSize(new java.awt.Dimension(453, 500));
 
-        table.setBackground(new java.awt.Color(255, 255, 255));
         table.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
 
@@ -218,36 +217,11 @@ public class ListEmployes extends javax.swing.JPanel {
         }
     }
     private void formComponentShown(java.awt.event.ComponentEvent evt) {//GEN-FIRST:event_formComponentShown
-        // Llamada al método findAllEntities para obtener la lista de empleados
-        ArrayList<Employee> employees = jpaController.findAllEntities(Employee.class);
-
-        // Configuración del modelo de la tabla
-        DefaultTableModel tableModel = new DefaultTableModel();
-        table.setModel(tableModel);
-
-        // Agregar columnas al modelo
-        tableModel.addColumn("Número Empleado");
-        tableModel.addColumn("Nombre");
-        tableModel.addColumn("Apellidos");
-        tableModel.addColumn("Área");
-        tableModel.addColumn("Estatus");
-
-        // Llenar la tabla con los datos de los empleados
-        for (Employee employee : employees) {
-            Object[] rowData = {
-                employee.getNumempleado(),
-                employee.getNombre(),
-                employee.getApellidop(),
-                employee.getPuesto(),
-                employee.getEstado()
-            };
-            tableModel.addRow(rowData);
-        }
-        System.out.println("Mostrado");
+       this.showModel();
     }//GEN-LAST:event_formComponentShown
 
     public Employee findEmployee() {
-        int filaSeleccionada = table.getSelectedRow();
+          int filaSeleccionada = table.getSelectedRow();
 
         if (filaSeleccionada != -1) { // Verifica que haya una fila seleccionada
             var codeEmployee = table.getValueAt(filaSeleccionada, 0);
@@ -262,6 +236,7 @@ public class ListEmployes extends javax.swing.JPanel {
             }
         }
         return null;
+       
     }
 
     public Account findAccount(Employee employee) {
@@ -299,6 +274,10 @@ public class ListEmployes extends javax.swing.JPanel {
         }
 
     }//GEN-LAST:event_buttonDeleteActionPerformed
+
+    private void buttonModifyActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_buttonModifyActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_buttonModifyActionPerformed
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
