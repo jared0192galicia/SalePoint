@@ -57,29 +57,32 @@ marca VARCHAR,
 PRIMARY KEY(id)
 );
 
-CREATE TABLE "Sales"(
-id serial,
-idEmpleado int,
-sabor VARCHAR,
-tipo_orden VARCHAR,
-comentarios VARCHAR,
-nombre_comprador VARCHAR,
-codigo_barra VARCHAR,
-PRIMARY KEY(id),
-FOREIGN KEY (idEmpleado) REFERENCES "Employee"(id)
+CREATE TABLE "Product"(
+  id serial,
+  codigoBarra VARCHAR NOT NULL UNIQUE,
+  nombre varchar,
+  precioCom float,
+  precioVenta float,
+  tipo VARCHAR,
+  descripcion VARCHAR(25),
+  numProducto INT,
+  estado VARCHAR(4),
+  disponible int,
+  variante VARCHAR,
+  PRIMARY KEY(id)
 );
 
-CREATE TABLE "Product"(
-id serial,
-nombre varchar,
-precioCom float,
-precioVenta float,
-codigoBarra VARCHAR,
-tipo VARCHAR,
-descripcion VARCHAR(25),
-numProducto INT,
-estado VARCHAR(4),
-disponible int,
-variante VARCHAR,
-PRIMARY KEY(id)
+CREATE TABLE "Sales"(
+  id serial,
+  idVenta serial,
+  idEmpleado int,
+  idProducto VARCHAR,
+  tipoOrden VARCHAR,
+  comentarios VARCHAR,
+  nombreComprador VARCHAR,
+  codigoBarra VARCHAR,
+  PRIMARY KEY(id),
+  FOREIGN KEY (idEmpleado) REFERENCES "Employee"(id),
+  FOREIGN KEY (idProducto) REFERENCES "Product"(codigoBarra)
 );
+
