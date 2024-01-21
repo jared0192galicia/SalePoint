@@ -74,7 +74,7 @@ CREATE TABLE "Product"(
 
 CREATE TABLE "Sales"(
   id serial,
-  idVenta serial,
+  idVenta int,
   idEmpleado int,
   idProducto VARCHAR,
   tipoOrden VARCHAR,

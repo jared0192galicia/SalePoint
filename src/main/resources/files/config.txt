@@ -1,0 +1,4 @@
+VAT=16%
+Decimals=22
+Email=
+Contact=
