@@ -10,7 +10,7 @@ import javax.swing.Icon;
  */
 public class ToolBar extends javax.swing.JPanel {
 
-    private Main mainWindow;
+    private final Main mainWindow;
     /**
      * Creates new form ToolBar
      * @param mainWindow
@@ -46,6 +46,7 @@ public class ToolBar extends javax.swing.JPanel {
         labelProfile = new javax.swing.JLabel();
         jLabel1 = new javax.swing.JLabel();
         buttonCloseSesion = new javax.swing.JButton();
+        buttonBack = new javax.swing.JButton();
 
         setBackground(new java.awt.Color(255, 255, 255));
 
@@ -66,6 +67,16 @@ public class ToolBar extends javax.swing.JPanel {
             }
         });
 
+        buttonBack.setIcon(new javax.swing.ImageIcon(getClass().getResource("/backArrow.png"))); // NOI18N
+        buttonBack.setBorder(null);
+        buttonBack.setContentAreaFilled(false);
+        buttonBack.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+        buttonBack.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                buttonBackActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
         this.setLayout(layout);
         layout.setHorizontalGroup(
@@ -75,17 +86,23 @@ public class ToolBar extends javax.swing.JPanel {
                 .addComponent(labelProfile)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 131, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 794, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 708, Short.MAX_VALUE)
+                .addComponent(buttonBack, javax.swing.GroupLayout.PREFERRED_SIZE, 68, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(18, 18, 18)
                 .addComponent(buttonCloseSesion)
                 .addGap(18, 18, 18))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(layout.createSequentialGroup()
-                .addComponent(buttonCloseSesion, javax.swing.GroupLayout.DEFAULT_SIZE, 68, Short.MAX_VALUE)
-                .addContainerGap())
             .addComponent(labelProfile, javax.swing.GroupLayout.PREFERRED_SIZE, 0, Short.MAX_VALUE)
             .addComponent(jLabel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+            .addGroup(layout.createSequentialGroup()
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(buttonCloseSesion, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addGroup(layout.createSequentialGroup()
+                        .addContainerGap()
+                        .addComponent(buttonBack, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
+                .addContainerGap())
         );
     }// </editor-fold>//GEN-END:initComponents
 
@@ -94,8 +111,13 @@ public class ToolBar extends javax.swing.JPanel {
         new Login().setVisible(true);
     }//GEN-LAST:event_buttonCloseSesionMouseClicked
 
+    private void buttonBackActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_buttonBackActionPerformed
+        mainWindow.showPreviusPanel();
+    }//GEN-LAST:event_buttonBackActionPerformed
+
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JButton buttonBack;
     private javax.swing.JButton buttonCloseSesion;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel labelProfile;

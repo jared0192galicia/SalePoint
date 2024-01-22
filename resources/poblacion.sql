@@ -73,3 +73,7 @@ VALUES
   (2, 'Editar Productos', 'Modifica los productos');
 
 
+--------------------------------
+
+INSERT INTO "Company" ("name", descripcion, logo) VALUES ('Tienda', 'nose', './');
+
