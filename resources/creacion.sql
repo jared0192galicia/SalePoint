@@ -74,4 +74,4 @@ UPDATE
 SET
   idcuenta = 1
 WHERE
-  idcuenta IS NULL;
+  idcuenta IS NULL; 

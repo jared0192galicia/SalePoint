@@ -1,31 +1,23 @@
-/*
- * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
- * Click nbfs://nbhost/SystemFileSystem/Templates/GUIForms/JPanel.java to edit this template
- */
 package com.unsis.view.panel;
 
-import com.toedter.calendar.JCalendar;
 import com.unsis.clases.Tools;
 import com.unsis.controller.JpaController;
-import com.unsis.models.entity.Access;
 import com.unsis.models.entity.Account;
 import com.unsis.models.entity.Employee;
-import com.unsis.models.entity.Section;
 import com.unsis.view.Main;
 import java.awt.Color;
-import java.awt.Font;
-import java.awt.event.KeyEvent;
+//import java.awt.Font;
+import java.io.FileOutputStream;
+import java.io.IOException;
 import java.util.ArrayList;
-import java.util.Date;
 import java.util.List;
 import java.util.Objects;
-import java.util.regex.Matcher;
-import java.util.regex.Pattern;
 import javax.swing.BorderFactory;
-import javax.swing.ImageIcon;
 import javax.swing.JOptionPane;
-import javax.swing.JTextField;
 import javax.swing.table.DefaultTableModel;
+import org.apache.poi.ss.usermodel.*;
+import org.apache.poi.xssf.usermodel.XSSFWorkbook;
+//import org.apache.poi.xssf.usermodel.XSSFWorkbook;
 
 /**
  *
@@ -35,6 +27,8 @@ public class ListEmployes extends javax.swing.JPanel {
 
     private final Main mainWindow;
     private final JpaController jpaController;
+    
+    private List<Employee> employeeList;
 
     /**
      * Creates new form HumanResourcesPanel
@@ -46,7 +40,7 @@ public class ListEmployes extends javax.swing.JPanel {
 
         this.setBounds(217, 0, 1700, 512);
         // Obtener el JTableHeader (encabezado de la tabla)
-        table.getTableHeader().setFont(new Font("Arial", Font.BOLD, 18));
+        table.getTableHeader().setFont(new java.awt.Font("Arial", java.awt.Font.BOLD, 18));
         table.getTableHeader().setOpaque(false);
         table.getTableHeader().setBackground(new Color(32, 136, 203));
         table.getTableHeader().setForeground(Color.WHITE);
@@ -105,6 +99,11 @@ public class ListEmployes extends javax.swing.JPanel {
         buttonExport.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
         buttonExport.setHorizontalTextPosition(javax.swing.SwingConstants.RIGHT);
         buttonExport.setVerticalTextPosition(javax.swing.SwingConstants.BOTTOM);
+        buttonExport.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                buttonExportActionPerformed(evt);
+            }
+        });
         jPanel1.add(buttonExport, new org.netbeans.lib.awtextra.AbsoluteConstraints(1340, 25, 136, 40));
 
         buttonModify.setBackground(new java.awt.Color(255, 255, 255));
@@ -214,10 +213,73 @@ public class ListEmployes extends javax.swing.JPanel {
         this.mainWindow.setView("Alta de Empleado");
     }//GEN-LAST:event_buttonCreateActionPerformed
 
+    private void exportToExcel(String outputPath) {
+        try (Workbook workbook = new XSSFWorkbook()) {
+            Sheet sheet = workbook.createSheet("Employees");
+
+            // Crear encabezados
+            Row headerRow = sheet.createRow(0);
+            String[] columns = {"Número de Empleado", "Nombre", "Apellido Paterno", "Apellido Materno", "Fecha Nacimiento", "Correo", "Teléfono", "Fecha Ingreso", "Estado", "Puesto"};
+            
+            CellStyle headerStyle = createHeaderStyle(workbook);
+
+            for (int i = 0; i < columns.length; i++) {
+                Cell cell = headerRow.createCell(i);
+                cell.setCellValue(columns[i]);
+                cell.setCellStyle(headerStyle);
+            }
+
+            // Agregar datos de empleados
+            int rowNum = 1;
+            for (Employee employee : employeeList) {
+                Row row = sheet.createRow(rowNum++);
+                row.createCell(1).setCellValue(employee.getNumempleado());
+                row.createCell(2).setCellValue(employee.getNombre());
+                row.createCell(3).setCellValue(employee.getApellidop());
+                row.createCell(4).setCellValue(employee.getApellidom());
+                row.createCell(5).setCellValue(employee.getFechanac().toString()); // Ajusta según el formato de fecha que desees
+                row.createCell(6).setCellValue(employee.getCorreo());
+                row.createCell(7).setCellValue(employee.getTelefono());
+                row.createCell(8).setCellValue(employee.getFechaing().toString()); // Ajusta según el formato de fecha que desees
+                row.createCell(9).setCellValue(employee.getEstado());
+                row.createCell(10).setCellValue(employee.getPuesto());
+                 
+                // Autoajustar el ancho de las columnas después de agregar los datos a la fila
+                for (int i = 0; i < columns.length; i++) {
+                    sheet.autoSizeColumn(i);
+                }
+            }
+
+            // Escribir el archivo Excel
+            try (FileOutputStream fileOut = new FileOutputStream(outputPath)) {
+                workbook.write(fileOut);
+                System.out.println("Archivo Excel generado con éxito en: " + outputPath);
+            }
+
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+    }
+    
+    private static CellStyle createHeaderStyle(Workbook workbook) {
+        CellStyle style = workbook.createCellStyle();
+
+        // Establecer el color de fondo
+        style.setFillForegroundColor(IndexedColors.DARK_TEAL.getIndex()); // Color: 0, 102, 102
+        style.setFillPattern(FillPatternType.SOLID_FOREGROUND);
+
+        // Establecer el color de la letra (fuente)
+        Font font = workbook.createFont();
+        font.setColor(IndexedColors.WHITE.getIndex());
+        style.setFont(font);
+
+        return style;
+    }
+    
     public void showModel() {
         // Llamada al método findAllEntities para obtener la lista de empleados
-        ArrayList<Employee> employees = new  JpaController().findAllEntities(Employee.class);
-
+        ArrayList<Employee> employees = new JpaController().findAllEntities(Employee.class);
+        employeeList = employees;
         // Configuración del modelo de la tabla
         DefaultTableModel tableModel = (DefaultTableModel) table.getModel();
         // Eliminar filas existentes
@@ -295,8 +357,31 @@ public class ListEmployes extends javax.swing.JPanel {
         if (employee != null) {
             UpdateEmployee.setEmploye(employee);
             mainWindow.setView("Editar Emplado");
-        } 
+        }
     }//GEN-LAST:event_buttonModifyActionPerformed
+    
+    private void buttonExportActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_buttonExportActionPerformed
+        exportToExcel("./reports/" + Tools.getFormatExcelFileName("Empleados"));
+//        try {
+//            String reportPath = "src/main/java/com/unsis/reports/Empleados.jasper";
+//
+//            // Cargar el informe .jasper (ya compilado)
+//            JasperReport jasperReport = (JasperReport) JRLoader.loadObjectFromFile(reportPath);
+//
+//            JRBeanCollectionDataSource dataSource = 
+//                    new JRBeanCollectionDataSource(jpaController.findAllEntities(Employee.class));
+//            JasperPrint jasperPrint = JasperFillManager.fillReport(jasperReport, null, dataSource);
+//
+//            // Exportar el informe a PDF
+//            JasperExportManager.exportReportToPdfFile(jasperPrint, "./reports/Empleados.pdf");
+//
+//            System.out.println("¡Informe PDF generado con éxito!");
+//
+//        } catch (JRException e) {
+//            e.printStackTrace();
+//        }
+
+    }//GEN-LAST:event_buttonExportActionPerformed
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables

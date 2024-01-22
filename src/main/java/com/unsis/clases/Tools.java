@@ -1,6 +1,8 @@
 package com.unsis.clases;
 
 import java.awt.Image;
+import java.text.SimpleDateFormat;
+import java.util.Date;
 import javax.swing.Icon;
 import javax.swing.ImageIcon;
 import org.mindrot.jbcrypt.BCrypt;
@@ -35,5 +37,16 @@ public class Tools {
     public static String cryptPassword(String password) {
         String hashedPassword = BCrypt.hashpw(password, BCrypt.gensalt(12));
         return hashedPassword;
+    }
+    
+    public static String getFormatExcelFileName(String name) {
+            // Obtener la fecha y hora actual
+            SimpleDateFormat dateFormat = new SimpleDateFormat("yyyyMMdd_HHmmss");
+            String timestamp = dateFormat.format(new Date());
+
+            // Nombrar el archivo con "Empleados + fecha y hora actual"
+            String fileName = name + "_" + timestamp + ".xlsx";
+            
+            return fileName;
     }
 }
