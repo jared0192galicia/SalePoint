@@ -51,6 +51,8 @@ public class RegisterProduct extends javax.swing.JPanel {
             // Consume el evento para evitar que el carácter no válido se agregue al JTextField// Obtiene el texto actual del JTextField
             String textoActual = field.getText();
 
+            JOptionPane.showMessageDialog(null, "Solo se permiten caracteres válidos según la expresión regular: " + regex, "Advertencia", JOptionPane.WARNING_MESSAGE);
+
             // Elimina el último carácter del texto actual
             if (textoActual.length() > 0) {
                 String textoSinUltimoCaracter = textoActual.substring(0, textoActual.length() - 1);
@@ -478,7 +480,7 @@ public class RegisterProduct extends javax.swing.JPanel {
             // Puedes realizar acciones adicionales si el precio es válido
         } else {
             txtPBuys.requestFocus();
-            // Puedes mostrar un mensaje de error o realizar otras acciones si el precio no es válido
+            System.out.println("Precio invalido");
         }
     }//GEN-LAST:event_txtPBuysFocusLost
 
@@ -494,7 +496,7 @@ public class RegisterProduct extends javax.swing.JPanel {
             // Puedes realizar acciones adicionales si el precio es válido
         } else {
             txtPSale.requestFocus();
-            // Puedes mostrar un mensaje de error o realizar otras acciones si el precio no es válido
+            System.out.println("Precio invalido");
         }
     }//GEN-LAST:event_txtPSaleFocusLost
 
@@ -510,7 +512,7 @@ public class RegisterProduct extends javax.swing.JPanel {
             // Puedes realizar acciones adicionales si el número entero es válido
         } else {
             txtNumProduct.requestFocus();
-            // Puedes mostrar un mensaje de error o realizar otras acciones si el número no es válido
+            System.out.println("Solo se aceptan numeros");
         }
     }//GEN-LAST:event_txtNumProductFocusLost
 
@@ -527,10 +529,11 @@ public class RegisterProduct extends javax.swing.JPanel {
         if (matcher.matches()) {
             int discount = Integer.parseInt(discountStr);
             System.out.println("Descuento válido: " + discount + "%");
-            // Puedes realizar acciones adicionales si el descuento es válido
+
         } else {
             txtDiscounts.requestFocus();
-            // Puedes mostrar un mensaje de error o realizar otras acciones si el descuento no es válido
+
+            System.out.println("El descuento es un numero invalido");
         }
     }//GEN-LAST:event_txtDiscountsFocusLost
 
@@ -544,14 +547,13 @@ public class RegisterProduct extends javax.swing.JPanel {
                     .withNumProducto(Integer.valueOf(txtNumProduct.getText().trim()))
                     .withNombre(txtPName.getText().trim())
                     .withPreciocom(Double.valueOf(txtPBuys.getText().trim()))
-                   .withPrecioventa(Double.valueOf(txtPSale.getText().trim()))
+                    .withPrecioventa(Double.valueOf(txtPSale.getText().trim()))
                     .withCodigobarra(txtBarcode.getText().trim())
                     .withTipo(String.valueOf(ComboProductType.getSelectedItem()))
                     .withDescripcion(txtDescription.getText().trim())
                     .withEstado(RadioButtonAvailable.isSelected() ? "Disponible" : "No disponible")
                     .withDisponible(txtAvailable.getText().trim())
                     .withVariente(txtVariants.getText().trim())
-                   
                     .build();
 
             controller.create(product);
@@ -576,10 +578,6 @@ public class RegisterProduct extends javax.swing.JPanel {
                 && ComboProductType.getSelectedItem() != null
                 && !txtDescription.getText().trim().isEmpty()
                 && !txtAvailable.getText().trim().isEmpty()
-                && !txtVariants.getText().trim().isEmpty()
-                && !txtComments.getText().trim().isEmpty()
-                && !txtDiscounts.getText().trim().isEmpty()
-                && !txtPortion.getText().trim().isEmpty()
                 && comboSchedule.getSelectedItem() != null;
     }
 
