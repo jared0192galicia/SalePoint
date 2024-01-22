@@ -22,7 +22,7 @@ public class PuntoVenta {
     }
 
     /**
-     *
+     * Compara si ya existe registrada una marca
      * @return
      */
     private boolean loadedMarch() {
@@ -30,6 +30,7 @@ public class PuntoVenta {
             new JpaController().findAllEntities(Company.class).get(0);
             return true;
         } catch (Exception e) {
+            System.err.println(e.getMessage());
             return false;
         }
     }

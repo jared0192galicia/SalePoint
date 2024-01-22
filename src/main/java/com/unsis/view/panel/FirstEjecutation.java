@@ -230,13 +230,12 @@ public class FirstEjecutation extends javax.swing.JFrame {
         }
 
         if (logo.equals("")) {
-            int response = JOptionPane.showConfirmDialog(null, "¿Decea conttinuar sin un logotipo?");
+            int response = JOptionPane.showConfirmDialog(null, "¿Decea continuar sin un logotipo?");
             if (JOptionPane.OK_OPTION != response) {
                 return;
             }
         }
 
-        System.out.println("Adios");
         Company company = new Company(0, name);
         company.setLogo("/" + (logo.equals("") ? "default" : logo));
         company.setDescripcion(description);
