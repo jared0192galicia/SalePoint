@@ -8,7 +8,9 @@
         <Property name="approveButtonText" type="java.lang.String" value="Guardar"/>
         <Property name="approveButtonToolTipText" type="java.lang.String" value=""/>
         <Property name="dialogTitle" type="java.lang.String" value="Descargar platilla"/>
-        <Property name="fileSelectionMode" type="int" value="1"/>
+        <Property name="fileFilter" type="javax.swing.filechooser.FileFilter" editor="org.netbeans.modules.form.RADConnectionPropertyEditor">
+          <Connection code="new FileNameExtensionFilter(&quot;Documento Excel&quot;, &quot;xlsx&quot;)" type="code"/>
+        </Property>
       </Properties>
     </Component>
   </NonVisualComponents>

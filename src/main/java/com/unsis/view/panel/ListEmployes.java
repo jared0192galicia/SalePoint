@@ -6,8 +6,6 @@ import com.unsis.models.entity.Account;
 import com.unsis.models.entity.Employee;
 import com.unsis.view.Main;
 import java.awt.Color;
-import java.io.File;
-//import java.awt.Font;
 import java.io.FileOutputStream;
 import java.io.IOException;
 import java.util.ArrayList;
@@ -17,6 +15,7 @@ import javax.swing.BorderFactory;
 import javax.swing.Icon;
 import javax.swing.JFileChooser;
 import javax.swing.JOptionPane;
+import javax.swing.filechooser.FileNameExtensionFilter;
 import javax.swing.table.DefaultTableModel;
 import net.sf.jasperreports.engine.JRException;
 import net.sf.jasperreports.engine.JasperExportManager;
@@ -37,7 +36,7 @@ public class ListEmployes extends javax.swing.JPanel {
 
     private final Main mainWindow;
     private final JpaController jpaController;
-    
+
     private List<Employee> employeeList;
 
     /**
@@ -57,7 +56,7 @@ public class ListEmployes extends javax.swing.JPanel {
 
         this.mainWindow = mainWindow;
         this.jpaController = new JpaController();
-        
+
         this.resizeImages();
     }
 
@@ -92,7 +91,7 @@ public class ListEmployes extends javax.swing.JPanel {
         fileChooser.setApproveButtonText("Guardar");
         fileChooser.setApproveButtonToolTipText("");
         fileChooser.setDialogTitle("Descargar platilla");
-        fileChooser.setFileSelectionMode(javax.swing.JFileChooser.DIRECTORIES_ONLY);
+        fileChooser.setFileFilter(new FileNameExtensionFilter("Documento Excel", "xlsx"));
 
         setBackground(new java.awt.Color(240, 240, 240));
         addComponentListener(new java.awt.event.ComponentAdapter() {
@@ -276,8 +275,9 @@ public class ListEmployes extends javax.swing.JPanel {
     }//GEN-LAST:event_buttonCreateActionPerformed
 
     /**
-     * Genera un archivo excel en la ruta especificada con toda la información de 
-     * los empleados registrados. No muentras informacion de las cuentas
+     * Genera un archivo excel en la ruta especificada con toda la información
+     * de los empleados registrados. No muentras informacion de las cuentas
+     *
      * @param outputPath String con la ruta y nombre a guardar
      */
     private void exportToExcel(String outputPath) {
@@ -287,7 +287,7 @@ public class ListEmployes extends javax.swing.JPanel {
             // Crear encabezados
             Row headerRow = sheet.createRow(0);
             String[] columns = {"Número de Empleado", "Nombre", "Apellido Paterno", "Apellido Materno", "Fecha Nacimiento", "Correo", "Teléfono", "Fecha Ingreso", "Estado", "Puesto"};
-            
+
             CellStyle headerStyle = createHeaderStyle(workbook);
 
             for (int i = 0; i < columns.length; i++) {
@@ -300,17 +300,17 @@ public class ListEmployes extends javax.swing.JPanel {
             int rowNum = 1;
             for (Employee employee : employeeList) {
                 Row row = sheet.createRow(rowNum++);
-                row.createCell(1).setCellValue(employee.getNumempleado());
-                row.createCell(2).setCellValue(employee.getNombre());
-                row.createCell(3).setCellValue(employee.getApellidop());
-                row.createCell(4).setCellValue(employee.getApellidom());
-                row.createCell(5).setCellValue(employee.getFechanac().toString()); // Ajusta según el formato de fecha que desees
-                row.createCell(6).setCellValue(employee.getCorreo());
-                row.createCell(7).setCellValue(employee.getTelefono());
-                row.createCell(8).setCellValue(employee.getFechaing().toString()); // Ajusta según el formato de fecha que desees
-                row.createCell(9).setCellValue(employee.getEstado());
-                row.createCell(10).setCellValue(employee.getPuesto());
-                 
+                row.createCell(0).setCellValue(employee.getNumempleado());
+                row.createCell(1).setCellValue(employee.getNombre());
+                row.createCell(2).setCellValue(employee.getApellidop());
+                row.createCell(3).setCellValue(employee.getApellidom());
+                row.createCell(4).setCellValue(employee.getFechanac().toString()); // Ajusta según el formato de fecha que desees
+                row.createCell(5).setCellValue(employee.getCorreo());
+                row.createCell(6).setCellValue(employee.getTelefono());
+                row.createCell(7).setCellValue(employee.getFechaing().toString()); // Ajusta según el formato de fecha que desees
+                row.createCell(8).setCellValue(employee.getEstado());
+                row.createCell(9).setCellValue(employee.getPuesto());
+
                 // Autoajustar el ancho de las columnas después de agregar los datos a la fila
                 for (int i = 0; i < columns.length; i++) {
                     sheet.autoSizeColumn(i);
@@ -327,10 +327,11 @@ public class ListEmployes extends javax.swing.JPanel {
             e.printStackTrace();
         }
     }
-    
+
     /**
-     * Genera un archivo excel en la ruta especificada con toda la información de 
-     * los empleados registrados. No muentras informacion de las cuentas
+     * Genera un archivo excel en la ruta especificada con toda la información
+     * de los empleados registrados. No muentras informacion de las cuentas
+     *
      * @param outputPath String con la ruta y nombre a guardar
      */
     private void excelTemplate(String outputPath) {
@@ -340,7 +341,7 @@ public class ListEmployes extends javax.swing.JPanel {
             // Crear encabezados
             Row headerRow = sheet.createRow(0);
             String[] columns = {"Número de Empleado", "Nombre", "Apellido Paterno", "Apellido Materno", "Fecha Nacimiento", "Correo", "Teléfono", "Fecha Ingreso", "Estado", "Puesto"};
-            
+
             CellStyle headerStyle = createHeaderStyle(workbook);
 
             for (int i = 0; i < columns.length; i++) {
@@ -358,10 +359,12 @@ public class ListEmployes extends javax.swing.JPanel {
             e.printStackTrace();
         }
     }
-    
+
     /**
      * Devuelve un style con el formato estandar para los reportes con excel
-     * @param workbook Libro sobre el cual se aplican los estilos de formato basico
+     *
+     * @param workbook Libro sobre el cual se aplican los estilos de formato
+     * basico
      * @return Obj Style para su uso libre
      */
     private static CellStyle createHeaderStyle(Workbook workbook) {
@@ -378,7 +381,7 @@ public class ListEmployes extends javax.swing.JPanel {
 
         return style;
     }
-    
+
     /**
      * Crea y muestra un modelo de tabla con la información de los empleados
      */
@@ -465,14 +468,15 @@ public class ListEmployes extends javax.swing.JPanel {
             mainWindow.setView("Editar Emplado");
         }
     }//GEN-LAST:event_buttonModifyActionPerformed
-    
+
     private void buttonExportXlsActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_buttonExportXlsActionPerformed
         exportToExcel("./reports/" + Tools.getFormatExcelFileName("Empleados"));
     }//GEN-LAST:event_buttonExportXlsActionPerformed
 
     /**
-     * Utiliza la plantilla Empleados.jasper para generar un reporte pdf
-     * exporta en ruta establecida en el archivo por defecto resource/files/settings
+     * Utiliza la plantilla Empleados.jasper para generar un reporte pdf exporta
+     * en ruta establecida en el archivo por defecto resource/files/settings
+     *
      * @param evt Objeto con propiedades del evento click
      */
     private void buttonExportPdfActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_buttonExportPdfActionPerformed
@@ -483,14 +487,14 @@ public class ListEmployes extends javax.swing.JPanel {
             JasperReport jasperReport = (JasperReport) JRLoader.loadObjectFromFile(reportPath);
 
             // agregar información 
-            JRBeanCollectionDataSource dataSource = 
-                    new JRBeanCollectionDataSource(jpaController.findAllEntities(Employee.class));
+            JRBeanCollectionDataSource dataSource
+                    = new JRBeanCollectionDataSource(jpaController.findAllEntities(Employee.class));
             JasperPrint jasperPrint = JasperFillManager.fillReport(jasperReport, null, dataSource);
 
             // Exportar el informe a PDF
             JasperExportManager.exportReportToPdfFile(jasperPrint, "./reports/Empleados.pdf");
 
-            JOptionPane.showMessageDialog(null, "Reporte exportado", "Accion exitosa", 
+            JOptionPane.showMessageDialog(null, "Reporte exportado", "Accion exitosa",
                     JOptionPane.INFORMATION_MESSAGE);
         } catch (JRException e) {
         }
@@ -500,10 +504,15 @@ public class ListEmployes extends javax.swing.JPanel {
 //        String path = fileChooser.sel
 
         int userSelection = fileChooser.showSaveDialog(null);
-        
+
         if (userSelection == JFileChooser.APPROVE_OPTION) {
             // El usuario ha seleccionado un archivo y ha hecho clic en "Guardar"
             String filePath = fileChooser.getSelectedFile().getAbsolutePath();
+            // Verifica si la cadena ya termina con ".xlsx"
+            if (!filePath.endsWith(".xlsx")) {
+                // Si no termina con ".xlsx", agrégale la extensión
+                filePath += ".xlsx";
+            }
             excelTemplate(filePath);
         }
     }//GEN-LAST:event_buttonTemplateActionPerformed

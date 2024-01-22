@@ -3,3 +3,4 @@ target
 /src/main/resources/.env
 src/main/resources/META-INF/*
 src/main/resources/META-INF/
+reports/*
