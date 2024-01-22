@@ -22,7 +22,7 @@ import javax.persistence.Table;
  * @author jared
  */
 @Entity
-@Table(name = "Access")
+@Table(name = "\"Access\"")
 @NamedQueries({
     @NamedQuery(name = "Access.findAll", query = "SELECT a FROM Access a"),
     @NamedQuery(name = "Access.findById", query = "SELECT a FROM Access a WHERE a.id = :id")})

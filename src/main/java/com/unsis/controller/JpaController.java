@@ -6,6 +6,7 @@ import com.unsis.dao.AccountDao;
 import com.unsis.models.entity.Access;
 import com.unsis.models.entity.Account;
 import com.unsis.models.entity.Area;
+import com.unsis.models.entity.Company;
 import com.unsis.models.entity.Employee;
 import com.unsis.models.entity.Section;
 import io.github.cdimascio.dotenv.Dotenv;
@@ -19,11 +20,12 @@ public class JpaController {
 
     private final AccessJpaController access;
     private final AccountJpaController account;
+    private final CompanyJpaController company;
     private final AreaJpaController area;
     private final EmployeeJpaController employee;
     private final AccountDao dao = new AccountDao();
     private final SectionJpaController section;
-    
+
     public JpaController() {
         Dotenv env = Dotenv.load();
         String namePu = env.get("PU_NAME");
@@ -33,6 +35,7 @@ public class JpaController {
         this.access = new AccessJpaController(emf);
         this.account = new AccountJpaController(emf);
         this.section = new SectionJpaController(emf);
+        this.company = new CompanyJpaController(emf);
         this.employee = new EmployeeJpaController(emf);
     }
 
@@ -49,7 +52,7 @@ public class JpaController {
             case Account accountObj ->
                 this.account.create(accountObj);
 
-            case Employee employeeObj -> 
+            case Employee employeeObj ->
                 this.employee.create(employeeObj);
 
             case Section sectionObj ->
@@ -57,6 +60,9 @@ public class JpaController {
 
             case Area areaObj ->
                 this.area.create(areaObj);
+
+            case Company companyObj ->
+                this.company.create(companyObj);
 
             default -> {
                 System.err.println("Invalid entity type");
@@ -86,6 +92,9 @@ public class JpaController {
 
                 case Area areaObj ->
                     this.area.destroy(areaObj.getId());
+
+                case Company companyObj ->
+                    this.company.destroy(companyObj.getId());
 
                 default -> {
                     System.err.println("Invalid entity type");
@@ -119,12 +128,16 @@ public class JpaController {
                 case Area areaObj ->
                     this.area.edit(areaObj);
 
+                case Company companyObj ->
+                    this.company.edit(companyObj);
+
                 default -> {
                     System.err.println("Tas mal");
                 }
             }
         } catch (Exception e) {
-            System.err.println("Error on edit generic: " + obj.getClass() + "\n" + e.getMessage());
+            System.err.println("Error on edit generic: " + obj.getClass() + "\n" + e.getMessage()
+                    + e.toString());
         }
     }
 
@@ -154,6 +167,9 @@ public class JpaController {
                 }
                 case "Area" -> {
                     return (T) this.section.findSection(id);
+                }
+                case "Company" -> {
+                    return (T) this.company.findCompany(id);
                 }
                 default -> {
                     System.err.println("Invalid entity type");
@@ -188,13 +204,16 @@ public class JpaController {
             case "Section" -> {
                 return new ArrayList<>((Collection<? extends T>) this.section.findSectionEntities());
             }
+            case "Company" -> {
+                return new ArrayList<>((Collection<? extends T>) this.company.findCompanyEntities());
+            }
             default -> {
                 System.err.println("Invalid entity type");
                 return null;
             }
         }
     }
-    
+
     /**
      *
      * @param user
@@ -202,16 +221,15 @@ public class JpaController {
      * @return
      */
     public boolean auth(String user, String pass) {
+        // busca una cuenta que corresponda con los datos de acceso
         Account account = dao.auth(user);
 
         if (account == null) {
             return false;
         }
-        
+
         Session.setAccount(account);
         // Verificar si la contraseña ingresada coincide con la contraseña hasheada
-        return  BCrypt.checkpw(pass, account.getContrasena());
-//        return true;
-
+        return BCrypt.checkpw(pass, account.getContrasena());
     }
 }

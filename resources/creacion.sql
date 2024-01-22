@@ -1,3 +1,10 @@
+CREATE Table "Company" (
+  id SERIAL PRIMARY KEY,
+  "name" VARCHAR NOT NULL,
+  logo VARCHAR,
+  descripcion VARCHAR
+);
+
 CREATE TABLE "Employee" (
   id serial,
   numEmpleado INT,
@@ -85,4 +92,23 @@ CREATE TABLE "Sales"(
   FOREIGN KEY (idEmpleado) REFERENCES "Employee"(id),
   FOREIGN KEY (idProducto) REFERENCES "Product"(codigoBarra)
 );
+
+ALTER TABLE
+  "Account"
+ADD
+  COLUMN fotoperfil VARCHAR;
+
+ALTER TABLE
+  "Account"
+ALTER COLUMN
+  fotoperfil
+SET
+  DEFAULT '/profileDefault.png' NOTNULL;
+
+UPDATE
+  "Account"
+SET
+  fotoperfil = '/profileDefault.png'
+WHERE
+  fotoperfil IS NULL;
 

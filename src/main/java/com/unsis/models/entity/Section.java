@@ -5,6 +5,7 @@
 package com.unsis.models.entity;
 
 import java.io.Serializable;
+import java.util.ArrayList;
 import java.util.List;
 import javax.persistence.Basic;
 import javax.persistence.Column;
@@ -24,7 +25,7 @@ import javax.persistence.Table;
  * @author jared
  */
 @Entity
-@Table(name = "Section")
+@Table(name = "\"Section\"")
 @NamedQueries({
     @NamedQuery(name = "Section.findAll", query = "SELECT s FROM Section s"),
     @NamedQuery(name = "Section.findById", query = "SELECT s FROM Section s WHERE s.id = :id"),
@@ -49,6 +50,16 @@ public class Section implements Serializable {
     private Area idarea;
 
     public Section() {
+    }
+
+    public Section(Section sectionToCopy) {
+        this.id = sectionToCopy.id;
+        this.nombre = sectionToCopy.nombre;
+        this.descripcion = sectionToCopy.descripcion;
+        if (sectionToCopy.accessList != null) {
+            this.accessList = new ArrayList<>(sectionToCopy.accessList);
+        }
+        this.idarea = sectionToCopy.idarea;
     }
 
     public Section(Integer id) {
@@ -119,5 +130,5 @@ public class Section implements Serializable {
     public String toString() {
         return "com.unsis.models.entity.Section[ id=" + id + " ]";
     }
-    
+
 }

@@ -47,6 +47,7 @@ public class PanelContainer extends javax.swing.JPanel {
 
                 item.addActionListener((e) -> {
                     mainWindow.setView(section.getNombre());
+                    mainWindow.addPanelHistory(section.getNombre());
                 });
                 menu.add(item);
             }

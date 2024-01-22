@@ -19,7 +19,7 @@ import javax.persistence.EntityManagerFactory;
 
 /**
  *
- * @author jared
+ * @author labtecweb10
  */
 public class AccessJpaController implements Serializable {
 

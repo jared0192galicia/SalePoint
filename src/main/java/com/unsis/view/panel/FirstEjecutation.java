@@ -1,34 +1,38 @@
-/*
- * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
- * Click nbfs://nbhost/SystemFileSystem/Templates/GUIForms/JFrame.java to edit this template
- */
 package com.unsis.view.panel;
 
+import com.unsis.clases.Tools;
+import com.unsis.controller.JpaController;
+import com.unsis.models.entity.Company;
 import java.awt.Image;
 import javax.swing.Icon;
 import javax.swing.ImageIcon;
+import javax.swing.JOptionPane;
 
 /**
  *
- * @author labtecweb04
+ * @author Elio
  */
 public class FirstEjecutation extends javax.swing.JFrame {
+
+    private String logo = "";
+    private String name = "";
+    private String description = "";
 
     /**
      * Creates new form FirstEjecutation
      */
     public FirstEjecutation() {
         initComponents();
-        
+
         this.setResizable(false);
         this.setLocationRelativeTo(null);
         this.setTitle("Iniciar programa");
-        
+
         resizeImages();
-        String text = "<html><body><p style='color: #BBBBBB;'>El nombre de la compañia y logotipo podrán ser cmbiados por usuario con permisos</p></body></html>";
+        String text = "<html><body><p style='color: #BBBBBB;'>El nombre de la compañia y logotipo podrán ser <br/> cambiados por un usuario con permisos</p></body></html>";
         this.labeltext.setText(text);
     }
-    
+
     /**
      * Redimenciona las imagenes de los botones para que se ajusten a el tamaño
      * necesario
@@ -39,19 +43,18 @@ public class FirstEjecutation extends javax.swing.JFrame {
 
         resizedIcon = resizeIcon(buttonSave.getIcon(), 25, 22);
         buttonSave.setIcon(resizedIcon);
-
     }
 
     /**
-     * Resize image for 
+     * Resize image for
+     *
      * @param icon image for resize
      * @param width Width for image
      * @param height height for image
      * @return
      */
     private Icon resizeIcon(Icon icon, int width, int height) {
-        if (icon instanceof ImageIcon) {
-            ImageIcon imageIcon = (ImageIcon) icon;
+        if (icon instanceof ImageIcon imageIcon) {
             Image image = imageIcon.getImage();
 
             // Redimensionar la imagen al tamaño deseado
@@ -64,7 +67,6 @@ public class FirstEjecutation extends javax.swing.JFrame {
         return icon; // Devolver el icono original si no es un ImageIcon
     }
 
-
     /**
      * This method is called from within the constructor to initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is always
@@ -74,9 +76,10 @@ public class FirstEjecutation extends javax.swing.JFrame {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
+        fileChooser = new javax.swing.JFileChooser();
         jPanel1 = new javax.swing.JPanel();
+        labelIcon = new javax.swing.JLabel();
         jLabel4 = new javax.swing.JLabel();
-        jLabel3 = new javax.swing.JLabel();
         buttonImport = new javax.swing.JButton();
         jPanel2 = new javax.swing.JPanel();
         txtName = new javax.swing.JTextField();
@@ -87,6 +90,10 @@ public class FirstEjecutation extends javax.swing.JFrame {
         labeltext = new javax.swing.JLabel();
         jPanel4 = new javax.swing.JPanel();
 
+        fileChooser.setApproveButtonText("Abrir");
+        fileChooser.setApproveButtonToolTipText("Selecciona esta imagen");
+        fileChooser.setDialogTitle("Seleccionar imagen");
+
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         getContentPane().setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
@@ -94,11 +101,11 @@ public class FirstEjecutation extends javax.swing.JFrame {
         jPanel1.setPreferredSize(new java.awt.Dimension(450, 500));
         jPanel1.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
+        labelIcon.setIcon(new javax.swing.ImageIcon(getClass().getResource("/IconCafe.png"))); // NOI18N
+        jPanel1.add(labelIcon, new org.netbeans.lib.awtextra.AbsoluteConstraints(100, 100, 240, 240));
+
         jLabel4.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Circulo.png"))); // NOI18N
         jPanel1.add(jLabel4, new org.netbeans.lib.awtextra.AbsoluteConstraints(100, 90, 240, 250));
-
-        jLabel3.setIcon(new javax.swing.ImageIcon(getClass().getResource("/IconCafe.png"))); // NOI18N
-        jPanel1.add(jLabel3, new org.netbeans.lib.awtextra.AbsoluteConstraints(110, 100, 240, 240));
 
         buttonImport.setBackground(new java.awt.Color(46, 125, 18));
         buttonImport.setFont(new java.awt.Font("Jaldi", 1, 15)); // NOI18N
@@ -107,7 +114,12 @@ public class FirstEjecutation extends javax.swing.JFrame {
         buttonImport.setText("Importar");
         buttonImport.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(215, 251, 203)));
         buttonImport.setHorizontalAlignment(javax.swing.SwingConstants.RIGHT);
-        jPanel1.add(buttonImport, new org.netbeans.lib.awtextra.AbsoluteConstraints(170, 350, 100, 30));
+        buttonImport.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                buttonImportActionPerformed(evt);
+            }
+        });
+        jPanel1.add(buttonImport, new org.netbeans.lib.awtextra.AbsoluteConstraints(170, 350, 110, 30));
 
         getContentPane().add(jPanel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, -1, -1));
 
@@ -116,7 +128,7 @@ public class FirstEjecutation extends javax.swing.JFrame {
         jPanel2.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
         txtName.setFont(new java.awt.Font("Jaldi", 0, 15)); // NOI18N
-        txtName.setForeground(new java.awt.Color(204, 204, 204));
+        txtName.setForeground(new java.awt.Color(51, 51, 51));
         txtName.setHorizontalAlignment(javax.swing.JTextField.CENTER);
         txtName.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(204, 204, 204)));
         txtName.addActionListener(new java.awt.event.ActionListener() {
@@ -151,6 +163,11 @@ public class FirstEjecutation extends javax.swing.JFrame {
         buttonSave.setForeground(new java.awt.Color(255, 255, 255));
         buttonSave.setIcon(new javax.swing.ImageIcon(getClass().getResource("/save.png"))); // NOI18N
         buttonSave.setText("Guardar");
+        buttonSave.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                buttonSaveActionPerformed(evt);
+            }
+        });
         jPanel2.add(buttonSave, new org.netbeans.lib.awtextra.AbsoluteConstraints(230, 320, 140, 33));
 
         labeltext.setHorizontalAlignment(javax.swing.SwingConstants.LEFT);
@@ -204,6 +221,53 @@ public class FirstEjecutation extends javax.swing.JFrame {
         // TODO add your handling code here:
     }//GEN-LAST:event_buttonCancelActionPerformed
 
+    private void buttonSaveActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_buttonSaveActionPerformed
+        String name = txtName.getText().trim();
+
+        if (name.equals("")) {
+            JOptionPane.showMessageDialog(null, "Debe ingresar el nombre de la empresa");
+            return;
+        }
+
+        if (logo.equals("")) {
+            int response = JOptionPane.showConfirmDialog(null, "¿Decea continuar sin un logotipo?");
+            if (JOptionPane.OK_OPTION != response) {
+                return;
+            }
+        }
+
+        Company company = new Company(0, name);
+        company.setLogo("/" + (logo.equals("") ? "default" : logo));
+        company.setDescripcion(description);
+        
+        System.out.println(company.toString());
+        
+        new JpaController().create(company);
+        
+        new Login().setVisible(true);
+        this.dispose();
+    }//GEN-LAST:event_buttonSaveActionPerformed
+
+    private void buttonImportActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_buttonImportActionPerformed
+        fileChooser.showOpenDialog(jPanel1);
+        try {
+            String path = fileChooser.getSelectedFile().getPath();
+            System.out.println(path);
+
+            if (!path.equals("")) {
+                String[] partes = path.split("/");
+                logo = partes[partes.length - 1];
+                
+                String destino = Tools.ROOTPATH + "company/" + logo;
+
+                Tools.copyFile(path, destino);
+                
+            }
+        } catch (Exception e) {
+            System.out.println("Cancelado");
+        }
+    }//GEN-LAST:event_buttonImportActionPerformed
+
     /**
      * @param args the command line arguments
      */
@@ -243,13 +307,14 @@ public class FirstEjecutation extends javax.swing.JFrame {
     private javax.swing.JButton buttonCancel;
     private javax.swing.JButton buttonImport;
     private javax.swing.JButton buttonSave;
+    private javax.swing.JFileChooser fileChooser;
     private javax.swing.JLabel jLabel1;
-    private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanel2;
     private javax.swing.JPanel jPanel3;
     private javax.swing.JPanel jPanel4;
+    private javax.swing.JLabel labelIcon;
     private javax.swing.JLabel labeltext;
     private javax.swing.JTextField txtName;
     // End of variables declaration//GEN-END:variables

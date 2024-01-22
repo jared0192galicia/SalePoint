@@ -5,7 +5,6 @@
 package com.unsis.models.entity;
 
 import java.io.Serializable;
-import java.util.List;
 import javax.persistence.Basic;
 import javax.persistence.Column;
 import javax.persistence.Entity;
@@ -14,21 +13,21 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.NamedQueries;
 import javax.persistence.NamedQuery;
-import javax.persistence.OneToMany;
 import javax.persistence.Table;
 
 /**
  *
- * @author jared
+ * @author labtecweb10
  */
 @Entity
-@Table(name = "\"Area\"")
+@Table(name = "\"Company\"")
 @NamedQueries({
-    @NamedQuery(name = "Area.findAll", query = "SELECT a FROM Area a"),
-    @NamedQuery(name = "Area.findById", query = "SELECT a FROM Area a WHERE a.id = :id"),
-    @NamedQuery(name = "Area.findByNombre", query = "SELECT a FROM Area a WHERE a.nombre = :nombre"),
-    @NamedQuery(name = "Area.findByDescripcion", query = "SELECT a FROM Area a WHERE a.descripcion = :descripcion")})
-public class Area implements Serializable {
+    @NamedQuery(name = "Company.findAll", query = "SELECT c FROM Company c"),
+    @NamedQuery(name = "Company.findById", query = "SELECT c FROM Company c WHERE c.id = :id"),
+    @NamedQuery(name = "Company.findByName", query = "SELECT c FROM Company c WHERE c.name = :name"),
+    @NamedQuery(name = "Company.findByLogo", query = "SELECT c FROM Company c WHERE c.logo = :logo"),
+    @NamedQuery(name = "Company.findByDescripcion", query = "SELECT c FROM Company c WHERE c.descripcion = :descripcion")})
+public class Company implements Serializable {
 
     private static final long serialVersionUID = 1L;
     @Id
@@ -36,18 +35,24 @@ public class Area implements Serializable {
     @Basic(optional = false)
     @Column(name = "id")
     private Integer id;
-    @Column(name = "nombre")
-    private String nombre;
+    @Basic(optional = false)
+    @Column(name = "name")
+    private String name;
+    @Column(name = "logo")
+    private String logo;
     @Column(name = "descripcion")
     private String descripcion;
-    @OneToMany(mappedBy = "idarea")
-    private List<Section> sectionList;
 
-    public Area() {
+    public Company() {
     }
 
-    public Area(Integer id) {
+    public Company(Integer id) {
         this.id = id;
+    }
+
+    public Company(Integer id, String name) {
+        this.id = id;
+        this.name = name;
     }
 
     public Integer getId() {
@@ -58,12 +63,20 @@ public class Area implements Serializable {
         this.id = id;
     }
 
-    public String getNombre() {
-        return nombre;
+    public String getName() {
+        return name;
     }
 
-    public void setNombre(String nombre) {
-        this.nombre = nombre;
+    public void setName(String name) {
+        this.name = name;
+    }
+
+    public String getLogo() {
+        return logo;
+    }
+
+    public void setLogo(String logo) {
+        this.logo = logo;
     }
 
     public String getDescripcion() {
@@ -72,14 +85,6 @@ public class Area implements Serializable {
 
     public void setDescripcion(String descripcion) {
         this.descripcion = descripcion;
-    }
-
-    public List<Section> getSectionList() {
-        return sectionList;
-    }
-
-    public void setSectionList(List<Section> sectionList) {
-        this.sectionList = sectionList;
     }
 
     @Override
@@ -92,10 +97,10 @@ public class Area implements Serializable {
     @Override
     public boolean equals(Object object) {
         // TODO: Warning - this method won't work in the case the id fields are not set
-        if (!(object instanceof Area)) {
+        if (!(object instanceof Company)) {
             return false;
         }
-        Area other = (Area) object;
+        Company other = (Company) object;
         if ((this.id == null && other.id != null) || (this.id != null && !this.id.equals(other.id))) {
             return false;
         }
@@ -104,7 +109,6 @@ public class Area implements Serializable {
 
     @Override
     public String toString() {
-        return "com.unsis.models.entity.Area[ id=" + id + " ]";
+        return "Company{" + "id=" + id + ", name=" + name + ", logo=" + logo + ", descripcion=" + descripcion + '}';
     }
-    
 }

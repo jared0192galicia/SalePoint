@@ -13,9 +13,10 @@ public class MainMenu extends javax.swing.JPanel {
 
     private final Main mainWindow;
     private final ArrayList<String> areas;
-    
+
     /**
      * Creates new form Venta
+     *
      * @param mainWindow
      */
     public MainMenu(Main mainWindow) {
@@ -28,7 +29,7 @@ public class MainMenu extends javax.swing.JPanel {
         this.labelWelcome.setText("Bienvenido " + Session.getAccount().getUsuario());
         this.showAreaButtons();
     }
-    
+
     /**
      * Quita los botones a los que no se tiene acceso en el menu principal
      */
@@ -312,26 +313,32 @@ public class MainMenu extends javax.swing.JPanel {
     }// </editor-fold>//GEN-END:initComponents
 
     private void buttonInventoryActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_buttonInventoryActionPerformed
-       mainWindow.setView(Constants.getSecctionsOf("Almacen").get(0));
+        mainWindow.addPanelHistory(Constants.getSecctionsOf("Almacen").get(0));
+        mainWindow.setView(Constants.getSecctionsOf("Almacen").get(0));
     }//GEN-LAST:event_buttonInventoryActionPerformed
 
     private void buttonHumanResourcesActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_buttonHumanResourcesActionPerformed
+        mainWindow.addPanelHistory(Constants.getSecctionsOf("Almacen").get(0));
         mainWindow.setView("Lista Empleados");
     }//GEN-LAST:event_buttonHumanResourcesActionPerformed
 
     private void buttonContaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_buttonContaActionPerformed
+        mainWindow.addPanelHistory(Constants.getSecctionsOf("Almacen").get(0));
         mainWindow.setView("Corte de caja");
     }//GEN-LAST:event_buttonContaActionPerformed
 
     private void buttonSalesActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_buttonSalesActionPerformed
+        mainWindow.addPanelHistory(Constants.getSecctionsOf("Almacen").get(0));
         mainWindow.setView("Ordenes entrantes");
     }//GEN-LAST:event_buttonSalesActionPerformed
 
     private void buttonSalePointActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_buttonSalePointActionPerformed
+        mainWindow.addPanelHistory(Constants.getSecctionsOf("Almacen").get(0));
         mainWindow.setView("Punto de Venta");
     }//GEN-LAST:event_buttonSalePointActionPerformed
 
     private void buttonSettingsActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_buttonSettingsActionPerformed
+        mainWindow.addPanelHistory(Constants.getSecctionsOf("Almacen").get(0));
         mainWindow.setView("Ajustes del generales");
     }//GEN-LAST:event_buttonSettingsActionPerformed
 

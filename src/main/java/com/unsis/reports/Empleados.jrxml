@@ -1,0 +1,241 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="null" language="groovy" pageWidth="595" pageHeight="842" columnWidth="555" leftMargin="20" rightMargin="20" topMargin="20" bottomMargin="20" uuid="3ea39149-0451-4f23-a9ec-a5672f580747">
+	<property name="ireport.zoom" value="1.3310000000000006"/>
+	<property name="ireport.x" value="0"/>
+	<property name="ireport.y" value="0"/>
+	<queryString language="SQL">
+		<![CDATA[select * from "Employee";]]>
+	</queryString>
+	<field name="numempleado" class="java.lang.Integer"/>
+	<field name="nombre" class="java.lang.String"/>
+	<field name="apellidop" class="java.lang.String"/>
+	<field name="apellidom" class="java.lang.String"/>
+	<field name="fechanac" class="java.sql.Date"/>
+	<field name="correo" class="java.lang.String"/>
+	<field name="telefono" class="java.lang.String"/>
+	<field name="fechaing" class="java.sql.Date"/>
+	<field name="estado" class="java.lang.String"/>
+	<field name="puesto" class="java.lang.String"/>
+	<background>
+		<band splitType="Stretch"/>
+	</background>
+	<title>
+		<band height="32" splitType="Stretch">
+			<staticText>
+				<reportElement x="0" y="0" width="555" height="32" uuid="9f176a74-8b63-48f3-b69c-6d500b3f7285"/>
+				<box bottomPadding="10"/>
+				<textElement textAlignment="Center">
+					<font size="14"/>
+				</textElement>
+				<text><![CDATA[REPORTE DE EMPLEADOS]]></text>
+			</staticText>
+		</band>
+	</title>
+	<columnHeader>
+		<band height="20" splitType="Stretch">
+			<staticText>
+				<reportElement mode="Opaque" x="0" y="0" width="75" height="20" forecolor="#FFFFFF" backcolor="#006666" uuid="4ed21a3b-676a-4092-bf14-295ce5e0edff"/>
+				<box>
+					<pen lineWidth="0.5" lineColor="#333333"/>
+					<topPen lineWidth="0.5" lineColor="#333333"/>
+					<leftPen lineWidth="0.5" lineColor="#333333"/>
+					<bottomPen lineWidth="0.5" lineColor="#333333"/>
+					<rightPen lineWidth="0.5" lineColor="#333333"/>
+				</box>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<paragraph firstLineIndent="1"/>
+				</textElement>
+				<text><![CDATA[Número]]></text>
+			</staticText>
+			<staticText>
+				<reportElement mode="Opaque" x="75" y="0" width="80" height="20" forecolor="#FFFFFF" backcolor="#006666" uuid="36dd6057-5b1e-491e-bc8c-7b59d71a57de"/>
+				<box>
+					<pen lineWidth="0.5" lineColor="#333333"/>
+					<topPen lineWidth="0.5" lineColor="#333333"/>
+					<leftPen lineWidth="0.5" lineColor="#333333"/>
+					<bottomPen lineWidth="0.5" lineColor="#333333"/>
+					<rightPen lineWidth="0.5" lineColor="#333333"/>
+				</box>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<paragraph firstLineIndent="1"/>
+				</textElement>
+				<text><![CDATA[Nombre]]></text>
+			</staticText>
+			<staticText>
+				<reportElement mode="Opaque" x="155" y="0" width="80" height="20" forecolor="#FFFFFF" backcolor="#006666" uuid="c52eb097-0ddb-40d5-aa16-ce3d9808f836"/>
+				<box>
+					<pen lineWidth="0.5" lineColor="#333333"/>
+					<topPen lineWidth="0.5" lineColor="#333333"/>
+					<leftPen lineWidth="0.5" lineColor="#333333"/>
+					<bottomPen lineWidth="0.5" lineColor="#333333"/>
+					<rightPen lineWidth="0.5" lineColor="#333333"/>
+				</box>
+				<textElement textAlignment="Center" verticalAlignment="Middle" rotation="None" markup="none">
+					<font isUnderline="false" isStrikeThrough="false"/>
+					<paragraph lineSpacing="Single"/>
+				</textElement>
+				<text><![CDATA[Apellido]]></text>
+			</staticText>
+			<staticText>
+				<reportElement mode="Opaque" x="235" y="0" width="80" height="20" forecolor="#FFFFFF" backcolor="#006666" uuid="fc9105f8-46a3-4cd3-a51f-4e5eb8416884"/>
+				<box>
+					<pen lineWidth="0.5" lineColor="#333333"/>
+					<topPen lineWidth="0.5" lineColor="#333333"/>
+					<leftPen lineWidth="0.5" lineColor="#333333"/>
+					<bottomPen lineWidth="0.5" lineColor="#333333"/>
+					<rightPen lineWidth="0.5" lineColor="#333333"/>
+				</box>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<paragraph firstLineIndent="1"/>
+				</textElement>
+				<text><![CDATA[Apellido]]></text>
+			</staticText>
+			<staticText>
+				<reportElement mode="Opaque" x="315" y="0" width="80" height="20" forecolor="#FFFFFF" backcolor="#006666" uuid="d31db1a1-32e1-4da4-af41-e11faaade414"/>
+				<box>
+					<pen lineWidth="0.5" lineColor="#333333"/>
+					<topPen lineWidth="0.5" lineColor="#333333"/>
+					<leftPen lineWidth="0.5" lineColor="#333333"/>
+					<bottomPen lineWidth="0.5" lineColor="#333333"/>
+					<rightPen lineWidth="0.5" lineColor="#333333"/>
+				</box>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<paragraph firstLineIndent="1"/>
+				</textElement>
+				<text><![CDATA[Puesto]]></text>
+			</staticText>
+			<staticText>
+				<reportElement mode="Opaque" x="395" y="0" width="80" height="20" forecolor="#FFFFFF" backcolor="#006666" uuid="9315c578-ac17-4d09-ab01-67fc62bb68a8"/>
+				<box>
+					<pen lineWidth="0.5" lineColor="#333333"/>
+					<topPen lineWidth="0.5" lineColor="#333333"/>
+					<leftPen lineWidth="0.5" lineColor="#333333"/>
+					<bottomPen lineWidth="0.5" lineColor="#333333"/>
+					<rightPen lineWidth="0.5" lineColor="#333333"/>
+				</box>
+				<textElement textAlignment="Center" verticalAlignment="Middle"/>
+				<text><![CDATA[telefono]]></text>
+			</staticText>
+			<staticText>
+				<reportElement mode="Opaque" x="475" y="0" width="80" height="20" forecolor="#FFFFFF" backcolor="#006666" uuid="4bc94f84-cb1a-4d87-97b4-9e5fdc4a3c96"/>
+				<box>
+					<pen lineWidth="0.5" lineColor="#333333"/>
+					<topPen lineWidth="0.5" lineColor="#333333"/>
+					<leftPen lineWidth="0.5" lineColor="#333333"/>
+					<bottomPen lineWidth="0.5" lineColor="#333333"/>
+					<rightPen lineWidth="0.5" lineColor="#333333"/>
+				</box>
+				<textElement textAlignment="Center" verticalAlignment="Middle"/>
+				<text><![CDATA[estado]]></text>
+			</staticText>
+		</band>
+	</columnHeader>
+	<detail>
+		<band height="20" splitType="Stretch">
+			<textField>
+				<reportElement x="0" y="0" width="75" height="20" uuid="4ef4aa90-c96e-44cf-b239-4917a96f8c98"/>
+				<box>
+					<pen lineWidth="0.25" lineColor="#666666"/>
+					<topPen lineWidth="0.25" lineColor="#666666"/>
+					<leftPen lineWidth="0.25" lineColor="#666666"/>
+					<bottomPen lineWidth="0.25" lineColor="#666666"/>
+					<rightPen lineWidth="0.25" lineColor="#666666"/>
+				</box>
+				<textElement textAlignment="Center" verticalAlignment="Middle"/>
+				<textFieldExpression><![CDATA[$F{numempleado}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="75" y="0" width="80" height="20" uuid="c589102f-b2ee-466d-a147-a9dbd67a5c21"/>
+				<box>
+					<pen lineWidth="0.25" lineColor="#666666"/>
+					<topPen lineWidth="0.25" lineColor="#666666"/>
+					<leftPen lineWidth="0.25" lineColor="#666666"/>
+					<bottomPen lineWidth="0.25" lineColor="#666666"/>
+					<rightPen lineWidth="0.25" lineColor="#666666"/>
+				</box>
+				<textElement textAlignment="Center" verticalAlignment="Middle"/>
+				<textFieldExpression><![CDATA[$F{nombre}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="155" y="0" width="80" height="20" uuid="4a41ed60-aa4a-4a2f-a401-282bc5ad9d38"/>
+				<box>
+					<pen lineWidth="0.25" lineColor="#666666"/>
+					<topPen lineWidth="0.25" lineColor="#666666"/>
+					<leftPen lineWidth="0.25" lineColor="#666666"/>
+					<bottomPen lineWidth="0.25" lineColor="#666666"/>
+					<rightPen lineWidth="0.25" lineColor="#666666"/>
+				</box>
+				<textElement textAlignment="Center" verticalAlignment="Middle"/>
+				<textFieldExpression><![CDATA[$F{apellidop}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="235" y="0" width="80" height="20" uuid="117e596c-5c3b-4e06-93e5-b283fd310fcf"/>
+				<box>
+					<pen lineWidth="0.25" lineColor="#666666"/>
+					<topPen lineWidth="0.25" lineColor="#666666"/>
+					<leftPen lineWidth="0.25" lineColor="#666666"/>
+					<bottomPen lineWidth="0.25" lineColor="#666666"/>
+					<rightPen lineWidth="0.25" lineColor="#666666"/>
+				</box>
+				<textElement textAlignment="Center" verticalAlignment="Middle"/>
+				<textFieldExpression><![CDATA[$F{apellidom}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="315" y="0" width="80" height="20" uuid="22842d67-b463-49b7-a023-94f652a7d54b"/>
+				<box>
+					<pen lineWidth="0.25" lineColor="#666666"/>
+					<topPen lineWidth="0.25" lineColor="#666666"/>
+					<leftPen lineWidth="0.25" lineColor="#666666"/>
+					<bottomPen lineWidth="0.25" lineColor="#666666"/>
+					<rightPen lineWidth="0.25" lineColor="#666666"/>
+				</box>
+				<textElement textAlignment="Center" verticalAlignment="Middle"/>
+				<textFieldExpression><![CDATA[$F{puesto}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="395" y="0" width="80" height="20" uuid="803c7c84-f236-41bb-ae3c-9f4b5bd5989a"/>
+				<box>
+					<pen lineWidth="0.25" lineColor="#666666"/>
+					<topPen lineWidth="0.25" lineColor="#666666"/>
+					<leftPen lineWidth="0.25" lineColor="#666666"/>
+					<bottomPen lineWidth="0.25" lineColor="#666666"/>
+					<rightPen lineWidth="0.25" lineColor="#666666"/>
+				</box>
+				<textElement textAlignment="Center" verticalAlignment="Middle"/>
+				<textFieldExpression><![CDATA[$F{telefono}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="475" y="0" width="80" height="20" uuid="42aecb72-e9eb-415b-bfa0-9498d378145f"/>
+				<box>
+					<pen lineWidth="0.25" lineColor="#666666"/>
+					<topPen lineWidth="0.25" lineColor="#666666"/>
+					<leftPen lineWidth="0.25" lineColor="#666666"/>
+					<bottomPen lineWidth="0.25" lineColor="#666666"/>
+					<rightPen lineWidth="0.25" lineColor="#666666"/>
+				</box>
+				<textElement textAlignment="Center" verticalAlignment="Middle"/>
+				<textFieldExpression><![CDATA[$F{estado}]]></textFieldExpression>
+			</textField>
+		</band>
+	</detail>
+	<pageFooter>
+		<band height="54" splitType="Stretch">
+			<line>
+				<reportElement x="0" y="11" width="555" height="1" forecolor="#CCCCCC" uuid="ab05ff9b-72be-4270-931e-8be053f3c568"/>
+			</line>
+			<textField>
+				<reportElement x="435" y="31" width="80" height="20" forecolor="#333333" uuid="aa0c0879-c2cf-47d0-a7ce-b16d624b0137"/>
+				<textElement textAlignment="Right"/>
+				<textFieldExpression><![CDATA["Página "+$V{PAGE_NUMBER}+" de"]]></textFieldExpression>
+			</textField>
+			<textField evaluationTime="Report">
+				<reportElement x="515" y="31" width="40" height="20" forecolor="#333333" uuid="2d2a0336-eb02-4a87-9a78-116f25f5d92c"/>
+				<textFieldExpression><![CDATA[" " + $V{PAGE_NUMBER}]]></textFieldExpression>
+			</textField>
+			<textField pattern="dd/MM/yyyy">
+				<reportElement x="11" y="31" width="100" height="20" forecolor="#333333" uuid="e2a10b35-6faf-4f5e-ab2e-eb470985e24b"/>
+				<textFieldExpression><![CDATA[new java.util.Date()]]></textFieldExpression>
+			</textField>
+		</band>
+	</pageFooter>
+</jasperReport>

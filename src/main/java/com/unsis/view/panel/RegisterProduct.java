@@ -3,8 +3,13 @@ package com.unsis.view.panel;
 import com.unsis.clases.Tools;
 import java.awt.Color;
 import java.awt.event.ItemEvent;
+import java.awt.event.KeyEvent;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
 import javax.swing.BorderFactory;
 import javax.swing.Icon;
+import javax.swing.JOptionPane;
+import javax.swing.JTextField;
 
 /**
  *
@@ -24,6 +29,29 @@ public class RegisterProduct extends javax.swing.JPanel {
         this.dialogRegisterSaller.setLocationRelativeTo(null);
     }
 
+     // este método se asegura de que solo se ingresen caracteres válidos en un campo de texto 
+    private void verify(KeyEvent evt, JTextField field, String regex) {
+        char c = evt.getKeyChar();
+        int keyCode = evt.getKeyCode();
+
+        if (KeyEvent.getKeyText(keyCode).length() > 1) {
+            return;
+        }
+
+        // Verifica si el carácter ingresado no es válido
+        if (!Character.toString(c).matches(regex)) {
+            // Consume el evento para evitar que el carácter no válido se agregue al JTextField// Obtiene el texto actual del JTextField
+            String textoActual = field.getText();
+
+            JOptionPane.showMessageDialog(null, "Solo se permiten caracteres válidos según la expresión regular: " + regex, "Advertencia", JOptionPane.WARNING_MESSAGE);
+
+            // Elimina el último carácter del texto actual
+            if (textoActual.length() > 0) {
+                String textoSinUltimoCaracter = textoActual.substring(0, textoActual.length() - 1);
+                field.setText(textoSinUltimoCaracter);
+            }
+        }
+    }
     /**
      * Redimenciona las imagenes de los botones para que se ajusten a el tamaño
      * necesario
@@ -187,6 +215,12 @@ public class RegisterProduct extends javax.swing.JPanel {
         jLabel2.setForeground(new java.awt.Color(82, 146, 222));
         jLabel2.setText("Información Especifica");
         panelInternal.add(jLabel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(100, 320, 280, -1));
+
+        jTextField1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jTextField1ActionPerformed(evt);
+            }
+        });
         panelInternal.add(jTextField1, new org.netbeans.lib.awtextra.AbsoluteConstraints(100, 410, 150, 30));
 
         jLabel4.setFont(new java.awt.Font("Jaldi", 0, 18)); // NOI18N
@@ -198,6 +232,12 @@ public class RegisterProduct extends javax.swing.JPanel {
         jLabel5.setForeground(new java.awt.Color(118, 125, 142));
         jLabel5.setText(" Precio de compra");
         panelInternal.add(jLabel5, new org.netbeans.lib.awtextra.AbsoluteConstraints(490, 90, 180, -1));
+
+        jTextField3.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jTextField3ActionPerformed(evt);
+            }
+        });
         panelInternal.add(jTextField3, new org.netbeans.lib.awtextra.AbsoluteConstraints(490, 120, 170, 30));
 
         jLabel6.setBackground(new java.awt.Color(255, 255, 255));
@@ -205,6 +245,12 @@ public class RegisterProduct extends javax.swing.JPanel {
         jLabel6.setForeground(new java.awt.Color(118, 125, 142));
         jLabel6.setText("N. Producto");
         panelInternal.add(jLabel6, new org.netbeans.lib.awtextra.AbsoluteConstraints(100, 380, -1, -1));
+
+        jTextField4.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jTextField4ActionPerformed(evt);
+            }
+        });
         panelInternal.add(jTextField4, new org.netbeans.lib.awtextra.AbsoluteConstraints(100, 210, 180, 30));
 
         jLabel7.setFont(new java.awt.Font("Jaldi", 0, 18)); // NOI18N
@@ -420,6 +466,54 @@ public class RegisterProduct extends javax.swing.JPanel {
             }
         }
     }//GEN-LAST:event_comboSallerItemStateChanged
+
+    private void jTextField3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jTextField3ActionPerformed
+          String price = jTextField3.getText().trim();
+        String regex = "^(\\d+\\.?\\d*|\\d*\\.\\d+)$";  // Acepta números flotantes (con o sin parte entera)
+
+        Pattern pattern = Pattern.compile(regex);
+        Matcher matcher = pattern.matcher(price);
+
+        if (matcher.matches()) {
+            System.out.println("Precio válido");
+            // Puedes realizar acciones adicionales si el precio es válido
+        } else {
+            jTextField3.requestFocus();
+            System.out.println("Precio invalido");
+        }
+    }//GEN-LAST:event_jTextField3ActionPerformed
+
+    private void jTextField4ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jTextField4ActionPerformed
+         String price = jTextField4.getText().trim();
+        String regex = "^(\\d+\\.?\\d*|\\d*\\.\\d+)$";  // Acepta números flotantes (con o sin parte entera)
+
+        Pattern pattern = Pattern.compile(regex);
+        Matcher matcher = pattern.matcher(price);
+
+        if (matcher.matches()) {
+            System.out.println("Precio válido");
+            // Puedes realizar acciones adicionales si el precio es válido
+        } else {
+         jTextField4.requestFocus();
+            System.out.println("Precio invalido");
+        }
+    }//GEN-LAST:event_jTextField4ActionPerformed
+
+    private void jTextField1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jTextField1ActionPerformed
+        String price = jTextField1.getText().trim();
+        String regex = "^\\d+$";  // Acepta números enteros
+
+        Pattern pattern = Pattern.compile(regex);
+        Matcher matcher = pattern.matcher(price);
+
+        if (matcher.matches()) {
+            System.out.println("Número entero válido");
+            // Puedes realizar acciones adicionales si el número entero es válido
+        } else {
+            jTextField1.requestFocus();
+            System.out.println("Solo se aceptan numeros");
+        }
+    }//GEN-LAST:event_jTextField1ActionPerformed
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables

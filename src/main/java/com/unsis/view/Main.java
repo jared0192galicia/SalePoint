@@ -1,5 +1,6 @@
 package com.unsis.view;
 
+import com.unsis.clases.Stack;
 import com.unsis.view.panel.GeneralSettings;
 import com.unsis.dao.Conexion;
 import com.unsis.models.constants.Constants;
@@ -30,6 +31,7 @@ public class Main extends javax.swing.JFrame {
 
     private JPanel defaultPanel;
     private final String MAINMENU = "Main Menu";
+    public Stack<String> stack;
 
     /**
      * Creates new form Home
@@ -58,11 +60,37 @@ public class Main extends javax.swing.JFrame {
                 try {
                     // Coloca aquí el código que deseas ejecutar cuando se cierra la ventana
                     Conexion.closeConecction();
+                    stack.print();
+                    stack.pop();
+                    stack.print();
                 } catch (SQLException ex) {
                     System.err.println("Error al cerrar la conexion\n" + ex.getMessage());
                 }
             }
         });
+
+        this.createStackAccess();
+    }
+    
+    /**
+     * Crea una pila para guardar el historial de navegación
+     */
+    private void createStackAccess() {
+        stack = new Stack<>(MAINMENU);
+        stack.add(MAINMENU);
+    }
+
+    public void showPreviusPanel() {
+        stack.pop();
+        this.setView(stack.pop());
+    }
+    
+    /**
+     * Agrega un elemento en la pila. Metodo para use desde clases externas
+     * @param name Nombre la clase a agregar
+     */
+    public void addPanelHistory(String name) {
+        stack.add(name);
     }
 
     /**
@@ -85,6 +113,23 @@ public class Main extends javax.swing.JFrame {
         defaultPanel.add("Gastos", new RegisterExpenses());
         defaultPanel.add("Ajustes del generales", new GeneralSettings());
         defaultPanel.add("Editar Emplado", new UpdateEmployee());
+
+        // Agregar ComponentListener al JPanel que contiene el CardLayout
+//        defaultPanel.addComponentListener(new ComponentAdapter() {
+//            @Override
+//            public void componentShown(ComponentEvent e) {
+//                CardLayout layout = (CardLayout) defaultPanel.getLayout();
+//                Component selectedComponent = layout.getCurrent();
+//                String componentName = componentNames.get(selectedComponent);
+//
+//                // Verificar si el nombre es no nulo
+//                if (componentName != null) {
+//                    // Aquí puedes usar el nombre de la ventana mostrada (componentName)
+//                    // para realizar alguna acción o imprimirlo
+//                    System.out.println("Nombre de la ventana: " + componentName);
+//                }
+//            }
+//        });
 
         this.add(defaultPanel);
     }

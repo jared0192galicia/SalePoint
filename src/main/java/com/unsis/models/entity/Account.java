@@ -45,6 +45,8 @@ public class Account implements Serializable {
     private String usuario;
     @Column(name = "contrasena")
     private String contrasena;
+    @Column(name = "fotoperfil")
+    private String fotoperfil;
     @JoinColumn(name = "idempleado", referencedColumnName = "id")
     @OneToOne
     private Employee idempleado;
@@ -95,6 +97,14 @@ public class Account implements Serializable {
         this.contrasena = contrasena;
     }
 
+    public String getFotoperfil() {
+        return fotoperfil;
+    }
+
+    public void setFotoperfil(String fotoperfil) {
+        this.fotoperfil = fotoperfil;
+    }
+    
     public Employee getIdempleado() {
         return idempleado;
     }
@@ -156,6 +166,11 @@ public class Account implements Serializable {
 
         public Builder withUsuario(String usuario) {
             account.usuario = usuario;
+            return this;
+        }
+
+        public Builder withFotoPerfil(String path) {
+            account.fotoperfil = path;
             return this;
         }
 

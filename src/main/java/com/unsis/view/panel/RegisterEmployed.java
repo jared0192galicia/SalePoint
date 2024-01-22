@@ -1,7 +1,3 @@
-/*
- * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
- * Click nbfs://nbhost/SystemFileSystem/Templates/GUIForms/JPanel.java to edit this template
- */
 package com.unsis.view.panel;
 
 import com.toedter.calendar.JCalendar;
@@ -19,6 +15,8 @@ import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 import javax.swing.Icon;
 import javax.swing.ImageIcon;
+import javax.swing.JCheckBox;
+import javax.swing.JOptionPane;
 import javax.swing.JTextField;
 
 /**
@@ -51,27 +49,43 @@ public class RegisterEmployed extends javax.swing.JPanel {
         panelInternal.add(dateNac, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 240, 400, 210));
         panelInternal.setComponentZOrder(dateNac, 0);
 
-        resizeImages();
+        this.resizeImages();
     }
 
     // Método para obtener los nombres de los JCheckBox en un ArrayList
     public ArrayList<String> getCheckBoxNames() {
         ArrayList<String> checkBoxNames = new ArrayList<>();
+        JCheckBox[] allCheckBoxes = {checkCourt, checkExpensesHistory, checkListEmployes, checkListProducts, checkOrders, checkRegisterEmploy, checkRegisterExpenses, checkRegisterProduct, checkSalePoint, checkSettingsApp, checkUpdateEmployes, checkUpdateProducts};
 
-        checkBoxNames.add(checkCourt.getName());
-        checkBoxNames.add(checkExpensesHistory.getName());
-        checkBoxNames.add(checkListEmployes.getName());
-        checkBoxNames.add(checkListProducts.getName());
-        checkBoxNames.add(checkOrders.getName());
-        checkBoxNames.add(checkRegisterEmploy.getName());
-        checkBoxNames.add(checkRegisterExpenses.getName());
-        checkBoxNames.add(checkRegisterProduct.getName());
-        checkBoxNames.add(checkSalePoint.getName());
-        checkBoxNames.add(checkSettingsApp.getName());
-        checkBoxNames.add(checkUpdateEmployes.getName());
-        checkBoxNames.add(checkUpdateProducts.getName());
+        for (JCheckBox checkBox : allCheckBoxes) {
+            if (checkBox.isSelected()) {
+                checkBoxNames.add(checkBox.getName());
+                System.out.println("Agregada la seccion: " + checkBox.getName());
+            }
+        }
 
         return checkBoxNames;
+    }
+
+    private List<Access> generateAccess(Account account) {
+        // Creas una instancia de Access
+        Access access;
+        ArrayList<Section> sections = controller.findAllEntities(Section.class);
+        ArrayList<String> ids = getCheckBoxNames();
+        List<Access> accessList = new ArrayList<>();
+        // Estableces la relación con la sección
+        for (Section section : sections) {
+            if (ids.contains(String.valueOf(section.getId()))) {
+                access = new Access.Builder()
+                        .withId(section.getId())
+                        .withIdCuenta(account)
+                        .withIdSeccion(new Section(section))
+                        .build();
+                accessList.add(access);
+                System.out.println("Acceso a " + section.getId() + " : " + section.getNombre());
+            }
+        }
+        return accessList;
     }
 
     private void verify(KeyEvent evt, JTextField field, String regex) {
@@ -372,6 +386,7 @@ public class RegisterEmployed extends javax.swing.JPanel {
         checkUpdateEmployes.setFont(new java.awt.Font("Jaldi", 0, 16)); // NOI18N
         checkUpdateEmployes.setForeground(new java.awt.Color(118, 125, 142));
         checkUpdateEmployes.setText("Modificación de empleados");
+        checkUpdateEmployes.setName("10"); // NOI18N
         checkUpdateEmployes.setOpaque(false);
         panelInternal.add(checkUpdateEmployes, new org.netbeans.lib.awtextra.AbsoluteConstraints(970, 400, -1, -1));
 
@@ -385,6 +400,7 @@ public class RegisterEmployed extends javax.swing.JPanel {
         checkUpdateProducts.setFont(new java.awt.Font("Jaldi", 0, 16)); // NOI18N
         checkUpdateProducts.setForeground(new java.awt.Color(118, 125, 142));
         checkUpdateProducts.setText("Modificación de productos");
+        checkUpdateProducts.setName("11"); // NOI18N
         checkUpdateProducts.setOpaque(false);
         panelInternal.add(checkUpdateProducts, new org.netbeans.lib.awtextra.AbsoluteConstraints(980, 220, -1, -1));
 
@@ -512,16 +528,19 @@ public class RegisterEmployed extends javax.swing.JPanel {
     private void buttonSelectImageActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_buttonSelectImageActionPerformed
         fileChooser.showDialog(this, "Aceptar");
 
-        String path = fileChooser.getSelectedFile().getPath();
+        try {
+            String path = fileChooser.getSelectedFile().getPath();
 
-        if (!path.isEmpty()) {
-            Tools tools = new Tools();
-            this.buttonSelectImage.setIcon(tools.resizeIcon(
-                    new ImageIcon(path), 140, 140));
+            if (!path.isEmpty()) {
+                Tools tools = new Tools();
+                this.buttonSelectImage.setIcon(tools.resizeIcon(
+                        new ImageIcon(path), 140, 140));
 
-            this.buttonSelectImage.setOpaque(false);
-            this.buttonSelectImage.setText("");
+                this.buttonSelectImage.setOpaque(false);
+                this.buttonSelectImage.setText("");
 
+            }
+        } catch (Exception e) {
         }
     }//GEN-LAST:event_buttonSelectImageActionPerformed
 
@@ -597,7 +616,6 @@ public class RegisterEmployed extends javax.swing.JPanel {
 
     private void buttonSaveActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_buttonSaveActionPerformed
         Employee employee = new Employee.Builder()
-                .withId(35)
                 .withNumEmpleado(Integer.valueOf(txtNumEmploy.getText().trim()))
                 .withNombre(txtName.getText().trim())
                 .withApellidoP(txtLastNamePaternal.getText().trim())
@@ -610,46 +628,40 @@ public class RegisterEmployed extends javax.swing.JPanel {
                 .withPuesto(txtPosition.getText().trim())
                 .build();
 
-        controller.create(employee);
+        String path;
+        try {
+
+            path = fileChooser.getSelectedFile().getPath();
+
+            if (path.isEmpty()) {
+                path = "/profileDefault.png";
+            }
+        } catch (Exception e) {
+            path = "/profileDefault.png";
+        }
 
         Account account = new Account.Builder()
-                .withId(1)
                 .withNumCuenta(Integer.valueOf(txtNumEmploy.getText().trim()))
                 .withUsuario(txtUserName.getText().trim())
                 .withContrasena(Tools.cryptPassword(txtPassword.getText().trim()))
-                .withIdEmpleado(employee) // instancia que esta abajo
+                .withIdEmpleado(employee)
+                .withFotoPerfil(path)
                 .build();
-        controller.create(account);
-        
-        account.setAccessList(generateAccess(account));
-        controller.edit(account);
 
-        account = controller.findEntityById(1, new Account().getClass());
-        System.out.println(account.getContrasena());
+        employee.setAccount(account);
+        account.setAccessList(generateAccess(account));
+
+        try {
+            controller.create(employee);
+            JOptionPane.showMessageDialog(null, "Empleado egistrado", "Aviso", JOptionPane.INFORMATION_MESSAGE);
+        } catch (Exception e) {
+            JOptionPane.showMessageDialog(null, "Error al registrar a el empleado", "Aviso", JOptionPane.ERROR_MESSAGE);
+        }
+//        controller.create(account);
+
 
     }//GEN-LAST:event_buttonSaveActionPerformed
 
-    private List<Access> generateAccess(Account account) {
-        // Creas una instancia de Access
-        Access access;
-        ArrayList<Section> sections = controller.findAllEntities(Section.class);
-        ArrayList<String> ids = getCheckBoxNames();
-        List<Access> accessList = new ArrayList<>();
-        // Estableces la relación con la sección
-        for (Section section : sections) {
-
-            if (ids.contains(section.getId())) {
-                access = new Access.Builder()
-                        .withId(section.getId())
-                        .withIdCuenta(account)
-                        .withIdSeccion(section)
-                        .build();
-                accessList.add(access); // Agregas el nuevo Access a la lista
-
-            }
-        }
-        return accessList;
-    }
     private void txtNumEmployKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtNumEmployKeyReleased
         verify(evt, txtNumEmploy, "^[0-9]$");
     }//GEN-LAST:event_txtNumEmployKeyReleased

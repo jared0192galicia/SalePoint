@@ -1,16 +1,13 @@
 package com.unsis.view.panel;
 
 import com.unsis.clases.Tools;
-import javax.swing.Icon;
-import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener;
-import javax.swing.JTextField;
-import javax.swing.event.DocumentEvent;
-import javax.swing.event.DocumentListener;
 import java.io.BufferedWriter;
 import java.io.File;
 import java.io.FileWriter;
 import java.io.IOException;
+import javax.swing.Icon;
+import javax.swing.event.DocumentEvent;
+import javax.swing.event.DocumentListener;
 
 public class GeneralSettings extends javax.swing.JPanel {
 
@@ -153,7 +150,7 @@ public class GeneralSettings extends javax.swing.JPanel {
     }
 
     @SuppressWarnings("unchecked")
-    // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
+    // <editor-fold defaultstate="collapsed" desc="Generated Code">                          
     private void initComponents() {
 
         jPanel1 = new javax.swing.JPanel();
@@ -279,9 +276,9 @@ public class GeneralSettings extends javax.swing.JPanel {
         Labeajustes1.setForeground(new java.awt.Color(7, 56, 112));
         Labeajustes1.setText("Ajustes");
         add(Labeajustes1, new org.netbeans.lib.awtextra.AbsoluteConstraints(50, 10, -1, -1));
-    }// </editor-fold>//GEN-END:initComponents
+    }// </editor-fold>                        
 //Guardar en archivo
-    private void buttonSaveActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_buttonSaveActionPerformed
+    private void buttonSaveActionPerformed(java.awt.event.ActionEvent evt) {                                           
         String vat = jTextFieldVAT.getText();
         String decimals = jTextFieldDecimals.getText();
         String email = jTextFieldEmail.getText();
@@ -313,7 +310,7 @@ public class GeneralSettings extends javax.swing.JPanel {
             System.err.println("Error: " + e.getMessage());
         }
 
-    }//GEN-LAST:event_buttonSaveActionPerformed
+    }                                          
 
     public void componentShown(java.awt.event.ComponentEvent evt) {
         // Este método se llama cuando se muestra el panel
@@ -356,7 +353,7 @@ public class GeneralSettings extends javax.swing.JPanel {
     }
 
 
-    // Variables declaration - do not modify//GEN-BEGIN:variables
+    // Variables declaration - do not modify                     
     private javax.swing.JLabel Labeajustes;
     private javax.swing.JLabel Labeajustes1;
     private javax.swing.JLabel Labeajustes2;
@@ -376,5 +373,5 @@ public class GeneralSettings extends javax.swing.JPanel {
     private javax.swing.JLabel labelfilter4;
     private javax.swing.JLabel labelfilter5;
     private javax.swing.JLabel labelfilter6;
-    // End of variables declaration//GEN-END:variables
+    // End of variables declaration                   
 }

@@ -57,11 +57,20 @@ VALUES
 
 
 INSERT INTO "Access" (idcuenta, idseccion)
-VALUES (1, 1), (1, 2), (1, 3), (1, 4), (1, 5), (1, 6), (1, 7), (1, 8), (1, 9);
+VALUES (1, 1), (1, 2), (1, 3), (1, 4), (1, 5), (1, 6), (1, 7), (1, 8);
 
 
 -------------------------------
 
+INSERT INTO
+  "Section" (idArea, nombre, descripcion)
+VALUES
+  (1, 'Editar Empleados', 'Modifica los empleados');
+
+INSERT INTO
+  "Section" (idArea, nombre, descripcion)
+VALUES
+  (2, 'Editar Productos', 'Modifica los productos');
 
 -- Población de la tabla Supplier
 INSERT INTO "Supplier" (nombre, marca) VALUES
@@ -87,4 +96,8 @@ INSERT INTO "Product" (nombre, precioCom, precioVenta, codigoBarra, tipo, descri
 ('Producto 4', 15.25, 24.99, '444444', 'Gelato', 'Descripción 4', 1004, 'Activo', 30, 'Variante D'),
 ('Producto 5', 9.99, 16.99, '555555', 'Cupcake', 'Descripción 5', 1005, 'Activo', 25, 'Variante E');
 
+
+--------------------------------
+
+INSERT INTO "Company" ("name", descripcion, logo) VALUES ('Tienda', 'nose', './');
 
