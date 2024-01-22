@@ -12,7 +12,6 @@ import java.io.File;
 import java.io.FileWriter;
 import java.io.IOException;
 
-
 public class GeneralSettings extends javax.swing.JPanel {
 
     /**
@@ -21,10 +20,16 @@ public class GeneralSettings extends javax.swing.JPanel {
     public GeneralSettings() {
         initComponents();
         this.resizeImages();
-           addListeners();
-
+        addListeners();
+        this.addComponentListener(new java.awt.event.ComponentAdapter() {
+            @Override
+            public void componentShown(java.awt.event.ComponentEvent evt) {
+                // Este método se llama cuando se muestra el panel
+                readDataFromFile(); // Llama a un método para leer datos desde el archivo y actualizar la interfaz de usuario
+            }
+        });
     }
-    
+
     /**
      * Redimenciona las imagenes de los botones para que se ajusten a el tamaño
      * necesario
@@ -33,10 +38,11 @@ public class GeneralSettings extends javax.swing.JPanel {
         Tools tools = new Tools();
         Icon resizedIcon = tools.resizeIcon(buttonSave.getIcon(), 45, 45);
         buttonSave.setIcon(resizedIcon);
-        
+
         resizedIcon = tools.resizeIcon(buttonImport.getIcon(), 45, 45);
         buttonImport.setIcon(resizedIcon);
     }
+
     private void addListeners() {
         // validacion del campo iva
         jTextFieldVAT.getDocument().addDocumentListener(new DocumentListener() {
@@ -114,7 +120,7 @@ public class GeneralSettings extends javax.swing.JPanel {
     private void validateVAT() {
         String textVAT = jTextFieldVAT.getText();
         if (!textVAT.matches("\\d*")) {
-           // Si el texto contiene caracteres no numéricos, elimínalo
+            // Si el texto contiene caracteres no numéricos, elimínalo
             textVAT = textVAT.replaceAll("\\D", "");
             jTextFieldVAT.setText(textVAT);
         }
@@ -131,10 +137,10 @@ public class GeneralSettings extends javax.swing.JPanel {
     }
 
     private void validateEmail() {
-         // Implementar la validación del correo electrónico usando una expresión regular
+        // Implementar la validación del correo electrónico usando una expresión regular
         String textEmail = jTextFieldEmail.getText();
         if (!textEmail.matches("[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\\.[a-zA-Z]{2,}")) {
-             jTextFieldEmail.setText("");
+            jTextFieldEmail.setText("");
         }
     }
 
@@ -146,8 +152,6 @@ public class GeneralSettings extends javax.swing.JPanel {
         }
     }
 
-
-   
     @SuppressWarnings("unchecked")
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
@@ -157,7 +161,6 @@ public class GeneralSettings extends javax.swing.JPanel {
         jTextField1 = new javax.swing.JTextField();
         labelfilter1 = new javax.swing.JLabel();
         jButton1 = new javax.swing.JButton();
-        buttonSave = new javax.swing.JButton();
         labelfilter2 = new javax.swing.JLabel();
         jTextFieldVAT = new javax.swing.JTextField();
         labelfilter3 = new javax.swing.JLabel();
@@ -166,10 +169,11 @@ public class GeneralSettings extends javax.swing.JPanel {
         labelfilter5 = new javax.swing.JLabel();
         labelfilter6 = new javax.swing.JLabel();
         jTextFieldEmail = new javax.swing.JTextField();
-        jTextFieldContact = new javax.swing.JTextField();
         buttonImport = new javax.swing.JButton();
         Labeajustes = new javax.swing.JLabel();
         Labeajustes2 = new javax.swing.JLabel();
+        buttonSave = new javax.swing.JButton();
+        jTextFieldContact = new javax.swing.JTextField();
         Labeajustes1 = new javax.swing.JLabel();
 
         setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
@@ -196,18 +200,6 @@ public class GeneralSettings extends javax.swing.JPanel {
         jButton1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/IconCafe.png"))); // NOI18N
         jButton1.setContentAreaFilled(false);
         jPanel1.add(jButton1, new org.netbeans.lib.awtextra.AbsoluteConstraints(280, 260, 350, 280));
-
-        buttonSave.setBackground(new java.awt.Color(0, 102, 0));
-        buttonSave.setFont(new java.awt.Font("Jaldi", 0, 20)); // NOI18N
-        buttonSave.setForeground(new java.awt.Color(255, 255, 255));
-        buttonSave.setIcon(new javax.swing.ImageIcon(getClass().getResource("/save.png"))); // NOI18N
-        buttonSave.setText("Guardar");
-        buttonSave.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                buttonSaveActionPerformed(evt);
-            }
-        });
-        jPanel1.add(buttonSave, new org.netbeans.lib.awtextra.AbsoluteConstraints(1060, 580, 260, 50));
 
         labelfilter2.setFont(new java.awt.Font("Jaldi", 0, 20)); // NOI18N
         labelfilter2.setForeground(new java.awt.Color(82, 146, 222));
@@ -248,10 +240,6 @@ public class GeneralSettings extends javax.swing.JPanel {
         jTextFieldEmail.setForeground(new java.awt.Color(51, 51, 51));
         jPanel1.add(jTextFieldEmail, new org.netbeans.lib.awtextra.AbsoluteConstraints(1060, 400, 250, 35));
 
-        jTextFieldContact.setFont(new java.awt.Font("Monospaced", 0, 14)); // NOI18N
-        jTextFieldContact.setForeground(new java.awt.Color(51, 51, 51));
-        jPanel1.add(jTextFieldContact, new org.netbeans.lib.awtextra.AbsoluteConstraints(1060, 500, 250, 35));
-
         buttonImport.setBackground(new java.awt.Color(0, 102, 0));
         buttonImport.setFont(new java.awt.Font("Jaldi", 0, 24)); // NOI18N
         buttonImport.setForeground(new java.awt.Color(255, 255, 255));
@@ -269,6 +257,22 @@ public class GeneralSettings extends javax.swing.JPanel {
         Labeajustes2.setText("Ajuste de valores");
         jPanel1.add(Labeajustes2, new org.netbeans.lib.awtextra.AbsoluteConstraints(960, 20, -1, -1));
 
+        buttonSave.setBackground(new java.awt.Color(0, 102, 0));
+        buttonSave.setFont(new java.awt.Font("Jaldi", 0, 20)); // NOI18N
+        buttonSave.setForeground(new java.awt.Color(255, 255, 255));
+        buttonSave.setIcon(new javax.swing.ImageIcon(getClass().getResource("/save.png"))); // NOI18N
+        buttonSave.setText("Guardar");
+        buttonSave.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                buttonSaveActionPerformed(evt);
+            }
+        });
+        jPanel1.add(buttonSave, new org.netbeans.lib.awtextra.AbsoluteConstraints(1050, 630, 260, 50));
+
+        jTextFieldContact.setFont(new java.awt.Font("Monospaced", 0, 14)); // NOI18N
+        jTextFieldContact.setForeground(new java.awt.Color(51, 51, 51));
+        jPanel1.add(jTextFieldContact, new org.netbeans.lib.awtextra.AbsoluteConstraints(1060, 500, 250, 35));
+
         add(jPanel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(60, 70, 1540, 690));
 
         Labeajustes1.setFont(new java.awt.Font("Jaldi", 0, 40)); // NOI18N
@@ -278,39 +282,78 @@ public class GeneralSettings extends javax.swing.JPanel {
     }// </editor-fold>//GEN-END:initComponents
 //Guardar en archivo
     private void buttonSaveActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_buttonSaveActionPerformed
-            String vat = jTextFieldVAT.getText();
-    String decimals = jTextFieldDecimals.getText();
-    String email = jTextFieldEmail.getText();
-    String contact = jTextFieldContact.getText();
-  
-    String filePath = "src/main/resources/files/config.txt";
+        String vat = jTextFieldVAT.getText();
+        String decimals = jTextFieldDecimals.getText();
+        String email = jTextFieldEmail.getText();
+        String contact = jTextFieldContact.getText();
 
-    try {
-        File file = new File(filePath);
+        String filePath = "src/main/resources/files/config.txt";
 
-        if (!file.getParentFile().exists()) {
-            file.getParentFile().mkdirs();
+        try {
+            File file = new File(filePath);
+
+            if (!file.getParentFile().exists()) {
+                file.getParentFile().mkdirs();
+            }
+
+            try (BufferedWriter writer = new BufferedWriter(new FileWriter(file))) {
+                writer.write("VAT=" + vat);
+                writer.newLine();
+                writer.write("Decimals=" + decimals);
+                writer.newLine();
+                writer.write("Email=" + email);
+                writer.newLine();
+                writer.write("Contact=" + contact);
+                writer.close();
+                System.out.println("Data saved successfully in the file.");
+            } catch (IOException e) {
+                System.err.println("Error saving data to the file: " + e.getMessage());
+            }
+        } catch (Exception e) {
+            System.err.println("Error: " + e.getMessage());
         }
 
-        try (BufferedWriter writer = new BufferedWriter(new FileWriter(file))) {
-            writer.write("VAT=" + vat);
-            writer.newLine();
-            writer.write("Decimals=" + decimals);
-            writer.newLine();
-            writer.write("Email=" + email);
-            writer.newLine();
-            writer.write("Contact=" + contact);
-
-            System.out.println("Data saved successfully in the file.");
-        } catch (IOException e) {
-            System.err.println("Error saving data to the file: " + e.getMessage());
-        }
-    } catch (Exception e) {
-        System.err.println("Error: " + e.getMessage());
-    }
-    
     }//GEN-LAST:event_buttonSaveActionPerformed
 
+    public void componentShown(java.awt.event.ComponentEvent evt) {
+        // Este método se llama cuando se muestra el panel
+        readDataFromFile(); // Llama a un método para leer datos desde el archivo y actualizar la interfaz de usuario
+    }
+
+    private void readDataFromFile() {
+        String filePath = "src/main/resources/files/config.txt";
+
+        try {
+            java.nio.file.Path path = java.nio.file.Paths.get(filePath);
+            java.util.List<String> lines = java.nio.file.Files.readAllLines(path, java.nio.charset.StandardCharsets.UTF_8);
+
+            for (String line : lines) {
+                String[] parts = line.split("=");
+                if (parts.length == 2) {
+                    String key = parts[0];
+                    String value = parts[1];
+
+                    switch (key) {
+                        case "VAT":
+                            jTextFieldVAT.setText(value);
+                            break;
+                        case "Decimals":
+                            jTextFieldDecimals.setText(value);
+                            break;
+                        case "Email":
+                            jTextFieldEmail.setText(value);
+                            break;
+                        case "Contact":
+                            jTextFieldContact.setText(value);
+                            break;
+                        // Agrega más casos si es necesario para otras configuraciones
+                    }
+                }
+            }
+        } catch (java.io.IOException e) {
+            System.err.println("Error al leer datos desde el archivo: " + e.getMessage());
+        }
+    }
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
@@ -335,4 +378,3 @@ public class GeneralSettings extends javax.swing.JPanel {
     private javax.swing.JLabel labelfilter6;
     // End of variables declaration//GEN-END:variables
 }
-
