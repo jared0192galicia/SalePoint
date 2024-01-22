@@ -169,7 +169,6 @@ public class GeneralSettings extends javax.swing.JPanel {
         labelfilter5 = new javax.swing.JLabel();
         labelfilter6 = new javax.swing.JLabel();
         jTextFieldEmail = new javax.swing.JTextField();
-        jTextFieldruta = new javax.swing.JTextField();
         buttonImport = new javax.swing.JButton();
         Labeajustes = new javax.swing.JLabel();
         Labeajustes2 = new javax.swing.JLabel();
@@ -240,10 +239,6 @@ public class GeneralSettings extends javax.swing.JPanel {
         jTextFieldEmail.setFont(new java.awt.Font("Monospaced", 0, 14)); // NOI18N
         jTextFieldEmail.setForeground(new java.awt.Color(51, 51, 51));
         jPanel1.add(jTextFieldEmail, new org.netbeans.lib.awtextra.AbsoluteConstraints(1060, 400, 250, 35));
-
-        jTextFieldruta.setFont(new java.awt.Font("Monospaced", 0, 14)); // NOI18N
-        jTextFieldruta.setForeground(new java.awt.Color(51, 51, 51));
-        jPanel1.add(jTextFieldruta, new org.netbeans.lib.awtextra.AbsoluteConstraints(1060, 560, 250, 35));
 
         buttonImport.setBackground(new java.awt.Color(0, 102, 0));
         buttonImport.setFont(new java.awt.Font("Jaldi", 0, 24)); // NOI18N
@@ -374,7 +369,6 @@ public class GeneralSettings extends javax.swing.JPanel {
     private javax.swing.JTextField jTextFieldDecimals;
     private javax.swing.JTextField jTextFieldEmail;
     private javax.swing.JTextField jTextFieldVAT;
-    private javax.swing.JTextField jTextFieldruta;
     private javax.swing.JLabel labelfilter;
     private javax.swing.JLabel labelfilter1;
     private javax.swing.JLabel labelfilter2;
