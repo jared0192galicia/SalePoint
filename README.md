@@ -29,9 +29,10 @@
 1. ```ENVIRONMENT``` = Entorno de ejecución
 
 > Conexion a la base de datos
-1. ```USE_NAME``` = Usuario de postgresql
+1. ```USE_NAMER``` = Usuario de postgresql
 2. ```PASSWORD_SERVER``` = Contraseña de acceso a postgresql
 3. ```DATA_BASE``` = Nombre  de la base dedatos a la que se accede
+4. ```PU_NAME``` = Nombre de la unidad de persistencia utilizada
 
 ## Dependecias
 
@@ -40,11 +41,12 @@
 * Timing Framework
 * MigLayout
 * Driver Postgresql
+* Jasper
 
 ### Estandar de desarrollo
 
 1. El nombre las variables debe ser en ingles
-2. Comentar los metodos y procesos complejos en ingles
+2. Comentar los metodos y procesos complejos en español
 3. Las variables deben empesar con minuscula y primera letra de la segunda palabra en mayuscula. Ejemplo ```unoDos```
 4. No renombrar ningun archivo, en caso de querer hacerlo avisar antes.
 5. Por cada commit creado crear un Pull Request en gitHub
