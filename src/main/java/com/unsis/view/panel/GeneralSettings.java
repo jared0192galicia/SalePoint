@@ -1,4 +1,4 @@
-package com.mycompany.cafe;
+package com.unsis.view.panel;
 
 import com.unsis.clases.Tools;
 import javax.swing.Icon;

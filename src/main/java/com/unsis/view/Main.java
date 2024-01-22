@@ -1,6 +1,6 @@
 package com.unsis.view;
 
-import com.mycompany.cafe.GeneralSettings;
+import com.unsis.view.panel.GeneralSettings;
 import com.unsis.dao.Conexion;
 import com.unsis.models.constants.Constants;
 import com.unsis.view.panel.RegisterEmployed;
