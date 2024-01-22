@@ -4,12 +4,20 @@
  */
 package com.unsis.view.panel;
 
+import com.unsis.clases.Session;
 import com.unsis.clases.Tools;
+import com.unsis.controller.JpaController;
+import com.unsis.models.entity.Product;
+import com.unsis.models.entity.Sales;
 import java.awt.Color;
 import java.awt.Font;
+import java.util.ArrayList;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
 import javax.swing.Icon;
 import javax.swing.SwingConstants;
 import javax.swing.table.DefaultTableCellRenderer;
+import javax.swing.table.DefaultTableModel;
 import javax.swing.table.JTableHeader;
 
 /**
@@ -18,12 +26,14 @@ import javax.swing.table.JTableHeader;
  */
 public class SalePoint extends javax.swing.JPanel {
 
+    private final JpaController controller;
+    private String selectedMess = "";
     /**
      * Creates new form Venta
      */
     public SalePoint() {
         initComponents();
-
+        this.controller = new JpaController();
         JTableHeader TableProduct = tableProduct.getTableHeader();
 
         // Crear un renderizador de encabezado personalizado
@@ -38,9 +48,9 @@ public class SalePoint extends javax.swing.JPanel {
         TableProduct.setDefaultRenderer(headerRenderer);
 
         resizeImages();
+        llenarCombo();
         dialogConfirm.setLocationRelativeTo(null);
     }
-
     /**
      * Redimenciona las imagenes de los botones para que se ajusten a el tamaño
      * necesario
@@ -50,6 +60,23 @@ public class SalePoint extends javax.swing.JPanel {
         Icon resizedIcon = tools.resizeIcon(buttonAdd.getIcon(), 20, 20);
         buttonAdd.setIcon(resizedIcon);
     }
+    
+    public void llenarCombo() {
+        // Llamada al método findAllEntities para obtener la lista de productos
+        ArrayList<Product> products = controller.findAllEntities(Product.class);
+
+        // Limpiar el JComboBox antes de agregar nuevos elementos
+        comboProd.removeAllItems();
+
+        for (Product product : products) {
+            // Obtener el nombre del producto
+            String nombreProducto = product.getNombre();
+
+            // Agregar el nombre del producto al JComboBox
+            comboProd.addItem(nombreProducto);
+        }
+    }
+    
 
     /**
      * This method is called from within the constructor to initialize the form.
@@ -61,7 +88,6 @@ public class SalePoint extends javax.swing.JPanel {
     private void initComponents() {
 
         buttonGroup1 = new javax.swing.ButtonGroup();
-        jRadioButton1 = new javax.swing.JRadioButton();
         dialogConfirm = new javax.swing.JDialog();
         jPanel3 = new javax.swing.JPanel();
         jPanel4 = new javax.swing.JPanel();
@@ -92,21 +118,20 @@ public class SalePoint extends javax.swing.JPanel {
         jLabel9 = new javax.swing.JLabel();
         jLabel10 = new javax.swing.JLabel();
         jLabel11 = new javax.swing.JLabel();
-        jComboBox1 = new javax.swing.JComboBox<>();
-        jComboBox2 = new javax.swing.JComboBox<>();
-        jTextField1 = new javax.swing.JTextField();
-        jRadioButton2 = new javax.swing.JRadioButton();
-        jRadioButton3 = new javax.swing.JRadioButton();
-        jTextField2 = new javax.swing.JTextField();
-        jTextField3 = new javax.swing.JTextField();
+        comboSab = new javax.swing.JComboBox<>();
+        comboProd = new javax.swing.JComboBox<>();
+        txtCant = new javax.swing.JTextField();
+        rbNormal = new javax.swing.JRadioButton();
+        btParaLlevar = new javax.swing.JRadioButton();
+        txtComents = new javax.swing.JTextField();
         jLabel12 = new javax.swing.JLabel();
-        jTextField4 = new javax.swing.JTextField();
+        txtName = new javax.swing.JTextField();
         buttonAdd = new javax.swing.JButton();
-        jTextField5 = new javax.swing.JTextField();
+        txtCodBarra = new javax.swing.JTextField();
         buttonAddOrder = new javax.swing.JButton();
-        jLabel13 = new javax.swing.JLabel();
-
-        jRadioButton1.setText("jRadioButton1");
+        labelInvalidCodBarra = new javax.swing.JLabel();
+        labelInvalidCant = new javax.swing.JLabel();
+        labelInvalidName1 = new javax.swing.JLabel();
 
         dialogConfirm.setAlwaysOnTop(true);
         dialogConfirm.setUndecorated(true);
@@ -362,43 +387,65 @@ public class SalePoint extends javax.swing.JPanel {
         jLabel11.setText("Nombre del comprador");
         jPanel2.add(jLabel11, new org.netbeans.lib.awtextra.AbsoluteConstraints(330, 280, -1, -1));
 
-        jComboBox1.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
-        jPanel2.add(jComboBox1, new org.netbeans.lib.awtextra.AbsoluteConstraints(330, 140, 160, 30));
+        comboSab.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
+        jPanel2.add(comboSab, new org.netbeans.lib.awtextra.AbsoluteConstraints(330, 140, 160, 30));
 
-        jComboBox2.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
-        jComboBox2.setOpaque(false);
-        jPanel2.add(jComboBox2, new org.netbeans.lib.awtextra.AbsoluteConstraints(60, 140, 160, 30));
+        comboProd.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
+        jPanel2.add(comboProd, new org.netbeans.lib.awtextra.AbsoluteConstraints(60, 140, 160, 30));
 
-        jTextField1.setBorder(javax.swing.BorderFactory.createEtchedBorder());
-        jPanel2.add(jTextField1, new org.netbeans.lib.awtextra.AbsoluteConstraints(60, 230, 160, 30));
+        txtCant.setBorder(javax.swing.BorderFactory.createEtchedBorder());
+        txtCant.addFocusListener(new java.awt.event.FocusAdapter() {
+            public void focusLost(java.awt.event.FocusEvent evt) {
+                txtCantFocusLost(evt);
+            }
+        });
+        jPanel2.add(txtCant, new org.netbeans.lib.awtextra.AbsoluteConstraints(60, 230, 160, 30));
 
-        buttonGroup1.add(jRadioButton2);
-        jRadioButton2.setText("Normal");
-        jRadioButton2.setHorizontalTextPosition(javax.swing.SwingConstants.RIGHT);
-        jRadioButton2.setOpaque(false);
-        jPanel2.add(jRadioButton2, new org.netbeans.lib.awtextra.AbsoluteConstraints(330, 230, -1, -1));
+        buttonGroup1.add(rbNormal);
+        rbNormal.setText("Normal");
+        rbNormal.setHorizontalTextPosition(javax.swing.SwingConstants.RIGHT);
+        rbNormal.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                rbNormalActionPerformed(evt);
+            }
+        });
+        jPanel2.add(rbNormal, new org.netbeans.lib.awtextra.AbsoluteConstraints(330, 230, -1, -1));
 
-        buttonGroup1.add(jRadioButton3);
-        jRadioButton3.setText("Para llevar");
-        jRadioButton3.setOpaque(false);
-        jPanel2.add(jRadioButton3, new org.netbeans.lib.awtextra.AbsoluteConstraints(430, 230, -1, -1));
-        jPanel2.add(jTextField2, new org.netbeans.lib.awtextra.AbsoluteConstraints(60, 310, 164, 30));
-        jPanel2.add(jTextField3, new org.netbeans.lib.awtextra.AbsoluteConstraints(60, 400, 164, 33));
+        buttonGroup1.add(btParaLlevar);
+        btParaLlevar.setText("Para llevar");
+        btParaLlevar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btParaLlevarActionPerformed(evt);
+            }
+        });
+        jPanel2.add(btParaLlevar, new org.netbeans.lib.awtextra.AbsoluteConstraints(430, 230, -1, -1));
+        jPanel2.add(txtComents, new org.netbeans.lib.awtextra.AbsoluteConstraints(60, 310, 164, 30));
 
         jLabel12.setBackground(new java.awt.Color(255, 255, 255));
         jLabel12.setFont(new java.awt.Font("Jaldi", 0, 18)); // NOI18N
         jLabel12.setForeground(new java.awt.Color(118, 125, 142));
         jLabel12.setText("Cantidad");
         jPanel2.add(jLabel12, new org.netbeans.lib.awtextra.AbsoluteConstraints(60, 200, -1, -1));
-        jPanel2.add(jTextField4, new org.netbeans.lib.awtextra.AbsoluteConstraints(330, 310, 164, 30));
+
+        txtName.addFocusListener(new java.awt.event.FocusAdapter() {
+            public void focusLost(java.awt.event.FocusEvent evt) {
+                txtNameFocusLost(evt);
+            }
+        });
+        jPanel2.add(txtName, new org.netbeans.lib.awtextra.AbsoluteConstraints(330, 310, 164, 30));
 
         buttonAdd.setBackground(new java.awt.Color(82, 146, 222));
         buttonAdd.setFont(new java.awt.Font("Jaldi", 0, 20)); // NOI18N
         buttonAdd.setForeground(new java.awt.Color(255, 255, 255));
         buttonAdd.setIcon(new javax.swing.ImageIcon(getClass().getResource("/iconCirclePlus.png"))); // NOI18N
         buttonAdd.setText("Agregar");
-        jPanel2.add(buttonAdd, new org.netbeans.lib.awtextra.AbsoluteConstraints(340, 400, 160, 33));
-        jPanel2.add(jTextField5, new org.netbeans.lib.awtextra.AbsoluteConstraints(100, 500, 370, 40));
+        buttonAdd.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                buttonAddActionPerformed(evt);
+            }
+        });
+        jPanel2.add(buttonAdd, new org.netbeans.lib.awtextra.AbsoluteConstraints(200, 390, 160, 33));
+        jPanel2.add(txtCodBarra, new org.netbeans.lib.awtextra.AbsoluteConstraints(100, 500, 370, 40));
 
         buttonAddOrder.setBackground(new java.awt.Color(82, 146, 222));
         buttonAddOrder.setFont(new java.awt.Font("Jaldi", 0, 24)); // NOI18N
@@ -410,13 +457,27 @@ public class SalePoint extends javax.swing.JPanel {
                 buttonAddOrderMouseClicked(evt);
             }
         });
+        buttonAddOrder.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                buttonAddOrderActionPerformed(evt);
+            }
+        });
         jPanel2.add(buttonAddOrder, new org.netbeans.lib.awtextra.AbsoluteConstraints(100, 580, 370, 50));
 
-        jLabel13.setBackground(new java.awt.Color(255, 255, 255));
-        jLabel13.setFont(new java.awt.Font("Jaldi", 0, 18)); // NOI18N
-        jLabel13.setForeground(new java.awt.Color(118, 125, 142));
-        jLabel13.setText("Por confirmar");
-        jPanel2.add(jLabel13, new org.netbeans.lib.awtextra.AbsoluteConstraints(60, 370, -1, -1));
+        labelInvalidCodBarra.setFont(new java.awt.Font("Dialog", 1, 13)); // NOI18N
+        labelInvalidCodBarra.setForeground(new java.awt.Color(255, 153, 0));
+        labelInvalidCodBarra.setText("Mercancia no disponible");
+        jPanel2.add(labelInvalidCodBarra, new org.netbeans.lib.awtextra.AbsoluteConstraints(100, 540, 360, -1));
+
+        labelInvalidCant.setFont(new java.awt.Font("Dialog", 1, 13)); // NOI18N
+        labelInvalidCant.setForeground(new java.awt.Color(153, 0, 0));
+        labelInvalidCant.setText("Cantidad no valida");
+        jPanel2.add(labelInvalidCant, new org.netbeans.lib.awtextra.AbsoluteConstraints(60, 260, 150, -1));
+
+        labelInvalidName1.setFont(new java.awt.Font("Dialog", 1, 13)); // NOI18N
+        labelInvalidName1.setForeground(new java.awt.Color(153, 0, 0));
+        labelInvalidName1.setText("Caracteres invalidos");
+        jPanel2.add(labelInvalidName1, new org.netbeans.lib.awtextra.AbsoluteConstraints(330, 340, 160, -1));
 
         add(jPanel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(1050, 90, 560, 720));
     }// </editor-fold>//GEN-END:initComponents
@@ -438,25 +499,124 @@ public class SalePoint extends javax.swing.JPanel {
         dialogConfirm.show(false);
     }//GEN-LAST:event_buttonCloseActionPerformed
 
+    private void txtCantFocusLost(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_txtCantFocusLost
+        String cantidad = txtCant.getText().trim();
+        String regex = "^[2-9]\\d*$";
+        
+        Pattern pattern = Pattern.compile(regex);
+        Matcher matcher = pattern.matcher(cantidad);
+        
+        if (matcher.matches()) {
+            labelInvalidCant.setVisible(false);
+        } else {
+            System.out.println("Cantidad invalida");
+            txtCant.requestFocus();
+            labelInvalidCant.setVisible(true);
+        }
+    }//GEN-LAST:event_txtCantFocusLost
 
+    private void txtNameFocusLost(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_txtNameFocusLost
+        String cantidad = txtCant.getText().trim();
+        String regex = "^[a-zA-Z]+";
+        
+        Pattern pattern = Pattern.compile(regex);
+        Matcher matcher = pattern.matcher(cantidad);
+        
+        if (matcher.matches()) {
+            labelInvalidCodBarra.setVisible(false);
+        } else {
+            System.out.println("Nombre Invalido");
+            txtName.requestFocus();
+            labelInvalidCodBarra.setVisible(true);
+        }
+    }//GEN-LAST:event_txtNameFocusLost
+
+    private void buttonAddActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_buttonAddActionPerformed
+        String producto = (String) comboProd.getSelectedItem();
+        String sabor = (String) comboSab.getSelectedItem();
+        int cantidad = (Integer.valueOf(txtCant.getText()));
+        String nomComp = txtName.getText();
+        String coment = txtComents.getText();
+        String codBarra = txtCodBarra.getText();
+        
+        llenarTabla(producto, cantidad);
+        
+        Session.getAccount().getId();
+    }//GEN-LAST:event_buttonAddActionPerformed
+
+    private void rbNormalActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_rbNormalActionPerformed
+        updateMessage("Normal");
+    }//GEN-LAST:event_rbNormalActionPerformed
+
+    private void btParaLlevarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btParaLlevarActionPerformed
+        updateMessage("Para llevar");
+    }//GEN-LAST:event_btParaLlevarActionPerformed
+
+    private void buttonAddOrderActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_buttonAddOrderActionPerformed
+        ArrayList<Product> products = controller.findAllEntities(Product.class);
+        for (Product producto : products) {
+            Sales sale = new Sales.Builder()
+                    .withId(1)
+                    .withIdVenta(1)
+                    .withIdProducto(producto)
+                    .withTipoOrden(selectedMess)
+                    .withNombreComp(txtName.getText().trim())
+                    .withComentarios(txtComents.getText().trim())
+                    .withCodigoBarras(producto.getCodigobarra())
+                    .build();
+
+            controller.create(sale);
+        }
+    }//GEN-LAST:event_buttonAddOrderActionPerformed
+
+    private void updateMessage(String mensaje){
+        selectedMess = mensaje;
+    }
+    
+    public void llenarTabla(String productName, int cantidad){
+        ArrayList<Product> products = controller.findAllEntities(Product.class);
+        
+        DefaultTableModel tableModel = (DefaultTableModel) tableProduct.getModel();
+        tableModel.setRowCount(0);
+        tableProduct.setModel(tableModel);
+        double precio = 0.0f;        
+        
+        for (Product producto : products) {
+            if(producto.getNombre().equalsIgnoreCase(productName)){
+                precio = producto.getPrecioventa();
+                double total = precio *cantidad;
+                
+                Object[] rowData = {
+                producto.getNombre(),
+                producto.getDescripcion(),
+                cantidad,
+                producto.getPrecioventa(),
+                total
+            };
+                tableModel.addRow(rowData);
+                break;
+            }            
+        }
+    }
+    
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JRadioButton btParaLlevar;
     private javax.swing.JButton buttonAdd;
     private javax.swing.JButton buttonAddOrder;
     private javax.swing.JButton buttonClose;
     private javax.swing.ButtonGroup buttonGroup1;
+    private javax.swing.JComboBox<String> comboProd;
+    private javax.swing.JComboBox<String> comboSab;
     private javax.swing.JLabel compradorLabel;
     private javax.swing.JButton confirmarBoton;
     private javax.swing.JDialog dialogConfirm;
     private javax.swing.JLabel fechaLabel;
     private javax.swing.JLabel ingresarFechaLabel;
     private javax.swing.JLabel ingresoMontoLabel;
-    private javax.swing.JComboBox<String> jComboBox1;
-    private javax.swing.JComboBox<String> jComboBox2;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel10;
     private javax.swing.JLabel jLabel11;
     private javax.swing.JLabel jLabel12;
-    private javax.swing.JLabel jLabel13;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel22;
     private javax.swing.JLabel jLabel3;
@@ -468,22 +628,22 @@ public class SalePoint extends javax.swing.JPanel {
     private javax.swing.JPanel jPanel2;
     private javax.swing.JPanel jPanel3;
     private javax.swing.JPanel jPanel4;
-    private javax.swing.JRadioButton jRadioButton1;
-    private javax.swing.JRadioButton jRadioButton2;
-    private javax.swing.JRadioButton jRadioButton3;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JScrollPane jScrollPane2;
     private javax.swing.JSeparator jSeparator1;
-    private javax.swing.JTextField jTextField1;
-    private javax.swing.JTextField jTextField2;
-    private javax.swing.JTextField jTextField3;
-    private javax.swing.JTextField jTextField4;
-    private javax.swing.JTextField jTextField5;
+    private javax.swing.JLabel labelInvalidCant;
+    private javax.swing.JLabel labelInvalidCodBarra;
+    private javax.swing.JLabel labelInvalidName1;
     private javax.swing.JLabel montoLabel;
     private javax.swing.JLabel nameCompradorLabel;
     private javax.swing.JLabel nameVendedorLabel;
+    private javax.swing.JRadioButton rbNormal;
     private javax.swing.JTable table;
     private javax.swing.JTable tableProduct;
+    private javax.swing.JTextField txtCant;
+    private javax.swing.JTextField txtCodBarra;
+    private javax.swing.JTextField txtComents;
+    private javax.swing.JTextField txtName;
     private javax.swing.JLabel vendedorLabel;
     // End of variables declaration//GEN-END:variables
 }

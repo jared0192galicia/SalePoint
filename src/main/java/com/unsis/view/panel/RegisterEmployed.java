@@ -653,8 +653,7 @@ public class RegisterEmployed extends javax.swing.JPanel {
     private void txtNumEmployKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtNumEmployKeyReleased
         verify(evt, txtNumEmploy, "^[0-9]$");
     }//GEN-LAST:event_txtNumEmployKeyReleased
-
-
+   
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JToggleButton buttonCalendarIngress;
     private javax.swing.JToggleButton buttonCalendarNac;

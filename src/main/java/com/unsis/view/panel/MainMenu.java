@@ -272,6 +272,7 @@ public class MainMenu extends javax.swing.JPanel {
         jButton7.setText("Descubre más");
         jPanel4.add(jButton7, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 230, -1, -1));
 
+        jTextArea1.setEditable(false);
         jTextArea1.setColumns(20);
         jTextArea1.setRows(5);
         jTextArea1.setText("   ●  A partir de la proxima semana a las bebidas de la marca Boing tendran un aumento de precios del\n          5% por pieza, los cambios se haran automaticamente en el sistema.");
