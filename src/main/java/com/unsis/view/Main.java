@@ -1,7 +1,7 @@
 package com.unsis.view;
 
-import com.mycompany.cafe.GeneralSettings;
 import com.unsis.clases.Stack;
+import com.unsis.view.panel.GeneralSettings;
 import com.unsis.dao.Conexion;
 import com.unsis.models.constants.Constants;
 import com.unsis.view.panel.RegisterEmployed;
@@ -17,9 +17,6 @@ import com.unsis.view.panel.SalePoint;
 import com.unsis.view.panel.UpdateEmployee;
 import com.unsis.view.panel.ventasDesp;
 import java.awt.CardLayout;
-import java.awt.Component;
-import java.awt.event.ComponentAdapter;
-import java.awt.event.ComponentEvent;
 import java.awt.event.WindowAdapter;
 import java.awt.event.WindowEvent;
 import java.sql.SQLException;

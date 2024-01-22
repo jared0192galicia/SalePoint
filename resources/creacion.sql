@@ -57,6 +57,42 @@ CREATE TABLE "Access" (
  
 ---------------------
 
+CREATE TABLE "Supplier"(
+id serial,
+nombre VARCHAR,
+marca VARCHAR,
+PRIMARY KEY(id)
+);
+
+CREATE TABLE "Product"(
+  id serial,
+  codigoBarra VARCHAR NOT NULL UNIQUE,
+  nombre varchar,
+  precioCom float,
+  precioVenta float,
+  tipo VARCHAR,
+  descripcion VARCHAR(25),
+  numProducto INT,
+  estado VARCHAR(4),
+  disponible int,
+  variante VARCHAR,
+  PRIMARY KEY(id)
+);
+
+CREATE TABLE "Sales"(
+  id serial,
+  idVenta int,
+  idEmpleado int,
+  idProducto VARCHAR,
+  tipoOrden VARCHAR,
+  comentarios VARCHAR,
+  nombreComprador VARCHAR,
+  codigoBarra VARCHAR,
+  PRIMARY KEY(id),
+  FOREIGN KEY (idEmpleado) REFERENCES "Employee"(id),
+  FOREIGN KEY (idProducto) REFERENCES "Product"(codigoBarra)
+);
+
 ALTER TABLE
   "Account"
 ADD
@@ -76,9 +112,3 @@ SET
 WHERE
   fotoperfil IS NULL;
 
-UPDATE
-  "Access"
-SET
-  idcuenta = 1
-WHERE
-  idcuenta IS NULL; 
