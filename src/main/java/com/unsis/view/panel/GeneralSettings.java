@@ -304,7 +304,7 @@ public class GeneralSettings extends javax.swing.JPanel {
                 writer.write("Email=" + email);
                 writer.newLine();
                 writer.write("Contact=" + contact);
-
+                writer.close();
                 System.out.println("Data saved successfully in the file.");
             } catch (IOException e) {
                 System.err.println("Error saving data to the file: " + e.getMessage());
