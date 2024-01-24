@@ -22,7 +22,7 @@ import javax.persistence.Table;
  * @author labtecweb04
  */
 @Entity
-@Table(name = "Product")
+@Table(name = "\"Product\"")
 @NamedQueries({
     @NamedQuery(name = "Product.findAll", query = "SELECT p FROM Product p"),
     @NamedQuery(name = "Product.findById", query = "SELECT p FROM Product p WHERE p.id = :id"),

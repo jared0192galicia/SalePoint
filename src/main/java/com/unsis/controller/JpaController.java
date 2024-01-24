@@ -7,7 +7,9 @@ import com.unsis.models.entity.Access;
 import com.unsis.models.entity.Account;
 import com.unsis.models.entity.Area;
 import com.unsis.models.entity.Employee;
+import com.unsis.models.entity.Product;
 import com.unsis.models.entity.Section;
+import com.unsis.models.entity.Sales;
 import io.github.cdimascio.dotenv.Dotenv;
 import java.util.ArrayList;
 import java.util.Collection;
@@ -23,6 +25,8 @@ public class JpaController {
     private final EmployeeJpaController employee;
     private final AccountDao dao = new AccountDao();
     private final SectionJpaController section;
+    private final ProductJpaController product;
+    private final SalesJpaController sales;
     
     public JpaController() {
         Dotenv env = Dotenv.load();
@@ -34,6 +38,8 @@ public class JpaController {
         this.account = new AccountJpaController(emf);
         this.section = new SectionJpaController(emf);
         this.employee = new EmployeeJpaController(emf);
+        this.product = new ProductJpaController(emf);
+        this.sales = new SalesJpaController(emf);
     }
 
     /**
@@ -57,6 +63,12 @@ public class JpaController {
 
             case Area areaObj ->
                 this.area.create(areaObj);
+
+            case Product productObj ->
+                this.product.create(productObj);
+
+            case Sales salesObj ->
+                this.sales.create(salesObj);
 
             default -> {
                 System.err.println("Invalid entity type");
@@ -87,6 +99,12 @@ public class JpaController {
                 case Area areaObj ->
                     this.area.destroy(areaObj.getId());
 
+                case Product productObj ->
+                    this.product.destroy(productObj.getId());
+
+                case Sales salesObj ->
+                    this.sales.destroy(salesObj.getId());
+                    
                 default -> {
                     System.err.println("Invalid entity type");
                 }
@@ -118,7 +136,13 @@ public class JpaController {
 
                 case Area areaObj ->
                     this.area.edit(areaObj);
+                    
+                case Product productObj ->
+                    this.product.edit(productObj);
 
+                case Sales salesObj ->
+                    this.sales.edit(salesObj);
+                    
                 default -> {
                     System.err.println("Tas mal");
                 }
@@ -155,6 +179,12 @@ public class JpaController {
                 case "Area" -> {
                     return (T) this.section.findSection(id);
                 }
+                case "Product" -> {
+                    return (T) this.section.findSection(id);
+                }
+                case "Sales" -> {
+                    return (T) this.section.findSection(id);
+                }
                 default -> {
                     System.err.println("Invalid entity type");
                     return null;
@@ -187,6 +217,12 @@ public class JpaController {
             }
             case "Section" -> {
                 return new ArrayList<>((Collection<? extends T>) this.section.findSectionEntities());
+            }
+            case "Product" -> {
+                return new ArrayList<>((Collection<? extends T>) this.product.findProductEntities());
+            }
+            case "Sales" -> {
+                return new ArrayList<>((Collection<? extends T>) this.sales.findSalesEntities());
             }
             default -> {
                 System.err.println("Invalid entity type");

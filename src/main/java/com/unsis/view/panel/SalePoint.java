@@ -15,6 +15,8 @@ import java.util.ArrayList;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 import javax.swing.Icon;
+import javax.swing.JOptionPane;
+import javax.swing.JTextField;
 import javax.swing.SwingConstants;
 import javax.swing.table.DefaultTableCellRenderer;
 import javax.swing.table.DefaultTableModel;
@@ -28,11 +30,17 @@ public class SalePoint extends javax.swing.JPanel {
 
     private final JpaController controller;
     private String selectedMess = "";
+    private boolean band = false;
+    private final ArrayList<Product> listPedido;
+
     /**
      * Creates new form Venta
      */
     public SalePoint() {
         initComponents();
+        this.labelInvalidCant.setVisible(false);
+        this.labelInvalidName1.setVisible(false);
+        this.labelInvalidCodBarra.setVisible(false);
         this.controller = new JpaController();
         JTableHeader TableProduct = tableProduct.getTableHeader();
 
@@ -50,7 +58,12 @@ public class SalePoint extends javax.swing.JPanel {
         resizeImages();
         llenarCombo();
         dialogConfirm.setLocationRelativeTo(null);
+        DefaultTableModel tableModel = (DefaultTableModel) tableProduct.getModel();
+        tableModel.setRowCount(0);
+        tableProduct.setModel(tableModel);
+        this.listPedido = null;
     }
+
     /**
      * Redimenciona las imagenes de los botones para que se ajusten a el tamaño
      * necesario
@@ -60,7 +73,7 @@ public class SalePoint extends javax.swing.JPanel {
         Icon resizedIcon = tools.resizeIcon(buttonAdd.getIcon(), 20, 20);
         buttonAdd.setIcon(resizedIcon);
     }
-    
+
     public void llenarCombo() {
         // Llamada al método findAllEntities para obtener la lista de productos
         ArrayList<Product> products = controller.findAllEntities(Product.class);
@@ -76,7 +89,6 @@ public class SalePoint extends javax.swing.JPanel {
             comboProd.addItem(nombreProducto);
         }
     }
-    
 
     /**
      * This method is called from within the constructor to initialize the form.
@@ -103,7 +115,7 @@ public class SalePoint extends javax.swing.JPanel {
         ingresarFechaLabel = new javax.swing.JLabel();
         confirmarBoton = new javax.swing.JButton();
         jScrollPane2 = new javax.swing.JScrollPane();
-        table = new javax.swing.JTable();
+        tableConfComp = new javax.swing.JTable();
         buttonClose = new javax.swing.JButton();
         jLabel1 = new javax.swing.JLabel();
         jPanel1 = new javax.swing.JPanel();
@@ -132,6 +144,7 @@ public class SalePoint extends javax.swing.JPanel {
         labelInvalidCodBarra = new javax.swing.JLabel();
         labelInvalidCant = new javax.swing.JLabel();
         labelInvalidName1 = new javax.swing.JLabel();
+        buttonDelete = new javax.swing.JButton();
 
         dialogConfirm.setAlwaysOnTop(true);
         dialogConfirm.setUndecorated(true);
@@ -269,32 +282,18 @@ public class SalePoint extends javax.swing.JPanel {
 
         jPanel3.add(jPanel4, new org.netbeans.lib.awtextra.AbsoluteConstraints(470, 60, 440, 380));
 
-        table.setFont(new java.awt.Font("Jaldi", 0, 12)); // NOI18N
-        table.setModel(new javax.swing.table.DefaultTableModel(
+        tableConfComp.setFont(new java.awt.Font("Jaldi", 0, 12)); // NOI18N
+        tableConfComp.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
-                {"Text", "Text", "1", "Text", "Text"},
-                {"Text", "Text", "2", "Text", "Text"},
-                {"Text", "Text", "4", "Text", "Text"},
-                {"Text", "Text", "5", "Text", "Text"},
-                {"Text", "Text", "7", "Text", "Text"},
-                {"Text", "Text", "7", "Text", "Text"},
-                {"Text", "Text", "1", "Text", "Text"},
-                {"Text", "Text", "5", "Text", "Text"},
-                {"Text", "Text", "5", "Text", "Text"},
-                {"Text", "Text", "8", "Text", "Text"},
-                {"Text", "Text", "5", "Text", "Text"},
-                {"Text", "Text", "5", "Text", "Text"},
-                {"Text", "Text", "7", "Text", "Text"},
-                {"Text", "Text", "2", "Text", "Text"},
-                {"Text", "Text", "2", "Text", "Text"}
+
             },
             new String [] {
                 "Productos", "Descripción", "Cantidad", "Precio por pieza", "Total"
             }
         ));
-        table.setSelectionBackground(new java.awt.Color(0, 102, 102));
-        table.setSelectionForeground(new java.awt.Color(250, 250, 250));
-        jScrollPane2.setViewportView(table);
+        tableConfComp.setSelectionBackground(new java.awt.Color(0, 102, 102));
+        tableConfComp.setSelectionForeground(new java.awt.Color(250, 250, 250));
+        jScrollPane2.setViewportView(tableConfComp);
 
         jPanel3.add(jScrollPane2, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 60, -1, 380));
 
@@ -444,7 +443,13 @@ public class SalePoint extends javax.swing.JPanel {
                 buttonAddActionPerformed(evt);
             }
         });
-        jPanel2.add(buttonAdd, new org.netbeans.lib.awtextra.AbsoluteConstraints(200, 390, 160, 33));
+        jPanel2.add(buttonAdd, new org.netbeans.lib.awtextra.AbsoluteConstraints(340, 390, 160, 33));
+
+        txtCodBarra.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                txtCodBarraActionPerformed(evt);
+            }
+        });
         jPanel2.add(txtCodBarra, new org.netbeans.lib.awtextra.AbsoluteConstraints(100, 500, 370, 40));
 
         buttonAddOrder.setBackground(new java.awt.Color(82, 146, 222));
@@ -455,11 +460,6 @@ public class SalePoint extends javax.swing.JPanel {
         buttonAddOrder.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
                 buttonAddOrderMouseClicked(evt);
-            }
-        });
-        buttonAddOrder.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                buttonAddOrderActionPerformed(evt);
             }
         });
         jPanel2.add(buttonAddOrder, new org.netbeans.lib.awtextra.AbsoluteConstraints(100, 580, 370, 50));
@@ -478,6 +478,18 @@ public class SalePoint extends javax.swing.JPanel {
         labelInvalidName1.setForeground(new java.awt.Color(153, 0, 0));
         labelInvalidName1.setText("Caracteres invalidos");
         jPanel2.add(labelInvalidName1, new org.netbeans.lib.awtextra.AbsoluteConstraints(330, 340, 160, -1));
+
+        buttonDelete.setBackground(new java.awt.Color(82, 146, 222));
+        buttonDelete.setFont(new java.awt.Font("Jaldi", 0, 20)); // NOI18N
+        buttonDelete.setForeground(new java.awt.Color(255, 255, 255));
+        buttonDelete.setIcon(new javax.swing.ImageIcon(getClass().getResource("/iconTrash.png"))); // NOI18N
+        buttonDelete.setText("Borrar");
+        buttonDelete.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                buttonDeleteActionPerformed(evt);
+            }
+        });
+        jPanel2.add(buttonDelete, new org.netbeans.lib.awtextra.AbsoluteConstraints(60, 390, 160, 33));
 
         add(jPanel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(1050, 90, 560, 720));
     }// </editor-fold>//GEN-END:initComponents
@@ -501,47 +513,54 @@ public class SalePoint extends javax.swing.JPanel {
 
     private void txtCantFocusLost(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_txtCantFocusLost
         String cantidad = txtCant.getText().trim();
-        String regex = "^[2-9]\\d*$";
-        
+        String regex = "^[1-9]\\d*$";
+
         Pattern pattern = Pattern.compile(regex);
         Matcher matcher = pattern.matcher(cantidad);
-        
+
         if (matcher.matches()) {
             labelInvalidCant.setVisible(false);
+            band = false;
         } else {
             System.out.println("Cantidad invalida");
-            txtCant.requestFocus();
+
             labelInvalidCant.setVisible(true);
+            band = true;
         }
     }//GEN-LAST:event_txtCantFocusLost
 
     private void txtNameFocusLost(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_txtNameFocusLost
-        String cantidad = txtCant.getText().trim();
+        String cantidad = txtName.getText().trim();
         String regex = "^[a-zA-Z]+";
-        
+
         Pattern pattern = Pattern.compile(regex);
         Matcher matcher = pattern.matcher(cantidad);
-        
+
         if (matcher.matches()) {
             labelInvalidCodBarra.setVisible(false);
+            band = false;
         } else {
             System.out.println("Nombre Invalido");
-            txtName.requestFocus();
+
             labelInvalidCodBarra.setVisible(true);
+            band = true;
         }
     }//GEN-LAST:event_txtNameFocusLost
 
     private void buttonAddActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_buttonAddActionPerformed
-        String producto = (String) comboProd.getSelectedItem();
-        String sabor = (String) comboSab.getSelectedItem();
-        int cantidad = (Integer.valueOf(txtCant.getText()));
-        String nomComp = txtName.getText();
-        String coment = txtComents.getText();
-        String codBarra = txtCodBarra.getText();
-        
-        llenarTabla(producto, cantidad);
-        
-        Session.getAccount().getId();
+        if (band == false) {
+            String producto = (String) comboProd.getSelectedItem();
+            String sabor = (String) comboSab.getSelectedItem();
+            int cantidad = (Integer.valueOf(txtCant.getText()));
+            String nomComp = txtName.getText();
+            String coment = txtComents.getText();
+            String codBarra = txtCodBarra.getText();
+
+            llenarTabla(producto, cantidad);
+
+            Session.getAccount().getId();
+            txtName.setEnabled(false);
+        }
     }//GEN-LAST:event_buttonAddActionPerformed
 
     private void rbNormalActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_rbNormalActionPerformed
@@ -552,58 +571,86 @@ public class SalePoint extends javax.swing.JPanel {
         updateMessage("Para llevar");
     }//GEN-LAST:event_btParaLlevarActionPerformed
 
-    private void buttonAddOrderActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_buttonAddOrderActionPerformed
-        ArrayList<Product> products = controller.findAllEntities(Product.class);
-        for (Product producto : products) {
-            Sales sale = new Sales.Builder()
-                    .withId(1)
-                    .withIdVenta(1)
-                    .withIdProducto(producto)
-                    .withTipoOrden(selectedMess)
-                    .withNombreComp(txtName.getText().trim())
-                    .withComentarios(txtComents.getText().trim())
-                    .withCodigoBarras(producto.getCodigobarra())
-                    .build();
+    private void buttonDeleteActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_buttonDeleteActionPerformed
+        int selectedRow = tableProduct.getSelectedRow();
 
-            controller.create(sale);
+        if (selectedRow != -1) { // Verifica que haya una fila seleccionada
+            int opcion = JOptionPane.showConfirmDialog(null,
+                    "¿Estás seguro de continuar?", "Confirmación", JOptionPane.YES_NO_OPTION);
+
+            if (opcion == JOptionPane.YES_OPTION) {
+                DefaultTableModel model = (DefaultTableModel) tableProduct.getModel();
+                //listPedido.remove(listPedido.);
+                model.removeRow(selectedRow);
+
+            }
         }
-    }//GEN-LAST:event_buttonAddOrderActionPerformed
+    }//GEN-LAST:event_buttonDeleteActionPerformed
 
-    private void updateMessage(String mensaje){
+    private void txtCodBarraActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtCodBarraActionPerformed
+        int cantidad = 1;
+        JTextField textField = (JTextField) evt.getSource();
+        String codBarra = textField.getText();
+        ArrayList<Product> products = controller.findAllEntities(Product.class);
+
+        for (Product producto : products) {
+            if (producto.getCodigobarra().equalsIgnoreCase(codBarra)) {
+                String nombreProd = producto.getNombre();
+                llenarTabla(nombreProd, cantidad);
+                System.out.println(codBarra);
+
+                textField.setText("");
+                return;
+            }
+        }
+
+    }//GEN-LAST:event_txtCodBarraActionPerformed
+
+    private void updateMessage(String mensaje) {
         selectedMess = mensaje;
     }
-    
-    public void llenarTabla(String productName, int cantidad){
+
+    public void llenarTabla(String productName, int cantidad) {
         ArrayList<Product> products = controller.findAllEntities(Product.class);
-        
+
         DefaultTableModel tableModel = (DefaultTableModel) tableProduct.getModel();
-        tableModel.setRowCount(0);
-        tableProduct.setModel(tableModel);
-        double precio = 0.0f;        
-        
+        if (tableModel == null) {
+            tableModel = new DefaultTableModel();
+            tableModel.addColumn("Producto");
+            tableModel.addColumn("Descriptción");
+            tableModel.addColumn("Cantidad");
+            tableModel.addColumn("Precio por pz");
+            tableModel.addColumn("Total");
+            tableProduct.setModel(tableModel);
+        }
+
+        double precio = 0.0f;
+
         for (Product producto : products) {
-            if(producto.getNombre().equalsIgnoreCase(productName)){
+            if (producto.getNombre().equalsIgnoreCase(productName)) {
                 precio = producto.getPrecioventa();
-                double total = precio *cantidad;
-                
+                double total = precio * cantidad;
+
                 Object[] rowData = {
-                producto.getNombre(),
-                producto.getDescripcion(),
-                cantidad,
-                producto.getPrecioventa(),
-                total
-            };
+                    producto.getNombre(),
+                    producto.getDescripcion(),
+                    cantidad,
+                    producto.getPrecioventa(),
+                    total
+                };
                 tableModel.addRow(rowData);
+                listPedido.add(producto);
                 break;
-            }            
+            }
         }
     }
-    
+
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JRadioButton btParaLlevar;
     private javax.swing.JButton buttonAdd;
     private javax.swing.JButton buttonAddOrder;
     private javax.swing.JButton buttonClose;
+    private javax.swing.JButton buttonDelete;
     private javax.swing.ButtonGroup buttonGroup1;
     private javax.swing.JComboBox<String> comboProd;
     private javax.swing.JComboBox<String> comboSab;
@@ -638,7 +685,7 @@ public class SalePoint extends javax.swing.JPanel {
     private javax.swing.JLabel nameCompradorLabel;
     private javax.swing.JLabel nameVendedorLabel;
     private javax.swing.JRadioButton rbNormal;
-    private javax.swing.JTable table;
+    private javax.swing.JTable tableConfComp;
     private javax.swing.JTable tableProduct;
     private javax.swing.JTextField txtCant;
     private javax.swing.JTextField txtCodBarra;
