@@ -7,6 +7,7 @@ import com.unsis.models.entity.Access;
 import com.unsis.models.entity.Account;
 import com.unsis.models.entity.Employee;
 import com.unsis.models.entity.Section;
+import java.awt.HeadlessException;
 import java.awt.event.KeyEvent;
 import java.util.ArrayList;
 import java.util.Date;
@@ -70,7 +71,7 @@ public class RegisterEmployed extends javax.swing.JPanel {
     private List<Access> generateAccess(Account account) {
         // Creas una instancia de Access
         Access access;
-        ArrayList<Section> sections = controller.findAllEntities(Section.class);
+        ArrayList<Section> sections = new ArrayList<>();
         ArrayList<String> ids = getCheckBoxNames();
         List<Access> accessList = new ArrayList<>();
         // Estableces la relación con la sección
@@ -329,6 +330,7 @@ public class RegisterEmployed extends javax.swing.JPanel {
 
         checkListProducts.setFont(new java.awt.Font("Jaldi", 0, 16)); // NOI18N
         checkListProducts.setForeground(new java.awt.Color(118, 125, 142));
+        checkListProducts.setSelected(true);
         checkListProducts.setText("Lista de productos");
         checkListProducts.setName("4"); // NOI18N
         checkListProducts.setOpaque(false);
@@ -343,6 +345,7 @@ public class RegisterEmployed extends javax.swing.JPanel {
 
         checkOrders.setFont(new java.awt.Font("Jaldi", 0, 16)); // NOI18N
         checkOrders.setForeground(new java.awt.Color(118, 125, 142));
+        checkOrders.setSelected(true);
         checkOrders.setText("Pedidos entranates");
         checkOrders.setName("5"); // NOI18N
         checkOrders.setOpaque(false);
@@ -654,7 +657,7 @@ public class RegisterEmployed extends javax.swing.JPanel {
         try {
             controller.create(employee);
             JOptionPane.showMessageDialog(null, "Empleado egistrado", "Aviso", JOptionPane.INFORMATION_MESSAGE);
-        } catch (Exception e) {
+        } catch (HeadlessException e) {
             JOptionPane.showMessageDialog(null, "Error al registrar a el empleado", "Aviso", JOptionPane.ERROR_MESSAGE);
         }
 //        controller.create(account);

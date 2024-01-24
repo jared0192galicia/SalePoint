@@ -7,6 +7,14 @@ import java.nio.file.Path;
 import java.nio.file.StandardCopyOption;
 import java.text.SimpleDateFormat;
 import java.util.Date;
+import java.util.Properties;
+import javax.mail.Authenticator;
+import javax.mail.Message;
+import javax.mail.MessagingException;
+import javax.mail.PasswordAuthentication;
+import javax.mail.Transport;
+import javax.mail.internet.InternetAddress;
+import javax.mail.internet.MimeMessage;
 import javax.swing.Icon;
 import javax.swing.ImageIcon;
 import org.mindrot.jbcrypt.BCrypt;
@@ -82,5 +90,39 @@ public class Tools {
             String fileName = name + "_" + timestamp + ".xlsx";
             
             return fileName;
+    }
+    
+     public static void enviarCorreo(String destinatario, String asunto, String mensaje) {
+        // Configuración de las propiedades del servidor SMTP
+        Properties properties = new Properties();
+        properties.put("mail.smtp.host", "tu_servidor_smtp");
+        properties.put("mail.smtp.port", "tu_puerto_smtp");
+        properties.put("mail.smtp.auth", "true");
+        properties.put("mail.smtp.starttls.enable", "true");
+
+        // Autenticación del usuario
+        javax.mail.Session session = javax.mail.Session.getInstance(properties, new Authenticator() {
+            @Override
+            protected PasswordAuthentication getPasswordAuthentication() {
+                return new PasswordAuthentication("tu_correo@gmail.com", "tu_contraseña");
+            }
+        });
+
+        try {
+            // Crear mensaje
+            Message message = new MimeMessage(session);
+            message.setFrom(new InternetAddress("tu_correo@gmail.com"));
+            message.setRecipient(Message.RecipientType.TO, new InternetAddress(destinatario));
+            message.setSubject(asunto);
+            message.setText(mensaje);
+
+            // Enviar mensaje
+            Transport.send(message);
+
+            System.out.println("Correo enviado con éxito!");
+
+        } catch (MessagingException e) {
+            e.printStackTrace();
+        }
     }
 }

@@ -22,7 +22,7 @@ public class AccountDao {
     public Account auth(String user) {
         String query = "SELECT * FROM \"Account\""
                 + "LEFT JOIN \"Employee\" ON \"Account\".idempleado = \"Employee\".id WHERE usuario = ?";
-        try ( PreparedStatement pst = cn.prepareStatement(query)) {
+        try (PreparedStatement pst = cn.prepareStatement(query)) {
             pst.setString(1, user);
 
             ResultSet rs = pst.executeQuery();
@@ -41,5 +41,30 @@ public class AccountDao {
         }
 
         return null;
+    }
+
+    /**
+     * Verifica si un correo pertenece a una cuenta
+     * @param mail correo a verificar
+     * @return boolean, true si el correo esta registrado y falso en caso contrario
+     */
+    public boolean isRegister(String mail) {
+        String query = """
+                        SELECT "usuario" as USER FROM "Account" 
+                        LEFT JOIN "Employee" ON idempleado = "Account".id
+                        WHERE correo = ?
+                       """;
+        
+        try (PreparedStatement pst = cn.prepareStatement(query)) {
+            pst.setString(1, mail);
+
+            ResultSet rs = pst.executeQuery();
+            while (rs.next()) {
+                return true;
+            }
+        } catch (Exception e) {
+            System.err.println("Error in search mail: " + e.getMessage());
+        }
+        return false;
     }
 }

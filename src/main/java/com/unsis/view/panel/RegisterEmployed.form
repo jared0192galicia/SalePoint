@@ -385,6 +385,7 @@
             <Property name="foreground" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
               <Color blue="8e" green="7d" red="76" type="rgb"/>
             </Property>
+            <Property name="selected" type="boolean" value="true"/>
             <Property name="text" type="java.lang.String" value="Lista de productos"/>
             <Property name="name" type="java.lang.String" value="4" noResource="true"/>
             <Property name="opaque" type="boolean" value="false"/>
@@ -421,6 +422,7 @@
             <Property name="foreground" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
               <Color blue="8e" green="7d" red="76" type="rgb"/>
             </Property>
+            <Property name="selected" type="boolean" value="true"/>
             <Property name="text" type="java.lang.String" value="Pedidos entranates"/>
             <Property name="name" type="java.lang.String" value="5" noResource="true"/>
             <Property name="opaque" type="boolean" value="false"/>

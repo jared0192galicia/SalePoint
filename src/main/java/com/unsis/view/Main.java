@@ -1,5 +1,6 @@
 package com.unsis.view;
 
+import com.unsis.clases.KeyController;
 import com.unsis.clases.Stack;
 import com.unsis.view.panel.GeneralSettings;
 import com.unsis.dao.Conexion;
@@ -17,6 +18,8 @@ import com.unsis.view.panel.SalePoint;
 import com.unsis.view.panel.UpdateEmployee;
 import com.unsis.view.panel.ventasDesp;
 import java.awt.CardLayout;
+import java.awt.event.KeyEvent;
+import java.awt.event.KeyListener;
 import java.awt.event.WindowAdapter;
 import java.awt.event.WindowEvent;
 import java.sql.SQLException;
@@ -32,6 +35,8 @@ public class Main extends javax.swing.JFrame {
     private JPanel defaultPanel;
     private final String MAINMENU = "Main Menu";
     public Stack<String> stack;
+    
+    private KeyController keyController;
 
     /**
      * Creates new form Home
@@ -44,7 +49,11 @@ public class Main extends javax.swing.JFrame {
         Constants.fillContants();
 
         NavBar navigator = new NavBar(this);
+        navigator.addKeyListener(keyController);
+        
         ToolBar toolBar = new ToolBar(this);
+        toolBar.addKeyListener(keyController);
+        
         navigator.setBounds(0, 0, 216, 1024);
         navigator.buttonHome.addActionListener((e) -> {
             setView(MAINMENU);
@@ -52,6 +61,10 @@ public class Main extends javax.swing.JFrame {
         this.add(navigator);
         this.add(toolBar);
         this.setCardPanel();
+
+        keyController = new KeyController(this);
+        
+        this.addKeyListener(keyController);
 
         // Agrega un WindowListener al JFrame para capturar el evento de cierre
         this.addWindowListener(new WindowAdapter() {
@@ -70,8 +83,11 @@ public class Main extends javax.swing.JFrame {
         });
 
         this.createStackAccess();
+        this.setFocusable(true);
+        this.requestFocusInWindow();
+
     }
-    
+
     /**
      * Crea una pila para guardar el historial de navegación
      */
@@ -84,9 +100,10 @@ public class Main extends javax.swing.JFrame {
         stack.pop();
         this.setView(stack.pop());
     }
-    
+
     /**
      * Agrega un elemento en la pila. Metodo para use desde clases externas
+     *
      * @param name Nombre la clase a agregar
      */
     public void addPanelHistory(String name) {
@@ -114,23 +131,7 @@ public class Main extends javax.swing.JFrame {
         defaultPanel.add("Ajustes del generales", new GeneralSettings());
         defaultPanel.add("Editar Emplado", new UpdateEmployee());
 
-        // Agregar ComponentListener al JPanel que contiene el CardLayout
-//        defaultPanel.addComponentListener(new ComponentAdapter() {
-//            @Override
-//            public void componentShown(ComponentEvent e) {
-//                CardLayout layout = (CardLayout) defaultPanel.getLayout();
-//                Component selectedComponent = layout.getCurrent();
-//                String componentName = componentNames.get(selectedComponent);
-//
-//                // Verificar si el nombre es no nulo
-//                if (componentName != null) {
-//                    // Aquí puedes usar el nombre de la ventana mostrada (componentName)
-//                    // para realizar alguna acción o imprimirlo
-//                    System.out.println("Nombre de la ventana: " + componentName);
-//                }
-//            }
-//        });
-
+        defaultPanel.addKeyListener(keyController);
         this.add(defaultPanel);
     }
 
@@ -142,6 +143,7 @@ public class Main extends javax.swing.JFrame {
     public void setView(String name) {
         CardLayout c1 = (CardLayout) (defaultPanel.getLayout());
         c1.show(defaultPanel, name);
+        this.requestFocus();
     }
 
     @SuppressWarnings("unchecked")
@@ -163,7 +165,6 @@ public class Main extends javax.swing.JFrame {
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
-
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     // End of variables declaration//GEN-END:variables

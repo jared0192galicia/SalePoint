@@ -1,20 +1,28 @@
-package com.unsis.view.panel;
+/*
+ * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
+ * Click nbfs://nbhost/SystemFileSystem/Templates/GUIForms/JFrame.java to edit this template
+ */
+package com.unsis.view;
 
 import com.unsis.controller.JpaController;
 import javax.swing.JOptionPane;
 
 /**
  *
- * @author labtecweb04
+ * @author labtecweb10
  */
-public class RecuperarContraseña extends javax.swing.JPanel {
+public class ResetPassword extends javax.swing.JFrame {
 
     /**
-     * Creates new form RecuperarContraseña
+     * Creates new form ResetPassword
      */
-    public RecuperarContraseña() {
+    public ResetPassword() {
         initComponents();
-        
+
+        this.setResizable(false);
+        this.setLocationRelativeTo(null);
+        this.setTitle("Recupera tu acceso");
+
         this.textMessage.setText("""
                                        Recibir\u00e1s un mensaje con tu contrase\u00f1a
                                  
@@ -32,6 +40,7 @@ public class RecuperarContraseña extends javax.swing.JPanel {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
+        jPanel1 = new javax.swing.JPanel();
         jPanel4 = new javax.swing.JPanel();
         jPanel5 = new javax.swing.JPanel();
         jScrollPane1 = new javax.swing.JScrollPane();
@@ -41,8 +50,10 @@ public class RecuperarContraseña extends javax.swing.JPanel {
         txtMailReset = new javax.swing.JTextField();
         buttonSend = new javax.swing.JButton();
 
-        setBackground(new java.awt.Color(245, 248, 251));
-        setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
+        setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+
+        jPanel1.setBackground(new java.awt.Color(245, 248, 251));
+        jPanel1.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
         jPanel5.setBackground(new java.awt.Color(17, 57, 103));
 
@@ -80,7 +91,7 @@ public class RecuperarContraseña extends javax.swing.JPanel {
             .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 143, Short.MAX_VALUE)
         );
 
-        add(jPanel4, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 65, 370, -1));
+        jPanel1.add(jPanel4, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 65, 370, -1));
 
         jLabel5.setFont(new java.awt.Font("Jaldi", 0, 18)); // NOI18N
         jLabel5.setForeground(new java.awt.Color(118, 125, 142));
@@ -129,12 +140,36 @@ public class RecuperarContraseña extends javax.swing.JPanel {
                 .addContainerGap(35, Short.MAX_VALUE))
         );
 
-        add(jPanel6, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 250, 370, 200));
+        jPanel1.add(jPanel6, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 250, 370, 200));
+
+        javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
+        getContentPane().setLayout(layout);
+        layout.setHorizontalGroup(
+            layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 450, Short.MAX_VALUE)
+            .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                .addGroup(layout.createSequentialGroup()
+                    .addGap(0, 0, Short.MAX_VALUE)
+                    .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, 450, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addGap(0, 0, Short.MAX_VALUE)))
+        );
+        layout.setVerticalGroup(
+            layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 506, Short.MAX_VALUE)
+            .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                .addGroup(layout.createSequentialGroup()
+                    .addGap(0, 0, Short.MAX_VALUE)
+                    .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, 506, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addGap(0, 0, Short.MAX_VALUE)))
+        );
+
+        pack();
     }// </editor-fold>//GEN-END:initComponents
 
     private void buttonSendMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_buttonSendMouseClicked
         String mail = txtMailReset.getText().trim();
         int response = new JpaController().sendMessage(mail);
+        System.out.println(response);
         String message;
         switch (response) {
             case 200:
@@ -152,10 +187,45 @@ public class RecuperarContraseña extends javax.swing.JPanel {
         JOptionPane.showMessageDialog(null, message);
     }//GEN-LAST:event_buttonSendMouseClicked
 
+    /**
+     * @param args the command line arguments
+     */
+    public static void main(String args[]) {
+        /* Set the Nimbus look and feel */
+        //<editor-fold defaultstate="collapsed" desc=" Look and feel setting code (optional) ">
+        /* If Nimbus (introduced in Java SE 6) is not available, stay with the default look and feel.
+         * For details see http://download.oracle.com/javase/tutorial/uiswing/lookandfeel/plaf.html 
+         */
+        try {
+            for (javax.swing.UIManager.LookAndFeelInfo info : javax.swing.UIManager.getInstalledLookAndFeels()) {
+                if ("Nimbus".equals(info.getName())) {
+                    javax.swing.UIManager.setLookAndFeel(info.getClassName());
+                    break;
+                }
+            }
+        } catch (ClassNotFoundException ex) {
+            java.util.logging.Logger.getLogger(ResetPassword.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+        } catch (InstantiationException ex) {
+            java.util.logging.Logger.getLogger(ResetPassword.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+        } catch (IllegalAccessException ex) {
+            java.util.logging.Logger.getLogger(ResetPassword.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+        } catch (javax.swing.UnsupportedLookAndFeelException ex) {
+            java.util.logging.Logger.getLogger(ResetPassword.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+        }
+        //</editor-fold>
+
+        /* Create and display the form */
+        java.awt.EventQueue.invokeLater(new Runnable() {
+            public void run() {
+                new ResetPassword().setVisible(true);
+            }
+        });
+    }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton buttonSend;
     private javax.swing.JLabel jLabel5;
+    private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanel4;
     private javax.swing.JPanel jPanel5;
     private javax.swing.JPanel jPanel6;

@@ -222,14 +222,21 @@ public class JpaController {
      */
     public boolean auth(String user, String pass) {
         // busca una cuenta que corresponda con los datos de acceso
-        Account account = dao.auth(user);
+        Account loogedAccount = dao.auth(user);
 
-        if (account == null) {
+        if (loogedAccount == null) {
             return false;
         }
 
-        Session.setAccount(account);
+        Session.setAccount(loogedAccount);
         // Verificar si la contraseña ingresada coincide con la contraseña hasheada
-        return BCrypt.checkpw(pass, account.getContrasena());
+        return BCrypt.checkpw(pass, loogedAccount.getContrasena());
+    }
+
+    public int sendMessage(String mail) {
+        if (!dao.isRegister(mail)) {
+            return 400;
+        }
+        return 200;
     }
 }

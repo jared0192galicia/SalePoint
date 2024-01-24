@@ -8,6 +8,7 @@ import com.unsis.models.entity.Account;
 import com.unsis.models.entity.Employee;
 import com.unsis.models.entity.Section;
 import com.unsis.view.Main;
+import com.unsis.view.ResetPassword;
 import java.awt.event.KeyEvent;
 import java.util.ArrayList;
 import java.util.Date;
@@ -38,12 +39,6 @@ public class Login extends javax.swing.JFrame {
         this.setLocationRelativeTo(null);
         this.setTitle("Inicio de Sesión");
 
-        this.textMessage.setText("""
-                                       Recibir\u00e1s un mensaje con tu contrase\u00f1a
-                                 
-                                 
-                                            Por favor, escribe tu correo electr\u00f3nico.
-                                            nueva por correo electr\u00f3nico.""");
         this.resetPass.setLocationRelativeTo(null);
         this.resetPass.setSize(450, 506);
         this.resetPass.setBounds(this.getX() + 300, this.getY() - 25, 450, 506);
@@ -109,8 +104,8 @@ public class Login extends javax.swing.JFrame {
         textMessage = new javax.swing.JTextArea();
         jPanel6 = new javax.swing.JPanel();
         jLabel5 = new javax.swing.JLabel();
-        jTextField1 = new javax.swing.JTextField();
-        jButton1 = new javax.swing.JButton();
+        txtMailReset = new javax.swing.JTextField();
+        buttonSend = new javax.swing.JButton();
         firtsUser = new javax.swing.JDialog();
         panelInternal = new javax.swing.JPanel();
         txtNumEmploy = new javax.swing.JTextField();
@@ -230,17 +225,17 @@ public class Login extends javax.swing.JFrame {
         jLabel5.setForeground(new java.awt.Color(118, 125, 142));
         jLabel5.setText("Correo Electronico");
 
-        jTextField1.setHorizontalAlignment(javax.swing.JTextField.CENTER);
+        txtMailReset.setHorizontalAlignment(javax.swing.JTextField.CENTER);
 
-        jButton1.setBackground(new java.awt.Color(0, 102, 102));
-        jButton1.setFont(new java.awt.Font("Dialog", 0, 14)); // NOI18N
-        jButton1.setForeground(new java.awt.Color(255, 255, 255));
-        jButton1.setText("Enviar");
-        jButton1.setBorder(javax.swing.BorderFactory.createBevelBorder(javax.swing.border.BevelBorder.RAISED));
-        jButton1.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
-        jButton1.addMouseListener(new java.awt.event.MouseAdapter() {
+        buttonSend.setBackground(new java.awt.Color(0, 102, 102));
+        buttonSend.setFont(new java.awt.Font("Dialog", 0, 14)); // NOI18N
+        buttonSend.setForeground(new java.awt.Color(255, 255, 255));
+        buttonSend.setText("Enviar");
+        buttonSend.setBorder(javax.swing.BorderFactory.createBevelBorder(javax.swing.border.BevelBorder.RAISED));
+        buttonSend.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+        buttonSend.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
-                jButton1MouseClicked(evt);
+                buttonSendMouseClicked(evt);
             }
         });
 
@@ -255,10 +250,10 @@ public class Login extends javax.swing.JFrame {
                         .addComponent(jLabel5))
                     .addGroup(jPanel6Layout.createSequentialGroup()
                         .addGap(69, 69, 69)
-                        .addComponent(jButton1, javax.swing.GroupLayout.PREFERRED_SIZE, 219, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addComponent(buttonSend, javax.swing.GroupLayout.PREFERRED_SIZE, 219, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addGroup(jPanel6Layout.createSequentialGroup()
                         .addGap(55, 55, 55)
-                        .addComponent(jTextField1, javax.swing.GroupLayout.PREFERRED_SIZE, 250, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                        .addComponent(txtMailReset, javax.swing.GroupLayout.PREFERRED_SIZE, 250, javax.swing.GroupLayout.PREFERRED_SIZE)))
                 .addContainerGap(65, Short.MAX_VALUE))
         );
         jPanel6Layout.setVerticalGroup(
@@ -267,9 +262,9 @@ public class Login extends javax.swing.JFrame {
                 .addGap(48, 48, 48)
                 .addComponent(jLabel5)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addComponent(jTextField1, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(txtMailReset, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(18, 18, 18)
-                .addComponent(jButton1, javax.swing.GroupLayout.PREFERRED_SIZE, 35, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(buttonSend, javax.swing.GroupLayout.PREFERRED_SIZE, 35, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap(35, Short.MAX_VALUE))
         );
 
@@ -810,12 +805,29 @@ public class Login extends javax.swing.JFrame {
     }//GEN-LAST:event_labelCloseMouseClicked
 
     private void labelResetPassMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_labelResetPassMouseClicked
-        resetPass.setVisible(true);
+        new ResetPassword().setVisible(true);
     }//GEN-LAST:event_labelResetPassMouseClicked
 
-    private void jButton1MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jButton1MouseClicked
+    private void buttonSendMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_buttonSendMouseClicked
+        String mail = txtMailReset.getText().trim();
+        int response = new JpaController().sendMessage(mail);
+        String message;
+        switch (response) {
+            case 200:
+                message = "";
+                break;
+            case 300:
+                message = "";
+                break;
+            case 400:
+                message = "El correo no corresponde a ningun usuario";
+                break;
+            default:
+                message = "Código no esperado";
+        }
+        JOptionPane.showMessageDialog(null, message);
         resetPass.setVisible(false);
-    }//GEN-LAST:event_jButton1MouseClicked
+    }//GEN-LAST:event_buttonSendMouseClicked
 
     private void txtNumEmployKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtNumEmployKeyReleased
         verify(evt, txtNumEmploy, "^[0-9]$");
@@ -910,6 +922,7 @@ public class Login extends javax.swing.JFrame {
 
         return checkBoxNames;
     }
+
     private List<Access> generateAccess(Account account) {
         // Creas una instancia de Access
         Access access;
@@ -1019,6 +1032,7 @@ public class Login extends javax.swing.JFrame {
     private javax.swing.JButton buttonLogin;
     private javax.swing.JButton buttonSave;
     private javax.swing.JButton buttonSelectImage;
+    private javax.swing.JButton buttonSend;
     private javax.swing.JCheckBox checkCourt;
     private javax.swing.JCheckBox checkExpensesHistory;
     private javax.swing.JCheckBox checkListEmployes;
@@ -1034,7 +1048,6 @@ public class Login extends javax.swing.JFrame {
     private javax.swing.JComboBox<String> comboStatus;
     private javax.swing.JFileChooser fileChooser;
     private javax.swing.JDialog firtsUser;
-    private javax.swing.JButton jButton1;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel10;
     private javax.swing.JLabel jLabel11;
@@ -1070,7 +1083,6 @@ public class Login extends javax.swing.JFrame {
     private javax.swing.JPanel jPanel5;
     private javax.swing.JPanel jPanel6;
     private javax.swing.JScrollPane jScrollPane1;
-    private javax.swing.JTextField jTextField1;
     private javax.swing.JLabel labelClose;
     private javax.swing.JLabel labelInvalidMail;
     private javax.swing.JLabel labelInvalidPhone;
@@ -1082,6 +1094,7 @@ public class Login extends javax.swing.JFrame {
     private javax.swing.JTextField txtEmail;
     private javax.swing.JTextField txtLastNameMaternal;
     private javax.swing.JTextField txtLastNamePaternal;
+    private javax.swing.JTextField txtMailReset;
     private javax.swing.JTextField txtName;
     private javax.swing.JTextField txtNumEmploy;
     private javax.swing.JTextField txtNumberPhone;

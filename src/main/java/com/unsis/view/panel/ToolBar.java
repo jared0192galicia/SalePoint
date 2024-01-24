@@ -113,6 +113,7 @@ public class ToolBar extends javax.swing.JPanel {
 
     private void buttonBackActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_buttonBackActionPerformed
         mainWindow.showPreviusPanel();
+        mainWindow.requestFocus();
     }//GEN-LAST:event_buttonBackActionPerformed
 
 
