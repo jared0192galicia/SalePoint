@@ -131,6 +131,10 @@ public class RegisterProduct extends javax.swing.JPanel {
         txtPortion = new javax.swing.JTextField();
         txtDiscounts = new javax.swing.JTextField();
         txtComments = new javax.swing.JTextField();
+        labelinvalidDiscounts = new javax.swing.JLabel();
+        labelinvalidPbuys = new javax.swing.JLabel();
+        labelinvalidPsale1 = new javax.swing.JLabel();
+        labelinvalidNproduct1 = new javax.swing.JLabel();
         jPanel1 = new javax.swing.JPanel();
         buttonUpload = new javax.swing.JButton();
         buttonTemplate = new javax.swing.JButton();
@@ -360,7 +364,7 @@ public class RegisterProduct extends javax.swing.JPanel {
         jLabel20.setText("Porción de comida");
         panelInternal.add(jLabel20, new org.netbeans.lib.awtextra.AbsoluteConstraints(1010, 180, -1, -1));
 
-        comboSchedule.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Todo el dia", "Mañana ", "Tarde", "Noche", " " }));
+        comboSchedule.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Todo el dia", "Mañana ", "Tarde", "Noche" }));
         panelInternal.add(comboSchedule, new org.netbeans.lib.awtextra.AbsoluteConstraints(1220, 210, 170, 30));
 
         jLabel18.setBackground(new java.awt.Color(255, 255, 255));
@@ -376,10 +380,12 @@ public class RegisterProduct extends javax.swing.JPanel {
         });
         panelInternal.add(txtNumProduct, new org.netbeans.lib.awtextra.AbsoluteConstraints(100, 410, 150, 30));
 
+        buttonGroup1.add(RadioButtonAvailable);
         RadioButtonAvailable.setText("Disponible");
         RadioButtonAvailable.setHorizontalTextPosition(javax.swing.SwingConstants.RIGHT);
         panelInternal.add(RadioButtonAvailable, new org.netbeans.lib.awtextra.AbsoluteConstraints(280, 420, -1, -1));
 
+        buttonGroup1.add(RadioButtonNotavailable);
         RadioButtonNotavailable.setText("No disponible");
         panelInternal.add(RadioButtonNotavailable, new org.netbeans.lib.awtextra.AbsoluteConstraints(380, 420, -1, -1));
         panelInternal.add(txtPortion, new org.netbeans.lib.awtextra.AbsoluteConstraints(1010, 210, 170, 30));
@@ -391,6 +397,18 @@ public class RegisterProduct extends javax.swing.JPanel {
         });
         panelInternal.add(txtDiscounts, new org.netbeans.lib.awtextra.AbsoluteConstraints(1220, 120, 170, 30));
         panelInternal.add(txtComments, new org.netbeans.lib.awtextra.AbsoluteConstraints(1010, 120, 170, 30));
+
+        labelinvalidDiscounts.setForeground(new java.awt.Color(255, 0, 51));
+        panelInternal.add(labelinvalidDiscounts, new org.netbeans.lib.awtextra.AbsoluteConstraints(1220, 150, 170, 20));
+
+        labelinvalidPbuys.setForeground(new java.awt.Color(255, 0, 51));
+        panelInternal.add(labelinvalidPbuys, new org.netbeans.lib.awtextra.AbsoluteConstraints(490, 150, 170, 20));
+
+        labelinvalidPsale1.setForeground(new java.awt.Color(255, 0, 51));
+        panelInternal.add(labelinvalidPsale1, new org.netbeans.lib.awtextra.AbsoluteConstraints(100, 240, 170, 20));
+
+        labelinvalidNproduct1.setForeground(new java.awt.Color(255, 0, 51));
+        panelInternal.add(labelinvalidNproduct1, new org.netbeans.lib.awtextra.AbsoluteConstraints(100, 440, 150, 20));
 
         jPanel1.setBackground(new java.awt.Color(255, 255, 255));
 
@@ -476,11 +494,9 @@ public class RegisterProduct extends javax.swing.JPanel {
         Matcher matcher = pattern.matcher(price);
 
         if (matcher.matches()) {
-            System.out.println("Precio válido");
-            // Puedes realizar acciones adicionales si el precio es válido
+          labelinvalidPbuys.setVisible(false);
         } else {
-            txtPBuys.requestFocus();
-            System.out.println("Precio invalido");
+            labelinvalidPbuys.setText("Precio invalido");
         }
     }//GEN-LAST:event_txtPBuysFocusLost
 
@@ -492,11 +508,10 @@ public class RegisterProduct extends javax.swing.JPanel {
         Matcher matcher = pattern.matcher(price);
 
         if (matcher.matches()) {
-            System.out.println("Precio válido");
-            // Puedes realizar acciones adicionales si el precio es válido
+          labelinvalidPsale1.setVisible(false);
         } else {
-            txtPSale.requestFocus();
-            System.out.println("Precio invalido");
+        
+           labelinvalidDiscounts.setText("Precio invalido");
         }
     }//GEN-LAST:event_txtPSaleFocusLost
 
@@ -508,11 +523,10 @@ public class RegisterProduct extends javax.swing.JPanel {
         Matcher matcher = pattern.matcher(price);
 
         if (matcher.matches()) {
-            System.out.println("Número entero válido");
-            // Puedes realizar acciones adicionales si el número entero es válido
+           labelinvalidNproduct1.setVisible(false);
         } else {
-            txtNumProduct.requestFocus();
-            System.out.println("Solo se aceptan numeros");
+            
+         labelinvalidNproduct1.setText("Solo se aceptan numeros");
         }
     }//GEN-LAST:event_txtNumProductFocusLost
 
@@ -528,12 +542,12 @@ public class RegisterProduct extends javax.swing.JPanel {
 
         if (matcher.matches()) {
             int discount = Integer.parseInt(discountStr);
-            System.out.println("Descuento válido: " + discount + "%");
+           labelinvalidDiscounts.setVisible(false);
 
         } else {
-            txtDiscounts.requestFocus();
+            
 
-            System.out.println("El descuento es un numero invalido");
+            labelinvalidDiscounts.setText("El descuento es un numero invalido");
         }
     }//GEN-LAST:event_txtDiscountsFocusLost
 
@@ -553,7 +567,9 @@ public class RegisterProduct extends javax.swing.JPanel {
                     .withDescripcion(txtDescription.getText().trim())
                     .withEstado(RadioButtonAvailable.isSelected() ? "Disponible" : "No disponible")
                     .withDisponible(txtAvailable.getText().trim())
-                    .withVariente(txtVariants.getText().trim())
+                   
+                    
+                    
                     .build();
 
             controller.create(product);
@@ -567,18 +583,19 @@ public class RegisterProduct extends javax.swing.JPanel {
         limpiarCampos();
     }//GEN-LAST:event_buttonDiscardActionPerformed
 
+    
     //verifica que el usuario rellene todos los caompos y en caso de que no, deja guardar 
     private boolean camposEstanLlenos() {
         // Verificar que todos los campos estén llenos
         return !txtNumProduct.getText().trim().isEmpty()
-                && !txtPName.getText().trim().isEmpty()
-                && !txtPBuys.getText().trim().isEmpty()
-                && !txtPSale.getText().trim().isEmpty()
-                && !txtBarcode.getText().trim().isEmpty()
-                && ComboProductType.getSelectedItem() != null
-                && !txtDescription.getText().trim().isEmpty()
-                && !txtAvailable.getText().trim().isEmpty()
-                && comboSchedule.getSelectedItem() != null;
+               && !txtPName.getText().trim().isEmpty()
+            && !txtPBuys.getText().trim().isEmpty()
+            && !txtPSale.getText().trim().isEmpty()
+            && !txtBarcode.getText().trim().isEmpty()
+            && ComboProductType.getSelectedItem() != null
+            && !txtDescription.getText().trim().isEmpty()
+            && !txtAvailable.getText().trim().isEmpty()
+            && comboSchedule.getSelectedItem() != null;
     }
 
     private void limpiarCampos() {
@@ -588,7 +605,6 @@ public class RegisterProduct extends javax.swing.JPanel {
         txtPBuys.setText("");
         txtPSale.setText("");
         txtBarcode.setText("");
-        ComboProductType.setSelectedItem(null);
         txtDescription.setText("");
         RadioButtonAvailable.setSelected(false);  // Desmarcar el botón de opción
         txtAvailable.setText("");
@@ -596,7 +612,7 @@ public class RegisterProduct extends javax.swing.JPanel {
         txtComments.setText("");
         txtDiscounts.setText("");
         txtPortion.setText("");
-        comboSchedule.setSelectedItem(null);
+        
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
@@ -632,6 +648,10 @@ public class RegisterProduct extends javax.swing.JPanel {
     private javax.swing.JLabel jLabel8;
     private javax.swing.JLabel jLabel9;
     private javax.swing.JPanel jPanel1;
+    private javax.swing.JLabel labelinvalidDiscounts;
+    private javax.swing.JLabel labelinvalidNproduct1;
+    private javax.swing.JLabel labelinvalidPbuys;
+    private javax.swing.JLabel labelinvalidPsale1;
     private javax.swing.JPanel panelInternal;
     private javax.swing.JPanel panelRegisterDialog;
     private javax.swing.JTextField txtAvailable;
