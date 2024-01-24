@@ -29,10 +29,14 @@
 1. ```ENVIRONMENT``` = Entorno de ejecución
 
 > Conexion a la base de datos
-1. ```USE_NAMER``` = Usuario de postgresql
+1. ```USER_NAMER``` = Usuario de postgresql
 2. ```PASSWORD_SERVER``` = Contraseña de acceso a postgresql
 3. ```DATA_BASE``` = Nombre  de la base dedatos a la que se accede
 4. ```PU_NAME``` = Nombre de la unidad de persistencia utilizada
+
+> Servicio de correos
+1. ```MAIL_HOST``` = Direccion de correo electronico para ser usada por el sistema
+2. ```MAIL_PASSWORD```= Contraseña del correo del sistema
 
 ## Dependecias
 
@@ -41,7 +45,10 @@
 * Timing Framework
 * MigLayout
 * Driver Postgresql
-* Jasper
+* Jasperreports
+* Mail
+* Eclipse persistence
+* Apache POI
 
 ### Estandar de desarrollo
 
