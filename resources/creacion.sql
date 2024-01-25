@@ -1,3 +1,10 @@
+CREATE Table "Company" (
+  id SERIAL PRIMARY KEY,
+  "name" VARCHAR NOT NULL,
+  logo VARCHAR,
+  descripcion VARCHAR
+);
+
 CREATE TABLE "Employee" (
   id serial,
   numEmpleado INT,
@@ -57,29 +64,57 @@ marca VARCHAR,
 PRIMARY KEY(id)
 );
 
-CREATE TABLE "Sales"(
-id serial,
-idEmpleado int,
-sabor VARCHAR,
-tipo_orden VARCHAR,
-comentarios VARCHAR,
-nombre_comprador VARCHAR,
-codigo_barra VARCHAR,
-PRIMARY KEY(id),
-FOREIGN KEY (idEmpleado) REFERENCES "Employee"(id)
+CREATE TABLE "Product"(
+  id serial,
+  codigoBarra VARCHAR UNIQUE,
+  nombre varchar,
+  precioCom float,
+  precioVenta float,
+  tipo VARCHAR,
+  descripcion VARCHAR(25),
+  numProducto INT,
+  estado VARCHAR(4),
+  disponible int,
+  variante VARCHAR,
+  PRIMARY KEY(id)
 );
 
-CREATE TABLE "Product"(
-id serial,
-nombre varchar,
-precioCom float,
-precioVenta float,
-codigoBarra VARCHAR,
-tipo VARCHAR,
-descripcion VARCHAR(25),
-numProducto INT,
-estado VARCHAR(4),
-disponible int,
-variante VARCHAR,
-PRIMARY KEY(id)
+CREATE TABLE "Flabors" (
+  id serial PRIMARY KEY,
+  idProducto INT,
+  sabor VARCHAR(50),
+  FOREIGN KEY (idProducto) REFERENCES "Product" (id)
 );
+
+CREATE TABLE "Sales"(
+  id serial,
+  idVenta int,
+  idEmpleado int,
+  idProducto VARCHAR,
+  tipoOrden VARCHAR,
+  comentarios VARCHAR,
+  nombreComprador VARCHAR,
+  codigoBarra VARCHAR,
+  PRIMARY KEY(id),
+  FOREIGN KEY (idEmpleado) REFERENCES "Employee"(id),
+  FOREIGN KEY (idProducto) REFERENCES "Product"(codigoBarra)
+);
+
+ALTER TABLE
+  "Account"
+ADD
+  COLUMN fotoperfil VARCHAR;
+
+ALTER TABLE
+  "Account"
+ALTER COLUMN
+  fotoperfil
+SET
+  DEFAULT '/profileDefault.png' NOTNULL;
+
+UPDATE
+  "Account"
+SET
+  fotoperfil = '/profileDefault.png'
+WHERE
+  fotoperfil IS NULL;

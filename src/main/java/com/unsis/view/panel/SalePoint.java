@@ -7,6 +7,7 @@ package com.unsis.view.panel;
 import com.unsis.clases.Session;
 import com.unsis.clases.Tools;
 import com.unsis.controller.JpaController;
+import com.unsis.models.entity.Flavors;
 import com.unsis.models.entity.Product;
 import com.unsis.models.entity.Sales;
 import java.awt.Color;
@@ -57,7 +58,8 @@ public class SalePoint extends javax.swing.JPanel {
         TableProduct.setDefaultRenderer(headerRenderer);
 
         resizeImages();
-        llenarCombo();
+        llenarComboProd();
+        llenarComboSab();
         dialogConfirm.setLocationRelativeTo(null);
         DefaultTableModel tableModel = (DefaultTableModel) tableProduct.getModel();
         tableModel.setRowCount(0);
@@ -75,7 +77,7 @@ public class SalePoint extends javax.swing.JPanel {
         buttonAdd.setIcon(resizedIcon);
     }
 
-    public void llenarCombo() {
+    public void llenarComboProd() {
         // Llamada al método findAllEntities para obtener la lista de productos
         ArrayList<Product> products = controller.findAllEntities(Product.class);
 
@@ -90,7 +92,47 @@ public class SalePoint extends javax.swing.JPanel {
             comboProd.addItem(nombreProducto);
         }
     }
+    
+    public void llenarComboSab() {
+        comboSab.removeAllItems();
+        
+        String nameProd = (String) comboProd.getSelectedItem();
+        
+        if (nameProd != null) {
+            ArrayList<Product> products = controller.findAllEntities(Product.class);
+           Product selectProd = obtProduct(nameProd, products);
+           
+           if (selectProd != null){
+               ArrayList<Flavors> sabores = obtSabProd(selectProd);
+               
+               for (Flavors sabor : sabores){
+                   comboSab.addItem(sabor.getSabor());
+               }
+           }
+        }
+    }
 
+    private ArrayList<Flavors> obtSabProd(Product producto){
+        ArrayList<Flavors> sabores = controller.findAllEntities(Flavors.class);
+        ArrayList<Flavors> saboresProd = new ArrayList<>();
+        
+        for (Flavors sabor : sabores){
+            if(sabor.getIdProduct() == producto.getId()){
+                saboresProd.add(sabor);
+            }
+        }
+        return saboresProd;
+    }
+    
+    private Product obtProduct (String nameProd, ArrayList<Product> products){
+        for (Product product : products){
+            if (product.getNombre().equalsIgnoreCase(nameProd)){
+                return product;
+            }
+        }
+        return null;
+    }
+    
     /**
      * This method is called from within the constructor to initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is always
@@ -606,9 +648,11 @@ public class SalePoint extends javax.swing.JPanel {
 
                 textField.setText("");
                 return;
+            }else{
+                labelInvalidCodBarra.setVisible(true);
             }
         }
-
+        
     }//GEN-LAST:event_txtCodBarraActionPerformed
 
     private void updateMessage(String mensaje) {

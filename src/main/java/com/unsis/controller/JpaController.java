@@ -10,6 +10,7 @@ import com.unsis.models.entity.Employee;
 import com.unsis.models.entity.Product;
 import com.unsis.models.entity.Section;
 import com.unsis.models.entity.Sales;
+import com.unsis.models.entity.Flavors;
 import io.github.cdimascio.dotenv.Dotenv;
 import java.util.ArrayList;
 import java.util.Collection;
@@ -27,6 +28,7 @@ public class JpaController {
     private final SectionJpaController section;
     private final ProductJpaController product;
     private final SalesJpaController sales;
+    private final FlavorsJpaController flavors;
     
     public JpaController() {
         Dotenv env = Dotenv.load();
@@ -40,6 +42,7 @@ public class JpaController {
         this.employee = new EmployeeJpaController(emf);
         this.product = new ProductJpaController(emf);
         this.sales = new SalesJpaController(emf);
+        this.flavors = new FlavorsJpaController(emf);
     }
 
     /**
@@ -55,7 +58,7 @@ public class JpaController {
             case Account accountObj ->
                 this.account.create(accountObj);
 
-            case Employee employeeObj -> 
+            case Employee employeeObj ->
                 this.employee.create(employeeObj);
 
             case Section sectionObj ->
@@ -69,6 +72,9 @@ public class JpaController {
 
             case Sales salesObj ->
                 this.sales.create(salesObj);
+
+            case Flavors flavorsObj ->
+                this.flavors.create(flavorsObj);
 
             default -> {
                 System.err.println("Invalid entity type");
@@ -104,6 +110,9 @@ public class JpaController {
 
                 case Sales salesObj ->
                     this.sales.destroy(salesObj.getId());
+                    
+                case Flavors flavorsObj ->
+                    this.flavors.destroy(flavorsObj.getId());
                     
                 default -> {
                     System.err.println("Invalid entity type");
@@ -143,6 +152,9 @@ public class JpaController {
                 case Sales salesObj ->
                     this.sales.edit(salesObj);
                     
+                case Flavors flavorsObj ->
+                    this.flavors.edit(flavorsObj);
+                    
                 default -> {
                     System.err.println("Tas mal");
                 }
@@ -177,13 +189,16 @@ public class JpaController {
                     return (T) this.section.findSection(id);
                 }
                 case "Area" -> {
-                    return (T) this.section.findSection(id);
+                    return (T) this.area.findArea(id);
                 }
                 case "Product" -> {
-                    return (T) this.section.findSection(id);
+                    return (T) this.product.findProduct(id);
                 }
                 case "Sales" -> {
-                    return (T) this.section.findSection(id);
+                    return (T) this.sales.findSales(id);
+                }
+                case "Flavors" -> {
+                    return (T) this.flavors.findFlavors(id);
                 }
                 default -> {
                     System.err.println("Invalid entity type");
@@ -223,6 +238,9 @@ public class JpaController {
             }
             case "Sales" -> {
                 return new ArrayList<>((Collection<? extends T>) this.sales.findSalesEntities());
+            }
+            case "Flavors" -> {
+                return new ArrayList<>((Collection<? extends T>) this.flavors.findFlavorsEntities());
             }
             default -> {
                 System.err.println("Invalid entity type");

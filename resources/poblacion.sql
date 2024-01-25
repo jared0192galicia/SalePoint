@@ -81,10 +81,25 @@ INSERT INTO "Sales" (idEmpleado, sabor, tipo_orden, comentarios, nombre_comprado
 
 -- Población de la tabla Product
 INSERT INTO "Product" (nombre, precioCom, precioVenta, codigoBarra, tipo, descripcion, numProducto, estado, disponible, variante) VALUES
-('Producto 1', 10.5, 15.99, '111111', 'Postre', 'Descripción 1', 1001, 'Activo', 20, 'Variante A'),
-('Producto 2', 8.75, 12.49, '222222', 'Helado', 'Descripción 2', 1002, 'Activo', 15, 'Variante B'),
-('Producto 3', 12.0, 19.99, '333333', 'Pastel', 'Descripción 3', 1003, 'Inactivo', 0, 'Variante C'),
-('Producto 4', 15.25, 24.99, '444444', 'Gelato', 'Descripción 4', 1004, 'Activo', 30, 'Variante D'),
-('Producto 5', 9.99, 16.99, '555555', 'Cupcake', 'Descripción 5', 1005, 'Activo', 25, 'Variante E');
+('Cupcake', 10.5, 15.99, '111111', 'Postre', 'Descripción 1', 1001, 'Activo', 20, 'Variante A'),
+('Hamburguesa', 8.75, 12.49, '222222', 'Comida', 'Descripción 2', 1002, 'Activo', 15, 'Variante B'),
+('Papas Gajo', 12.0, 19.99, '333333', 'Complemento', 'Descripción 3', 1003, 'Inactivo', 0, 'Variante C'),
+('CocaCola', 15.25, 24.99, '444444', 'Bebida', 'Descripción 4', 1004, 'Activo', 30, 'Variante D'),
+('Soda Italiana', 9.99, 16.99, '555555', 'Bebida', 'Descripción 5', 1005, 'Activo', 25, 'Variante E');
+
+-- Población de la tabla Flavors
+INSERT INTO "Flavors" (idProducto, sabor) VALUES
+(1, 'Fresa'),
+(1, 'Durazno'),
+(2, 'Clasica'),
+(2, 'Hawaiana'),
+(2, 'De la casa'),
+(3, 'Adobadas'),
+(3, 'Normales'),
+(3, 'Sal de ajo'),
+(5, 'Fresa'),
+(5, 'Kiwi'),
+(5, 'Blue Berry');
+
 
 
