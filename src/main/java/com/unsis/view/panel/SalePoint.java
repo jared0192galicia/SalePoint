@@ -11,6 +11,7 @@ import com.unsis.models.entity.Product;
 import com.unsis.models.entity.Sales;
 import java.awt.Color;
 import java.awt.Font;
+import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
@@ -560,6 +561,10 @@ public class SalePoint extends javax.swing.JPanel {
 
             Session.getAccount().getId();
             txtName.setEnabled(false);
+            
+            nameCompradorLabel.setText(nomComp);
+            LocalDate fechaActual = LocalDate.now();
+            ingresarFechaLabel.setText(fechaActual.toString());
         }
     }//GEN-LAST:event_buttonAddActionPerformed
 
@@ -611,6 +616,41 @@ public class SalePoint extends javax.swing.JPanel {
     }
 
     public void llenarTabla(String productName, int cantidad) {
+        ArrayList<Product> products = controller.findAllEntities(Product.class);
+
+        DefaultTableModel tableModel = (DefaultTableModel) tableProduct.getModel();
+        if (tableModel == null) {
+            tableModel = new DefaultTableModel();
+            tableModel.addColumn("Producto");
+            tableModel.addColumn("Descriptción");
+            tableModel.addColumn("Cantidad");
+            tableModel.addColumn("Precio por pz");
+            tableModel.addColumn("Total");
+            tableProduct.setModel(tableModel);
+        }
+
+        double precio = 0.0f;
+
+        for (Product producto : products) {
+            if (producto.getNombre().equalsIgnoreCase(productName)) {
+                precio = producto.getPrecioventa();
+                double total = precio * cantidad;
+
+                Object[] rowData = {
+                    producto.getNombre(),
+                    producto.getDescripcion(),
+                    cantidad,
+                    producto.getPrecioventa(),
+                    total
+                };
+                tableModel.addRow(rowData);
+                listPedido.add(producto);
+                break;
+            }
+        }
+    }
+    
+    public void llenarTabla2(String productName, int cantidad) {
         ArrayList<Product> products = controller.findAllEntities(Product.class);
 
         DefaultTableModel tableModel = (DefaultTableModel) tableProduct.getModel();
