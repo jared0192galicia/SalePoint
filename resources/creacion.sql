@@ -91,7 +91,7 @@ CREATE TABLE "Sales"(
   idVenta int,
   idEmpleado int,
   idProducto VARCHAR,
-  tipoOrden VARCHAR,
+  tipoOrden VARCHAR CHECK (tipoOrden IN ('Para llevar', 'Normal')),
   comentarios VARCHAR,
   nombreComprador VARCHAR,
   codigoBarra VARCHAR,
