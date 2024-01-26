@@ -119,3 +119,7 @@ SET
   fotoperfil = '/profileDefault.png'
 WHERE
   fotoperfil IS NULL;
+
+--Script de consulta de compras
+SELECT * FROM "Sales" LEFT JOIN "Product" ON "Product".codigobarra = "Sales".idproducto 
+LEFT JOIN "Flavors" ON "Flavors".idproducto = "Product".id WHERE "idventa" = 10002;
