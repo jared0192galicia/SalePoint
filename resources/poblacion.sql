@@ -72,12 +72,12 @@ INSERT INTO "Supplier" (nombre, marca) VALUES
 ('Proveedor E', 'Marca E');
 
 -- Población de la tabla Sales
-INSERT INTO "Sales" (idEmpleado, sabor, tipo_orden, comentarios, nombre_comprador, codigo_barra) VALUES
-(1, 'Chocolate', 'Online', 'Entrega rápida', 'Cliente 1', '123456789012'),
-(2, 'Fresa', 'In-Store', 'Sin comentarios', 'Cliente 2', '234567890123'),
-(3, 'Vainilla', 'Delivery', 'Producto defectuoso', 'Cliente 3', '345678901234'),
-(1, 'Café', 'Online', 'Entrega demorada', 'Cliente 4', '456789012345'),
-(2, 'Mango', 'In-Store', 'Buen servicio', 'Cliente 5', '567890123456');
+INSERT INTO "Sales" (idVenta, idEmpleado, idProducto, tipoOrden, comentarios, nombreComprador, codigoBarra, fechaHora) VALUES
+(10001, 1, '111111', 'Normal', 'Sin azúcar', 'Juan Pérez', '111111', '2024-01-26 08:30:00'),
+(10002, 2, '222222', 'Para llevar', 'Extra queso', 'Ana López', '222222', '2024-01-26 12:45:00'),
+(10003, 1, '333333', 'Para llevar', 'Salsa extra', 'Carlos Martínez', '333333', '2024-01-26 15:20:00'),
+(10004, 3, '444444', 'Normal', 'Con hielo', 'Laura Gómez', '444444', '2024-01-26 18:10:00'),
+(10005, 2, '555555', 'Para llevar', 'Sin gas', 'Pedro Rodríguez', '555555', '2024-01-26 21:00:00');
 
 -- Población de la tabla Product
 INSERT INTO "Product" (nombre, precioCom, precioVenta, codigoBarra, tipo, descripcion, numProducto, estado, disponible, variante) VALUES
@@ -100,6 +100,3 @@ INSERT INTO "Flavors" (idProducto, sabor) VALUES
 (5, 'Fresa'),
 (5, 'Kiwi'),
 (5, 'Blue Berry');
-
-
-
