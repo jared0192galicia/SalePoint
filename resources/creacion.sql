@@ -95,6 +95,7 @@ CREATE TABLE "Sales"(
   comentarios VARCHAR,
   nombreComprador VARCHAR,
   codigoBarra VARCHAR,
+  fechaHora TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
   PRIMARY KEY(id),
   FOREIGN KEY (idEmpleado) REFERENCES "Employee"(id),
   FOREIGN KEY (idProducto) REFERENCES "Product"(codigoBarra)
