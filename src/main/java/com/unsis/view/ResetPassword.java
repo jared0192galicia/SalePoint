@@ -4,6 +4,8 @@
  */
 package com.unsis.view;
 
+import com.unsis.clases.Clock;
+import com.unsis.clases.Tools;
 import com.unsis.controller.JpaController;
 import javax.swing.JOptionPane;
 
@@ -13,6 +15,7 @@ import javax.swing.JOptionPane;
  */
 public class ResetPassword extends javax.swing.JFrame {
 
+    private Clock timer;
     /**
      * Creates new form ResetPassword
      */
@@ -23,8 +26,13 @@ public class ResetPassword extends javax.swing.JFrame {
         this.setLocationRelativeTo(null);
         this.setTitle("Recupera tu acceso");
 
+        changePassword.setSize(448, 241);
+        changePassword.setLocationRelativeTo(this);
+        
+        labelWarnig.setVisible(false);
         this.textMessage.setText("""
-                                       Recibir\u00e1s un mensaje con tu contrase\u00f1a
+                                       Recibir\u00e1s un mensaje con código
+                                       recuperación. No lo compartas con nadie
                                  
                                  
                                             Por favor, escribe tu correo electr\u00f3nico.
@@ -40,6 +48,13 @@ public class ResetPassword extends javax.swing.JFrame {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
+        changePassword = new javax.swing.JDialog();
+        jPanel2 = new javax.swing.JPanel();
+        txtCode = new javax.swing.JTextField();
+        buttonContinue = new javax.swing.JButton();
+        labelTimer = new javax.swing.JLabel();
+        labelWarnig = new javax.swing.JLabel();
+        jLabel1 = new javax.swing.JLabel();
         jPanel1 = new javax.swing.JPanel();
         jPanel4 = new javax.swing.JPanel();
         jPanel5 = new javax.swing.JPanel();
@@ -49,6 +64,47 @@ public class ResetPassword extends javax.swing.JFrame {
         jLabel5 = new javax.swing.JLabel();
         txtMailReset = new javax.swing.JTextField();
         buttonSend = new javax.swing.JButton();
+
+        changePassword.setModal(true);
+
+        jPanel2.setBackground(new java.awt.Color(255, 255, 255));
+        jPanel2.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
+
+        txtCode.setHorizontalAlignment(javax.swing.JTextField.CENTER);
+        jPanel2.add(txtCode, new org.netbeans.lib.awtextra.AbsoluteConstraints(120, 70, 210, 25));
+
+        buttonContinue.setText("Continuar");
+        buttonContinue.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                buttonContinueActionPerformed(evt);
+            }
+        });
+        jPanel2.add(buttonContinue, new org.netbeans.lib.awtextra.AbsoluteConstraints(160, 130, 120, 30));
+
+        labelTimer.setText("El código será valido durante 60 Seg");
+        jPanel2.add(labelTimer, new org.netbeans.lib.awtextra.AbsoluteConstraints(94, 100, 270, -1));
+
+        labelWarnig.setBackground(new java.awt.Color(204, 153, 0));
+        labelWarnig.setForeground(new java.awt.Color(204, 153, 0));
+        labelWarnig.setText("Por favor ingrese el codigo");
+        jPanel2.add(labelWarnig, new org.netbeans.lib.awtextra.AbsoluteConstraints(140, 160, 180, -1));
+
+        jLabel1.setFont(new java.awt.Font("Dialog", 1, 14)); // NOI18N
+        jLabel1.setForeground(new java.awt.Color(0, 102, 102));
+        jLabel1.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        jLabel1.setText("Ingrese el código recibido en su correo electronico");
+        jPanel2.add(jLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 10, 450, 50));
+
+        javax.swing.GroupLayout changePasswordLayout = new javax.swing.GroupLayout(changePassword.getContentPane());
+        changePassword.getContentPane().setLayout(changePasswordLayout);
+        changePasswordLayout.setHorizontalGroup(
+            changePasswordLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addComponent(jPanel2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+        );
+        changePasswordLayout.setVerticalGroup(
+            changePasswordLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addComponent(jPanel2, javax.swing.GroupLayout.PREFERRED_SIZE, 241, javax.swing.GroupLayout.PREFERRED_SIZE)
+        );
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -168,53 +224,44 @@ public class ResetPassword extends javax.swing.JFrame {
 
     private void buttonSendMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_buttonSendMouseClicked
         String mail = txtMailReset.getText().trim();
-        int response = new JpaController().sendMessage(mail);
+        String code = Tools.generateCode();
+        int response = new JpaController().sendMessage(mail, code);
+        
         System.out.println(response);
+        
         String message;
+        
         switch (response) {
-            case 200:
+            case 200 -> {
                 message = "";
-                break;
-            case 300:
+                timer = new Clock(labelTimer);
+                timer.start();
+                changePassword.show();
+            }
+            case 300 ->
                 message = "";
-                break;
-            case 400:
+            case 304 ->
+                message = "Credenciales de correo no disponibles";
+            case 400 ->
                 message = "El correo no corresponde a ningun usuario";
-                break;
-            default:
+            default ->
                 message = "Código no esperado";
         }
+
         JOptionPane.showMessageDialog(null, message);
     }//GEN-LAST:event_buttonSendMouseClicked
 
-    /**
-     * @param args the command line arguments
-     */
-    public static void main(String args[]) {
-        /* Set the Nimbus look and feel */
-        //<editor-fold defaultstate="collapsed" desc=" Look and feel setting code (optional) ">
-        /* If Nimbus (introduced in Java SE 6) is not available, stay with the default look and feel.
-         * For details see http://download.oracle.com/javase/tutorial/uiswing/lookandfeel/plaf.html 
-         */
-        try {
-            for (javax.swing.UIManager.LookAndFeelInfo info : javax.swing.UIManager.getInstalledLookAndFeels()) {
-                if ("Nimbus".equals(info.getName())) {
-                    javax.swing.UIManager.setLookAndFeel(info.getClassName());
-                    break;
-                }
-            }
-        } catch (ClassNotFoundException ex) {
-            java.util.logging.Logger.getLogger(ResetPassword.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        } catch (InstantiationException ex) {
-            java.util.logging.Logger.getLogger(ResetPassword.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        } catch (IllegalAccessException ex) {
-            java.util.logging.Logger.getLogger(ResetPassword.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        } catch (javax.swing.UnsupportedLookAndFeelException ex) {
-            java.util.logging.Logger.getLogger(ResetPassword.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+    private void buttonContinueActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_buttonContinueActionPerformed
+        String codeInp = txtCode.getText().trim();
+        
+        if (codeInp.equals("")) {
+            labelWarnig.setVisible(true);
+            return;
         }
-        //</editor-fold>
+        
+    }//GEN-LAST:event_buttonContinueActionPerformed
 
-        /* Create and display the form */
+    public static void main(String args[]) {
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
                 new ResetPassword().setVisible(true);
@@ -223,14 +270,21 @@ public class ResetPassword extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JButton buttonContinue;
     private javax.swing.JButton buttonSend;
+    private javax.swing.JDialog changePassword;
+    private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel5;
     private javax.swing.JPanel jPanel1;
+    private javax.swing.JPanel jPanel2;
     private javax.swing.JPanel jPanel4;
     private javax.swing.JPanel jPanel5;
     private javax.swing.JPanel jPanel6;
     private javax.swing.JScrollPane jScrollPane1;
+    private javax.swing.JLabel labelTimer;
+    private javax.swing.JLabel labelWarnig;
     private javax.swing.JTextArea textMessage;
+    private javax.swing.JTextField txtCode;
     private javax.swing.JTextField txtMailReset;
     // End of variables declaration//GEN-END:variables
 }

@@ -1,6 +1,7 @@
 package com.unsis.controller;
 
 import com.unsis.clases.Session;
+import com.unsis.clases.Tools;
 import com.unsis.controller.exceptions.NonexistentEntityException;
 import com.unsis.dao.AccountDao;
 import com.unsis.models.entity.Access;
@@ -233,10 +234,11 @@ public class JpaController {
         return BCrypt.checkpw(pass, loogedAccount.getContrasena());
     }
 
-    public int sendMessage(String mail) {
-        if (!dao.isRegister(mail)) {
+    public int sendMessage(String mail, String code) {
+        var user = dao.isRegister(mail);
+        if (user.equals("-1")) {
             return 400;
         }
-        return 200;
+        return Tools.enviarCorreo(mail, "Recuperar Contraseña", Tools.createMessageResetPassword(user, code));
     }
 }

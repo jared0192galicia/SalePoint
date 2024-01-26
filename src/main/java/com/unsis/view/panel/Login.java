@@ -809,24 +809,7 @@ public class Login extends javax.swing.JFrame {
     }//GEN-LAST:event_labelResetPassMouseClicked
 
     private void buttonSendMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_buttonSendMouseClicked
-        String mail = txtMailReset.getText().trim();
-        int response = new JpaController().sendMessage(mail);
-        String message;
-        switch (response) {
-            case 200:
-                message = "";
-                break;
-            case 300:
-                message = "";
-                break;
-            case 400:
-                message = "El correo no corresponde a ningun usuario";
-                break;
-            default:
-                message = "Código no esperado";
-        }
-        JOptionPane.showMessageDialog(null, message);
-        resetPass.setVisible(false);
+       
     }//GEN-LAST:event_buttonSendMouseClicked
 
     private void txtNumEmployKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtNumEmployKeyReleased

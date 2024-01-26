@@ -48,7 +48,7 @@ public class AccountDao {
      * @param mail correo a verificar
      * @return boolean, true si el correo esta registrado y falso en caso contrario
      */
-    public boolean isRegister(String mail) {
+    public String isRegister(String mail) {
         String query = """
                         SELECT "usuario" as USER FROM "Account" 
                         LEFT JOIN "Employee" ON idempleado = "Account".id
@@ -60,11 +60,12 @@ public class AccountDao {
 
             ResultSet rs = pst.executeQuery();
             while (rs.next()) {
-                return true;
+                return rs.getString("USER");
             }
         } catch (Exception e) {
             System.err.println("Error in search mail: " + e.getMessage());
         }
-        return false;
+        return "-1";
     }
 }
+
