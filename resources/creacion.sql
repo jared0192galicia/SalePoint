@@ -66,7 +66,7 @@ PRIMARY KEY(id)
 
 CREATE TABLE "Product"(
   id serial,
-  codigoBarra VARCHAR NOT NULL UNIQUE,
+  codigoBarra VARCHAR UNIQUE,
   nombre varchar,
   precioCom float,
   precioVenta float,
@@ -79,15 +79,23 @@ CREATE TABLE "Product"(
   PRIMARY KEY(id)
 );
 
+CREATE TABLE "Flavors" (
+  id serial PRIMARY KEY,
+  idProducto INT,
+  sabor VARCHAR(50),
+  FOREIGN KEY (idProducto) REFERENCES "Product" (id)
+);
+
 CREATE TABLE "Sales"(
   id serial,
   idVenta int,
   idEmpleado int,
   idProducto VARCHAR,
-  tipoOrden VARCHAR,
+  tipoOrden VARCHAR CHECK (tipoOrden IN ('Para llevar', 'Normal')),
   comentarios VARCHAR,
   nombreComprador VARCHAR,
   codigoBarra VARCHAR,
+  fechaHora TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
   PRIMARY KEY(id),
   FOREIGN KEY (idEmpleado) REFERENCES "Employee"(id),
   FOREIGN KEY (idProducto) REFERENCES "Product"(codigoBarra)
@@ -112,3 +120,6 @@ SET
 WHERE
   fotoperfil IS NULL;
 
+--Script de consulta de compras
+SELECT * FROM "Sales" LEFT JOIN "Product" ON "Product".codigobarra = "Sales".idproducto 
+LEFT JOIN "Flavors" ON "Flavors".idproducto = "Product".id WHERE "idventa" = 10002;
