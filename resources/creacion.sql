@@ -66,7 +66,7 @@ PRIMARY KEY(id)
 
 CREATE TABLE "Product"(
   id serial,
-  codigoBarra VARCHAR NOT NULL UNIQUE,
+  codigoBarra VARCHAR UNIQUE,
   nombre varchar,
   precioCom float,
   precioVenta float,
@@ -77,6 +77,13 @@ CREATE TABLE "Product"(
   disponible int,
   variante VARCHAR,
   PRIMARY KEY(id)
+);
+
+CREATE TABLE "Flavors" (
+  id serial PRIMARY KEY,
+  idProducto INT,
+  sabor VARCHAR(50),
+  FOREIGN KEY (idProducto) REFERENCES "Product" (id)
 );
 
 CREATE TABLE "Sales"(
@@ -111,4 +118,3 @@ SET
   fotoperfil = '/profileDefault.png'
 WHERE
   fotoperfil IS NULL;
-
