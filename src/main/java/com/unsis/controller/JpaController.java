@@ -9,7 +9,10 @@ import com.unsis.models.entity.Account;
 import com.unsis.models.entity.Area;
 import com.unsis.models.entity.Company;
 import com.unsis.models.entity.Employee;
+import com.unsis.models.entity.Product;
 import com.unsis.models.entity.Section;
+import com.unsis.models.entity.Sales;
+import com.unsis.models.entity.Flavors;
 import io.github.cdimascio.dotenv.Dotenv;
 import java.util.ArrayList;
 import java.util.Collection;
@@ -26,7 +29,10 @@ public class JpaController {
     private final EmployeeJpaController employee;
     private final AccountDao dao = new AccountDao();
     private final SectionJpaController section;
-
+    private final ProductJpaController product;
+    private final SalesJpaController sales;
+    private final FlavorsJpaController flavors;
+    
     public JpaController() {
         Dotenv env = Dotenv.load();
         String namePu = env.get("PU_NAME");
@@ -38,6 +44,9 @@ public class JpaController {
         this.section = new SectionJpaController(emf);
         this.company = new CompanyJpaController(emf);
         this.employee = new EmployeeJpaController(emf);
+        this.product = new ProductJpaController(emf);
+        this.sales = new SalesJpaController(emf);
+        this.flavors = new FlavorsJpaController(emf);
     }
 
     /**
@@ -64,6 +73,14 @@ public class JpaController {
 
             case Company companyObj ->
                 this.company.create(companyObj);
+            case Product productObj ->
+                this.product.create(productObj);
+
+            case Sales salesObj ->
+                this.sales.create(salesObj);
+
+            case Flavors flavorsObj ->
+                this.flavors.create(flavorsObj);
 
             default -> {
                 System.err.println("Invalid entity type");
@@ -97,6 +114,15 @@ public class JpaController {
                 case Company companyObj ->
                     this.company.destroy(companyObj.getId());
 
+                case Product productObj ->
+                    this.product.destroy(productObj.getId());
+
+                case Sales salesObj ->
+                    this.sales.destroy(salesObj.getId());
+                    
+                case Flavors flavorsObj ->
+                    this.flavors.destroy(flavorsObj.getId());
+                    
                 default -> {
                     System.err.println("Invalid entity type");
                 }
@@ -128,10 +154,19 @@ public class JpaController {
 
                 case Area areaObj ->
                     this.area.edit(areaObj);
+                    
+                case Product productObj ->
+                    this.product.edit(productObj);
 
                 case Company companyObj ->
                     this.company.edit(companyObj);
 
+                case Sales salesObj ->
+                    this.sales.edit(salesObj);
+                    
+                case Flavors flavorsObj ->
+                    this.flavors.edit(flavorsObj);
+                    
                 default -> {
                     System.err.println("Tas mal");
                 }
@@ -167,7 +202,16 @@ public class JpaController {
                     return (T) this.section.findSection(id);
                 }
                 case "Area" -> {
-                    return (T) this.section.findSection(id);
+                    return (T) this.area.findArea(id);
+                }
+                case "Product" -> {
+                    return (T) this.product.findProduct(id);
+                }
+                case "Sales" -> {
+                    return (T) this.sales.findSales(id);
+                }
+                case "Flavors" -> {
+                    return (T) this.flavors.findFlavors(id);
                 }
                 case "Company" -> {
                     return (T) this.company.findCompany(id);
@@ -207,6 +251,15 @@ public class JpaController {
             }
             case "Company" -> {
                 return new ArrayList<>((Collection<? extends T>) this.company.findCompanyEntities());
+            }    
+            case "Product" -> {
+                return new ArrayList<>((Collection<? extends T>) this.product.findProductEntities());
+            }
+            case "Sales" -> {
+                return new ArrayList<>((Collection<? extends T>) this.sales.findSalesEntities());
+            }
+            case "Flavors" -> {
+                return new ArrayList<>((Collection<? extends T>) this.flavors.findFlavorsEntities());
             }
             default -> {
                 System.err.println("Invalid entity type");

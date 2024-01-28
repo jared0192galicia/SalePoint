@@ -101,4 +101,16 @@ INSERT INTO "Flavors" (idProducto, sabor) VALUES
 (5, 'Kiwi'),
 (5, 'Blue Berry');
 
-
+-- Población de la tabla Flavors
+INSERT INTO "Flavors" (idProducto, sabor) VALUES
+(1, 'Fresa'),
+(1, 'Durazno'),
+(2, 'Clasica'),
+(2, 'Hawaiana'),
+(2, 'De la casa'),
+(3, 'Adobadas'),
+(3, 'Normales'),
+(3, 'Sal de ajo'),
+(5, 'Fresa'),
+(5, 'Kiwi'),
+(5, 'Blue Berry');

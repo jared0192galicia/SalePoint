@@ -9,7 +9,7 @@ import org.mindrot.jbcrypt.BCrypt;
 public class GeneratorPassword {
     public static void main(String[] args) {
         // Contraseña normal
-        String userProvidedPassword = "1234"; // Ingresa la contraseña que quieres usar
+        String userProvidedPassword = "5678"; // Ingresa la contraseña que quieres usar
 
         // Generar un hash de la contraseña
         String hashedPassword = BCrypt.hashpw(userProvidedPassword, BCrypt.gensalt(12));
