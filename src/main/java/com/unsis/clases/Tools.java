@@ -35,6 +35,10 @@ public class Tools {
      */
     public static String codeSecurityPass = "";
 
+    public static boolean matchCode(String codeInp) {
+        return codeSecurityPass.equalsIgnoreCase(codeInp);
+    }
+
     /**
      * Resize image for
      *

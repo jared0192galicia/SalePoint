@@ -1,7 +1,3 @@
-/*
- * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
- * Click nbfs://nbhost/SystemFileSystem/Templates/GUIForms/JFrame.java to edit this template
- */
 package com.unsis.view;
 
 import com.unsis.clases.Clock;
@@ -26,6 +22,9 @@ public class ResetPassword extends javax.swing.JFrame {
         this.setLocationRelativeTo(null);
         this.setTitle("Recupera tu acceso");
 
+        validateCode.setSize(448, 241);
+        validateCode.setLocationRelativeTo(this);
+        
         changePassword.setSize(448, 241);
         changePassword.setLocationRelativeTo(this);
         
@@ -48,13 +47,18 @@ public class ResetPassword extends javax.swing.JFrame {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
-        changePassword = new javax.swing.JDialog();
+        validateCode = new javax.swing.JDialog();
         jPanel2 = new javax.swing.JPanel();
         txtCode = new javax.swing.JTextField();
         buttonContinue = new javax.swing.JButton();
         labelTimer = new javax.swing.JLabel();
         labelWarnig = new javax.swing.JLabel();
         jLabel1 = new javax.swing.JLabel();
+        changePassword = new javax.swing.JDialog();
+        txtPassword = new javax.swing.JPasswordField();
+        txtPasswordConfirm = new javax.swing.JPasswordField();
+        jButton1 = new javax.swing.JButton();
+        jLabel2 = new javax.swing.JLabel();
         jPanel1 = new javax.swing.JPanel();
         jPanel4 = new javax.swing.JPanel();
         jPanel5 = new javax.swing.JPanel();
@@ -65,12 +69,17 @@ public class ResetPassword extends javax.swing.JFrame {
         txtMailReset = new javax.swing.JTextField();
         buttonSend = new javax.swing.JButton();
 
-        changePassword.setModal(true);
+        validateCode.setModal(true);
 
         jPanel2.setBackground(new java.awt.Color(255, 255, 255));
         jPanel2.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
         txtCode.setHorizontalAlignment(javax.swing.JTextField.CENTER);
+        txtCode.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyPressed(java.awt.event.KeyEvent evt) {
+                txtCodeKeyPressed(evt);
+            }
+        });
         jPanel2.add(txtCode, new org.netbeans.lib.awtextra.AbsoluteConstraints(120, 70, 210, 25));
 
         buttonContinue.setText("Continuar");
@@ -95,16 +104,45 @@ public class ResetPassword extends javax.swing.JFrame {
         jLabel1.setText("Ingrese el código recibido en su correo electronico");
         jPanel2.add(jLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 10, 450, 50));
 
-        javax.swing.GroupLayout changePasswordLayout = new javax.swing.GroupLayout(changePassword.getContentPane());
-        changePassword.getContentPane().setLayout(changePasswordLayout);
-        changePasswordLayout.setHorizontalGroup(
-            changePasswordLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+        javax.swing.GroupLayout validateCodeLayout = new javax.swing.GroupLayout(validateCode.getContentPane());
+        validateCode.getContentPane().setLayout(validateCodeLayout);
+        validateCodeLayout.setHorizontalGroup(
+            validateCodeLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addComponent(jPanel2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
         );
-        changePasswordLayout.setVerticalGroup(
-            changePasswordLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+        validateCodeLayout.setVerticalGroup(
+            validateCodeLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addComponent(jPanel2, javax.swing.GroupLayout.PREFERRED_SIZE, 241, javax.swing.GroupLayout.PREFERRED_SIZE)
         );
+
+        changePassword.setModal(true);
+        changePassword.getContentPane().setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
+
+        txtPassword.setFont(new java.awt.Font("Dialog", 1, 14)); // NOI18N
+        txtPassword.setHorizontalAlignment(javax.swing.JTextField.CENTER);
+        txtPassword.setText("jPasswordField1");
+        txtPassword.setBorder(javax.swing.BorderFactory.createBevelBorder(javax.swing.border.BevelBorder.RAISED));
+        changePassword.getContentPane().add(txtPassword, new org.netbeans.lib.awtextra.AbsoluteConstraints(160, 100, 210, 25));
+
+        txtPasswordConfirm.setFont(new java.awt.Font("Dialog", 1, 14)); // NOI18N
+        txtPasswordConfirm.setHorizontalAlignment(javax.swing.JTextField.CENTER);
+        txtPasswordConfirm.setText("jPasswordField1");
+        txtPasswordConfirm.setBorder(javax.swing.BorderFactory.createBevelBorder(javax.swing.border.BevelBorder.RAISED));
+        changePassword.getContentPane().add(txtPasswordConfirm, new org.netbeans.lib.awtextra.AbsoluteConstraints(160, 160, 210, 25));
+
+        jButton1.setText("Actualizar");
+        jButton1.setBorder(javax.swing.BorderFactory.createBevelBorder(javax.swing.border.BevelBorder.RAISED));
+        jButton1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton1ActionPerformed(evt);
+            }
+        });
+        changePassword.getContentPane().add(jButton1, new org.netbeans.lib.awtextra.AbsoluteConstraints(190, 220, 150, 25));
+
+        jLabel2.setFont(new java.awt.Font("Dialog", 1, 18)); // NOI18N
+        jLabel2.setForeground(new java.awt.Color(0, 102, 102));
+        jLabel2.setText("Ingresa tu nueva contraseña");
+        changePassword.getContentPane().add(jLabel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(140, 40, -1, -1));
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -236,7 +274,7 @@ public class ResetPassword extends javax.swing.JFrame {
                 message = "";
                 timer = new Clock(labelTimer);
                 timer.start();
-                changePassword.show();
+                validateCode.show();
             }
             case 300 ->
                 message = "";
@@ -259,7 +297,39 @@ public class ResetPassword extends javax.swing.JFrame {
             return;
         }
         
+        if (Tools.matchCode(codeInp)) {
+            JOptionPane.showMessageDialog(null, "código valido");
+            validateCode.setVisible(false);
+            changePassword.show();
+        } else {
+            JOptionPane.showMessageDialog(null, "El código ingresado es invalido");
+        }
+        
     }//GEN-LAST:event_buttonContinueActionPerformed
+
+    /**
+     * Agrega un espacio en la posicion 5 del componente txtCode para cumplir con el formato
+     * del código de recuperación
+     * @param evt Obj con propiedades del eento KeyPressed
+     */
+    private void txtCodeKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtCodeKeyPressed
+        if (txtCode.getText().trim().length() == 4) {
+            txtCode.setText(txtCode.getText() + " ");
+        }
+    }//GEN-LAST:event_txtCodeKeyPressed
+
+    private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
+        String pass = txtPassword.getText().trim();
+        String passConfirm = txtPasswordConfirm.getText().trim();
+        
+        if (pass.equals(passConfirm)) {
+//            Actualiza contraseña
+            this.dispose();
+           
+        } else {
+            JOptionPane.showMessageDialog(null, "Las contraseñas no coinciden");
+        }
+    }//GEN-LAST:event_jButton1ActionPerformed
 
     public static void main(String args[]) {
         java.awt.EventQueue.invokeLater(new Runnable() {
@@ -273,7 +343,9 @@ public class ResetPassword extends javax.swing.JFrame {
     private javax.swing.JButton buttonContinue;
     private javax.swing.JButton buttonSend;
     private javax.swing.JDialog changePassword;
+    private javax.swing.JButton jButton1;
     private javax.swing.JLabel jLabel1;
+    private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel5;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanel2;
@@ -286,5 +358,8 @@ public class ResetPassword extends javax.swing.JFrame {
     private javax.swing.JTextArea textMessage;
     private javax.swing.JTextField txtCode;
     private javax.swing.JTextField txtMailReset;
+    private javax.swing.JPasswordField txtPassword;
+    private javax.swing.JPasswordField txtPasswordConfirm;
+    private javax.swing.JDialog validateCode;
     // End of variables declaration//GEN-END:variables
 }

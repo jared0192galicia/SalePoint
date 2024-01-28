@@ -39,11 +39,6 @@ public class Login extends javax.swing.JFrame {
         this.setLocationRelativeTo(null);
         this.setTitle("Inicio de Sesión");
 
-        this.resetPass.setLocationRelativeTo(null);
-        this.resetPass.setSize(450, 506);
-        this.resetPass.setBounds(this.getX() + 300, this.getY() - 25, 450, 506);
-        this.resetPass.setTitle("Resetear contraseña");
-
         this.firtsUser.setLocationRelativeTo(null);
         this.firtsUser.setSize(1710, 840);
         this.firtsUser.setBounds(this.getX() + 300, this.getY() - 25, 1710, 860);
@@ -96,16 +91,6 @@ public class Login extends javax.swing.JFrame {
     private void initComponents() {
 
         fileChooser = new javax.swing.JFileChooser();
-        resetPass = new javax.swing.JDialog();
-        jPanel3 = new javax.swing.JPanel();
-        jPanel4 = new javax.swing.JPanel();
-        jPanel5 = new javax.swing.JPanel();
-        jScrollPane1 = new javax.swing.JScrollPane();
-        textMessage = new javax.swing.JTextArea();
-        jPanel6 = new javax.swing.JPanel();
-        jLabel5 = new javax.swing.JLabel();
-        txtMailReset = new javax.swing.JTextField();
-        buttonSend = new javax.swing.JButton();
         firtsUser = new javax.swing.JDialog();
         panelInternal = new javax.swing.JPanel();
         txtNumEmploy = new javax.swing.JTextField();
@@ -172,114 +157,6 @@ public class Login extends javax.swing.JFrame {
         jLabel6 = new javax.swing.JLabel();
         labelClose = new javax.swing.JLabel();
         jLabel4 = new javax.swing.JLabel();
-
-        resetPass.setTitle("Restablecer contraseña");
-        resetPass.setAlwaysOnTop(true);
-        resetPass.setFocusTraversalPolicyProvider(true);
-        resetPass.setLocationByPlatform(true);
-        resetPass.setModal(true);
-        resetPass.setUndecorated(true);
-
-        jPanel3.setBackground(new java.awt.Color(245, 248, 251));
-        jPanel3.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
-
-        jPanel5.setBackground(new java.awt.Color(17, 57, 103));
-
-        javax.swing.GroupLayout jPanel5Layout = new javax.swing.GroupLayout(jPanel5);
-        jPanel5.setLayout(jPanel5Layout);
-        jPanel5Layout.setHorizontalGroup(
-            jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 18, Short.MAX_VALUE)
-        );
-        jPanel5Layout.setVerticalGroup(
-            jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 0, Short.MAX_VALUE)
-        );
-
-        textMessage.setEditable(false);
-        textMessage.setColumns(20);
-        textMessage.setForeground(new java.awt.Color(180, 184, 186));
-        textMessage.setRows(5);
-        textMessage.setBorder(null);
-        textMessage.setOpaque(false);
-        jScrollPane1.setViewportView(textMessage);
-
-        javax.swing.GroupLayout jPanel4Layout = new javax.swing.GroupLayout(jPanel4);
-        jPanel4.setLayout(jPanel4Layout);
-        jPanel4Layout.setHorizontalGroup(
-            jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jPanel4Layout.createSequentialGroup()
-                .addComponent(jPanel5, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 346, Short.MAX_VALUE))
-        );
-        jPanel4Layout.setVerticalGroup(
-            jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jPanel5, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-            .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 143, Short.MAX_VALUE)
-        );
-
-        jPanel3.add(jPanel4, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 65, 370, -1));
-
-        jLabel5.setFont(new java.awt.Font("Jaldi", 0, 18)); // NOI18N
-        jLabel5.setForeground(new java.awt.Color(118, 125, 142));
-        jLabel5.setText("Correo Electronico");
-
-        txtMailReset.setHorizontalAlignment(javax.swing.JTextField.CENTER);
-
-        buttonSend.setBackground(new java.awt.Color(0, 102, 102));
-        buttonSend.setFont(new java.awt.Font("Dialog", 0, 14)); // NOI18N
-        buttonSend.setForeground(new java.awt.Color(255, 255, 255));
-        buttonSend.setText("Enviar");
-        buttonSend.setBorder(javax.swing.BorderFactory.createBevelBorder(javax.swing.border.BevelBorder.RAISED));
-        buttonSend.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
-        buttonSend.addMouseListener(new java.awt.event.MouseAdapter() {
-            public void mouseClicked(java.awt.event.MouseEvent evt) {
-                buttonSendMouseClicked(evt);
-            }
-        });
-
-        javax.swing.GroupLayout jPanel6Layout = new javax.swing.GroupLayout(jPanel6);
-        jPanel6.setLayout(jPanel6Layout);
-        jPanel6Layout.setHorizontalGroup(
-            jPanel6Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jPanel6Layout.createSequentialGroup()
-                .addGroup(jPanel6Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(jPanel6Layout.createSequentialGroup()
-                        .addGap(23, 23, 23)
-                        .addComponent(jLabel5))
-                    .addGroup(jPanel6Layout.createSequentialGroup()
-                        .addGap(69, 69, 69)
-                        .addComponent(buttonSend, javax.swing.GroupLayout.PREFERRED_SIZE, 219, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addGroup(jPanel6Layout.createSequentialGroup()
-                        .addGap(55, 55, 55)
-                        .addComponent(txtMailReset, javax.swing.GroupLayout.PREFERRED_SIZE, 250, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                .addContainerGap(65, Short.MAX_VALUE))
-        );
-        jPanel6Layout.setVerticalGroup(
-            jPanel6Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jPanel6Layout.createSequentialGroup()
-                .addGap(48, 48, 48)
-                .addComponent(jLabel5)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addComponent(txtMailReset, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(18, 18, 18)
-                .addComponent(buttonSend, javax.swing.GroupLayout.PREFERRED_SIZE, 35, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(35, Short.MAX_VALUE))
-        );
-
-        jPanel3.add(jPanel6, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 250, 370, 200));
-
-        javax.swing.GroupLayout resetPassLayout = new javax.swing.GroupLayout(resetPass.getContentPane());
-        resetPass.getContentPane().setLayout(resetPassLayout);
-        resetPassLayout.setHorizontalGroup(
-            resetPassLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jPanel3, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, 450, Short.MAX_VALUE)
-        );
-        resetPassLayout.setVerticalGroup(
-            resetPassLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jPanel3, javax.swing.GroupLayout.DEFAULT_SIZE, 506, Short.MAX_VALUE)
-        );
 
         firtsUser.setModal(true);
 
@@ -808,10 +685,6 @@ public class Login extends javax.swing.JFrame {
         new ResetPassword().setVisible(true);
     }//GEN-LAST:event_labelResetPassMouseClicked
 
-    private void buttonSendMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_buttonSendMouseClicked
-       
-    }//GEN-LAST:event_buttonSendMouseClicked
-
     private void txtNumEmployKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtNumEmployKeyReleased
         verify(evt, txtNumEmploy, "^[0-9]$");
     }//GEN-LAST:event_txtNumEmployKeyReleased
@@ -1015,7 +888,6 @@ public class Login extends javax.swing.JFrame {
     private javax.swing.JButton buttonLogin;
     private javax.swing.JButton buttonSave;
     private javax.swing.JButton buttonSelectImage;
-    private javax.swing.JButton buttonSend;
     private javax.swing.JCheckBox checkCourt;
     private javax.swing.JCheckBox checkExpensesHistory;
     private javax.swing.JCheckBox checkListEmployes;
@@ -1054,30 +926,21 @@ public class Login extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel28;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;
-    private javax.swing.JLabel jLabel5;
     private javax.swing.JLabel jLabel6;
     private javax.swing.JLabel jLabel7;
     private javax.swing.JLabel jLabel8;
     private javax.swing.JLabel jLabel9;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanel2;
-    private javax.swing.JPanel jPanel3;
-    private javax.swing.JPanel jPanel4;
-    private javax.swing.JPanel jPanel5;
-    private javax.swing.JPanel jPanel6;
-    private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JLabel labelClose;
     private javax.swing.JLabel labelInvalidMail;
     private javax.swing.JLabel labelInvalidPhone;
     private javax.swing.JLabel labelInvalidUser;
     private javax.swing.JLabel labelResetPass;
     private javax.swing.JPanel panelInternal;
-    private javax.swing.JDialog resetPass;
-    private javax.swing.JTextArea textMessage;
     private javax.swing.JTextField txtEmail;
     private javax.swing.JTextField txtLastNameMaternal;
     private javax.swing.JTextField txtLastNamePaternal;
-    private javax.swing.JTextField txtMailReset;
     private javax.swing.JTextField txtName;
     private javax.swing.JTextField txtNumEmploy;
     private javax.swing.JTextField txtNumberPhone;
