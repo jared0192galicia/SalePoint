@@ -73,7 +73,7 @@ CREATE TABLE "Product"(
   tipo VARCHAR,
   descripcion VARCHAR(25),
   numProducto INT,
-  estado VARCHAR(4),
+  estado VARCHAR,
   disponible int,
   variante VARCHAR,
   PRIMARY KEY(id)
