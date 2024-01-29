@@ -201,5 +201,72 @@ public class Product implements Serializable {
     public String toString() {
         return "com.unsis.models.entity.Product[ id=" + id + " ]";
     }
+
+    public static class Builder {
+        private Product product;
+
+        public Builder() {
+            product = new Product();
+        }
+
+        public Builder withId(Integer id) {
+          product.id = id;
+            return this;
+        }
+
+        public Builder withNumProducto(Integer numProduct) {
+            product.numproducto = numProduct;
+            return this;
+        }
+
+        public Builder withNombre(String nombre) {
+            product.nombre = nombre;
+            return this;
+        }
+
+        public Builder withPreciocom(Double precioC) {
+           product.preciocom = precioC;
+            return this;
+        }
+
+        public Builder withPrecioventa(Double precioV) {
+            product.precioventa = precioV;
+            return this;
+        }
+
+        public Builder withCodigobarra(String codigoBarra) {
+            product.codigobarra = codigoBarra;
+            return this;
+        }
+
+        public Builder withTipo(String tipo) {
+            product.tipo = tipo;
+            return this;
+        }
+
+      
+        public Builder withDescripcion(String descripcion) {
+            product.descripcion = descripcion;
+            return this;
+        }
+
+        public Builder withEstado(String estado) {
+            product.estado = estado;
+            return this;
+        }
+
+        public Builder withDisponible(int disponible) {
+           product.disponible = disponible;
+            return this;
+        }
+
+         public Builder withVariente(String variante) {
+           product.variante = variante;
+            return this;
+        }
+        public Product build() {
+            return product;
+        }
+    }
     
 }
