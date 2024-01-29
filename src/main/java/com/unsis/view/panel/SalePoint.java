@@ -12,7 +12,7 @@ import com.unsis.models.entity.Product;
 import com.unsis.models.entity.Sales;
 import java.awt.Color;
 import java.awt.Font;
-import java.time.LocalDate;
+import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
 import java.util.regex.Matcher;
@@ -46,6 +46,7 @@ public class SalePoint extends javax.swing.JPanel {
         this.labelInvalidName.setVisible(false);
         this.labelInvalidCodBarra.setVisible(false);
         this.labelVoidCamp.setVisible(false);
+        this.labelVoidTable.setVisible(false);
         this.controller = new JpaController();
         JTableHeader TableProduct = tableProduct.getTableHeader();
         
@@ -192,6 +193,7 @@ public class SalePoint extends javax.swing.JPanel {
         labelInvalidName = new javax.swing.JLabel();
         labelVoidCamp = new javax.swing.JLabel();
         buttonDelete = new javax.swing.JButton();
+        labelVoidTable = new javax.swing.JLabel();
 
         dialogConfirm.setAlwaysOnTop(true);
         dialogConfirm.setUndecorated(true);
@@ -228,7 +230,7 @@ public class SalePoint extends javax.swing.JPanel {
         compradorLabel.setFont(new java.awt.Font("Jaldi", 0, 16)); // NOI18N
         compradorLabel.setForeground(new java.awt.Color(118, 125, 142));
         compradorLabel.setText("Comprador");
-        jPanel4.add(compradorLabel, new org.netbeans.lib.awtextra.AbsoluteConstraints(220, 58, 130, -1));
+        jPanel4.add(compradorLabel, new org.netbeans.lib.awtextra.AbsoluteConstraints(200, 60, 130, -1));
 
         montoLabel.setBackground(new java.awt.Color(118, 125, 142));
         montoLabel.setFont(new java.awt.Font("Jaldi", 0, 16)); // NOI18N
@@ -240,7 +242,7 @@ public class SalePoint extends javax.swing.JPanel {
         fechaLabel.setFont(new java.awt.Font("Jaldi", 0, 16)); // NOI18N
         fechaLabel.setForeground(new java.awt.Color(118, 125, 142));
         fechaLabel.setText("Fecha y hora de venta");
-        jPanel4.add(fechaLabel, new org.netbeans.lib.awtextra.AbsoluteConstraints(220, 190, 140, -1));
+        jPanel4.add(fechaLabel, new org.netbeans.lib.awtextra.AbsoluteConstraints(200, 190, 140, -1));
 
         nameVendedorLabel.setBackground(new java.awt.Color(118, 125, 142));
         nameVendedorLabel.setFont(new java.awt.Font("Jaldi", 0, 12)); // NOI18N
@@ -254,7 +256,7 @@ public class SalePoint extends javax.swing.JPanel {
         nameCompradorLabel.setForeground(new java.awt.Color(118, 125, 142));
         nameCompradorLabel.setText("Pedro (taxista)");
         nameCompradorLabel.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(204, 204, 204)));
-        jPanel4.add(nameCompradorLabel, new org.netbeans.lib.awtextra.AbsoluteConstraints(220, 92, 127, 28));
+        jPanel4.add(nameCompradorLabel, new org.netbeans.lib.awtextra.AbsoluteConstraints(200, 90, 190, 28));
 
         ingresoMontoLabel.setForeground(new java.awt.Color(118, 125, 142));
         ingresoMontoLabel.setText("$__.__");
@@ -266,7 +268,7 @@ public class SalePoint extends javax.swing.JPanel {
         ingresarFechaLabel.setForeground(new java.awt.Color(118, 125, 142));
         ingresarFechaLabel.setText("3 de Octubre 2023 10:15:45");
         ingresarFechaLabel.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(204, 204, 204)));
-        jPanel4.add(ingresarFechaLabel, new org.netbeans.lib.awtextra.AbsoluteConstraints(220, 231, 140, 22));
+        jPanel4.add(ingresarFechaLabel, new org.netbeans.lib.awtextra.AbsoluteConstraints(200, 230, 190, 22));
 
         confirmarBoton.setBackground(new java.awt.Color(25, 130, 206));
         confirmarBoton.setFont(new java.awt.Font("Jaldi", 0, 12)); // NOI18N
@@ -504,7 +506,7 @@ public class SalePoint extends javax.swing.JPanel {
         labelVoidCamp.setForeground(new java.awt.Color(153, 0, 0));
         labelVoidCamp.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         labelVoidCamp.setText("Campos necesarios vacios");
-        jPanel2.add(labelVoidCamp, new org.netbeans.lib.awtextra.AbsoluteConstraints(50, 440, 450, -1));
+        jPanel2.add(labelVoidCamp, new org.netbeans.lib.awtextra.AbsoluteConstraints(60, 440, 450, -1));
 
         buttonDelete.setBackground(new java.awt.Color(82, 146, 222));
         buttonDelete.setFont(new java.awt.Font("Jaldi", 0, 20)); // NOI18N
@@ -518,16 +520,26 @@ public class SalePoint extends javax.swing.JPanel {
         });
         jPanel2.add(buttonDelete, new org.netbeans.lib.awtextra.AbsoluteConstraints(60, 390, 160, 33));
 
+        labelVoidTable.setFont(new java.awt.Font("Dialog", 1, 13)); // NOI18N
+        labelVoidTable.setForeground(new java.awt.Color(153, 0, 0));
+        labelVoidTable.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        labelVoidTable.setText("No hay productos que comprar");
+        jPanel2.add(labelVoidTable, new org.netbeans.lib.awtextra.AbsoluteConstraints(50, 640, 450, -1));
+
         add(jPanel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(1050, 90, 560, 720));
     }// </editor-fold>//GEN-END:initComponents
 
     private void buttonAddOrderMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_buttonAddOrderMouseClicked
-//        new SalesDetails(this).setVisible(true);
-        dialogConfirm.show(true);
-        nameCompradorLabel.setText(txtName.getText());
-        DateTimeFormatter formatter = DateTimeFormatter.ofPattern ("dd 'de' MMMM 'del' yyyy");
-        LocalDate fechaActual = LocalDate.now();
-        ingresarFechaLabel.setText(fechaActual.format(formatter));
+        if (txtCant.getText().trim().isEmpty() || txtName.getText().trim().isEmpty()) {
+            labelVoidTable.setVisible(true);
+        } else {
+            labelVoidTable.setVisible(false);
+            dialogConfirm.show(true);
+            nameCompradorLabel.setText(txtName.getText());
+            DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd 'de' MMMM 'del' yyyy ' ' HH:mm:ss");
+            LocalDateTime fechaActual = LocalDateTime.now();
+            ingresarFechaLabel.setText(fechaActual.format(formatter));
+        }
     }//GEN-LAST:event_buttonAddOrderMouseClicked
 
     private void confirmarBotonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_confirmarBotonActionPerformed
@@ -744,6 +756,7 @@ public class SalePoint extends javax.swing.JPanel {
     private javax.swing.JLabel labelInvalidCodBarra;
     private javax.swing.JLabel labelInvalidName;
     private javax.swing.JLabel labelVoidCamp;
+    private javax.swing.JLabel labelVoidTable;
     private javax.swing.JLabel montoLabel;
     private javax.swing.JLabel nameCompradorLabel;
     private javax.swing.JLabel nameVendedorLabel;
