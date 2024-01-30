@@ -583,7 +583,7 @@ public class SalePoint extends javax.swing.JPanel {
             Sales sales = new Sales.Builder()
                     .withIdVenta(idVenta)
                     .withIdProducto(product)
-                    .withIdEmpleado(Session.getAccount().getIdempleado().getId())
+                    .withIdEmpleado(Session.getAccount().getIdempleado())
                     .withTipoOrden(listTipoOrden.get(index) ? "Normal" : "Para llevar")//Crear lista de booleanos
                     .withNombreComp(txtName.getText())
                     .withComentarios(listComent.get(index))//Crear lista de String
