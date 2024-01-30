@@ -16,6 +16,7 @@ import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.NamedQueries;
 import javax.persistence.NamedQuery;
+import javax.persistence.OneToOne;
 import javax.persistence.Table;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
@@ -25,7 +26,7 @@ import javax.persistence.TemporalType;
  * @author labtecweb10
  */
 @Entity
-@Table(name = "Sales")
+@Table(name = "\"Sales\"")
 @NamedQueries({
     @NamedQuery(name = "Sales.findAll", query = "SELECT s FROM Sales s"),
     @NamedQuery(name = "Sales.findById", query = "SELECT s FROM Sales s WHERE s.id = :id"),
@@ -62,6 +63,9 @@ public class Sales implements Serializable {
     @JoinColumn(name = "idproducto", referencedColumnName = "id")
     @ManyToOne
     private Product idproducto;
+    @JoinColumn(name = "idempleado", referencedColumnName = "id")
+    @OneToOne
+    private Employee idempleado;
 
     public Sales() {
     }
@@ -130,6 +134,14 @@ public class Sales implements Serializable {
         return estatus;
     }
 
+    public Employee getIdempleado() {
+        return idempleado;
+    }
+
+    public void setIdempleado(Employee idempleado) {
+        this.idempleado = idempleado;
+    }
+    
     public void setEstatus(Integer estatus) {
         this.estatus = estatus;
     }
@@ -167,4 +179,62 @@ public class Sales implements Serializable {
         return "com.unsis.models.entity.Sales[ id=" + id + " ]";
     }
     
+ public static class Builder {
+
+        private Sales sales;
+
+        public Builder() {
+            sales = new Sales();
+        }
+
+        public Builder withId(Integer id) {
+            sales.id = id;
+            return this;
+        }
+
+        public Builder withIdVenta(Integer idVenta) {
+            sales.idventa = idVenta;
+            return this;
+        }
+
+        public Builder withIdProducto(Product idProducto) {
+            sales.idproducto = idProducto;
+            return this;
+        }
+        
+        public Builder withIdEmpleado(Employee idEmpleado) {
+            sales.idempleado = idEmpleado;
+            return this;
+        }
+
+        public Builder withTipoOrden(String tipoOrden) {
+            sales.tipoorden = tipoOrden;
+            return this;
+        }
+
+        public Builder withNombreComp(String nombreComprador) {
+            sales.nombrecomprador = nombreComprador;
+            return this;
+        }
+
+        public Builder withComentarios(String coments) {
+            sales.comentarios = coments;
+            return this;
+        }
+
+        public Builder withCodigoBarras(String codigoBarras) {
+            sales.codigobarra = codigoBarras;
+            return this;
+        }
+
+        public Builder withFechaHora(Date fechaHora) {
+            sales.fechahora = fechaHora;
+            return this;
+        }
+        
+        public Sales build() {
+            return sales;
+        }
+    }
+
 }
