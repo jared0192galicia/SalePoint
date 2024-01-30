@@ -7,11 +7,16 @@ package com.unsis.view.panel;
 import com.unsis.clases.Session;
 import com.unsis.clases.Tools;
 import com.unsis.controller.JpaController;
+import com.unsis.dao.Conexion;
 import com.unsis.models.entity.Flavors;
 import com.unsis.models.entity.Product;
 import com.unsis.models.entity.Sales;
 import java.awt.Color;
 import java.awt.Font;
+import java.sql.Connection;
+import java.sql.PreparedStatement;
+import java.sql.ResultSet;
+import java.sql.SQLException;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
@@ -36,6 +41,9 @@ public class SalePoint extends javax.swing.JPanel {
     private boolean band = false;
     private final ArrayList<Product> listPedido;
     private ArrayList<Product> productList = new ArrayList<>();
+    private final Connection cn = Conexion.getConexion();
+    private ArrayList<String> listComent;
+    private ArrayList<Boolean> listTipoOrden;
 
     /**
      * Creates new form Venta
@@ -80,7 +88,10 @@ public class SalePoint extends javax.swing.JPanel {
         Icon resizedIcon = tools.resizeIcon(buttonAdd.getIcon(), 20, 20);
         buttonAdd.setIcon(resizedIcon);
     }
-
+/**
+ * Llena el comboBox de productos con los productos que esten en la base de
+ * datos
+ */
     public void llenarComboProd() {
         // Llamada al método findAllEntities para obtener la lista de productos
         productList = controller.findAllEntities(Product.class);
@@ -97,7 +108,10 @@ public class SalePoint extends javax.swing.JPanel {
             //llenarComboSab();
         }
     }
-
+/**
+ * Llena el comboBox de sabores dependiendo del producto que sea elegido en el 
+ * comboBox de producto
+ */
     public void llenarComboSab() {
         comboSab.removeAllItems();
 
@@ -115,7 +129,12 @@ public class SalePoint extends javax.swing.JPanel {
             }
         }
     }
-
+/**
+ * Obtiene una lista de los sabores dependiendo del producto seleccionado, 
+ * recibe el producto y busca los sabores
+ * @param producto
+ * @return 
+ */
     private ArrayList<Flavors> obtSabProd(Product producto) {
         ArrayList<Flavors> sabores = controller.findAllEntities(Flavors.class);
         ArrayList<Flavors> saboresProd = new ArrayList<>();
@@ -127,7 +146,11 @@ public class SalePoint extends javax.swing.JPanel {
         }
         return saboresProd;
     }
-
+/**
+ * Obtiene los productos de la base de datos
+ * @param nameProd
+ * @return 
+ */
     private Product obtProduct(String nameProd) {
         for (Product product : productList) {
             if (product.getNombre().equalsIgnoreCase(nameProd)) {
@@ -181,7 +204,7 @@ public class SalePoint extends javax.swing.JPanel {
         comboProd = new javax.swing.JComboBox<>();
         txtCant = new javax.swing.JTextField();
         rbNormal = new javax.swing.JRadioButton();
-        btParaLlevar = new javax.swing.JRadioButton();
+        rbParaLlevar = new javax.swing.JRadioButton();
         txtComents = new javax.swing.JTextField();
         jLabel12 = new javax.swing.JLabel();
         txtName = new javax.swing.JTextField();
@@ -205,6 +228,7 @@ public class SalePoint extends javax.swing.JPanel {
                 dialogConfirmComponentShown(evt);
             }
         });
+        dialogConfirm.getContentPane().setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
         jPanel3.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
@@ -326,7 +350,7 @@ public class SalePoint extends javax.swing.JPanel {
         });
         jPanel3.add(buttonClose, new org.netbeans.lib.awtextra.AbsoluteConstraints(880, 10, 30, 30));
 
-        dialogConfirm.getContentPane().add(jPanel3, java.awt.BorderLayout.CENTER);
+        dialogConfirm.getContentPane().add(jPanel3, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 920, 448));
 
         setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
@@ -433,14 +457,14 @@ public class SalePoint extends javax.swing.JPanel {
         });
         jPanel2.add(rbNormal, new org.netbeans.lib.awtextra.AbsoluteConstraints(330, 230, -1, -1));
 
-        buttonGroup1.add(btParaLlevar);
-        btParaLlevar.setText("Para llevar");
-        btParaLlevar.addActionListener(new java.awt.event.ActionListener() {
+        buttonGroup1.add(rbParaLlevar);
+        rbParaLlevar.setText("Para llevar");
+        rbParaLlevar.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btParaLlevarActionPerformed(evt);
+                rbParaLlevarActionPerformed(evt);
             }
         });
-        jPanel2.add(btParaLlevar, new org.netbeans.lib.awtextra.AbsoluteConstraints(430, 230, -1, -1));
+        jPanel2.add(rbParaLlevar, new org.netbeans.lib.awtextra.AbsoluteConstraints(430, 230, -1, -1));
         jPanel2.add(txtComents, new org.netbeans.lib.awtextra.AbsoluteConstraints(60, 310, 164, 30));
 
         jLabel12.setBackground(new java.awt.Color(255, 255, 255));
@@ -528,24 +552,42 @@ public class SalePoint extends javax.swing.JPanel {
 
         add(jPanel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(1050, 90, 560, 720));
     }// </editor-fold>//GEN-END:initComponents
-
+/**
+ * Agrega la orden a un dialogConfirm para confirmar la compra
+ * @param evt 
+ */
     private void buttonAddOrderMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_buttonAddOrderMouseClicked
-        if (txtCant.getText().trim().isEmpty() || txtName.getText().trim().isEmpty()) {
-            labelVoidTable.setVisible(true);
-        } else {
+        if (((DefaultTableModel) tableProduct.getModel()).getRowCount() > 0) {
             labelVoidTable.setVisible(false);
             dialogConfirm.show(true);
             nameCompradorLabel.setText(txtName.getText());
             DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd 'de' MMMM 'del' yyyy ' ' HH:mm:ss");
             LocalDateTime fechaActual = LocalDateTime.now();
             ingresarFechaLabel.setText(fechaActual.format(formatter));
+            nameVendedorLabel.setText(Session.getAccount().getIdempleado().getNombre());
+        } else {
+            labelVoidTable.setVisible(true);
         }
     }//GEN-LAST:event_buttonAddOrderMouseClicked
 
     private void confirmarBotonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_confirmarBotonActionPerformed
-//        this.wrapper.setEnabled(true);
+//      this.wrapper.setEnabled(true);
+//      this.dispose();
         dialogConfirm.show(false);
-// this.dispose();
+        int idVenta = obSigIdVeta();
+         for (Product product : listPedido) {
+            Sales sales = new Sales.Builder()
+                .withIdVenta(idVenta)
+                .withIdProducto(product)
+                .withIdEmpleado(Session.getAccount().getIdempleado().getId())
+                .withTipoOrden()//Crear lista de booleanos
+                .withNombreComp(txtName.getText())
+                .withComentarios()//Crear lista de String
+                .withCodigoBarras()
+                .withFechaHora(ingresarFechaLabel.getText())
+                .build();
+        }
+        
     }//GEN-LAST:event_confirmarBotonActionPerformed
 
     private void buttonCloseActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_buttonCloseActionPerformed
@@ -553,7 +595,10 @@ public class SalePoint extends javax.swing.JPanel {
 //        this.dispose();
         dialogConfirm.show(false);
     }//GEN-LAST:event_buttonCloseActionPerformed
-
+/**
+ * Validaciones de cantidades y del nombre del comprador
+ * @param evt 
+ */
     private void txtCantFocusLost(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_txtCantFocusLost
         String cantidad = txtCant.getText().trim();
         String regex = "^[1-9]\\d*$";
@@ -600,13 +645,15 @@ public class SalePoint extends javax.swing.JPanel {
                 String coment = txtComents.getText();
                 String codBarra = txtCodBarra.getText();
                 txtName.setEnabled(false);
+                listComent.add(coment);
+                listTipoOrden.add();
 
                 if (txtCant.getText() == null || txtName.getText() == null) {
                     labelVoidCamp.setVisible(true);
                 } else {
                     labelVoidCamp.setVisible(false);
                     llenarTabla(producto, cantidad);
-                    
+
                     Session.getAccount().getId();
                 }
             } catch (NumberFormatException e) {
@@ -619,9 +666,9 @@ public class SalePoint extends javax.swing.JPanel {
         updateMessage("Normal");
     }//GEN-LAST:event_rbNormalActionPerformed
 
-    private void btParaLlevarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btParaLlevarActionPerformed
+    private void rbParaLlevarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_rbParaLlevarActionPerformed
         updateMessage("Para llevar");
-    }//GEN-LAST:event_btParaLlevarActionPerformed
+    }//GEN-LAST:event_rbParaLlevarActionPerformed
 
     private void buttonDeleteActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_buttonDeleteActionPerformed
         int selectedRow = tableProduct.getSelectedRow();
@@ -719,8 +766,32 @@ public class SalePoint extends javax.swing.JPanel {
         }
     }
 
+    public int obSigIdVeta() {
+        String query = "SELECT MAX(idventa) FROM \"Sales\"";
+        try (PreparedStatement pst = cn.prepareStatement(query)) {
+            ResultSet rs = pst.executeQuery();
+
+            if (rs.next()) {
+                int maxIdVenta = rs.getInt(1);
+                return maxIdVenta + 1;
+            }
+        } catch (SQLException e) {
+            System.err.println("Error al obtener el siguiente idVenta: " + e.getMessage());
+        }
+
+        return 1; // Si no se puede obtener, devolvemos 1 como valor predeterminado
+    }
+    
+    private boolean obtTipoOrden() {
+        if(rbNormal.isSelected()){
+            return true;
+        }else if (rbParaLlevar.isSelected()){
+            return false;
+        }else {
+            return false;
+        }
+    }
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JRadioButton btParaLlevar;
     private javax.swing.JButton buttonAdd;
     private javax.swing.JButton buttonAddOrder;
     private javax.swing.JButton buttonClose;
@@ -761,6 +832,7 @@ public class SalePoint extends javax.swing.JPanel {
     private javax.swing.JLabel nameCompradorLabel;
     private javax.swing.JLabel nameVendedorLabel;
     private javax.swing.JRadioButton rbNormal;
+    private javax.swing.JRadioButton rbParaLlevar;
     private javax.swing.JTable tableConfComp;
     private javax.swing.JTable tableProduct;
     private javax.swing.JTextField txtCant;
