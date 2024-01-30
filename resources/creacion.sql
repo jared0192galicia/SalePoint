@@ -96,6 +96,7 @@ CREATE TABLE "Sales"(
   nombreComprador VARCHAR,
   codigoBarra VARCHAR,
   fechaHora TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
+  
   PRIMARY KEY(id),
   FOREIGN KEY (idEmpleado) REFERENCES "Employee"(id),
   FOREIGN KEY (idProducto) REFERENCES "Product"(codigoBarra)
@@ -122,4 +123,4 @@ WHERE
 
 --Script de consulta de compras
 SELECT * FROM "Sales" LEFT JOIN "Product" ON "Product".codigobarra = "Sales".idproducto 
-LEFT JOIN "Flavors" ON "Flavors".idproducto = "Product".id WHERE "idventa" = 10002;
+LEFT JOIN "Flavors" ON "Flavors".idproducto = "Product".id WHERE "fechahora" == '2024-01-26';
