@@ -20,6 +20,7 @@ import java.sql.SQLException;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 import javax.swing.Icon;
@@ -39,9 +40,9 @@ public class SalePoint extends javax.swing.JPanel {
     private final JpaController controller;
     private String selectedMess = "";
     private boolean band = false;
+    private final Connection cn = Conexion.getConexion();
     private final ArrayList<Product> listPedido;
     private ArrayList<Product> productList = new ArrayList<>();
-    private final Connection cn = Conexion.getConexion();
     private ArrayList<String> listComent;
     private ArrayList<Boolean> listTipoOrden;
 
@@ -77,6 +78,8 @@ public class SalePoint extends javax.swing.JPanel {
         tableModel.setRowCount(0);
         tableProduct.setModel(tableModel);
         this.listPedido = new ArrayList<>();
+        this.listComent = new ArrayList<>();
+        this.listTipoOrden = new ArrayList<>();
     }
 
     /**
@@ -575,19 +578,21 @@ public class SalePoint extends javax.swing.JPanel {
 //      this.dispose();
         dialogConfirm.show(false);
         int idVenta = obSigIdVeta();
-         for (Product product : listPedido) {
+        int index = 0;
+        for (Product product : listPedido) {
             Sales sales = new Sales.Builder()
-                .withIdVenta(idVenta)
-                .withIdProducto(product)
-                .withIdEmpleado(Session.getAccount().getIdempleado().getId())
-                .withTipoOrden()//Crear lista de booleanos
-                .withNombreComp(txtName.getText())
-                .withComentarios()//Crear lista de String
-                .withCodigoBarras()
-                .withFechaHora(ingresarFechaLabel.getText())
-                .build();
+                    .withIdVenta(idVenta)
+                    .withIdProducto(product)
+                    .withIdEmpleado(Session.getAccount().getIdempleado().getId())
+                    .withTipoOrden(listTipoOrden.get(index) ? "Normal" : "Para llevar")//Crear lista de booleanos
+                    .withNombreComp(txtName.getText())
+                    .withComentarios(listComent.get(index))//Crear lista de String
+                    .withCodigoBarras(product.getCodigobarra())
+                    .withFechaHora(new Date(ingresarFechaLabel.getText()))
+                    .build();
+            index++;
         }
-        
+
     }//GEN-LAST:event_confirmarBotonActionPerformed
 
     private void buttonCloseActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_buttonCloseActionPerformed
@@ -646,7 +651,8 @@ public class SalePoint extends javax.swing.JPanel {
                 String codBarra = txtCodBarra.getText();
                 txtName.setEnabled(false);
                 listComent.add(coment);
-                listTipoOrden.add();
+                boolean tipoOrden = obtTipoOrden();
+                listTipoOrden.add(tipoOrden);
 
                 if (txtCant.getText() == null || txtName.getText() == null) {
                     labelVoidCamp.setVisible(true);
