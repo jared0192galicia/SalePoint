@@ -19,10 +19,10 @@ import javax.persistence.Table;
 
 /**
  *
- * @author labtecweb04
+ * @author labtecweb10
  */
 @Entity
-@Table(name = "\"Product\"")
+@Table(name = "Product")
 @NamedQueries({
     @NamedQuery(name = "Product.findAll", query = "SELECT p FROM Product p"),
     @NamedQuery(name = "Product.findById", query = "SELECT p FROM Product p WHERE p.id = :id"),
@@ -44,7 +44,6 @@ public class Product implements Serializable {
     @Basic(optional = false)
     @Column(name = "id")
     private Integer id;
-    @Basic(optional = false)
     @Column(name = "codigobarra")
     private String codigobarra;
     @Column(name = "nombre")
@@ -74,11 +73,6 @@ public class Product implements Serializable {
 
     public Product(Integer id) {
         this.id = id;
-    }
-
-    public Product(Integer id, String codigobarra) {
-        this.id = id;
-        this.codigobarra = codigobarra;
     }
 
     public Integer getId() {
@@ -200,73 +194,6 @@ public class Product implements Serializable {
     @Override
     public String toString() {
         return "com.unsis.models.entity.Product[ id=" + id + " ]";
-    }
-
-    public static class Builder {
-        private Product product;
-
-        public Builder() {
-            product = new Product();
-        }
-
-        public Builder withId(Integer id) {
-          product.id = id;
-            return this;
-        }
-
-        public Builder withNumProducto(Integer numProduct) {
-            product.numproducto = numProduct;
-            return this;
-        }
-
-        public Builder withNombre(String nombre) {
-            product.nombre = nombre;
-            return this;
-        }
-
-        public Builder withPreciocom(Double precioC) {
-           product.preciocom = precioC;
-            return this;
-        }
-
-        public Builder withPrecioventa(Double precioV) {
-            product.precioventa = precioV;
-            return this;
-        }
-
-        public Builder withCodigobarra(String codigoBarra) {
-            product.codigobarra = codigoBarra;
-            return this;
-        }
-
-        public Builder withTipo(String tipo) {
-            product.tipo = tipo;
-            return this;
-        }
-
-      
-        public Builder withDescripcion(String descripcion) {
-            product.descripcion = descripcion;
-            return this;
-        }
-
-        public Builder withEstado(String estado) {
-            product.estado = estado;
-            return this;
-        }
-
-        public Builder withDisponible(int disponible) {
-           product.disponible = disponible;
-            return this;
-        }
-
-         public Builder withVariente(String variante) {
-           product.variante = variante;
-            return this;
-        }
-        public Product build() {
-            return product;
-        }
     }
     
 }
