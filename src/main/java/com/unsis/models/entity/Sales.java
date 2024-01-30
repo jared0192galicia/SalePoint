@@ -1,4 +1,7 @@
-
+/*
+ * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
+ * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Class.java to edit this template
+ */
 package com.unsis.models.entity;
 
 import java.io.Serializable;
@@ -14,23 +17,25 @@ import javax.persistence.ManyToOne;
 import javax.persistence.NamedQueries;
 import javax.persistence.NamedQuery;
 import javax.persistence.Table;
+import javax.persistence.Temporal;
+import javax.persistence.TemporalType;
 
 /**
  *
- * @author labtecweb04
+ * @author Arleth Machuca
  */
 @Entity
-@Table(name = "\"Sales\"")
+@Table(name = "Sales")
 @NamedQueries({
     @NamedQuery(name = "Sales.findAll", query = "SELECT s FROM Sales s"),
     @NamedQuery(name = "Sales.findById", query = "SELECT s FROM Sales s WHERE s.id = :id"),
     @NamedQuery(name = "Sales.findByIdventa", query = "SELECT s FROM Sales s WHERE s.idventa = :idventa"),
-    @NamedQuery(name = "Sales.findByIdempleado", query = "SELECT s FROM Sales s WHERE s.idempleado = :idempleado"),
     @NamedQuery(name = "Sales.findByTipoorden", query = "SELECT s FROM Sales s WHERE s.tipoorden = :tipoorden"),
     @NamedQuery(name = "Sales.findByComentarios", query = "SELECT s FROM Sales s WHERE s.comentarios = :comentarios"),
     @NamedQuery(name = "Sales.findByNombrecomprador", query = "SELECT s FROM Sales s WHERE s.nombrecomprador = :nombrecomprador"),
     @NamedQuery(name = "Sales.findByCodigobarra", query = "SELECT s FROM Sales s WHERE s.codigobarra = :codigobarra"),
-    @NamedQuery(name = "Sales.findByFechahora", query = "SELECT s FROM Sales s WHERE s.fechaHora = :fechaHora")})
+    @NamedQuery(name = "Sales.findByFechahora", query = "SELECT s FROM Sales s WHERE s.fechahora = :fechahora"),
+    @NamedQuery(name = "Sales.findByEstatus", query = "SELECT s FROM Sales s WHERE s.estatus = :estatus")})
 public class Sales implements Serializable {
 
     private static final long serialVersionUID = 1L;
@@ -41,8 +46,6 @@ public class Sales implements Serializable {
     private Integer id;
     @Column(name = "idventa")
     private Integer idventa;
-    @Column(name = "idempleado")
-    private Integer idempleado;
     @Column(name = "tipoorden")
     private String tipoorden;
     @Column(name = "comentarios")
@@ -51,8 +54,14 @@ public class Sales implements Serializable {
     private String nombrecomprador;
     @Column(name = "codigobarra")
     private String codigobarra;
-    @Column(name = "fechaHora")
-    private Date fechaHora;
+    @Column(name = "fechahora")
+    @Temporal(TemporalType.TIMESTAMP)
+    private Date fechahora;
+    @Column(name = "estatus")
+    private Integer estatus;
+    @JoinColumn(name = "idempleado", referencedColumnName = "id")
+    @ManyToOne
+    private Employee idempleado;
     @JoinColumn(name = "idproducto", referencedColumnName = "codigobarra")
     @ManyToOne
     private Product idproducto;
@@ -78,14 +87,6 @@ public class Sales implements Serializable {
 
     public void setIdventa(Integer idventa) {
         this.idventa = idventa;
-    }
-    
-    public Integer getIdempleado() {
-        return idempleado;
-    }
-
-    public void setIdempleado(Integer idempleado) {
-        this.idempleado = idempleado;
     }
 
     public String getTipoorden() {
@@ -119,13 +120,29 @@ public class Sales implements Serializable {
     public void setCodigobarra(String codigobarra) {
         this.codigobarra = codigobarra;
     }
-    
+
     public Date getFechahora() {
-        return fechaHora;
+        return fechahora;
     }
 
-    public void setFechahora(Date fechaHora) {
-        this.fechaHora = fechaHora;
+    public void setFechahora(Date fechahora) {
+        this.fechahora = fechahora;
+    }
+
+    public Integer getEstatus() {
+        return estatus;
+    }
+
+    public void setEstatus(Integer estatus) {
+        this.estatus = estatus;
+    }
+
+    public Employee getIdempleado() {
+        return idempleado;
+    }
+
+    public void setIdempleado(Employee idempleado) {
+        this.idempleado = idempleado;
     }
 
     public Product getIdproducto() {
@@ -160,63 +177,5 @@ public class Sales implements Serializable {
     public String toString() {
         return "com.unsis.models.entity.Sales[ id=" + id + " ]";
     }
-
-    public static class Builder {
-
-        private Sales sales;
-
-        public Builder() {
-            sales = new Sales();
-        }
-
-        public Builder withId(Integer id) {
-            sales.id = id;
-            return this;
-        }
-
-        public Builder withIdVenta(Integer idVenta) {
-            sales.idventa = idVenta;
-            return this;
-        }
-
-        public Builder withIdProducto(Product idProducto) {
-            sales.idproducto = idProducto;
-            return this;
-        }
-        
-        public Builder withIdEmpleado(Integer idEmpleado) {
-            sales.idempleado = idEmpleado;
-            return this;
-        }
-
-        public Builder withTipoOrden(String tipoOrden) {
-            sales.tipoorden = tipoOrden;
-            return this;
-        }
-
-        public Builder withNombreComp(String nombreComprador) {
-            sales.nombrecomprador = nombreComprador;
-            return this;
-        }
-
-        public Builder withComentarios(String coments) {
-            sales.comentarios = coments;
-            return this;
-        }
-
-        public Builder withCodigoBarras(String codigoBarras) {
-            sales.codigobarra = codigoBarras;
-            return this;
-        }
-
-        public Builder withFechaHora(Date fechaHora) {
-            sales.fechaHora = fechaHora;
-            return this;
-        }
-        
-        public Sales build() {
-            return sales;
-        }
-    }
-
+    
 }
