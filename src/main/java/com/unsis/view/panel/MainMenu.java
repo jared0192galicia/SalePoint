@@ -30,10 +30,10 @@ public class MainMenu extends javax.swing.JPanel {
         this.setBounds(217, 0, this.getWidth(), this.getHeight());
         this.labelWelcome.setText("Bienvenido " + Session.getAccount().getIdempleado().getNombre());
         this.showAreaButtons();
-        
+
         buttonEdit.setVisible(false);
     }
-    
+
     /**
      * Quita los botones a los que no se tiene acceso en el menu principal
      */
@@ -287,13 +287,15 @@ public class MainMenu extends javax.swing.JPanel {
         txtNotes.setColumns(20);
         txtNotes.setRows(5);
         txtNotes.setText("   ●  A partir de la proxima semana a las bebidas de la marca Boing tendran un aumento de precios del\n          5% por pieza, los cambios se haran automaticamente en el sistema.");
+        txtNotes.setBorder(null);
         jScrollPane1.setViewportView(txtNotes);
 
         jPanel4.add(jScrollPane1, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 90, 750, 100));
 
-        buttonEdit.setIcon(new javax.swing.ImageIcon(getClass().getResource("/pen (1).png"))); // NOI18N
+        buttonEdit.setIcon(new javax.swing.ImageIcon(getClass().getResource("/pen .png"))); // NOI18N
         buttonEdit.setBorder(null);
         buttonEdit.setContentAreaFilled(false);
+        buttonEdit.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
         buttonEdit.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 buttonEditActionPerformed(evt);
@@ -365,11 +367,15 @@ public class MainMenu extends javax.swing.JPanel {
 
     private void buttonEditActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_buttonEditActionPerformed
         txtNotes.setEditable(true);
+        txtNotes.setCaretPosition(0);
+        buttonEdit.setIcon(new javax.swing.ImageIcon(getClass().getResource("/saveBlue.png")));
     }//GEN-LAST:event_buttonEditActionPerformed
 
     private void formComponentShown(java.awt.event.ComponentEvent evt) {//GEN-FIRST:event_formComponentShown
         if (Session.getAccount().getIdempleado().getPuesto().equals("Administrador")) {
             buttonEdit.setVisible(true);
+        } else {
+            buttonEdit.setVisible(false);
         }
     }//GEN-LAST:event_formComponentShown
 
