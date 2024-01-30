@@ -1,9 +1,11 @@
 package com.unsis.view.panel;
 
 import com.unsis.clases.Session;
+import com.unsis.clases.Tools;
 import com.unsis.models.constants.Constants;
 import com.unsis.view.Main;
 import java.util.ArrayList;
+import javax.swing.Icon;
 
 /**
  *
@@ -26,10 +28,12 @@ public class MainMenu extends javax.swing.JPanel {
         this.mainWindow = mainWindow;
         this.setSize(1700, 861);
         this.setBounds(217, 0, this.getWidth(), this.getHeight());
-        this.labelWelcome.setText("Bienvenido " + Session.getAccount().getUsuario());
+        this.labelWelcome.setText("Bienvenido " + Session.getAccount().getIdempleado().getNombre());
         this.showAreaButtons();
+        
+        buttonEdit.setVisible(false);
     }
-
+    
     /**
      * Quita los botones a los que no se tiene acceso en el menu principal
      */
@@ -77,7 +81,8 @@ public class MainMenu extends javax.swing.JPanel {
         jLabel26 = new javax.swing.JLabel();
         jButton7 = new javax.swing.JButton();
         jScrollPane1 = new javax.swing.JScrollPane();
-        jTextArea1 = new javax.swing.JTextArea();
+        txtNotes = new javax.swing.JTextArea();
+        buttonEdit = new javax.swing.JButton();
         jLabel23 = new javax.swing.JLabel();
         jLabel24 = new javax.swing.JLabel();
         jPanel2 = new javax.swing.JPanel();
@@ -88,12 +93,17 @@ public class MainMenu extends javax.swing.JPanel {
 
         jRadioButton1.setText("jRadioButton1");
 
+        addComponentListener(new java.awt.event.ComponentAdapter() {
+            public void componentShown(java.awt.event.ComponentEvent evt) {
+                formComponentShown(evt);
+            }
+        });
         setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
         labelWelcome.setFont(new java.awt.Font("Jaldi", 0, 30)); // NOI18N
         labelWelcome.setForeground(new java.awt.Color(7, 56, 112));
         labelWelcome.setText("Bienvenido");
-        add(labelWelcome, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 30, 330, 46));
+        add(labelWelcome, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 30, 750, 46));
 
         jPanel1.setBackground(new java.awt.Color(255, 255, 255));
         jPanel1.setOpaque(false);
@@ -271,15 +281,25 @@ public class MainMenu extends javax.swing.JPanel {
         jButton7.setBackground(new java.awt.Color(51, 153, 255));
         jButton7.setForeground(new java.awt.Color(255, 255, 255));
         jButton7.setText("Descubre más");
-        jPanel4.add(jButton7, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 230, -1, -1));
+        jPanel4.add(jButton7, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 220, -1, -1));
 
-        jTextArea1.setEditable(false);
-        jTextArea1.setColumns(20);
-        jTextArea1.setRows(5);
-        jTextArea1.setText("   ●  A partir de la proxima semana a las bebidas de la marca Boing tendran un aumento de precios del\n          5% por pieza, los cambios se haran automaticamente en el sistema.");
-        jScrollPane1.setViewportView(jTextArea1);
+        txtNotes.setEditable(false);
+        txtNotes.setColumns(20);
+        txtNotes.setRows(5);
+        txtNotes.setText("   ●  A partir de la proxima semana a las bebidas de la marca Boing tendran un aumento de precios del\n          5% por pieza, los cambios se haran automaticamente en el sistema.");
+        jScrollPane1.setViewportView(txtNotes);
 
         jPanel4.add(jScrollPane1, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 90, 750, 100));
+
+        buttonEdit.setIcon(new javax.swing.ImageIcon(getClass().getResource("/pen (1).png"))); // NOI18N
+        buttonEdit.setBorder(null);
+        buttonEdit.setContentAreaFilled(false);
+        buttonEdit.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                buttonEditActionPerformed(evt);
+            }
+        });
+        jPanel4.add(buttonEdit, new org.netbeans.lib.awtextra.AbsoluteConstraints(170, 210, 40, 40));
 
         add(jPanel4, new org.netbeans.lib.awtextra.AbsoluteConstraints(100, 470, 1110, 270));
 
@@ -343,9 +363,20 @@ public class MainMenu extends javax.swing.JPanel {
         mainWindow.setView("Ajustes del generales");
     }//GEN-LAST:event_buttonSettingsActionPerformed
 
+    private void buttonEditActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_buttonEditActionPerformed
+        txtNotes.setEditable(true);
+    }//GEN-LAST:event_buttonEditActionPerformed
+
+    private void formComponentShown(java.awt.event.ComponentEvent evt) {//GEN-FIRST:event_formComponentShown
+        if (Session.getAccount().getIdempleado().getPuesto().equals("Administrador")) {
+            buttonEdit.setVisible(true);
+        }
+    }//GEN-LAST:event_formComponentShown
+
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton buttonConta;
+    private javax.swing.JButton buttonEdit;
     private javax.swing.ButtonGroup buttonGroup1;
     private javax.swing.JButton buttonHumanResources;
     private javax.swing.JButton buttonInventory;
@@ -369,7 +400,7 @@ public class MainMenu extends javax.swing.JPanel {
     private javax.swing.JPanel jPanel5;
     private javax.swing.JRadioButton jRadioButton1;
     private javax.swing.JScrollPane jScrollPane1;
-    private javax.swing.JTextArea jTextArea1;
     private javax.swing.JLabel labelWelcome;
+    private javax.swing.JTextArea txtNotes;
     // End of variables declaration//GEN-END:variables
 }

@@ -90,7 +90,7 @@ CREATE TABLE "Sales"(
   id serial,
   idVenta int,
   idEmpleado int,
-  idProducto VARCHAR,
+  idProducto INT,
   tipoOrden VARCHAR CHECK (tipoOrden IN ('Para llevar', 'Normal')),
   comentarios VARCHAR,
   nombreComprador VARCHAR,
@@ -99,7 +99,7 @@ CREATE TABLE "Sales"(
   estatus INT,
   PRIMARY KEY(id),
   FOREIGN KEY (idEmpleado) REFERENCES "Employee"(id),
-  FOREIGN KEY (idProducto) REFERENCES "Product"(codigoBarra)
+  FOREIGN KEY (idProducto) REFERENCES "Product"(id)
 );
 
 ALTER TABLE

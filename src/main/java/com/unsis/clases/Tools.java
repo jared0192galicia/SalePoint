@@ -9,7 +9,6 @@ import java.nio.file.StandardCopyOption;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.Properties;
-import javax.mail.Authenticator;
 import javax.mail.Message;
 import javax.mail.MessagingException;
 import javax.mail.Transport;
@@ -18,7 +17,7 @@ import javax.mail.internet.MimeMessage;
 import javax.swing.Icon;
 import javax.swing.ImageIcon;
 import org.mindrot.jbcrypt.BCrypt;
-
+import javax.mail.Session;
 /**
  *
  * @author jared
@@ -140,7 +139,7 @@ public class Tools {
         properties.put("mail.smtp.starttls.enable", "true");
 
         // Autenticación del usuario
-        javax.mail.Session session = javax.mail.Session.getInstance(properties);
+        Session session = Session.getInstance(properties);
 
         try {
             // Crear mensaje

@@ -36,7 +36,7 @@ public class ClosingSales extends javax.swing.JPanel {
      */
 //    public void showModel() {
 //        // Llamada al método findAllEntities para obtener la lista de empleados
-////        ArrayList<Sales> sales = new SaleRepository().findSalesByFecha(new Date);
+//        ArrayList<Sales> sales = (ArrayList<Sales>) new SaleRepository().findSalesByFecha(new Date());
 ////        employeeList = employees;
 //
 //        // Configuración del modelo de la tabla
