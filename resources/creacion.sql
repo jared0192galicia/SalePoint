@@ -120,6 +120,9 @@ SET
   fotoperfil = '/profileDefault.png'
 WHERE
   fotoperfil IS NULL;
+  
+ALTER TABLE "Product"
+MODIFY COLUMN estado VARCHAR;
 
 --Script de consulta de compras
 SELECT * FROM "Sales" LEFT JOIN "Product" ON "Product".codigobarra = "Sales".idproducto 
