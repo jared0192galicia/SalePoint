@@ -33,6 +33,13 @@ import javax.swing.table.DefaultTableCellRenderer;
 import javax.swing.table.DefaultTableModel;
 import javax.swing.table.JTableHeader;
 
+import com.itextpdf.kernel.pdf.PdfDocument;
+import com.itextpdf.kernel.pdf.PdfWriter;
+import com.itextpdf.layout.Document;
+import com.itextpdf.layout.element.Paragraph;
+
+import java.io.FileNotFoundException;
+
 /**
  *
  * @author labtecweb09
@@ -47,6 +54,7 @@ public class SalePoint extends javax.swing.JPanel {
     private ArrayList<Product> productList = new ArrayList<>();
     private ArrayList<String> listComent;
     private ArrayList<Boolean> listTipoOrden;
+    private ArrayList<Integer> listCantidad;
 
     /**
      * Creates new form Venta
@@ -59,6 +67,7 @@ public class SalePoint extends javax.swing.JPanel {
         this.labelVoidCamp.setVisible(false);
         this.labelVoidTable.setVisible(false);
         this.labelProdNoFind.setVisible(false);
+        labelNoSelectProd.setVisible(false);
         this.controller = new JpaController();
         JTableHeader TableProduct = tableProduct.getTableHeader();
 
@@ -82,6 +91,7 @@ public class SalePoint extends javax.swing.JPanel {
         this.listPedido = new ArrayList<>();
         this.listComent = new ArrayList<>();
         this.listTipoOrden = new ArrayList<>();
+        this.listCantidad = new ArrayList<>();
     }
 
     /**
@@ -229,6 +239,7 @@ public class SalePoint extends javax.swing.JPanel {
         buttonDelete = new javax.swing.JButton();
         labelVoidTable = new javax.swing.JLabel();
         labelProdNoFind = new javax.swing.JLabel();
+        labelNoSelectProd = new javax.swing.JLabel();
 
         dialogConfirm.setAlwaysOnTop(true);
         dialogConfirm.setUndecorated(true);
@@ -568,6 +579,12 @@ public class SalePoint extends javax.swing.JPanel {
         labelProdNoFind.setText("Mercancia no disponible");
         jPanel2.add(labelProdNoFind, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 360, 560, -1));
 
+        labelNoSelectProd.setFont(new java.awt.Font("Dialog", 1, 13)); // NOI18N
+        labelNoSelectProd.setForeground(new java.awt.Color(255, 153, 0));
+        labelNoSelectProd.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        labelNoSelectProd.setText("Debes seleccionar un producto");
+        jPanel2.add(labelNoSelectProd, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 360, 560, -1));
+
         add(jPanel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(1050, 90, 560, 720));
     }// </editor-fold>//GEN-END:initComponents
 /**
@@ -583,7 +600,7 @@ public class SalePoint extends javax.swing.JPanel {
             DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd 'de' MMMM 'del' yyyy ' ' HH:mm");
             LocalDateTime fechaActual = LocalDateTime.now();
             ingresarFechaLabel.setText(fechaActual.format(formatter));
-            nameVendedorLabel.setText(Session.getAccount().getIdempleado().getNombre());
+            nameVendedorLabel.setText(Session.getAccount().getIdempleado().getNombre() + Session.getAccount().getIdempleado().getApellidop());
         } else {
             labelVoidTable.setVisible(true);
         }
@@ -597,25 +614,37 @@ public class SalePoint extends javax.swing.JPanel {
         int index = 0;
         LocalDate fecha = LocalDate.now();
         Date fechaActual = Date.from(fecha.atStartOfDay(ZoneId.systemDefault()).toInstant());
+        
+        JpaController jpaController = new JpaController();
+        
         for (Product product : listPedido) {
             Sales sales = new Sales.Builder()
                     .withIdVenta(idVenta)
                     .withIdProducto(product)
                     .withIdEmpleado(Session.getAccount().getIdempleado())
-                    .withTipoOrden(listTipoOrden.get(index) ? "Normal" : "Para llevar")//Crear lista de booleanos
+                    .withTipoOrden(listTipoOrden.get(index) ? "Normal" : "Para llevar")
                     .withNombreComp(txtName.getText())
-                    .withComentarios(listComent.get(index))//Crear lista de String
+                    .withComentarios(listComent.get(index))
                     .withCodigoBarras(product.getCodigobarra())
                     .withFechaHora(fechaActual)
                     .build();
-            index++;
-            int newDisp = product.getDisponible() -1;
+            
+            int newDisp = product.getDisponible() - listCantidad.get(index);
             product.setDisponible(newDisp);
-//            controller.updateEntity(product);
-            new JpaController().create(sales);
-        }
-        
-       // imprimirFactura();
+
+            jpaController.create(sales);
+            jpaController.edit(product);
+            
+            index++;
+            String outputPath = "Venta"+String.valueOf(idVenta)+".pdf";
+            try {
+                generaTicket(outputPath);
+                System.out.println("PDF generado exitosamente en: " + outputPath);
+            } catch (Exception e) {
+                e.printStackTrace();
+            } 
+       }
+        resetearTabla();
     }//GEN-LAST:event_confirmarBotonActionPerformed
 
     private void buttonCloseActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_buttonCloseActionPerformed
@@ -647,19 +676,18 @@ public class SalePoint extends javax.swing.JPanel {
     }//GEN-LAST:event_txtCantFocusLost
 
     private void txtNameFocusLost(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_txtNameFocusLost
-        String cantidad = txtName.getText().trim();
-        String regex = "^[a-zA-Z ]+";
+        String name = txtName.getText().trim();
+        String regex = "^\\s*[a-zA-Z]+(\\s[a-zA-Z]+)*\\s*$";
 
         Pattern pattern = Pattern.compile(regex);
-        Matcher matcher = pattern.matcher(cantidad);
+        Matcher matcher = pattern.matcher(name);
 
-        if (matcher.matches()) {
-            labelInvalidCodBarra.setVisible(false);
+        if (!name.isEmpty() && matcher.matches()) {
+            labelInvalidName.setVisible(false);
             band = false;
         } else {
             System.out.println("Nombre Invalido");
-
-            labelInvalidCodBarra.setVisible(true);
+            labelInvalidName.setVisible(true);
             band = true;
         }
     }//GEN-LAST:event_txtNameFocusLost
@@ -667,6 +695,7 @@ public class SalePoint extends javax.swing.JPanel {
     private void buttonAddActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_buttonAddActionPerformed
         if (band == false) {
             try {
+                labelNoSelectProd.setVisible(false);
                 String producto = (String) comboProd.getSelectedItem();
                 String sabor = (String) comboSab.getSelectedItem();
                 int cantidad = (Integer.valueOf(txtCant.getText()));
@@ -677,6 +706,7 @@ public class SalePoint extends javax.swing.JPanel {
                 listComent.add(coment);
                 boolean tipoOrden = obtTipoOrden();
                 listTipoOrden.add(tipoOrden);
+                listCantidad.add(cantidad);
 
                 if (txtCant.getText() == null || txtName.getText() == null) {
                     labelVoidCamp.setVisible(true);
@@ -688,6 +718,7 @@ public class SalePoint extends javax.swing.JPanel {
                 }
             } catch (NumberFormatException e) {
                 labelVoidCamp.setVisible(true);
+                labelNoSelectProd.setVisible(false);
             }
         }
     }//GEN-LAST:event_buttonAddActionPerformed
@@ -702,8 +733,11 @@ public class SalePoint extends javax.swing.JPanel {
 
     private void buttonDeleteActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_buttonDeleteActionPerformed
         int selectedRow = tableProduct.getSelectedRow();
+        labelProdNoFind.setVisible(false);
 
         if (selectedRow != -1) { // Verifica que haya una fila seleccionada
+            labelNoSelectProd.setVisible(false);
+            
             int opcion = JOptionPane.showConfirmDialog(null,
                     "¿Estás seguro de continuar?", "Confirmación", JOptionPane.YES_NO_OPTION);
 
@@ -713,6 +747,9 @@ public class SalePoint extends javax.swing.JPanel {
                 model.removeRow(selectedRow);
 
             }
+        }else{
+            labelNoSelectProd.setVisible(true);
+            labelVoidCamp.setVisible(false);
         }
     }//GEN-LAST:event_buttonDeleteActionPerformed
 
@@ -799,6 +836,27 @@ public class SalePoint extends javax.swing.JPanel {
         }
     }
 
+    public void resetearTabla() {
+        DefaultTableModel tableModel = (DefaultTableModel) tableProduct.getModel();
+        if (tableModel != null) {
+            tableModel.setRowCount(0); // Elimina todas las filas de la tabla
+        } else {
+            tableModel = new DefaultTableModel();
+            tableModel.addColumn("Producto");
+            tableModel.addColumn("Descripción");
+            tableModel.addColumn("Cantidad");
+            tableModel.addColumn("Precio por pz");
+            tableModel.addColumn("Total");
+            tableProduct.setModel(tableModel);
+        }
+
+        txtCant.setText("");
+        txtComents.setText("");
+        labelProdNoFind.setVisible(false);
+
+        listPedido.clear(); // Vacía la lista de pedidos
+    }
+    
     public int obSigIdVeta() {
         String query = "SELECT MAX(idventa) FROM \"Sales\"";
         try (PreparedStatement pst = cn.prepareStatement(query)) {
@@ -825,84 +883,16 @@ public class SalePoint extends javax.swing.JPanel {
         }
     }
 
-//    void imprimirFactura() {
-//
-//        PrinterMatrix printer = new PrinterMatrix();
-//
-//        Extenso e = new Extenso();
-//
-//        e.setNumber(101.85);
-//
-//        //Definir el tamanho del papel para la impresion  aca 25 lineas y 80 columnas
-//        printer.setOutSize(60, 80);
-//        //Imprimir * de la 2da linea a 25 en la columna 1;
-//        // printer.printCharAtLin(2, 25, 1, "*");
-//        //Imprimir * 1ra linea de la columa de 1 a 80
-//        printer.printCharAtCol(1, 1, 80, "=");
-//        //Imprimir Encabezado nombre del La EMpresa
-//        printer.printTextWrap(1, 2, 30, 80, "FACTURA DE VENTA");
-//        //printer.printTextWrap(linI, linE, colI, colE, null);
-//        printer.printTextWrap(2, 3, 1, 22, "Num. Boleta : " + txtVentaNumeroFactura.getText());
-//        printer.printTextWrap(2, 3, 25, 55, "Fecha de Emision: " + dateFechaVenta.getDate());
-//        printer.printTextWrap(2, 3, 60, 80, "Hora: 12:22:51");
-//        printer.printTextWrap(3, 3, 1, 80, "Vendedor.  : " + txtVentaIdVendedor.getText() + " - " + txtVentaNombreVendedor.getText());
-//        printer.printTextWrap(4, 4, 1, 80, "CLIENTE: " + txtVentaNombreCliente.getText());
-//        printer.printTextWrap(5, 5, 1, 80, "RUC/CI.: " + txtVentaRucCliente.getText());
-//        printer.printTextWrap(6, 6, 1, 80, "DIRECCION: " + "");
-//        printer.printCharAtCol(7, 1, 80, "=");
-//        printer.printTextWrap(7, 8, 1, 80, "Codigo          Descripcion                Cant.      P  P.Unit.      P.Total");
-//        printer.printCharAtCol(9, 1, 80, "-");
-//        int filas = tblVentas.getRowCount();
-//
-//        for (int i = 0; i < filas; i++) {
-//            printer.printTextWrap(9 + i, 10, 1, 80, tblVentas.getValueAt(i, 0).toString() + "|" + tblVentas.getValueAt(i, 1).toString() + "| " + tblVentas.getValueAt(i, 2).toString() + "| " + tblVentas.getValueAt(i, 3).toString() + "|" + tblVentas.getValueAt(i, 4).toString());
-//        }
-//
-//        if (filas > 15) {
-//            printer.printCharAtCol(filas + 1, 1, 80, "=");
-//            printer.printTextWrap(filas + 1, filas + 2, 1, 80, "TOTAL A PAGAR " + txtVentaTotal.getText());
-//            printer.printCharAtCol(filas + 2, 1, 80, "=");
-//            printer.printTextWrap(filas + 2, filas + 3, 1, 80, "Esta boleta no tiene valor fiscal, solo para uso interno.: + Descripciones........");
-//        } else {
-//            printer.printCharAtCol(25, 1, 80, "=");
-//            printer.printTextWrap(26, 26, 1, 80, "TOTAL A PAGAR " + txtVentaTotal.getText());
-//            printer.printCharAtCol(27, 1, 80, "=");
-//            printer.printTextWrap(27, 28, 1, 80, "Esta boleta no tiene valor fiscal, solo para uso interno.: + Descripciones........");
-//
-//        }
-//        printer.toFile("impresion.txt");
-//
-//        FileInputStream inputStream = null;
-//        try {
-//            inputStream = new FileInputStream("impresion.txt");
-//        } catch (FileNotFoundException ex) {
-//            ex.printStackTrace();
-//        }
-//        if (inputStream == null) {
-//            return;
-//        }
-//
-//        DocFlavor docFormat = DocFlavor.INPUT_STREAM.AUTOSENSE;
-//        Doc document = new SimpleDoc(inputStream, docFormat, null);
-//
-//        PrintRequestAttributeSet attributeSet = new HashPrintRequestAttributeSet();
-//
-//        PrintService defaultPrintService = PrintServiceLookup.lookupDefaultPrintService();
-//
-//        if (defaultPrintService != null) {
-//            DocPrintJob printJob = defaultPrintService.createPrintJob();
-//            try {
-//                printJob.print(document, attributeSet);
-//
-//            } catch (Exception ex) {
-//                ex.printStackTrace();
-//            }
-//        } else {
-//            System.err.println("No existen impresoras instaladas");
-//        }
-//
-//        //inputStream.close();
-//    }
+    private static void generaTicket(String outputPath) throws FileNotFoundException{
+        PdfWriter writer = new PdfWriter(outputPath);
+        PdfDocument pdf = new PdfDocument(writer);
+        Document document = new Document(pdf);
+        
+        document.add(new Paragraph("Ejemplo de PDF con formato"));
+        document.add(new Paragraph("Fecha: 31 de enero de 2024"));
+        
+        document.close();
+    }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton buttonAdd;
@@ -939,6 +929,7 @@ public class SalePoint extends javax.swing.JPanel {
     private javax.swing.JLabel labelInvalidCant;
     private javax.swing.JLabel labelInvalidCodBarra;
     private javax.swing.JLabel labelInvalidName;
+    private javax.swing.JLabel labelNoSelectProd;
     private javax.swing.JLabel labelProdNoFind;
     private javax.swing.JLabel labelVoidCamp;
     private javax.swing.JLabel labelVoidTable;
