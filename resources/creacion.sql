@@ -83,7 +83,7 @@ CREATE TABLE "Flavors" (
   id serial PRIMARY KEY,
   idProducto INT,
   sabor VARCHAR(50),
-  FOREIGN KEY (idProducto) REFERENCES "Product" (id)
+  FOREIGN KEY (idProducto) REFERENCES "Product" (id) ON DELETE CASCADE
 );
 
 CREATE TABLE "Sales"(
@@ -123,6 +123,27 @@ WHERE
   
 ALTER TABLE "Product"
 MODIFY COLUMN estado VARCHAR;
+
+--Trigger para disponible y estado
+CREATE OR REPLACE FUNCTION actualizar_estado()
+RETURNS TRIGGER AS $$
+BEGIN
+    IF NEW.disponible >= 0 THEN
+        IF NEW.disponible = 0 THEN
+            NEW.estado = 'inactivo';
+        END IF;
+        RETURN NEW;
+    ELSE
+        RAISE EXCEPTION 'El valor de "disponible" debe ser mayor o igual a cero';
+    END IF;
+END;
+$$ LANGUAGE plpgsql;
+
+CREATE TRIGGER tr_actualizar_estado
+BEFORE INSERT OR UPDATE
+ON "Product"
+FOR EACH ROW
+EXECUTE FUNCTION actualizar_estado();
 
 --Script de consulta de compras
 SELECT * FROM "Sales" 

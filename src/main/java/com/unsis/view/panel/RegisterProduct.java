@@ -6,6 +6,7 @@ import java.awt.Color;
 import java.awt.event.ItemEvent;
 import com.unsis.models.entity.Product;
 import java.awt.event.KeyEvent;
+import java.util.ArrayList;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 import javax.swing.BorderFactory;
@@ -38,6 +39,7 @@ public class RegisterProduct extends javax.swing.JPanel {
         this.dialogRegisterSaller.setLocationRelativeTo(null);
     }
 
+        
      // este método se asegura de que solo se ingresen caracteres válidos en un campo de texto 
     private void verify(KeyEvent evt, JTextField field, String regex) {
         char c = evt.getKeyChar();
@@ -291,7 +293,7 @@ public class RegisterProduct extends javax.swing.JPanel {
         jLabel13.setText("Estado");
         panelInternal.add(jLabel13, new org.netbeans.lib.awtextra.AbsoluteConstraints(270, 380, -1, -1));
 
-        ComboProductType.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Alimento ", "Bebidas" }));
+        ComboProductType.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Comida", "Babida", "Complemento", "Postre" }));
         panelInternal.add(ComboProductType, new org.netbeans.lib.awtextra.AbsoluteConstraints(490, 210, 170, 30));
 
         jLabel15.setFont(new java.awt.Font("Jaldi", 0, 18)); // NOI18N
