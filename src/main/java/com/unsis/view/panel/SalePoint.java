@@ -17,7 +17,9 @@ import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.time.LocalDate;
 import java.time.LocalDateTime;
+import java.time.ZoneId;
 import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
 import java.util.Date;
@@ -56,9 +58,9 @@ public class SalePoint extends javax.swing.JPanel {
         this.labelInvalidCodBarra.setVisible(false);
         this.labelVoidCamp.setVisible(false);
         this.labelVoidTable.setVisible(false);
+        this.labelProdNoFind.setVisible(false);
         this.controller = new JpaController();
         JTableHeader TableProduct = tableProduct.getTableHeader();
-        
 
         // Crear un renderizador de encabezado personalizado
         DefaultTableCellRenderer headerRenderer = new DefaultTableCellRenderer();
@@ -91,10 +93,11 @@ public class SalePoint extends javax.swing.JPanel {
         Icon resizedIcon = tools.resizeIcon(buttonAdd.getIcon(), 20, 20);
         buttonAdd.setIcon(resizedIcon);
     }
-/**
- * Llena el comboBox de productos con los productos que esten en la base de
- * datos
- */
+
+    /**
+     * Llena el comboBox de productos con los productos que esten en la base de
+     * datos
+     */
     public void llenarComboProd() {
         // Llamada al método findAllEntities para obtener la lista de productos
         productList = controller.findAllEntities(Product.class);
@@ -111,10 +114,11 @@ public class SalePoint extends javax.swing.JPanel {
             //llenarComboSab();
         }
     }
-/**
- * Llena el comboBox de sabores dependiendo del producto que sea elegido en el 
- * comboBox de producto
- */
+
+    /**
+     * Llena el comboBox de sabores dependiendo del producto que sea elegido en
+     * el comboBox de producto
+     */
     public void llenarComboSab() {
         comboSab.removeAllItems();
 
@@ -132,12 +136,14 @@ public class SalePoint extends javax.swing.JPanel {
             }
         }
     }
-/**
- * Obtiene una lista de los sabores dependiendo del producto seleccionado, 
- * recibe el producto y busca los sabores
- * @param producto
- * @return 
- */
+
+    /**
+     * Obtiene una lista de los sabores dependiendo del producto seleccionado,
+     * recibe el producto y busca los sabores
+     *
+     * @param producto
+     * @return
+     */
     private ArrayList<Flavors> obtSabProd(Product producto) {
         ArrayList<Flavors> sabores = controller.findAllEntities(Flavors.class);
         ArrayList<Flavors> saboresProd = new ArrayList<>();
@@ -149,11 +155,13 @@ public class SalePoint extends javax.swing.JPanel {
         }
         return saboresProd;
     }
-/**
- * Obtiene los productos de la base de datos
- * @param nameProd
- * @return 
- */
+
+    /**
+     * Obtiene los productos de la base de datos
+     *
+     * @param nameProd
+     * @return
+     */
     private Product obtProduct(String nameProd) {
         for (Product product : productList) {
             if (product.getNombre().equalsIgnoreCase(nameProd)) {
@@ -220,6 +228,7 @@ public class SalePoint extends javax.swing.JPanel {
         labelVoidCamp = new javax.swing.JLabel();
         buttonDelete = new javax.swing.JButton();
         labelVoidTable = new javax.swing.JLabel();
+        labelProdNoFind = new javax.swing.JLabel();
 
         dialogConfirm.setAlwaysOnTop(true);
         dialogConfirm.setUndecorated(true);
@@ -517,7 +526,7 @@ public class SalePoint extends javax.swing.JPanel {
         labelInvalidCodBarra.setFont(new java.awt.Font("Dialog", 1, 13)); // NOI18N
         labelInvalidCodBarra.setForeground(new java.awt.Color(255, 153, 0));
         labelInvalidCodBarra.setText("Mercancia no disponible");
-        jPanel2.add(labelInvalidCodBarra, new org.netbeans.lib.awtextra.AbsoluteConstraints(100, 540, 360, -1));
+        jPanel2.add(labelInvalidCodBarra, new org.netbeans.lib.awtextra.AbsoluteConstraints(100, 540, 370, -1));
 
         labelInvalidCant.setFont(new java.awt.Font("Dialog", 1, 13)); // NOI18N
         labelInvalidCant.setForeground(new java.awt.Color(153, 0, 0));
@@ -553,18 +562,25 @@ public class SalePoint extends javax.swing.JPanel {
         labelVoidTable.setText("No hay productos que comprar");
         jPanel2.add(labelVoidTable, new org.netbeans.lib.awtextra.AbsoluteConstraints(50, 640, 450, -1));
 
+        labelProdNoFind.setFont(new java.awt.Font("Dialog", 1, 13)); // NOI18N
+        labelProdNoFind.setForeground(new java.awt.Color(255, 153, 0));
+        labelProdNoFind.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        labelProdNoFind.setText("Mercancia no disponible");
+        jPanel2.add(labelProdNoFind, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 360, 560, -1));
+
         add(jPanel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(1050, 90, 560, 720));
     }// </editor-fold>//GEN-END:initComponents
 /**
- * Agrega la orden a un dialogConfirm para confirmar la compra
- * @param evt 
- */
+     * Agrega la orden a un dialogConfirm para confirmar la compra
+     *
+     * @param evt
+     */
     private void buttonAddOrderMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_buttonAddOrderMouseClicked
         if (((DefaultTableModel) tableProduct.getModel()).getRowCount() > 0) {
             labelVoidTable.setVisible(false);
             dialogConfirm.show(true);
             nameCompradorLabel.setText(txtName.getText());
-            DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd 'de' MMMM 'del' yyyy ' ' HH:mm:ss");
+            DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd 'de' MMMM 'del' yyyy ' ' HH:mm");
             LocalDateTime fechaActual = LocalDateTime.now();
             ingresarFechaLabel.setText(fechaActual.format(formatter));
             nameVendedorLabel.setText(Session.getAccount().getIdempleado().getNombre());
@@ -579,20 +595,27 @@ public class SalePoint extends javax.swing.JPanel {
         dialogConfirm.show(false);
         int idVenta = obSigIdVeta();
         int index = 0;
+        LocalDate fecha = LocalDate.now();
+        Date fechaActual = Date.from(fecha.atStartOfDay(ZoneId.systemDefault()).toInstant());
         for (Product product : listPedido) {
             Sales sales = new Sales.Builder()
                     .withIdVenta(idVenta)
                     .withIdProducto(product)
-                    .withIdEmpleado(Session.getAccount().getIdempleado().getId())
+                    .withIdEmpleado(Session.getAccount().getIdempleado())
                     .withTipoOrden(listTipoOrden.get(index) ? "Normal" : "Para llevar")//Crear lista de booleanos
                     .withNombreComp(txtName.getText())
                     .withComentarios(listComent.get(index))//Crear lista de String
                     .withCodigoBarras(product.getCodigobarra())
-                    .withFechaHora(new Date(ingresarFechaLabel.getText()))
+                    .withFechaHora(fechaActual)
                     .build();
             index++;
+            int newDisp = product.getDisponible() -1;
+            product.setDisponible(newDisp);
+//            controller.updateEntity(product);
+            new JpaController().create(sales);
         }
-
+        
+       // imprimirFactura();
     }//GEN-LAST:event_confirmarBotonActionPerformed
 
     private void buttonCloseActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_buttonCloseActionPerformed
@@ -600,10 +623,11 @@ public class SalePoint extends javax.swing.JPanel {
 //        this.dispose();
         dialogConfirm.show(false);
     }//GEN-LAST:event_buttonCloseActionPerformed
-/**
- * Validaciones de cantidades y del nombre del comprador
- * @param evt 
- */
+    /**
+     * Validaciones de cantidades y del nombre del comprador
+     *
+     * @param evt
+     */
     private void txtCantFocusLost(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_txtCantFocusLost
         String cantidad = txtCant.getText().trim();
         String regex = "^[1-9]\\d*$";
@@ -624,7 +648,7 @@ public class SalePoint extends javax.swing.JPanel {
 
     private void txtNameFocusLost(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_txtNameFocusLost
         String cantidad = txtName.getText().trim();
-        String regex = "^[a-zA-Z]+";
+        String regex = "^[a-zA-Z ]+";
 
         Pattern pattern = Pattern.compile(regex);
         Matcher matcher = pattern.matcher(cantidad);
@@ -719,13 +743,13 @@ public class SalePoint extends javax.swing.JPanel {
     private void dialogConfirmComponentShown(java.awt.event.ComponentEvent evt) {//GEN-FIRST:event_dialogConfirmComponentShown
         tableConfComp.setModel(tableProduct.getModel());
         DefaultTableModel tableModel = (DefaultTableModel) tableProduct.getModel();
-        
+
         int rowCount = tableModel.getRowCount();
         double total = 0.0f;
-        
-        for (int i=0; i < rowCount; i++){
+
+        for (int i = 0; i < rowCount; i++) {
             double totalComp = (double) tableModel.getValueAt(i, 4);
-            
+
             total += totalComp;
         }
         ingresoMontoLabel.setText("$" + String.valueOf(total));
@@ -754,13 +778,14 @@ public class SalePoint extends javax.swing.JPanel {
         double precio = 0.0f;
 
         for (Product producto : products) {
-            if (producto.getNombre().equalsIgnoreCase(productName)) {
+            if (producto.getNombre().equalsIgnoreCase(productName) && producto.getDisponible() >= cantidad) {
+                labelProdNoFind.setVisible(false);
                 precio = producto.getPrecioventa();
                 double total = precio * cantidad;
 
                 Object[] rowData = {
-                    producto.getNombre(), 
-                   producto.getDescripcion(),
+                    producto.getNombre(),
+                    producto.getDescripcion(),
                     cantidad,
                     producto.getPrecioventa(),
                     total
@@ -768,6 +793,8 @@ public class SalePoint extends javax.swing.JPanel {
                 tableModel.addRow(rowData);
                 listPedido.add(producto);
                 break;
+            }else{
+                labelProdNoFind.setVisible(true);
             }
         }
     }
@@ -787,16 +814,96 @@ public class SalePoint extends javax.swing.JPanel {
 
         return 1; // Si no se puede obtener, devolvemos 1 como valor predeterminado
     }
-    
+
     private boolean obtTipoOrden() {
-        if(rbNormal.isSelected()){
+        if (rbNormal.isSelected()) {
             return true;
-        }else if (rbParaLlevar.isSelected()){
+        } else if (rbParaLlevar.isSelected()) {
             return false;
-        }else {
+        } else {
             return false;
         }
     }
+
+//    void imprimirFactura() {
+//
+//        PrinterMatrix printer = new PrinterMatrix();
+//
+//        Extenso e = new Extenso();
+//
+//        e.setNumber(101.85);
+//
+//        //Definir el tamanho del papel para la impresion  aca 25 lineas y 80 columnas
+//        printer.setOutSize(60, 80);
+//        //Imprimir * de la 2da linea a 25 en la columna 1;
+//        // printer.printCharAtLin(2, 25, 1, "*");
+//        //Imprimir * 1ra linea de la columa de 1 a 80
+//        printer.printCharAtCol(1, 1, 80, "=");
+//        //Imprimir Encabezado nombre del La EMpresa
+//        printer.printTextWrap(1, 2, 30, 80, "FACTURA DE VENTA");
+//        //printer.printTextWrap(linI, linE, colI, colE, null);
+//        printer.printTextWrap(2, 3, 1, 22, "Num. Boleta : " + txtVentaNumeroFactura.getText());
+//        printer.printTextWrap(2, 3, 25, 55, "Fecha de Emision: " + dateFechaVenta.getDate());
+//        printer.printTextWrap(2, 3, 60, 80, "Hora: 12:22:51");
+//        printer.printTextWrap(3, 3, 1, 80, "Vendedor.  : " + txtVentaIdVendedor.getText() + " - " + txtVentaNombreVendedor.getText());
+//        printer.printTextWrap(4, 4, 1, 80, "CLIENTE: " + txtVentaNombreCliente.getText());
+//        printer.printTextWrap(5, 5, 1, 80, "RUC/CI.: " + txtVentaRucCliente.getText());
+//        printer.printTextWrap(6, 6, 1, 80, "DIRECCION: " + "");
+//        printer.printCharAtCol(7, 1, 80, "=");
+//        printer.printTextWrap(7, 8, 1, 80, "Codigo          Descripcion                Cant.      P  P.Unit.      P.Total");
+//        printer.printCharAtCol(9, 1, 80, "-");
+//        int filas = tblVentas.getRowCount();
+//
+//        for (int i = 0; i < filas; i++) {
+//            printer.printTextWrap(9 + i, 10, 1, 80, tblVentas.getValueAt(i, 0).toString() + "|" + tblVentas.getValueAt(i, 1).toString() + "| " + tblVentas.getValueAt(i, 2).toString() + "| " + tblVentas.getValueAt(i, 3).toString() + "|" + tblVentas.getValueAt(i, 4).toString());
+//        }
+//
+//        if (filas > 15) {
+//            printer.printCharAtCol(filas + 1, 1, 80, "=");
+//            printer.printTextWrap(filas + 1, filas + 2, 1, 80, "TOTAL A PAGAR " + txtVentaTotal.getText());
+//            printer.printCharAtCol(filas + 2, 1, 80, "=");
+//            printer.printTextWrap(filas + 2, filas + 3, 1, 80, "Esta boleta no tiene valor fiscal, solo para uso interno.: + Descripciones........");
+//        } else {
+//            printer.printCharAtCol(25, 1, 80, "=");
+//            printer.printTextWrap(26, 26, 1, 80, "TOTAL A PAGAR " + txtVentaTotal.getText());
+//            printer.printCharAtCol(27, 1, 80, "=");
+//            printer.printTextWrap(27, 28, 1, 80, "Esta boleta no tiene valor fiscal, solo para uso interno.: + Descripciones........");
+//
+//        }
+//        printer.toFile("impresion.txt");
+//
+//        FileInputStream inputStream = null;
+//        try {
+//            inputStream = new FileInputStream("impresion.txt");
+//        } catch (FileNotFoundException ex) {
+//            ex.printStackTrace();
+//        }
+//        if (inputStream == null) {
+//            return;
+//        }
+//
+//        DocFlavor docFormat = DocFlavor.INPUT_STREAM.AUTOSENSE;
+//        Doc document = new SimpleDoc(inputStream, docFormat, null);
+//
+//        PrintRequestAttributeSet attributeSet = new HashPrintRequestAttributeSet();
+//
+//        PrintService defaultPrintService = PrintServiceLookup.lookupDefaultPrintService();
+//
+//        if (defaultPrintService != null) {
+//            DocPrintJob printJob = defaultPrintService.createPrintJob();
+//            try {
+//                printJob.print(document, attributeSet);
+//
+//            } catch (Exception ex) {
+//                ex.printStackTrace();
+//            }
+//        } else {
+//            System.err.println("No existen impresoras instaladas");
+//        }
+//
+//        //inputStream.close();
+//    }
+
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton buttonAdd;
     private javax.swing.JButton buttonAddOrder;
@@ -832,6 +939,7 @@ public class SalePoint extends javax.swing.JPanel {
     private javax.swing.JLabel labelInvalidCant;
     private javax.swing.JLabel labelInvalidCodBarra;
     private javax.swing.JLabel labelInvalidName;
+    private javax.swing.JLabel labelProdNoFind;
     private javax.swing.JLabel labelVoidCamp;
     private javax.swing.JLabel labelVoidTable;
     private javax.swing.JLabel montoLabel;

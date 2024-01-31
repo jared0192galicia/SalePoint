@@ -125,5 +125,6 @@ ALTER TABLE "Product"
 MODIFY COLUMN estado VARCHAR;
 
 --Script de consulta de compras
-SELECT * FROM "Sales" LEFT JOIN "Product" ON "Product".codigobarra = "Sales".idproducto 
-LEFT JOIN "Flavors" ON "Flavors".idproducto = "Product".id WHERE "fechahora" == '2024-01-26';
+SELECT * FROM "Sales" 
+LEFT JOIN "Product" ON "Product".id = "Sales".idproducto 
+LEFT JOIN "Flavors" ON "Flavors".idproducto = "Product".id WHERE DATE("fechahora") = '2024-01-26';
