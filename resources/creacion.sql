@@ -73,7 +73,7 @@ CREATE TABLE "Product"(
   tipo VARCHAR,
   descripcion VARCHAR(25),
   numProducto INT,
-  estado VARCHAR(4),
+  estado VARCHAR,
   disponible int,
   variante VARCHAR,
   PRIMARY KEY(id)
@@ -90,15 +90,16 @@ CREATE TABLE "Sales"(
   id serial,
   idVenta int,
   idEmpleado int,
-  idProducto VARCHAR,
+  idProducto INT,
   tipoOrden VARCHAR CHECK (tipoOrden IN ('Para llevar', 'Normal')),
   comentarios VARCHAR,
   nombreComprador VARCHAR,
   codigoBarra VARCHAR,
   fechaHora TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
+  estatus INT,
   PRIMARY KEY(id),
   FOREIGN KEY (idEmpleado) REFERENCES "Employee"(id),
-  FOREIGN KEY (idProducto) REFERENCES "Product"(codigoBarra)
+  FOREIGN KEY (idProducto) REFERENCES "Product"(id)
 );
 
 CREATE TABLE "Expenses" (
@@ -132,7 +133,35 @@ SET
   fotoperfil = '/profileDefault.png'
 WHERE
   fotoperfil IS NULL;
+  
+ALTER TABLE "Product"
+MODIFY COLUMN estado VARCHAR;
+
+--Trigger para disponible y estado
+CREATE OR REPLACE FUNCTION actualizar_estado()
+RETURNS TRIGGER AS $$
+BEGIN
+    IF NEW.disponible >= 0 THEN
+        IF NEW.disponible = 0 THEN
+            NEW.estado = 'No disponible';
+        ELSIF NEW.disponible > 1 THEN
+            NEW.estado = 'Disponible';
+        END IF;
+        RETURN NEW;
+    ELSE
+        RAISE EXCEPTION 'El valor de "disponible" debe ser mayor o igual a cero';
+    END IF;
+END;
+$$ LANGUAGE plpgsql;
+
+CREATE TRIGGER tr_actualizar_estado
+BEFORE INSERT OR UPDATE
+ON "Product"
+FOR EACH ROW
+EXECUTE FUNCTION actualizar_estado();
 
 --Script de consulta de compras
-SELECT * FROM "Sales" LEFT JOIN "Product" ON "Product".codigobarra = "Sales".idproducto 
-LEFT JOIN "Flavors" ON "Flavors".idproducto = "Product".id WHERE "idventa" = 10002;
+SELECT * FROM "Sales" 
+LEFT JOIN "Product" ON "Product".id = "Sales".idproducto 
+LEFT JOIN "Flavors" ON "Flavors".idproducto = "Product".id WHERE DATE("fechahora") = '2024-01-26';
+ 
