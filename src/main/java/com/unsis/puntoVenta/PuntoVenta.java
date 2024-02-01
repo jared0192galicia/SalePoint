@@ -27,7 +27,7 @@ public class PuntoVenta {
      */
     private boolean loadedMarch() {
         try {
-            new JpaController().findAllEntities(Company.class).get(0);
+//            new JpaController().findAllEntities(Company.class).get(0);
             return true;
         } catch (Exception e) {
             System.err.println(e.getMessage());
