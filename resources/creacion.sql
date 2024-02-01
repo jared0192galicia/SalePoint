@@ -101,6 +101,19 @@ CREATE TABLE "Sales"(
   FOREIGN KEY (idProducto) REFERENCES "Product"(codigoBarra)
 );
 
+CREATE TABLE "Expenses" (
+  id serial PRIMARY KEY,
+  idAccount INT,
+  idAutorizo INT,
+  date TIMESTAMP DEFAULT CURRENT_DATE,
+  descripcion varchar,
+  categoria VARCHAR CHECK (categoria IN ('Viatico', 'Otro')),
+  monto float4,
+  comprobante varchar,
+  FOREIGN KEY (idAccount) REFERENCES "Account"(id),
+  FOREIGN KEY (idAutorizo) REFERENCES "Account"(id)
+);
+
 ALTER TABLE
   "Account"
 ADD
