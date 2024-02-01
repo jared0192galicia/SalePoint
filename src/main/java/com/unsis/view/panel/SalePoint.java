@@ -17,7 +17,9 @@ import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.time.LocalDate;
 import java.time.LocalDateTime;
+import java.time.ZoneId;
 import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
 import java.util.Date;
@@ -30,6 +32,13 @@ import javax.swing.SwingConstants;
 import javax.swing.table.DefaultTableCellRenderer;
 import javax.swing.table.DefaultTableModel;
 import javax.swing.table.JTableHeader;
+
+import com.itextpdf.kernel.pdf.PdfDocument;
+import com.itextpdf.kernel.pdf.PdfWriter;
+import com.itextpdf.layout.Document;
+import com.itextpdf.layout.element.Paragraph;
+
+import java.io.FileNotFoundException;
 
 /**
  *
@@ -45,6 +54,7 @@ public class SalePoint extends javax.swing.JPanel {
     private ArrayList<Product> productList = new ArrayList<>();
     private ArrayList<String> listComent;
     private ArrayList<Boolean> listTipoOrden;
+    private ArrayList<Integer> listCantidad;
 
     /**
      * Creates new form Venta
@@ -56,9 +66,10 @@ public class SalePoint extends javax.swing.JPanel {
         this.labelInvalidCodBarra.setVisible(false);
         this.labelVoidCamp.setVisible(false);
         this.labelVoidTable.setVisible(false);
+        this.labelProdNoFind.setVisible(false);
+        labelNoSelectProd.setVisible(false);
         this.controller = new JpaController();
         JTableHeader TableProduct = tableProduct.getTableHeader();
-        
 
         // Crear un renderizador de encabezado personalizado
         DefaultTableCellRenderer headerRenderer = new DefaultTableCellRenderer();
@@ -80,6 +91,7 @@ public class SalePoint extends javax.swing.JPanel {
         this.listPedido = new ArrayList<>();
         this.listComent = new ArrayList<>();
         this.listTipoOrden = new ArrayList<>();
+        this.listCantidad = new ArrayList<>();
     }
 
     /**
@@ -91,10 +103,11 @@ public class SalePoint extends javax.swing.JPanel {
         Icon resizedIcon = tools.resizeIcon(buttonAdd.getIcon(), 20, 20);
         buttonAdd.setIcon(resizedIcon);
     }
-/**
- * Llena el comboBox de productos con los productos que esten en la base de
- * datos
- */
+
+    /**
+     * Llena el comboBox de productos con los productos que esten en la base de
+     * datos
+     */
     public void llenarComboProd() {
         // Llamada al método findAllEntities para obtener la lista de productos
         productList = controller.findAllEntities(Product.class);
@@ -111,10 +124,11 @@ public class SalePoint extends javax.swing.JPanel {
             //llenarComboSab();
         }
     }
-/**
- * Llena el comboBox de sabores dependiendo del producto que sea elegido en el 
- * comboBox de producto
- */
+
+    /**
+     * Llena el comboBox de sabores dependiendo del producto que sea elegido en
+     * el comboBox de producto
+     */
     public void llenarComboSab() {
         comboSab.removeAllItems();
 
@@ -132,12 +146,14 @@ public class SalePoint extends javax.swing.JPanel {
             }
         }
     }
-/**
- * Obtiene una lista de los sabores dependiendo del producto seleccionado, 
- * recibe el producto y busca los sabores
- * @param producto
- * @return 
- */
+
+    /**
+     * Obtiene una lista de los sabores dependiendo del producto seleccionado,
+     * recibe el producto y busca los sabores
+     *
+     * @param producto
+     * @return
+     */
     private ArrayList<Flavors> obtSabProd(Product producto) {
         ArrayList<Flavors> sabores = controller.findAllEntities(Flavors.class);
         ArrayList<Flavors> saboresProd = new ArrayList<>();
@@ -149,11 +165,13 @@ public class SalePoint extends javax.swing.JPanel {
         }
         return saboresProd;
     }
-/**
- * Obtiene los productos de la base de datos
- * @param nameProd
- * @return 
- */
+
+    /**
+     * Obtiene los productos de la base de datos
+     *
+     * @param nameProd
+     * @return
+     */
     private Product obtProduct(String nameProd) {
         for (Product product : productList) {
             if (product.getNombre().equalsIgnoreCase(nameProd)) {
@@ -220,6 +238,8 @@ public class SalePoint extends javax.swing.JPanel {
         labelVoidCamp = new javax.swing.JLabel();
         buttonDelete = new javax.swing.JButton();
         labelVoidTable = new javax.swing.JLabel();
+        labelProdNoFind = new javax.swing.JLabel();
+        labelNoSelectProd = new javax.swing.JLabel();
 
         dialogConfirm.setAlwaysOnTop(true);
         dialogConfirm.setUndecorated(true);
@@ -517,7 +537,7 @@ public class SalePoint extends javax.swing.JPanel {
         labelInvalidCodBarra.setFont(new java.awt.Font("Dialog", 1, 13)); // NOI18N
         labelInvalidCodBarra.setForeground(new java.awt.Color(255, 153, 0));
         labelInvalidCodBarra.setText("Mercancia no disponible");
-        jPanel2.add(labelInvalidCodBarra, new org.netbeans.lib.awtextra.AbsoluteConstraints(100, 540, 360, -1));
+        jPanel2.add(labelInvalidCodBarra, new org.netbeans.lib.awtextra.AbsoluteConstraints(100, 540, 370, -1));
 
         labelInvalidCant.setFont(new java.awt.Font("Dialog", 1, 13)); // NOI18N
         labelInvalidCant.setForeground(new java.awt.Color(153, 0, 0));
@@ -553,21 +573,34 @@ public class SalePoint extends javax.swing.JPanel {
         labelVoidTable.setText("No hay productos que comprar");
         jPanel2.add(labelVoidTable, new org.netbeans.lib.awtextra.AbsoluteConstraints(50, 640, 450, -1));
 
+        labelProdNoFind.setFont(new java.awt.Font("Dialog", 1, 13)); // NOI18N
+        labelProdNoFind.setForeground(new java.awt.Color(255, 153, 0));
+        labelProdNoFind.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        labelProdNoFind.setText("Mercancia no disponible");
+        jPanel2.add(labelProdNoFind, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 360, 560, -1));
+
+        labelNoSelectProd.setFont(new java.awt.Font("Dialog", 1, 13)); // NOI18N
+        labelNoSelectProd.setForeground(new java.awt.Color(255, 153, 0));
+        labelNoSelectProd.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        labelNoSelectProd.setText("Debes seleccionar un producto");
+        jPanel2.add(labelNoSelectProd, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 360, 560, -1));
+
         add(jPanel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(1050, 90, 560, 720));
     }// </editor-fold>//GEN-END:initComponents
 /**
- * Agrega la orden a un dialogConfirm para confirmar la compra
- * @param evt 
- */
+     * Agrega la orden a un dialogConfirm para confirmar la compra
+     *
+     * @param evt
+     */
     private void buttonAddOrderMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_buttonAddOrderMouseClicked
         if (((DefaultTableModel) tableProduct.getModel()).getRowCount() > 0) {
             labelVoidTable.setVisible(false);
             dialogConfirm.show(true);
             nameCompradorLabel.setText(txtName.getText());
-            DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd 'de' MMMM 'del' yyyy ' ' HH:mm:ss");
+            DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd 'de' MMMM 'del' yyyy ' ' HH:mm");
             LocalDateTime fechaActual = LocalDateTime.now();
             ingresarFechaLabel.setText(fechaActual.format(formatter));
-            nameVendedorLabel.setText(Session.getAccount().getIdempleado().getNombre());
+            nameVendedorLabel.setText(Session.getAccount().getIdempleado().getNombre() + Session.getAccount().getIdempleado().getApellidop());
         } else {
             labelVoidTable.setVisible(true);
         }
@@ -579,20 +612,39 @@ public class SalePoint extends javax.swing.JPanel {
         dialogConfirm.show(false);
         int idVenta = obSigIdVeta();
         int index = 0;
+        LocalDate fecha = LocalDate.now();
+        Date fechaActual = Date.from(fecha.atStartOfDay(ZoneId.systemDefault()).toInstant());
+        
+        JpaController jpaController = new JpaController();
+        
         for (Product product : listPedido) {
             Sales sales = new Sales.Builder()
                     .withIdVenta(idVenta)
                     .withIdProducto(product)
                     .withIdEmpleado(Session.getAccount().getIdempleado())
-                    .withTipoOrden(listTipoOrden.get(index) ? "Normal" : "Para llevar")//Crear lista de booleanos
+                    .withTipoOrden(listTipoOrden.get(index) ? "Normal" : "Para llevar")
                     .withNombreComp(txtName.getText())
-                    .withComentarios(listComent.get(index))//Crear lista de String
+                    .withComentarios(listComent.get(index))
                     .withCodigoBarras(product.getCodigobarra())
-                    .withFechaHora(new Date(ingresarFechaLabel.getText()))
+                    .withFechaHora(fechaActual)
                     .build();
-            index++;
-        }
+            
+            int newDisp = product.getDisponible() - listCantidad.get(index);
+            product.setDisponible(newDisp);
 
+            jpaController.create(sales);
+            jpaController.edit(product);
+            
+            index++;
+            String outputPath = "Venta"+String.valueOf(idVenta)+".pdf";
+            try {
+                generaTicket(outputPath);
+                System.out.println("PDF generado exitosamente en: " + outputPath);
+            } catch (Exception e) {
+                e.printStackTrace();
+            } 
+       }
+        resetearTabla();
     }//GEN-LAST:event_confirmarBotonActionPerformed
 
     private void buttonCloseActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_buttonCloseActionPerformed
@@ -600,10 +652,11 @@ public class SalePoint extends javax.swing.JPanel {
 //        this.dispose();
         dialogConfirm.show(false);
     }//GEN-LAST:event_buttonCloseActionPerformed
-/**
- * Validaciones de cantidades y del nombre del comprador
- * @param evt 
- */
+    /**
+     * Validaciones de cantidades y del nombre del comprador
+     *
+     * @param evt
+     */
     private void txtCantFocusLost(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_txtCantFocusLost
         String cantidad = txtCant.getText().trim();
         String regex = "^[1-9]\\d*$";
@@ -623,19 +676,18 @@ public class SalePoint extends javax.swing.JPanel {
     }//GEN-LAST:event_txtCantFocusLost
 
     private void txtNameFocusLost(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_txtNameFocusLost
-        String cantidad = txtName.getText().trim();
-        String regex = "^[a-zA-Z]+";
+        String name = txtName.getText().trim();
+        String regex = "^\\s*[a-zA-Z]+(\\s[a-zA-Z]+)*\\s*$";
 
         Pattern pattern = Pattern.compile(regex);
-        Matcher matcher = pattern.matcher(cantidad);
+        Matcher matcher = pattern.matcher(name);
 
-        if (matcher.matches()) {
-            labelInvalidCodBarra.setVisible(false);
+        if (!name.isEmpty() && matcher.matches()) {
+            labelInvalidName.setVisible(false);
             band = false;
         } else {
             System.out.println("Nombre Invalido");
-
-            labelInvalidCodBarra.setVisible(true);
+            labelInvalidName.setVisible(true);
             band = true;
         }
     }//GEN-LAST:event_txtNameFocusLost
@@ -643,6 +695,7 @@ public class SalePoint extends javax.swing.JPanel {
     private void buttonAddActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_buttonAddActionPerformed
         if (band == false) {
             try {
+                labelNoSelectProd.setVisible(false);
                 String producto = (String) comboProd.getSelectedItem();
                 String sabor = (String) comboSab.getSelectedItem();
                 int cantidad = (Integer.valueOf(txtCant.getText()));
@@ -653,6 +706,7 @@ public class SalePoint extends javax.swing.JPanel {
                 listComent.add(coment);
                 boolean tipoOrden = obtTipoOrden();
                 listTipoOrden.add(tipoOrden);
+                listCantidad.add(cantidad);
 
                 if (txtCant.getText() == null || txtName.getText() == null) {
                     labelVoidCamp.setVisible(true);
@@ -664,6 +718,7 @@ public class SalePoint extends javax.swing.JPanel {
                 }
             } catch (NumberFormatException e) {
                 labelVoidCamp.setVisible(true);
+                labelNoSelectProd.setVisible(false);
             }
         }
     }//GEN-LAST:event_buttonAddActionPerformed
@@ -678,8 +733,11 @@ public class SalePoint extends javax.swing.JPanel {
 
     private void buttonDeleteActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_buttonDeleteActionPerformed
         int selectedRow = tableProduct.getSelectedRow();
+        labelProdNoFind.setVisible(false);
 
         if (selectedRow != -1) { // Verifica que haya una fila seleccionada
+            labelNoSelectProd.setVisible(false);
+            
             int opcion = JOptionPane.showConfirmDialog(null,
                     "¿Estás seguro de continuar?", "Confirmación", JOptionPane.YES_NO_OPTION);
 
@@ -689,6 +747,9 @@ public class SalePoint extends javax.swing.JPanel {
                 model.removeRow(selectedRow);
 
             }
+        }else{
+            labelNoSelectProd.setVisible(true);
+            labelVoidCamp.setVisible(false);
         }
     }//GEN-LAST:event_buttonDeleteActionPerformed
 
@@ -719,13 +780,13 @@ public class SalePoint extends javax.swing.JPanel {
     private void dialogConfirmComponentShown(java.awt.event.ComponentEvent evt) {//GEN-FIRST:event_dialogConfirmComponentShown
         tableConfComp.setModel(tableProduct.getModel());
         DefaultTableModel tableModel = (DefaultTableModel) tableProduct.getModel();
-        
+
         int rowCount = tableModel.getRowCount();
         double total = 0.0f;
-        
-        for (int i=0; i < rowCount; i++){
+
+        for (int i = 0; i < rowCount; i++) {
             double totalComp = (double) tableModel.getValueAt(i, 4);
-            
+
             total += totalComp;
         }
         ingresoMontoLabel.setText("$" + String.valueOf(total));
@@ -754,13 +815,14 @@ public class SalePoint extends javax.swing.JPanel {
         double precio = 0.0f;
 
         for (Product producto : products) {
-            if (producto.getNombre().equalsIgnoreCase(productName)) {
+            if (producto.getNombre().equalsIgnoreCase(productName) && producto.getDisponible() >= cantidad) {
+                labelProdNoFind.setVisible(false);
                 precio = producto.getPrecioventa();
                 double total = precio * cantidad;
 
                 Object[] rowData = {
-                    producto.getNombre(), 
-                   producto.getDescripcion(),
+                    producto.getNombre(),
+                    producto.getDescripcion(),
                     cantidad,
                     producto.getPrecioventa(),
                     total
@@ -768,10 +830,33 @@ public class SalePoint extends javax.swing.JPanel {
                 tableModel.addRow(rowData);
                 listPedido.add(producto);
                 break;
+            }else{
+                labelProdNoFind.setVisible(true);
             }
         }
     }
 
+    public void resetearTabla() {
+        DefaultTableModel tableModel = (DefaultTableModel) tableProduct.getModel();
+        if (tableModel != null) {
+            tableModel.setRowCount(0); // Elimina todas las filas de la tabla
+        } else {
+            tableModel = new DefaultTableModel();
+            tableModel.addColumn("Producto");
+            tableModel.addColumn("Descripción");
+            tableModel.addColumn("Cantidad");
+            tableModel.addColumn("Precio por pz");
+            tableModel.addColumn("Total");
+            tableProduct.setModel(tableModel);
+        }
+
+        txtCant.setText("");
+        txtComents.setText("");
+        labelProdNoFind.setVisible(false);
+
+        listPedido.clear(); // Vacía la lista de pedidos
+    }
+    
     public int obSigIdVeta() {
         String query = "SELECT MAX(idventa) FROM \"Sales\"";
         try (PreparedStatement pst = cn.prepareStatement(query)) {
@@ -787,16 +872,28 @@ public class SalePoint extends javax.swing.JPanel {
 
         return 1; // Si no se puede obtener, devolvemos 1 como valor predeterminado
     }
-    
+
     private boolean obtTipoOrden() {
-        if(rbNormal.isSelected()){
+        if (rbNormal.isSelected()) {
             return true;
-        }else if (rbParaLlevar.isSelected()){
+        } else if (rbParaLlevar.isSelected()) {
             return false;
-        }else {
+        } else {
             return false;
         }
     }
+
+    private static void generaTicket(String outputPath) throws FileNotFoundException{
+        PdfWriter writer = new PdfWriter(outputPath);
+        PdfDocument pdf = new PdfDocument(writer);
+        Document document = new Document(pdf);
+        
+        document.add(new Paragraph("Ejemplo de PDF con formato"));
+        document.add(new Paragraph("Fecha: 31 de enero de 2024"));
+        
+        document.close();
+    }
+
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton buttonAdd;
     private javax.swing.JButton buttonAddOrder;
@@ -832,6 +929,8 @@ public class SalePoint extends javax.swing.JPanel {
     private javax.swing.JLabel labelInvalidCant;
     private javax.swing.JLabel labelInvalidCodBarra;
     private javax.swing.JLabel labelInvalidName;
+    private javax.swing.JLabel labelNoSelectProd;
+    private javax.swing.JLabel labelProdNoFind;
     private javax.swing.JLabel labelVoidCamp;
     private javax.swing.JLabel labelVoidTable;
     private javax.swing.JLabel montoLabel;

@@ -78,6 +78,8 @@ INSERT INTO "Sales" (idVenta, idEmpleado, idProducto, tipoOrden, comentarios, no
 (10003, 1, '333333', 'Para llevar', 'Salsa extra', 'Carlos Martínez', '333333', '2024-01-26 15:20:00'),
 (10004, 1, '444444', 'Normal', 'Con hielo', 'Laura Gómez', '444444', '2024-01-26 18:10:00'),
 (10005, 1, '555555', 'Para llevar', 'Sin gas', 'Pedro Rodríguez', '555555', '2024-01-26 21:00:00');
+INSERT INTO "Sales" (idVenta, idEmpleado, idProducto, tipoOrden, comentarios, nombreComprador, codigoBarra, fechaHora) VALUES
+(454544, 1, '5', 'Para llevar', 'Sin gas', 'Pedro Rodríguez', '555555', '2024-01-26 21:00:00');
 
 -- Población de la tabla Product
 INSERT INTO "Product" (nombre, precioCom, precioVenta, codigoBarra, tipo, descripcion, numProducto, estado, disponible, variante) VALUES
@@ -114,3 +116,5 @@ INSERT INTO "Flavors" (idProducto, sabor) VALUES
 (5, 'Fresa'),
 (5, 'Kiwi'),
 (5, 'Blue Berry');
+
+UPDATE "Sales" set estatus = 0;

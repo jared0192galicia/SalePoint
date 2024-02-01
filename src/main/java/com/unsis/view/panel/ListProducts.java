@@ -26,10 +26,10 @@ public class ListProducts extends javax.swing.JPanel {
         initComponents();
         this.setBounds(217, 0, 1200, 692);
         // Obtener el JTableHeader (encabezado de la tabla)
-        table.getTableHeader().setFont(new Font("Arial", Font.BOLD, 20));
-        table.getTableHeader().setOpaque(false);
-        table.getTableHeader().setBackground(new Color(32, 136, 203));
-        table.getTableHeader().setForeground(Color.WHITE);
+        tableProduct.getTableHeader().setFont(new Font("Arial", Font.BOLD, 20));
+        tableProduct.getTableHeader().setOpaque(false);
+        tableProduct.getTableHeader().setBackground(new Color(32, 136, 203));
+        tableProduct.getTableHeader().setForeground(Color.WHITE);
 
         this.mainWindow = mainWindow;
         this.jpaController = new JpaController();
@@ -52,7 +52,7 @@ public class ListProducts extends javax.swing.JPanel {
         buttonDelete = new javax.swing.JButton();
         jPanel2 = new javax.swing.JPanel();
         jScrollPane1 = new javax.swing.JScrollPane();
-        table = new javax.swing.JTable();
+        tableProduct = new javax.swing.JTable();
 
         setBackground(new java.awt.Color(240, 240, 240));
         addComponentListener(new java.awt.event.ComponentAdapter() {
@@ -104,6 +104,11 @@ public class ListProducts extends javax.swing.JPanel {
         buttonModify.setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
         buttonModify.setMaximumSize(new java.awt.Dimension(157, 35));
         buttonModify.setMinimumSize(new java.awt.Dimension(157, 35));
+        buttonModify.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                buttonModifyActionPerformed(evt);
+            }
+        });
         jPanel1.add(buttonModify, new org.netbeans.lib.awtextra.AbsoluteConstraints(280, 10, 170, 60));
 
         buttonDelete.setFont(new java.awt.Font("Dialog", 1, 16)); // NOI18N
@@ -126,7 +131,7 @@ public class ListProducts extends javax.swing.JPanel {
         jPanel2.setOpaque(false);
         jPanel2.setPreferredSize(new java.awt.Dimension(453, 500));
 
-        table.setModel(new javax.swing.table.DefaultTableModel(
+        tableProduct.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
                 {null, null, null, null, null},
                 {null, null, null, null, null},
@@ -146,13 +151,28 @@ public class ListProducts extends javax.swing.JPanel {
             new String [] {
                 "Nombre", "Descripción", "Precio Venta", "Disponibles", "Estado"
             }
-        ));
-        table.setGridColor(new java.awt.Color(204, 204, 204));
-        table.setRowHeight(25);
-        table.setRowMargin(3);
-        table.setShowGrid(true);
-        table.setShowVerticalLines(false);
-        jScrollPane1.setViewportView(table);
+        ) {
+            boolean[] canEdit = new boolean [] {
+                false, false, false, false, false
+            };
+
+            public boolean isCellEditable(int rowIndex, int columnIndex) {
+                return canEdit [columnIndex];
+            }
+        });
+        tableProduct.setGridColor(new java.awt.Color(204, 204, 204));
+        tableProduct.setRowHeight(25);
+        tableProduct.setRowMargin(3);
+        tableProduct.setShowGrid(true);
+        tableProduct.setShowVerticalLines(false);
+        jScrollPane1.setViewportView(tableProduct);
+        if (tableProduct.getColumnModel().getColumnCount() > 0) {
+            tableProduct.getColumnModel().getColumn(0).setResizable(false);
+            tableProduct.getColumnModel().getColumn(1).setResizable(false);
+            tableProduct.getColumnModel().getColumn(2).setResizable(false);
+            tableProduct.getColumnModel().getColumn(3).setResizable(false);
+            tableProduct.getColumnModel().getColumn(4).setResizable(false);
+        }
 
         javax.swing.GroupLayout jPanel2Layout = new javax.swing.GroupLayout(jPanel2);
         jPanel2.setLayout(jPanel2Layout);
@@ -208,10 +228,10 @@ public class ListProducts extends javax.swing.JPanel {
         ArrayList<Product> products = jpaController.findAllEntities(Product.class);
 
         // Configuración del modelo de la tabla
-        DefaultTableModel tableModel = (DefaultTableModel) table.getModel();
+        DefaultTableModel tableModel = (DefaultTableModel) tableProduct.getModel();
         // Eliminar filas existentes
         tableModel.setRowCount(0);
-        table.setModel(tableModel);
+        tableProduct.setModel(tableModel);
 
         for (Product product : products) {
             Object[] rowData = {
@@ -219,7 +239,7 @@ public class ListProducts extends javax.swing.JPanel {
                 product.getDescripcion(),
                 product.getPrecioventa(),
                 product.getDisponible(),
-               
+                product.getEstado()
             };
             tableModel.addRow(rowData);
         }
@@ -230,44 +250,43 @@ public class ListProducts extends javax.swing.JPanel {
     }//GEN-LAST:event_formComponentShown
 
     private void buttonDeleteActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_buttonDeleteActionPerformed
-    Product product = findProduct();
+        Product product = findProduct();
 
-    if (product != null) {
-        int opcion = JOptionPane.showConfirmDialog(null,
-                "¿Estás seguro de continuar?", "Confirmación", JOptionPane.YES_NO_OPTION);
+        if (product != null) {
+            int opcion = JOptionPane.showConfirmDialog(null,
+                    "¿Estás seguro de continuar?", "Confirmación", JOptionPane.YES_NO_OPTION);
 
-        if (opcion == JOptionPane.YES_OPTION) {
-            jpaController.destroy(product);
-            this.showModel();
+            if (opcion == JOptionPane.YES_OPTION) {
+                jpaController.destroy(product);
+                this.showModel();
+            }
         }
-    }
     }//GEN-LAST:event_buttonDeleteActionPerformed
 
-    private void buttonModifyActionPerformed(java.awt.event.ActionEvent evt) {                                             
-        Product product= findProduct();
+    private void buttonModifyActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_buttonModifyActionPerformed
+       Product product= findProduct();
         if (product != null) {
             RegisterProduct.setProduct(product);
-            mainWindow.setView("Editar Emplado");
+            mainWindow.setView("Editar Product");
         }
-    }                                            
-
+    }//GEN-LAST:event_buttonModifyActionPerformed
+                                          
     public Product findProduct() {
-          int filaSeleccionada = table.getSelectedRow();
+        int filaSeleccionada = tableProduct.getSelectedRow();
 
         if (filaSeleccionada != -1) { // Verifica que haya una fila seleccionada
-            var codeProduct= table.getValueAt(filaSeleccionada, 0);
+            var codeProduct = tableProduct.getValueAt(filaSeleccionada, 0);
 
             ArrayList<Product> products = jpaController.findAllEntities(Product.class);
 
             for (Product product : products) {
-                if (product.getNumproducto() == codeProduct) {
+                if (product.getNombre()== codeProduct) {
                     return product;
 
                 }
             }
         }
         return null;
-       
     }
         
 
@@ -280,6 +299,6 @@ public class ListProducts extends javax.swing.JPanel {
     private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanel2;
     private javax.swing.JScrollPane jScrollPane1;
-    private javax.swing.JTable table;
+    private javax.swing.JTable tableProduct;
     // End of variables declaration//GEN-END:variables
 }

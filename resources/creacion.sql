@@ -83,7 +83,7 @@ CREATE TABLE "Flavors" (
   id serial PRIMARY KEY,
   idProducto INT,
   sabor VARCHAR(50),
-  FOREIGN KEY (idProducto) REFERENCES "Product" (id)
+  FOREIGN KEY (idProducto) REFERENCES "Product" (id) ON DELETE CASCADE
 );
 
 CREATE TABLE "Sales"(
@@ -165,3 +165,4 @@ SELECT * FROM "Sales"
 LEFT JOIN "Product" ON "Product".id = "Sales".idproducto 
 LEFT JOIN "Flavors" ON "Flavors".idproducto = "Product".id WHERE DATE("fechahora") = '2024-01-26';
  
+ DELETE FROM "Sales" WHERE "id"=7

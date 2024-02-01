@@ -73,6 +73,7 @@ public class JpaController {
 
             case Company companyObj ->
                 this.company.create(companyObj);
+                
             case Product productObj ->
                 this.product.create(productObj);
 

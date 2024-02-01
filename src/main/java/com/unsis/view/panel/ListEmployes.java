@@ -109,7 +109,7 @@ public class ListEmployes extends javax.swing.JPanel {
         buttonCreate.setText("Alta");
         buttonCreate.setBorder(BorderFactory.createLineBorder(new Color(0,153,0), 2));
         buttonCreate.setContentAreaFilled(false);
-        buttonCreate.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+        buttonCreate.setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
         buttonCreate.setMaximumSize(new java.awt.Dimension(157, 38));
         buttonCreate.setMinimumSize(new java.awt.Dimension(157, 38));
         buttonCreate.addActionListener(new java.awt.event.ActionListener() {
@@ -125,7 +125,7 @@ public class ListEmployes extends javax.swing.JPanel {
         buttonExportXls.setIcon(new javax.swing.ImageIcon(getClass().getResource("/exportExcel .png"))); // NOI18N
         buttonExportXls.setText("Exportar");
         buttonExportXls.setBorder(null);
-        buttonExportXls.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+        buttonExportXls.setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
         buttonExportXls.setHorizontalTextPosition(javax.swing.SwingConstants.RIGHT);
         buttonExportXls.setVerticalTextPosition(javax.swing.SwingConstants.BOTTOM);
         buttonExportXls.addActionListener(new java.awt.event.ActionListener() {
@@ -141,7 +141,7 @@ public class ListEmployes extends javax.swing.JPanel {
         buttonModify.setText("Modificación");
         buttonModify.setBorder(BorderFactory.createLineBorder(Color.BLUE, 2));
         buttonModify.setContentAreaFilled(false);
-        buttonModify.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+        buttonModify.setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
         buttonModify.setMaximumSize(new java.awt.Dimension(157, 35));
         buttonModify.setMinimumSize(new java.awt.Dimension(157, 35));
         buttonModify.addActionListener(new java.awt.event.ActionListener() {
@@ -157,7 +157,7 @@ public class ListEmployes extends javax.swing.JPanel {
         buttonDelete.setText("Eliminar");
         buttonDelete.setBorder(BorderFactory.createLineBorder(Color.RED, 2));
         buttonDelete.setContentAreaFilled(false);
-        buttonDelete.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+        buttonDelete.setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
         buttonDelete.setMaximumSize(new java.awt.Dimension(157, 35));
         buttonDelete.setMinimumSize(new java.awt.Dimension(157, 35));
         buttonDelete.addActionListener(new java.awt.event.ActionListener() {
@@ -209,13 +209,28 @@ public class ListEmployes extends javax.swing.JPanel {
             new String [] {
                 "Número Empleado", "Nombre", "Apellidos", "Area", "Estatus"
             }
-        ));
+        ) {
+            boolean[] canEdit = new boolean [] {
+                false, false, false, false, false
+            };
+
+            public boolean isCellEditable(int rowIndex, int columnIndex) {
+                return canEdit [columnIndex];
+            }
+        });
         table.setGridColor(new java.awt.Color(204, 204, 204));
         table.setRowHeight(25);
         table.setRowMargin(3);
         table.setShowGrid(true);
         table.setShowVerticalLines(false);
         jScrollPane1.setViewportView(table);
+        if (table.getColumnModel().getColumnCount() > 0) {
+            table.getColumnModel().getColumn(0).setResizable(false);
+            table.getColumnModel().getColumn(1).setResizable(false);
+            table.getColumnModel().getColumn(2).setResizable(false);
+            table.getColumnModel().getColumn(3).setResizable(false);
+            table.getColumnModel().getColumn(4).setResizable(false);
+        }
 
         javax.swing.GroupLayout jPanel2Layout = new javax.swing.GroupLayout(jPanel2);
         jPanel2.setLayout(jPanel2Layout);
@@ -439,7 +454,6 @@ public class ListEmployes extends javax.swing.JPanel {
     }
 
     private void buttonDeleteActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_buttonDeleteActionPerformed
-
         Employee employee = findEmployee();
 
         if (employee != null) {

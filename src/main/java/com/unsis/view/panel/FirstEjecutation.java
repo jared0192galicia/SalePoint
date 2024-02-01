@@ -230,7 +230,7 @@ public class FirstEjecutation extends javax.swing.JFrame {
         }
 
         if (logo.equals("")) {
-            int response = JOptionPane.showConfirmDialog(null, "¿Decea continuar sin un logotipo?");
+            int response = JOptionPane.showConfirmDialog(null, "¿Desea continuar sin un logotipo?");
             if (JOptionPane.OK_OPTION != response) {
                 return;
             }
