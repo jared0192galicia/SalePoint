@@ -72,8 +72,7 @@ public class ventasDesp extends javax.swing.JPanel {
             // Aquí agrego un icono a la fila del pedido
             // Genera num random new Random().nextInt(0, 3)
             h.getImgLabel().setIcon(new ImageIcon(
-                    getClass().getResource("/user/user"
-                            + new Random().nextInt(0, 3) + ".png")));
+                    getClass().getResource("/user1.png")));
             h.getNombreLabel().setText(sale.getIdempleado().getNombre()); // Pone el nombre del empleado
             h.getPedidoLabel().setText(sale.getTipoorden()); // Pone el tipo de pedido.
 
