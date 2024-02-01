@@ -1,5 +1,6 @@
 package com.unsis.puntoVenta;
 
+import com.unsis.clases.Tools;
 import com.unsis.controller.JpaController;
 import com.unsis.models.entity.Company;
 import com.unsis.view.panel.FirstEjecutation;
@@ -13,16 +14,23 @@ import io.github.cdimascio.dotenv.Dotenv;
 public class PuntoVenta {
 
     public PuntoVenta() {
-        Dotenv env = Dotenv.load();
-        String environment = env.get("ENVIRONMENT");
+        try {
+            Dotenv env = Dotenv.load();
+            String environment = env.get("ENVIRONMENT");
 
-        if (environment != null) {
-            System.out.println("ENVIRONMENT = " + environment);
+            if (environment != null) {
+                System.out.println("ENVIRONMENT = " + environment);
+            }
+
+        } catch (Exception e) {
+            System.err.println("No se ah encontrado el archivo de dependencias");
         }
+        Tools.generateTicket();
     }
 
     /**
      * Compara si ya existe registrada una marca
+     *
      * @return
      */
     private boolean loadedMarch() {
