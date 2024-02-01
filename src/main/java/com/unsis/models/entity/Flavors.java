@@ -54,14 +54,14 @@ public class Flavors implements Serializable {
         this.id = id;
     }
 
-    public Integer getIdProduct(){
+    public Integer getIdProduct() {
         return idproducto;
     }
-    
-    public void setIdProduct() {
+
+    public void setIdProduct(Integer idproducto) {
         this.idproducto = idproducto;
     }
-    
+
     public String getSabor() {
         return sabor;
     }
@@ -94,5 +94,27 @@ public class Flavors implements Serializable {
     public String toString() {
         return "com.unsis.models.entity.Flavors[ id=" + id + " ]";
     }
-    
+
+    public static class Builder {
+
+        private Flavors flavors;
+
+        public Builder() {
+            this.flavors = new Flavors();
+        }
+
+        public Builder withIdProduct(Integer idproduct) {
+            flavors.setIdProduct(idproduct);
+            return this;
+        }
+
+        public Builder withSabor(String sabor) {
+            flavors.setSabor(sabor);
+            return this;
+        }
+
+        public Flavors build() {
+            return flavors;
+        }
+    }
 }

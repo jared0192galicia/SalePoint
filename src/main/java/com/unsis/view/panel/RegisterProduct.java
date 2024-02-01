@@ -2,11 +2,14 @@ package com.unsis.view.panel;
 
 import com.unsis.clases.Tools;
 import com.unsis.controller.JpaController;
+import com.unsis.models.entity.Flavors;
 import java.awt.Color;
 import java.awt.event.ItemEvent;
 import com.unsis.models.entity.Product;
 import java.awt.event.KeyEvent;
 import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.List;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 import javax.swing.BorderFactory;
@@ -137,6 +140,9 @@ public class RegisterProduct extends javax.swing.JPanel {
         labelinvalidPbuys = new javax.swing.JLabel();
         labelinvalidPsale1 = new javax.swing.JLabel();
         labelinvalidNproduct1 = new javax.swing.JLabel();
+        txtFlavors = new javax.swing.JTextField();
+        jLabel12 = new javax.swing.JLabel();
+        jLabel17 = new javax.swing.JLabel();
         jPanel1 = new javax.swing.JPanel();
         buttonUpload = new javax.swing.JButton();
         buttonTemplate = new javax.swing.JButton();
@@ -412,6 +418,25 @@ public class RegisterProduct extends javax.swing.JPanel {
         labelinvalidNproduct1.setForeground(new java.awt.Color(255, 0, 51));
         panelInternal.add(labelinvalidNproduct1, new org.netbeans.lib.awtextra.AbsoluteConstraints(100, 440, 150, 20));
 
+        txtFlavors.addFocusListener(new java.awt.event.FocusAdapter() {
+            public void focusLost(java.awt.event.FocusEvent evt) {
+                txtFlavorsFocusLost(evt);
+            }
+        });
+        panelInternal.add(txtFlavors, new org.netbeans.lib.awtextra.AbsoluteConstraints(100, 290, 180, 30));
+
+        jLabel12.setBackground(new java.awt.Color(255, 255, 255));
+        jLabel12.setFont(new java.awt.Font("Jaldi", 0, 18)); // NOI18N
+        jLabel12.setForeground(new java.awt.Color(118, 125, 142));
+        jLabel12.setText("Sabores");
+        panelInternal.add(jLabel12, new org.netbeans.lib.awtextra.AbsoluteConstraints(100, 260, -1, -1));
+
+        jLabel17.setBackground(new java.awt.Color(255, 255, 255));
+        jLabel17.setFont(new java.awt.Font("Jaldi", 0, 18)); // NOI18N
+        jLabel17.setForeground(new java.awt.Color(118, 125, 142));
+        jLabel17.setText("Nota: todos los sabores deben ser separados por comas.");
+        panelInternal.add(jLabel17, new org.netbeans.lib.awtextra.AbsoluteConstraints(280, 290, -1, -1));
+
         jPanel1.setBackground(new java.awt.Color(255, 255, 255));
 
         buttonUpload.setFont(new java.awt.Font("Dialog", 1, 16)); // NOI18N
@@ -570,8 +595,20 @@ public class RegisterProduct extends javax.swing.JPanel {
                     .withEstado(RadioButtonAvailable.isSelected() ? "Disponible" : "No disponible")
                     .withDisponible(Integer.parseInt(txtAvailable.getText().trim()))
                     .build();
-
             controller.create(product);
+            
+            String sabores = txtFlavors.getText();
+            String[] saboresArray = sabores.split(",\\s");
+            List<String> saboresList = new ArrayList<>(Arrays.asList(saboresArray));
+
+            for (String sabor : saboresList) {
+                Flavors flavors = new Flavors.Builder()
+                        .withIdProduct(product.getId())
+                        .withSabor(sabor.trim())
+                        .build();
+                controller.create(flavors);
+            }
+
         } else {
             // Mostrar un mensaje indicando que todos los campos deben estar llenos
             JOptionPane.showMessageDialog(null, "Todos los campos deben estar llenos", "Error", JOptionPane.ERROR_MESSAGE);
@@ -581,6 +618,10 @@ public class RegisterProduct extends javax.swing.JPanel {
     private void buttonDiscardActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_buttonDiscardActionPerformed
         limpiarCampos();
     }//GEN-LAST:event_buttonDiscardActionPerformed
+
+    private void txtFlavorsFocusLost(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_txtFlavorsFocusLost
+        // TODO add your handling code here:
+    }//GEN-LAST:event_txtFlavorsFocusLost
 
     
     //verifica que el usuario rellene todos los caompos y en caso de que no, deja guardar 
@@ -594,7 +635,9 @@ public class RegisterProduct extends javax.swing.JPanel {
             && ComboProductType.getSelectedItem() != null
             && !txtDescription.getText().trim().isEmpty()
             && !txtAvailable.getText().trim().isEmpty()
-            && comboSchedule.getSelectedItem() != null;
+            && comboSchedule.getSelectedItem() != null
+            && !txtFlavors.getText().trim().isEmpty();
+        
     }
 
     private void limpiarCampos() {
@@ -611,7 +654,7 @@ public class RegisterProduct extends javax.swing.JPanel {
         txtComments.setText("");
         txtDiscounts.setText("");
         txtPortion.setText("");
-        
+        txtFlavors.setText("");
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
@@ -629,10 +672,12 @@ public class RegisterProduct extends javax.swing.JPanel {
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel10;
     private javax.swing.JLabel jLabel11;
+    private javax.swing.JLabel jLabel12;
     private javax.swing.JLabel jLabel13;
     private javax.swing.JLabel jLabel14;
     private javax.swing.JLabel jLabel15;
     private javax.swing.JLabel jLabel16;
+    private javax.swing.JLabel jLabel17;
     private javax.swing.JLabel jLabel18;
     private javax.swing.JLabel jLabel19;
     private javax.swing.JLabel jLabel2;
@@ -659,6 +704,7 @@ public class RegisterProduct extends javax.swing.JPanel {
     private javax.swing.JTextField txtDescSaller;
     private javax.swing.JTextField txtDescription;
     private javax.swing.JTextField txtDiscounts;
+    private javax.swing.JTextField txtFlavors;
     private javax.swing.JTextField txtNameSaller;
     private javax.swing.JTextField txtNumProduct;
     private javax.swing.JTextField txtPBuys;
