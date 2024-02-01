@@ -616,7 +616,7 @@ public class SalePoint extends javax.swing.JPanel {
         Date fechaActual = Date.from(fecha.atStartOfDay(ZoneId.systemDefault()).toInstant());
         
         JpaController jpaController = new JpaController();
-        
+        int newDisp = 01;
         for (Product product : listPedido) {
             Sales sales = new Sales.Builder()
                     .withIdVenta(idVenta)
@@ -629,10 +629,13 @@ public class SalePoint extends javax.swing.JPanel {
                     .withFechaHora(fechaActual)
                     .build();
             
-            int newDisp = product.getDisponible() - listCantidad.get(index);
             product.setDisponible(newDisp);
-
-            jpaController.create(sales);
+            newDisp =product.getDisponible();
+            for (int i = 0; i >= listCantidad.get(index); i++) {
+                newDisp--;
+                jpaController.create(sales);
+            }
+            product.setDisponible(newDisp);
             jpaController.edit(product);
             
             index++;
@@ -798,7 +801,7 @@ public class SalePoint extends javax.swing.JPanel {
 
     public void llenarTabla(String productName, int cantidad) {
         ArrayList<Product> products = controller.findAllEntities(Product.class);
-
+        
         txtCant.setText("");
         txtComents.setText("");
         DefaultTableModel tableModel = (DefaultTableModel) tableProduct.getModel();
@@ -813,6 +816,7 @@ public class SalePoint extends javax.swing.JPanel {
         }
 
         double precio = 0.0f;
+        Product selectedProduct = null;
 
         for (Product producto : products) {
             if (producto.getNombre().equalsIgnoreCase(productName) && producto.getDisponible() >= cantidad) {
@@ -828,12 +832,19 @@ public class SalePoint extends javax.swing.JPanel {
                     total
                 };
                 tableModel.addRow(rowData);
-                listPedido.add(producto);
+                
+                selectedProduct = producto;
                 break;
             }else{
                 labelProdNoFind.setVisible(true);
             }
         }
+        if (selectedProduct != null) {
+            for (int i = 0; i >= cantidad; i++) {
+                listPedido.add(selectedProduct);
+            }
+        }
+        
     }
 
     public void resetearTabla() {

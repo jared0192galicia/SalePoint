@@ -5,10 +5,12 @@ import com.unsis.controller.JpaController;
 import com.unsis.models.entity.Flavors;
 import java.awt.Color;
 import com.unsis.models.entity.Product;
+import com.unsis.view.Main;
 import java.awt.event.KeyEvent;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
+import java.util.Locale;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 import javax.swing.BorderFactory;
@@ -20,18 +22,15 @@ import javax.swing.JTextField;
  *
  * @author jared
  */
-public class RegisterProduct extends javax.swing.JPanel {
-
-    static void setProduct(Product product) {
-        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
-    }
+public class UpdateProduct extends javax.swing.JPanel {
 
     private final JpaController controller;
+    private static Product product;
 
     /**
      * Creates new form RegisterProduct
      */
-    public RegisterProduct() {
+    public UpdateProduct() {
         initComponents();
         this.controller = new JpaController();
 
@@ -39,6 +38,7 @@ public class RegisterProduct extends javax.swing.JPanel {
 
         // comboSaller.addItem("+");
         this.dialogRegisterSaller.setLocationRelativeTo(null);
+   
     }
 
         
@@ -87,7 +87,50 @@ public class RegisterProduct extends javax.swing.JPanel {
         buttonSaveSaller.setIcon(resizedIcon);
 
     }
+    
+    public static Product getProduct() {
+        return product;
+    }
+    
+    public static void setProduct(Product product) {
+        UpdateProduct.product = product;
+    }
+    
+    public void setAllFields() {
+        this.txtPName.setText(product.getNombre());
+        this.txtNumProduct.setText(String.valueOf(product.getId()));
+        this.txtPBuys.setText(String.valueOf(product.getPreciocom()));
+        this.txtPSale.setText(String.valueOf(product.getPrecioventa()));
+        this.txtBarcode.setText(product.getCodigobarra());
+        this.txtDescription.setText(product.getDescripcion());
+        this.txtAvailable.setText(product.getEstado());
+        this.txtVariants.setText(product.getVariante());
+        
+        if("Disponible".equalsIgnoreCase(product.getEstado())){
+            RadioButtonAvailable.setSelected(true);
+        }else if ("No disponible".equalsIgnoreCase(product.getEstado())){
+            RadioButtonNotavailable.setSelected(true);
+        }
+        
+        List<String> flavorList = obtFlavors(product.getId());
+        String sabores = String.join(", ", flavorList);
+        
+        this.txtFlavors.setText(sabores);
+    }
 
+    private List<String> obtFlavors(int idProducto) {
+        List<Flavors> sabores = controller.findAllEntities(Flavors.class);
+        List<String> saboresProd = new ArrayList<>();
+
+        for (Flavors sabor : sabores) {
+            if (sabor.getIdProduct() == idProducto) {
+                saboresProd.add(sabor.getSabor());
+            }
+        }
+        return saboresProd;
+    }
+    
+    
     @SuppressWarnings("unchecked")
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
@@ -227,6 +270,12 @@ public class RegisterProduct extends javax.swing.JPanel {
                 .addComponent(panelRegisterDialog, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap(35, Short.MAX_VALUE))
         );
+
+        addComponentListener(new java.awt.event.ComponentAdapter() {
+            public void componentShown(java.awt.event.ComponentEvent evt) {
+                formComponentShown(evt);
+            }
+        });
 
         panelInternal.setBackground(new java.awt.Color(255, 255, 255));
         panelInternal.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
@@ -592,7 +641,7 @@ public class RegisterProduct extends javax.swing.JPanel {
                     .withEstado(RadioButtonAvailable.isSelected() ? "Disponible" : "No disponible")
                     .withDisponible(Integer.parseInt(txtAvailable.getText().trim()))
                     .build();
-            controller.create(product);
+            controller.edit(product);
             
             String sabores = txtFlavors.getText();
             String[] saboresArray = sabores.split(",\\s");
@@ -603,7 +652,7 @@ public class RegisterProduct extends javax.swing.JPanel {
                         .withIdProduct(product.getId())
                         .withSabor(sabor.trim())
                         .build();
-                controller.create(flavors);
+                controller.edit(flavors);
             }
 
         } else {
@@ -619,6 +668,10 @@ public class RegisterProduct extends javax.swing.JPanel {
     private void txtFlavorsFocusLost(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_txtFlavorsFocusLost
         // TODO add your handling code here:
     }//GEN-LAST:event_txtFlavorsFocusLost
+
+    private void formComponentShown(java.awt.event.ComponentEvent evt) {//GEN-FIRST:event_formComponentShown
+       this.setAllFields();
+    }//GEN-LAST:event_formComponentShown
 
     
     //verifica que el usuario rellene todos los caompos y en caso de que no, deja guardar 

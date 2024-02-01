@@ -8,7 +8,14 @@ import java.util.ArrayList;
 import javax.swing.BorderFactory;
 import javax.swing.table.DefaultTableModel;
 import com.unsis.controller.JpaController;
+import com.unsis.models.entity.Flavors;
+import java.awt.event.KeyEvent;
+import java.util.Arrays;
+import java.util.List;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
 import javax.swing.JOptionPane;
+import javax.swing.JTextField;
 
 /**
  *
@@ -17,7 +24,7 @@ import javax.swing.JOptionPane;
 public class ListProducts extends javax.swing.JPanel {
 
     private final Main mainWindow;
-     private final JpaController jpaController;
+    private final JpaController jpaController;    
 
     /**
      * Creates new form ListProducts
@@ -244,9 +251,9 @@ public class ListProducts extends javax.swing.JPanel {
             tableModel.addRow(rowData);
         }
     }
-    
+
     private void formComponentShown(java.awt.event.ComponentEvent evt) {//GEN-FIRST:event_formComponentShown
-         this.showModel();
+        this.showModel();
     }//GEN-LAST:event_formComponentShown
 
     private void buttonDeleteActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_buttonDeleteActionPerformed
@@ -264,13 +271,13 @@ public class ListProducts extends javax.swing.JPanel {
     }//GEN-LAST:event_buttonDeleteActionPerformed
 
     private void buttonModifyActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_buttonModifyActionPerformed
-       Product product= findProduct();
+        Product product = findProduct();
         if (product != null) {
-            RegisterProduct.setProduct(product);
-            mainWindow.setView("Editar Product");
+            UpdateProduct.setProduct(product);
+            mainWindow.setView("Editar Producto");
         }
     }//GEN-LAST:event_buttonModifyActionPerformed
-                                          
+
     public Product findProduct() {
         int filaSeleccionada = tableProduct.getSelectedRow();
 
@@ -280,16 +287,53 @@ public class ListProducts extends javax.swing.JPanel {
             ArrayList<Product> products = jpaController.findAllEntities(Product.class);
 
             for (Product product : products) {
-                if (product.getNombre()== codeProduct) {
+                if (product.getNombre() == codeProduct) {
                     return product;
-
                 }
             }
+        } else {
+            JOptionPane.showMessageDialog(null, "Debe seleccionar un producto", "Error", JOptionPane.ERROR_MESSAGE);
         }
         return null;
     }
-        
 
+    // este método se asegura de que solo se ingresen caracteres válidos en un campo de texto 
+    private void verify(KeyEvent evt, JTextField field, String regex) {
+        char c = evt.getKeyChar();
+        int keyCode = evt.getKeyCode();
+
+        if (KeyEvent.getKeyText(keyCode).length() > 1) {
+            return;
+        }
+
+        // Verifica si el carácter ingresado no es válido
+        if (!Character.toString(c).matches(regex)) {
+            // Consume el evento para evitar que el carácter no válido se agregue al JTextField// Obtiene el texto actual del JTextField
+            String textoActual = field.getText();
+
+            JOptionPane.showMessageDialog(null, "Solo se permiten caracteres válidos según la expresión regular: " + regex, "Advertencia", JOptionPane.WARNING_MESSAGE);
+
+            // Elimina el último carácter del texto actual
+            if (textoActual.length() > 0) {
+                String textoSinUltimoCaracter = textoActual.substring(0, textoActual.length() - 1);
+                field.setText(textoSinUltimoCaracter);
+            }
+        }
+    }
+
+    //Busca los sabores del producto seleccionado
+    private List<String> obtenerFlavors(int idProducto){
+        List<Flavors> sabores = jpaController.findAllEntities(Flavors.class);
+        List<String> saboresProd = new ArrayList<>();
+
+        for (Flavors sabor : sabores) {
+            if (sabor.getIdProduct() == idProducto) {
+                saboresProd.add(String.valueOf(sabor));
+            }
+        }
+        return saboresProd;
+    }
+    
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton buttonCreate;
     private javax.swing.JButton buttonDelete;
