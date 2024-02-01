@@ -1,8 +1,5 @@
 package com.unsis.puntoVenta;
 
-import com.unsis.clases.Tools;
-import com.unsis.controller.JpaController;
-import com.unsis.models.entity.Company;
 import com.unsis.view.panel.FirstEjecutation;
 import com.unsis.view.panel.Login;
 import io.github.cdimascio.dotenv.Dotenv;
@@ -25,7 +22,6 @@ public class PuntoVenta {
         } catch (Exception e) {
             System.err.println("No se ah encontrado el archivo de dependencias");
         }
-        Tools.generateTicket();
     }
 
     /**

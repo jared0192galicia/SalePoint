@@ -75,16 +75,16 @@ public class RegisterEmployed extends javax.swing.JPanel {
         ArrayList<String> ids = getCheckBoxNames();
         List<Access> accessList = new ArrayList<>();
         // Estableces la relación con la sección
-        for (Section section : sections) {
-            if (ids.contains(String.valueOf(section.getId()))) {
+        for (String id : ids) {
+//            if (ids.contains(String.valueOf(section.getId()))) {
                 access = new Access.Builder()
-                        .withId(section.getId())
+                        .withId(100)
                         .withIdCuenta(account)
                         .withIdSeccion(new Section(section))
                         .build();
                 accessList.add(access);
                 System.out.println("Acceso a " + section.getId() + " : " + section.getNombre());
-            }
+//            }
         }
         return accessList;
     }
