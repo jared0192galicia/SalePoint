@@ -23,7 +23,7 @@ import javax.persistence.TemporalType;
 
 /**
  *
- * @author labtecweb10
+ * @author Elio Justino
  */
 @Entity
 @Table(name = "\"Sales\"")

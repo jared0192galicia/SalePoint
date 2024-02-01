@@ -102,6 +102,19 @@ CREATE TABLE "Sales"(
   FOREIGN KEY (idProducto) REFERENCES "Product"(id)
 );
 
+CREATE TABLE "Expenses" (
+  id serial PRIMARY KEY,
+  idAccount INT,
+  idAutorizo INT,
+  date TIMESTAMP DEFAULT CURRENT_DATE,
+  descripcion varchar,
+  categoria VARCHAR CHECK (categoria IN ('Viatico', 'Otro')),
+  monto float4,
+  comprobante varchar,
+  FOREIGN KEY (idAccount) REFERENCES "Account"(id),
+  FOREIGN KEY (idAutorizo) REFERENCES "Account"(id)
+);
+
 ALTER TABLE
   "Account"
 ADD
@@ -123,6 +136,29 @@ WHERE
   
 ALTER TABLE "Product"
 MODIFY COLUMN estado VARCHAR;
+
+--Trigger para disponible y estado
+CREATE OR REPLACE FUNCTION actualizar_estado()
+RETURNS TRIGGER AS $$
+BEGIN
+    IF NEW.disponible >= 0 THEN
+        IF NEW.disponible = 0 THEN
+            NEW.estado = 'No disponible';
+        ELSIF NEW.disponible > 1 THEN
+            NEW.estado = 'Disponible';
+        END IF;
+        RETURN NEW;
+    ELSE
+        RAISE EXCEPTION 'El valor de "disponible" debe ser mayor o igual a cero';
+    END IF;
+END;
+$$ LANGUAGE plpgsql;
+
+CREATE TRIGGER tr_actualizar_estado
+BEFORE INSERT OR UPDATE
+ON "Product"
+FOR EACH ROW
+EXECUTE FUNCTION actualizar_estado();
 
 --Script de consulta de compras
 SELECT * FROM "Sales" 

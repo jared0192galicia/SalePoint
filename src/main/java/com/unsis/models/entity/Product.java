@@ -19,7 +19,7 @@ import javax.persistence.Table;
 
 /**
  *
- * @author labtecweb10
+ * @author labtecweb04
  */
 @Entity
 @Table(name = "\"Product\"")
@@ -44,6 +44,7 @@ public class Product implements Serializable {
     @Basic(optional = false)
     @Column(name = "id")
     private Integer id;
+    @Basic(optional = false)
     @Column(name = "codigobarra")
     private String codigobarra;
     @Column(name = "nombre")
@@ -73,6 +74,11 @@ public class Product implements Serializable {
 
     public Product(Integer id) {
         this.id = id;
+    }
+
+    public Product(Integer id, String codigobarra) {
+        this.id = id;
+        this.codigobarra = codigobarra;
     }
 
     public Integer getId() {
@@ -195,7 +201,7 @@ public class Product implements Serializable {
     public String toString() {
         return "com.unsis.models.entity.Product[ id=" + id + " ]";
     }
-    
+
     public static class Builder {
         private Product product;
 
@@ -262,4 +268,5 @@ public class Product implements Serializable {
             return product;
         }
     }
+    
 }

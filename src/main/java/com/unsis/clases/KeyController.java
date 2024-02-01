@@ -20,43 +20,42 @@ public class KeyController extends KeyAdapter {
     public void keyPressed(KeyEvent e) {
         // Lógica para el evento de tecla presionada
         int keyCode = e.getKeyCode();
-        System.out.print("Tecla presionada: " + e.getKeyChar());
-        System.out.println(" Codigo: " + keyCode);
 
+        String name = "-1";
         // Eventos para teclas F1-F12
         switch (keyCode) {
-            case 112 ->
-                this.window.setView("Lista Empleados");
+            case 112 -> {
+                name = "Lista Empleados";
+            }
             case 113 -> {
-                this.window.setView("Alta de Empleado");
+                name = "Alta de Empleado";
             }
             case 114 -> {
-                this.window.setView("Alta de Producto");
+                name = "Alta de Producto";
             }
             case 115 -> {
-                this.window.setView("Lista Productos");
+                name = "Lista Productos";
             }
             case 116 -> {
-                this.window.setView("Ordenes entrantes");
+                name = "Ordenes entrantes";
             }
             case 117 -> {
-                this.window.setView("Punto de Venta");
+                name = "Punto de Venta";
             }
             case 118 -> {
-                this.window.setView("Ajustes del generales");
+                name = "Ajustes del generales";
             }
             case 119 -> {
-                this.window.setView("Corte de caja");
+                name = "Corte de caja";
             }
             case 120 -> {
-                this.window.setView("Gastos");
+                name = "Gastos";
             }
-            case 121 -> {
-            }
-            case 122 -> {
-            }
-            case 123 -> {
-            }
+        }
+
+        if (!name.equals("-1")) {
+            this.window.setView(name);
+            this.window.addPanelHistory(name);
         }
     }
 }

@@ -1,21 +1,12 @@
-/*
- * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
- * Click nbfs://nbhost/SystemFileSystem/Templates/GUIForms/JPanel.java to edit this template
- */
 package com.unsis.view.panel;
 
 import javax.swing.JLabel;
 
-/**
- *
- * @author Cristoforo
- */
-public class HeadWrapperPanel extends javax.swing.JPanel {
+public class SalesRow extends javax.swing.JPanel {
 
-    public HeadWrapperPanel() {
+    public SalesRow() {
         initComponents();
         this.setSize(900, 82);
-        pedidoLabel.setText("2 Tortas de cuero \n 2 Aguas de 1L...");
     }
 
     public JLabel getImgLabel() {
@@ -50,6 +41,14 @@ public class HeadWrapperPanel extends javax.swing.JPanel {
         this.pedidoLabel = pedidoLabel;
     }
 
+    public JLabel getDescripcionLabel() {
+        return descripcionLabel;
+    }
+
+    public JLabel getProductoLabel() {
+        return productoLabel;
+    }
+
     /**
      * This method is called from within the constructor to initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is always
@@ -60,67 +59,60 @@ public class HeadWrapperPanel extends javax.swing.JPanel {
     private void initComponents() {
 
         imgLabel = new javax.swing.JLabel();
-        nombreLabel = new javax.swing.JLabel();
+        descripcionLabel = new javax.swing.JLabel();
         horaLabel = new javax.swing.JLabel();
+        nombreLabel = new javax.swing.JLabel();
         pedidoLabel = new javax.swing.JLabel();
-        labelName = new javax.swing.JLabel();
-        jLabel1 = new javax.swing.JLabel();
-        pedidoLabel1 = new javax.swing.JLabel();
+        productoLabel = new javax.swing.JLabel();
 
         setBackground(new java.awt.Color(255, 255, 255));
-        setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+        setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
 
         imgLabel.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        imgLabel.setIcon(new javax.swing.ImageIcon(getClass().getResource("/user0.png"))); // NOI18N
 
-        nombreLabel.setForeground(new java.awt.Color(132, 143, 165));
-        nombreLabel.setText("de ventas dio de alta un pedido");
+        descripcionLabel.setForeground(new java.awt.Color(132, 143, 165));
+        descripcionLabel.setText("de ventas dio de alta un pedido");
 
         horaLabel.setFont(new java.awt.Font("Dialog", 1, 14)); // NOI18N
         horaLabel.setForeground(new java.awt.Color(132, 139, 188));
+        horaLabel.setHorizontalAlignment(javax.swing.SwingConstants.LEFT);
         horaLabel.setText("Hoy a las 2:35 PM");
+
+        nombreLabel.setFont(new java.awt.Font("Dialog", 1, 14)); // NOI18N
+        nombreLabel.setForeground(new java.awt.Color(3, 43, 89));
+        nombreLabel.setHorizontalAlignment(javax.swing.SwingConstants.RIGHT);
+        nombreLabel.setText("Hugo");
 
         pedidoLabel.setFont(new java.awt.Font("Dialog", 1, 16)); // NOI18N
         pedidoLabel.setForeground(new java.awt.Color(51, 51, 51));
-        pedidoLabel.setText("2 Tortas de cuero");
+        pedidoLabel.setHorizontalAlignment(javax.swing.SwingConstants.RIGHT);
+        pedidoLabel.setText("Tipo de pedido");
         pedidoLabel.setVerticalAlignment(javax.swing.SwingConstants.TOP);
         pedidoLabel.setVerticalTextPosition(javax.swing.SwingConstants.TOP);
 
-        labelName.setFont(new java.awt.Font("Dialog", 1, 14)); // NOI18N
-        labelName.setForeground(new java.awt.Color(3, 43, 89));
-        labelName.setText("Hugo");
-
-        jLabel1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/dropDawn.png"))); // NOI18N
-
-        pedidoLabel1.setFont(new java.awt.Font("Dialog", 1, 16)); // NOI18N
-        pedidoLabel1.setForeground(new java.awt.Color(51, 51, 51));
-        pedidoLabel1.setText("2 Tortas de cuero");
-        pedidoLabel1.setVerticalAlignment(javax.swing.SwingConstants.TOP);
-        pedidoLabel1.setVerticalTextPosition(javax.swing.SwingConstants.TOP);
+        productoLabel.setFont(new java.awt.Font("Times New Roman", 0, 24)); // NOI18N
+        productoLabel.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        productoLabel.setText("Producto");
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
         this.setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addGap(39, 39, 39)
+                .addContainerGap()
                 .addComponent(imgLabel, javax.swing.GroupLayout.PREFERRED_SIZE, 62, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(14, 14, 14)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(layout.createSequentialGroup()
-                        .addGap(6, 6, 6)
-                        .addComponent(horaLabel, javax.swing.GroupLayout.PREFERRED_SIZE, 166, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addGroup(layout.createSequentialGroup()
-                        .addComponent(labelName, javax.swing.GroupLayout.PREFERRED_SIZE, 41, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(nombreLabel, javax.swing.GroupLayout.PREFERRED_SIZE, 121, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(nombreLabel, javax.swing.GroupLayout.PREFERRED_SIZE, 205, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                .addGap(52, 52, 52)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(pedidoLabel, javax.swing.GroupLayout.PREFERRED_SIZE, 194, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(pedidoLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 194, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 453, Short.MAX_VALUE)
-                .addComponent(jLabel1)
-                .addGap(34, 34, 34))
+                        .addComponent(descripcionLabel, javax.swing.GroupLayout.PREFERRED_SIZE, 179, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(horaLabel, javax.swing.GroupLayout.PREFERRED_SIZE, 262, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addComponent(pedidoLabel, javax.swing.GroupLayout.PREFERRED_SIZE, 194, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(productoLabel, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addContainerGap())
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -129,30 +121,25 @@ public class HeadWrapperPanel extends javax.swing.JPanel {
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(imgLabel, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                        .addGap(0, 0, Short.MAX_VALUE)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                                .addComponent(nombreLabel, javax.swing.GroupLayout.PREFERRED_SIZE, 16, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addComponent(labelName))
-                            .addComponent(pedidoLabel1))
+                            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                                .addComponent(descripcionLabel, javax.swing.GroupLayout.PREFERRED_SIZE, 16, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addComponent(nombreLabel)
+                                .addComponent(horaLabel))
+                            .addComponent(pedidoLabel, javax.swing.GroupLayout.Alignment.TRAILING))
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(horaLabel)
-                            .addComponent(pedidoLabel))
-                        .addGap(7, 7, 7)))
+                        .addComponent(productoLabel, javax.swing.GroupLayout.DEFAULT_SIZE, 64, Short.MAX_VALUE)))
                 .addContainerGap())
-            .addComponent(jLabel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
         );
     }// </editor-fold>//GEN-END:initComponents
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JLabel descripcionLabel;
     private javax.swing.JLabel horaLabel;
     private javax.swing.JLabel imgLabel;
-    private javax.swing.JLabel jLabel1;
-    private javax.swing.JLabel labelName;
     private javax.swing.JLabel nombreLabel;
     private javax.swing.JLabel pedidoLabel;
-    private javax.swing.JLabel pedidoLabel1;
+    private javax.swing.JLabel productoLabel;
     // End of variables declaration//GEN-END:variables
 }
