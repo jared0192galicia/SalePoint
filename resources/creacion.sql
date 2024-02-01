@@ -130,7 +130,9 @@ RETURNS TRIGGER AS $$
 BEGIN
     IF NEW.disponible >= 0 THEN
         IF NEW.disponible = 0 THEN
-            NEW.estado = 'inactivo';
+            NEW.estado = 'No disponible';
+        ELSIF NEW.disponible > 1 THEN
+            NEW.estado = 'Disponible';
         END IF;
         RETURN NEW;
     ELSE
