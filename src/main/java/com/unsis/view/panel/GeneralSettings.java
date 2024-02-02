@@ -115,6 +115,14 @@ public class GeneralSettings extends javax.swing.JPanel {
                 validateContact();
             }
         });
+        buttonSave.addActionListener(new ActionListener() {
+    @Override
+    public void actionPerformed(ActionEvent e) {
+        // Llama al método separado para manejar la acción de buttonSave
+        buttonSaveActionPerformed(e);
+    }
+});
+       
     }
 
     private void validateVAT() {
@@ -288,12 +296,16 @@ public class GeneralSettings extends javax.swing.JPanel {
         Labeajustes1.setText("Ajustes");
         add(Labeajustes1, new org.netbeans.lib.awtextra.AbsoluteConstraints(50, 10, -1, -1));
     }// </editor-fold>//GEN-END:initComponents
-//Guardar en archivo
+
+  
+    
     private void buttonSaveActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_buttonSaveActionPerformed
         String vat = jTextFieldVAT.getText();
         String decimals = jTextFieldDecimals.getText();
         String email = jTextFieldEmail.getText();
         String contact = jTextFieldContact.getText();
+       String ruta = jTextFieldroute.getText(); // Obtener ruta desde JTextField
+
 
         String filePath = "src/main/resources/files/config.txt";
 
@@ -312,6 +324,8 @@ public class GeneralSettings extends javax.swing.JPanel {
                 writer.write("Email=" + email);
                 writer.newLine();
                 writer.write("Contact=" + contact);
+                writer.newLine();
+            writer.write("Ruta=" + ruta); // Guardar la ruta
 
                 System.out.println("Data saved successfully in the file.");
             } catch (IOException e) {
@@ -322,7 +336,7 @@ public class GeneralSettings extends javax.swing.JPanel {
         }
 
     }//GEN-LAST:event_buttonSaveActionPerformed
-
+ 
     public void componentShown(java.awt.event.ComponentEvent evt) {
         // Este método se llama cuando se muestra el panel
         readDataFromFile(); // Llama a un método para leer datos desde el archivo y actualizar la interfaz de usuario
