@@ -174,6 +174,8 @@ public class GeneralSettings extends javax.swing.JPanel {
         Labeajustes2 = new javax.swing.JLabel();
         buttonSave = new javax.swing.JButton();
         jTextFieldContact = new javax.swing.JTextField();
+        labelfilter7 = new javax.swing.JLabel();
+        jTextFieldroute = new javax.swing.JTextField();
         Labeajustes1 = new javax.swing.JLabel();
 
         setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
@@ -194,8 +196,8 @@ public class GeneralSettings extends javax.swing.JPanel {
 
         labelfilter1.setFont(new java.awt.Font("Jaldi", 0, 20)); // NOI18N
         labelfilter1.setForeground(new java.awt.Color(82, 146, 222));
-        labelfilter1.setText("Contacto");
-        jPanel1.add(labelfilter1, new org.netbeans.lib.awtextra.AbsoluteConstraints(1060, 460, 140, 39));
+        labelfilter1.setText("ruta");
+        jPanel1.add(labelfilter1, new org.netbeans.lib.awtextra.AbsoluteConstraints(1060, 540, 140, 39));
 
         jButton1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/IconCafe.png"))); // NOI18N
         jButton1.setContentAreaFilled(false);
@@ -272,6 +274,12 @@ public class GeneralSettings extends javax.swing.JPanel {
         jTextFieldContact.setFont(new java.awt.Font("Monospaced", 0, 14)); // NOI18N
         jTextFieldContact.setForeground(new java.awt.Color(51, 51, 51));
         jPanel1.add(jTextFieldContact, new org.netbeans.lib.awtextra.AbsoluteConstraints(1060, 500, 250, 35));
+
+        labelfilter7.setFont(new java.awt.Font("Jaldi", 0, 20)); // NOI18N
+        labelfilter7.setForeground(new java.awt.Color(82, 146, 222));
+        labelfilter7.setText("Contacto");
+        jPanel1.add(labelfilter7, new org.netbeans.lib.awtextra.AbsoluteConstraints(1060, 460, 140, 39));
+        jPanel1.add(jTextFieldroute, new org.netbeans.lib.awtextra.AbsoluteConstraints(1060, 580, 250, 40));
 
         add(jPanel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(60, 70, 1540, 690));
 
@@ -369,6 +377,7 @@ public class GeneralSettings extends javax.swing.JPanel {
     private javax.swing.JTextField jTextFieldDecimals;
     private javax.swing.JTextField jTextFieldEmail;
     private javax.swing.JTextField jTextFieldVAT;
+    private javax.swing.JTextField jTextFieldroute;
     private javax.swing.JLabel labelfilter;
     private javax.swing.JLabel labelfilter1;
     private javax.swing.JLabel labelfilter2;
@@ -376,5 +385,6 @@ public class GeneralSettings extends javax.swing.JPanel {
     private javax.swing.JLabel labelfilter4;
     private javax.swing.JLabel labelfilter5;
     private javax.swing.JLabel labelfilter6;
+    private javax.swing.JLabel labelfilter7;
     // End of variables declaration//GEN-END:variables
 }
