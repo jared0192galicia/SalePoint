@@ -139,6 +139,23 @@ ON "Product"
 FOR EACH ROW
 EXECUTE FUNCTION actualizar_estado();
 
+--Trigger para restar disponibilidad
+CREATE OR REPLACE FUNCTION actualizar_disponible()
+RETURNS TRIGGER AS $$
+BEGIN
+  UPDATE "Product"
+  SET disponible = disponible - 1
+  WHERE id = NEW.idProducto;
+
+  RETURN NEW;
+END;
+$$ LANGUAGE plpgsql;
+
+CREATE TRIGGER actualizar_disponible_trigger
+AFTER INSERT ON "Sales"
+FOR EACH ROW
+EXECUTE FUNCTION actualizar_disponible();
+
 --Script de consulta de compras
 SELECT * FROM "Sales" 
 LEFT JOIN "Product" ON "Product".id = "Sales".idproducto 
