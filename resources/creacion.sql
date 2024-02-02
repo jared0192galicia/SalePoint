@@ -97,7 +97,7 @@ CREATE TABLE "Sales"(
   nombreComprador VARCHAR,
   codigoBarra VARCHAR,
   fechaHora TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
-  estatus INT,
+  estatus INT  NOT NULL DEFAULT 0,
   PRIMARY KEY(id),
   FOREIGN KEY (idEmpleado) REFERENCES "Employee"(id),
   FOREIGN KEY (idProducto) REFERENCES "Product"(id)
