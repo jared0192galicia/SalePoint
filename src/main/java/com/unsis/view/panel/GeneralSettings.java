@@ -11,8 +11,11 @@ import java.io.BufferedWriter;
 import java.io.File;
 import java.io.FileWriter;
 import java.io.IOException;
+import javax.swing.Timer;
+
 
 public class GeneralSettings extends javax.swing.JPanel {
+    private Timer timer; // Agrega esta línea para declarar la variable timer
 
     /**
      * Creates new form PanelAjustes
@@ -21,6 +24,7 @@ public class GeneralSettings extends javax.swing.JPanel {
         initComponents();
         this.resizeImages();
         addListeners();
+            initializeTimer();
         this.addComponentListener(new java.awt.event.ComponentAdapter() {
             @Override
             public void componentShown(java.awt.event.ComponentEvent evt) {
@@ -44,86 +48,59 @@ public class GeneralSettings extends javax.swing.JPanel {
     }
 
     private void addListeners() {
-        // validacion del campo iva
-        jTextFieldVAT.getDocument().addDocumentListener(new DocumentListener() {
-            @Override
-            public void insertUpdate(DocumentEvent e) {
-                validateVAT();
-            }
-
-            @Override
-            public void removeUpdate(DocumentEvent e) {
-                validateVAT();
-            }
-
-            @Override
-            public void changedUpdate(DocumentEvent e) {
-                validateVAT();
-            }
-        });
-
-        //  Validación del campo Decimales
-        jTextFieldDecimals.getDocument().addDocumentListener(new DocumentListener() {
-            @Override
-            public void insertUpdate(DocumentEvent e) {
-                validateDecimals();
-            }
-
-            @Override
-            public void removeUpdate(DocumentEvent e) {
-                validateDecimals();
-            }
-
-            @Override
-            public void changedUpdate(DocumentEvent e) {
-                validateDecimals();
-            }
-        });
-
-        // Validación del campo Correo
-        jTextFieldEmail.getDocument().addDocumentListener(new DocumentListener() {
-            @Override
-            public void insertUpdate(DocumentEvent e) {
-                validateEmail();
-            }
-
-            @Override
-            public void removeUpdate(DocumentEvent e) {
-                validateEmail();
-            }
-
-            @Override
-            public void changedUpdate(DocumentEvent e) {
-                validateEmail();
-            }
-        });
-
-        // Validación del campo Contacto
-        jTextFieldContact.getDocument().addDocumentListener(new DocumentListener() {
-            @Override
-            public void insertUpdate(DocumentEvent e) {
-                validateContact();
-            }
-
-            @Override
-            public void removeUpdate(DocumentEvent e) {
-                validateContact();
-            }
-
-            @Override
-            public void changedUpdate(DocumentEvent e) {
-                validateContact();
-            }
-        });
-        buttonSave.addActionListener(new ActionListener() {
-    @Override
-    public void actionPerformed(ActionEvent e) {
-        // Llama al método separado para manejar la acción de buttonSave
-        buttonSaveActionPerformed(e);
-    }
-});
+       // Validación del campo iva
        
+
+        buttonSave.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                // Llama al método separado para manejar la acción de buttonSave
+                buttonSaveActionPerformed(e);
+            }
+        });
     }
+    
+    private void addValidationListener(JTextField textField, ActionListener validationAction) {
+        textField.getDocument().addDocumentListener(new DocumentListener() {
+            @Override
+            public void insertUpdate(DocumentEvent e) {
+                startValidationTimer(validationAction);
+            }
+
+            @Override
+            public void removeUpdate(DocumentEvent e) {
+                startValidationTimer(validationAction);
+            }
+
+            @Override
+            public void changedUpdate(DocumentEvent e) {
+                startValidationTimer(validationAction);
+            }
+        });
+    }
+
+    private void startValidationTimer(ActionListener validationAction) {
+        if (timer.isRunning()) {
+            timer.restart();
+        } else {
+            timer.start();
+        }
+
+        timer.addActionListener(validationAction);
+    }
+
+    private void initializeTimer() {
+        // Configurar el temporizador para 500 milisegundos
+        timer = new Timer(500, new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                timer.stop();
+            }
+        });
+
+        timer.setRepeats(false);
+    }
+
 
     private void validateVAT() {
         String textVAT = jTextFieldVAT.getText();
