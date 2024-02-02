@@ -71,6 +71,13 @@ INSERT INTO "Supplier" (nombre, marca) VALUES
 ('Proveedor D', 'Marca D'),
 ('Proveedor E', 'Marca E');
 
+-- Población de la tabla Product
+INSERT INTO "Product" (nombre, precioCom, precioVenta, codigoBarra, tipo, descripcion, numProducto, estado, disponible, variante) VALUES
+('Cupcake', 10.5, 15.99, '111111', 'Postre', 'Descripción 1', 1001, 'Activo', 20, 'Variante A'),
+('Hamburguesa', 8.75, 12.49, '222222', 'Comida', 'Descripción 2', 1002, 'Activo', 15, 'Variante B'),
+('Papas Gajo', 12.0, 19.99, '333333', 'Complemento', 'Descripción 3', 1003, 'Inactivo', 0, 'Variante C'),
+('CocaCola', 15.25, 24.99, '444444', 'Bebida', 'Descripción 4', 1004, 'Activo', 30, 'Variante D'),
+('Soda Italiana', 9.99, 16.99, '555555', 'Bebida', 'Descripción 5', 1005, 'Activo', 25, 'Variante E');
 -- Población de la tabla Sales
 INSERT INTO "Sales" (idVenta, idEmpleado, idProducto, tipoOrden, comentarios, nombreComprador, codigoBarra, fechaHora) VALUES
 (10001, 17, '111111', 'Normal', 'Sin azúcar', 'Juan Pérez', '111111', '2024-01-26 08:30:00'),
@@ -81,13 +88,6 @@ INSERT INTO "Sales" (idVenta, idEmpleado, idProducto, tipoOrden, comentarios, no
 INSERT INTO "Sales" (idVenta, idEmpleado, idProducto, tipoOrden, comentarios, nombreComprador, codigoBarra, fechaHora) VALUES
 (454544, 1, '5', 'Para llevar', 'Sin gas', 'Pedro Rodríguez', '555555', '2024-01-26 21:00:00');
 
--- Población de la tabla Product
-INSERT INTO "Product" (nombre, precioCom, precioVenta, codigoBarra, tipo, descripcion, numProducto, estado, disponible, variante) VALUES
-('Cupcake', 10.5, 15.99, '111111', 'Postre', 'Descripción 1', 1001, 'Activo', 20, 'Variante A'),
-('Hamburguesa', 8.75, 12.49, '222222', 'Comida', 'Descripción 2', 1002, 'Activo', 15, 'Variante B'),
-('Papas Gajo', 12.0, 19.99, '333333', 'Complemento', 'Descripción 3', 1003, 'Inactivo', 0, 'Variante C'),
-('CocaCola', 15.25, 24.99, '444444', 'Bebida', 'Descripción 4', 1004, 'Activo', 30, 'Variante D'),
-('Soda Italiana', 9.99, 16.99, '555555', 'Bebida', 'Descripción 5', 1005, 'Activo', 25, 'Variante E');
 
 -- Población de la tabla Flavors
 INSERT INTO "Flavors" (idProducto, sabor) VALUES

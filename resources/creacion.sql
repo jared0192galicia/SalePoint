@@ -42,6 +42,7 @@ CREATE TABLE "Account" (
   idEmpleado INT,
   usuario VARCHAR(20),
   contrasena VARCHAR(256),
+  fotoperfil VARCHAR NOTNULL DEFAULT '/profileDefault.png',
   PRIMARY KEY(id),
   FOREIGN KEY (idEmpleado) REFERENCES "Employee"(id)
 );
@@ -115,28 +116,6 @@ CREATE TABLE "Expenses" (
   FOREIGN KEY (idAutorizo) REFERENCES "Account"(id)
 );
 
-ALTER TABLE
-  "Account"
-ADD
-  COLUMN fotoperfil VARCHAR;
-
-ALTER TABLE
-  "Account"
-ALTER COLUMN
-  fotoperfil
-SET
-  DEFAULT '/profileDefault.png' NOTNULL;
-
-UPDATE
-  "Account"
-SET
-  fotoperfil = '/profileDefault.png'
-WHERE
-  fotoperfil IS NULL;
-  
-ALTER TABLE "Product"
-MODIFY COLUMN estado VARCHAR;
-
 --Trigger para disponible y estado
 CREATE OR REPLACE FUNCTION actualizar_estado()
 RETURNS TRIGGER AS $$
@@ -166,3 +145,10 @@ LEFT JOIN "Product" ON "Product".id = "Sales".idproducto
 LEFT JOIN "Flavors" ON "Flavors".idproducto = "Product".id WHERE DATE("fechahora") = '2024-01-26';
  
  DELETE FROM "Sales" WHERE "id"=7
+
+ UPDATE
+  "Account"
+SET
+  fotoperfil = '/profileDefault.png'
+WHERE
+  fotoperfil IS NULL;

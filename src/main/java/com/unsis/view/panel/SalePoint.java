@@ -1,7 +1,3 @@
-/*
- * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
- * Click nbfs://nbhost/SystemFileSystem/Templates/GUIForms/JPanel.java to edit this template
- */
 package com.unsis.view.panel;
 
 import com.unsis.clases.Session;
@@ -33,10 +29,10 @@ import javax.swing.table.DefaultTableCellRenderer;
 import javax.swing.table.DefaultTableModel;
 import javax.swing.table.JTableHeader;
 
-import com.itextpdf.kernel.pdf.PdfDocument;
-import com.itextpdf.kernel.pdf.PdfWriter;
-import com.itextpdf.layout.Document;
-import com.itextpdf.layout.element.Paragraph;
+//import com.itextpdf.kernel.pdf.PdfDocument;
+//import com.itextpdf.kernel.pdf.PdfWriter;
+//import com.itextpdf.layout.Document;
+//import com.itextpdf.layout.element.Paragraph;
 
 import java.io.FileNotFoundException;
 
@@ -884,14 +880,14 @@ public class SalePoint extends javax.swing.JPanel {
     }
 
     private static void generaTicket(String outputPath) throws FileNotFoundException{
-        PdfWriter writer = new PdfWriter(outputPath);
-        PdfDocument pdf = new PdfDocument(writer);
-        Document document = new Document(pdf);
-        
-        document.add(new Paragraph("Ejemplo de PDF con formato"));
-        document.add(new Paragraph("Fecha: 31 de enero de 2024"));
-        
-        document.close();
+//        PdfWriter writer = new PdfWriter(outputPath);
+//        PdfDocument pdf = new PdfDocument(writer);
+//        Document document = new Document(pdf);
+//        
+//        document.add(new Paragraph("Ejemplo de PDF con formato"));
+//        document.add(new Paragraph("Fecha: 31 de enero de 2024"));
+//        
+//        document.close();
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables

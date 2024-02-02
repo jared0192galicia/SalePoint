@@ -71,20 +71,20 @@ public class RegisterEmployed extends javax.swing.JPanel {
     private List<Access> generateAccess(Account account) {
         // Creas una instancia de Access
         Access access;
+        Section secctionAux;
         ArrayList<Section> sections = new ArrayList<>();
         ArrayList<String> ids = getCheckBoxNames();
         List<Access> accessList = new ArrayList<>();
         // Estableces la relación con la sección
         for (String id : ids) {
-//            if (ids.contains(String.valueOf(section.getId()))) {
-                access = new Access.Builder()
-                        .withId(100)
-                        .withIdCuenta(account)
-                        .withIdSeccion(new Section(section))
-                        .build();
-                accessList.add(access);
-                System.out.println("Acceso a " + section.getId() + " : " + section.getNombre());
-//            }
+            secctionAux = controller.findEntityById(Integer.parseInt(id), Section.class);
+            access = new Access.Builder()
+                    .withId(0)
+                    .withIdCuenta(account)
+                    .withIdSeccion(secctionAux)
+                    .build();
+            
+            accessList.add(access);
         }
         return accessList;
     }
