@@ -471,6 +471,7 @@ public class SalePoint extends javax.swing.JPanel {
         jPanel2.add(txtCant, new org.netbeans.lib.awtextra.AbsoluteConstraints(60, 230, 160, 30));
 
         buttonGroup1.add(rbNormal);
+        rbNormal.setSelected(true);
         rbNormal.setText("Normal");
         rbNormal.setHorizontalTextPosition(javax.swing.SwingConstants.RIGHT);
         rbNormal.addActionListener(new java.awt.event.ActionListener() {
@@ -607,16 +608,20 @@ public class SalePoint extends javax.swing.JPanel {
     }//GEN-LAST:event_buttonAddOrderMouseClicked
 
     private void confirmarBotonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_confirmarBotonActionPerformed
-//      this.wrapper.setEnabled(true);
-//      this.dispose();
         dialogConfirm.show(false);
         int idVenta = obSigIdVeta();
         int index = 0;
+        int newDisp = 0;
         LocalDate fecha = LocalDate.now();
         Date fechaActual = Date.from(fecha.atStartOfDay(ZoneId.systemDefault()).toInstant());
-        
         JpaController jpaController = new JpaController();
-        int newDisp = 01;
+
+//        for (Product product : listPedido) {
+//            System.out.println("ID Producto: " + product);
+//            System.out.println("Nombre: " + product.getNombre());
+//            System.out.println("Cantidad Disponible: " + product.getDisponible());
+//            // Imprime otros atributos relevantes de Product si es necesario
+//        }
         for (Product product : listPedido) {
             Sales sales = new Sales.Builder()
                     .withIdVenta(idVenta)
@@ -628,26 +633,34 @@ public class SalePoint extends javax.swing.JPanel {
                     .withCodigoBarras(product.getCodigobarra())
                     .withFechaHora(fechaActual)
                     .build();
-            
-            product.setDisponible(newDisp);
-            newDisp =product.getDisponible();
-            for (int i = 0; i >= listCantidad.get(index); i++) {
-                newDisp--;
+
+//            product.setDisponible(newDisp);
+//            newDisp = product.getDisponible();  // <-- Deberías asignar el valor actual de disponibilidad antes de restar
+
+            for (int i = 0; i < listCantidad.get(index); i++) {
+//                newDisp--;
+//                product.setDisponible(newDisp);  // <-- Resta a la disponibilidad actual
                 jpaController.create(sales);
+                System.out.println(sales.getIdproducto().getNombre());
             }
-            product.setDisponible(newDisp);
-            jpaController.edit(product);
-            
+
+            //jpaController.edit(product);
             index++;
-            String outputPath = "Venta"+String.valueOf(idVenta)+".pdf";
+            String outputPath = "Venta" + String.valueOf(idVenta) + ".pdf";
             try {
                 generaTicket(outputPath);
                 System.out.println("PDF generado exitosamente en: " + outputPath);
             } catch (Exception e) {
                 e.printStackTrace();
-            } 
-       }
+            }
+        }
         resetearTabla();
+        listCantidad.clear();
+        listComent.clear();
+        listPedido.clear();
+        listTipoOrden.clear();
+        txtName.setEnabled(true);
+        txtName.setText("");
     }//GEN-LAST:event_confirmarBotonActionPerformed
 
     private void buttonCloseActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_buttonCloseActionPerformed
@@ -740,7 +753,7 @@ public class SalePoint extends javax.swing.JPanel {
 
         if (selectedRow != -1) { // Verifica que haya una fila seleccionada
             labelNoSelectProd.setVisible(false);
-            
+
             int opcion = JOptionPane.showConfirmDialog(null,
                     "¿Estás seguro de continuar?", "Confirmación", JOptionPane.YES_NO_OPTION);
 
@@ -750,7 +763,7 @@ public class SalePoint extends javax.swing.JPanel {
                 model.removeRow(selectedRow);
 
             }
-        }else{
+        } else {
             labelNoSelectProd.setVisible(true);
             labelVoidCamp.setVisible(false);
         }
@@ -801,7 +814,7 @@ public class SalePoint extends javax.swing.JPanel {
 
     public void llenarTabla(String productName, int cantidad) {
         ArrayList<Product> products = controller.findAllEntities(Product.class);
-        
+
         txtCant.setText("");
         txtComents.setText("");
         DefaultTableModel tableModel = (DefaultTableModel) tableProduct.getModel();
@@ -832,19 +845,19 @@ public class SalePoint extends javax.swing.JPanel {
                     total
                 };
                 tableModel.addRow(rowData);
-                
+
                 selectedProduct = producto;
                 break;
-            }else{
+            } else {
                 labelProdNoFind.setVisible(true);
             }
         }
         if (selectedProduct != null) {
-            for (int i = 0; i >= cantidad; i++) {
-                listPedido.add(selectedProduct);
-            }
+            //for (int i = 0; i <= cantidad; i++) {
+            listPedido.add(selectedProduct);
+            //}
         }
-        
+
     }
 
     public void resetearTabla() {
@@ -867,7 +880,7 @@ public class SalePoint extends javax.swing.JPanel {
 
         listPedido.clear(); // Vacía la lista de pedidos
     }
-    
+
     public int obSigIdVeta() {
         String query = "SELECT MAX(idventa) FROM \"Sales\"";
         try (PreparedStatement pst = cn.prepareStatement(query)) {
@@ -894,14 +907,14 @@ public class SalePoint extends javax.swing.JPanel {
         }
     }
 
-    private static void generaTicket(String outputPath) throws FileNotFoundException{
+    private static void generaTicket(String outputPath) throws FileNotFoundException {
         PdfWriter writer = new PdfWriter(outputPath);
         PdfDocument pdf = new PdfDocument(writer);
         Document document = new Document(pdf);
-        
+
         document.add(new Paragraph("Ejemplo de PDF con formato"));
         document.add(new Paragraph("Fecha: 31 de enero de 2024"));
-        
+
         document.close();
     }
 

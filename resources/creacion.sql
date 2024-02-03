@@ -42,6 +42,7 @@ CREATE TABLE "Account" (
   idEmpleado INT,
   usuario VARCHAR(20),
   contrasena VARCHAR(256),
+  fotoperfil VARCHAR NOTNULL DEFAULT '/profileDefault.png',
   PRIMARY KEY(id),
   FOREIGN KEY (idEmpleado) REFERENCES "Employee"(id)
 );
@@ -102,27 +103,18 @@ CREATE TABLE "Sales"(
   FOREIGN KEY (idProducto) REFERENCES "Product"(id)
 );
 
-ALTER TABLE
-  "Account"
-ADD
-  COLUMN fotoperfil VARCHAR;
-
-ALTER TABLE
-  "Account"
-ALTER COLUMN
-  fotoperfil
-SET
-  DEFAULT '/profileDefault.png' NOTNULL;
-
-UPDATE
-  "Account"
-SET
-  fotoperfil = '/profileDefault.png'
-WHERE
-  fotoperfil IS NULL;
-  
-ALTER TABLE "Product"
-MODIFY COLUMN estado VARCHAR;
+CREATE TABLE "Expenses" (
+  id serial PRIMARY KEY,
+  idAccount INT,
+  idAutorizo INT,
+  date TIMESTAMP DEFAULT CURRENT_DATE,
+  descripcion varchar,
+  categoria VARCHAR CHECK (categoria IN ('Viatico', 'Otro')),
+  monto float4,
+  comprobante varchar,
+  FOREIGN KEY (idAccount) REFERENCES "Account"(id),
+  FOREIGN KEY (idAutorizo) REFERENCES "Account"(id)
+);
 
 --Trigger para disponible y estado
 CREATE OR REPLACE FUNCTION actualizar_estado()
@@ -130,7 +122,9 @@ RETURNS TRIGGER AS $$
 BEGIN
     IF NEW.disponible >= 0 THEN
         IF NEW.disponible = 0 THEN
-            NEW.estado = 'inactivo';
+            NEW.estado = 'No disponible';
+        ELSIF NEW.disponible > 1 THEN
+            NEW.estado = 'Disponible';
         END IF;
         RETURN NEW;
     ELSE
@@ -145,7 +139,33 @@ ON "Product"
 FOR EACH ROW
 EXECUTE FUNCTION actualizar_estado();
 
+--Trigger para restar disponibilidad
+CREATE OR REPLACE FUNCTION actualizar_disponible()
+RETURNS TRIGGER AS $$
+BEGIN
+  UPDATE "Product"
+  SET disponible = disponible - 1
+  WHERE id = NEW.idProducto;
+
+  RETURN NEW;
+END;
+$$ LANGUAGE plpgsql;
+
+CREATE TRIGGER actualizar_disponible_trigger
+AFTER INSERT ON "Sales"
+FOR EACH ROW
+EXECUTE FUNCTION actualizar_disponible();
+
 --Script de consulta de compras
 SELECT * FROM "Sales" 
 LEFT JOIN "Product" ON "Product".id = "Sales".idproducto 
 LEFT JOIN "Flavors" ON "Flavors".idproducto = "Product".id WHERE DATE("fechahora") = '2024-01-26';
+ 
+ DELETE FROM "Sales" WHERE "id"=7
+
+ UPDATE
+  "Account"
+SET
+  fotoperfil = '/profileDefault.png'
+WHERE
+  fotoperfil IS NULL;

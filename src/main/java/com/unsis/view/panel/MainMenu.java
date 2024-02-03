@@ -335,7 +335,7 @@ public class MainMenu extends javax.swing.JPanel {
 
     private void buttonInventoryActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_buttonInventoryActionPerformed
         mainWindow.addPanelHistory(Constants.getSecctionsOf("Almacen").get(0));
-        mainWindow.setView(Constants.getSecctionsOf("Almacen").get(0));
+        mainWindow.setView("Lista Productos");
     }//GEN-LAST:event_buttonInventoryActionPerformed
 
     private void buttonHumanResourcesActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_buttonHumanResourcesActionPerformed
