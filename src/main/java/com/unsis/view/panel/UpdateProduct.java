@@ -103,7 +103,7 @@ public class UpdateProduct extends javax.swing.JPanel {
         this.txtPSale.setText(String.valueOf(product.getPrecioventa()));
         this.txtBarcode.setText(product.getCodigobarra());
         this.txtDescription.setText(product.getDescripcion());
-        this.txtAvailable.setText(product.getEstado());
+        this.txtAvailable.setText(String.valueOf(product.getDisponible()));
         this.txtVariants.setText(product.getVariante());
         
         if("Disponible".equalsIgnoreCase(product.getEstado())){
@@ -630,7 +630,7 @@ public class UpdateProduct extends javax.swing.JPanel {
         if (camposEstanLlenos()) {
             // Todos los campos están llenos, proceder a crear y guardar el producto
             Product product = new Product.Builder()
-                    .withId(35)
+//                    .withId(35)
                     .withNumProducto(Integer.valueOf(txtNumProduct.getText().trim()))
                     .withNombre(txtPName.getText().trim())
                     .withPreciocom(Double.valueOf(txtPBuys.getText().trim()))
@@ -648,11 +648,14 @@ public class UpdateProduct extends javax.swing.JPanel {
             List<String> saboresList = new ArrayList<>(Arrays.asList(saboresArray));
 
             for (String sabor : saboresList) {
-                Flavors flavors = new Flavors.Builder()
+                if (product.getId() != null){
+                    Flavors flavors = new Flavors.Builder()
                         .withIdProduct(product.getId())
                         .withSabor(sabor.trim())
                         .build();
                 controller.edit(flavors);
+                }
+                System.out.println("El id del producto no está asignado correctamente.");
             }
 
         } else {

@@ -1,5 +1,6 @@
 package com.unsis.view.panel;
 
+import com.unsis.clases.Tools;
 import com.unsis.models.entity.Product;
 import com.unsis.view.Main;
 import java.awt.Color;
@@ -8,14 +9,35 @@ import java.util.ArrayList;
 import javax.swing.BorderFactory;
 import javax.swing.table.DefaultTableModel;
 import com.unsis.controller.JpaController;
+import com.unsis.models.entity.Employee;
 import com.unsis.models.entity.Flavors;
 import java.awt.event.KeyEvent;
+import java.io.FileOutputStream;
+import java.io.IOException;
 import java.util.Arrays;
 import java.util.List;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
+import javax.swing.Icon;
+import javax.swing.JFileChooser;
 import javax.swing.JOptionPane;
 import javax.swing.JTextField;
+import javax.swing.filechooser.FileNameExtensionFilter;
+import net.sf.jasperreports.engine.JRException;
+import net.sf.jasperreports.engine.JasperExportManager;
+import net.sf.jasperreports.engine.JasperFillManager;
+import net.sf.jasperreports.engine.JasperPrint;
+import net.sf.jasperreports.engine.JasperReport;
+import net.sf.jasperreports.engine.data.JRBeanCollectionDataSource;
+import net.sf.jasperreports.engine.util.JRLoader;
+import org.apache.poi.ss.usermodel.Cell;
+import org.apache.poi.ss.usermodel.CellStyle;
+import org.apache.poi.ss.usermodel.FillPatternType;
+import org.apache.poi.ss.usermodel.IndexedColors;
+import org.apache.poi.ss.usermodel.Row;
+import org.apache.poi.ss.usermodel.Sheet;
+import org.apache.poi.ss.usermodel.*;
+import org.apache.poi.xssf.usermodel.XSSFWorkbook;
 
 /**
  *
@@ -24,7 +46,9 @@ import javax.swing.JTextField;
 public class ListProducts extends javax.swing.JPanel {
 
     private final Main mainWindow;
-    private final JpaController jpaController;    
+    private final JpaController jpaController;
+    
+    private List<Product> productList;
 
     /**
      * Creates new form ListProducts
@@ -40,6 +64,15 @@ public class ListProducts extends javax.swing.JPanel {
 
         this.mainWindow = mainWindow;
         this.jpaController = new JpaController();
+        
+
+        resizeImages();;
+    }
+
+    private void resizeImages() {
+        Tools tools = new Tools();
+        Icon resizedIcon = tools.resizeIcon(buttonExportPdf.getIcon(), 35, 35);
+        buttonExportPdf.setIcon(resizedIcon);
     }
 
     /**
@@ -51,15 +84,24 @@ public class ListProducts extends javax.swing.JPanel {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
+        fileChooser = new javax.swing.JFileChooser();
         jLabel2 = new javax.swing.JLabel();
         jPanel1 = new javax.swing.JPanel();
         buttonCreate = new javax.swing.JButton();
         buttonExport = new javax.swing.JButton();
         buttonModify = new javax.swing.JButton();
         buttonDelete = new javax.swing.JButton();
+        buttonExportPdf = new javax.swing.JButton();
+        buttonTemplate = new javax.swing.JButton();
         jPanel2 = new javax.swing.JPanel();
         jScrollPane1 = new javax.swing.JScrollPane();
         tableProduct = new javax.swing.JTable();
+
+        fileChooser.setDialogType(javax.swing.JFileChooser.SAVE_DIALOG);
+        fileChooser.setApproveButtonText("Guardar");
+        fileChooser.setApproveButtonToolTipText("");
+        fileChooser.setDialogTitle("Descargar platilla");
+        fileChooser.setFileFilter(new FileNameExtensionFilter("Documento Excel", "xlsx"));
 
         setBackground(new java.awt.Color(240, 240, 240));
         addComponentListener(new java.awt.event.ComponentAdapter() {
@@ -100,7 +142,12 @@ public class ListProducts extends javax.swing.JPanel {
         buttonExport.setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
         buttonExport.setHorizontalTextPosition(javax.swing.SwingConstants.RIGHT);
         buttonExport.setVerticalTextPosition(javax.swing.SwingConstants.BOTTOM);
-        jPanel1.add(buttonExport, new org.netbeans.lib.awtextra.AbsoluteConstraints(1270, 25, 136, 40));
+        buttonExport.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                buttonExportActionPerformed(evt);
+            }
+        });
+        jPanel1.add(buttonExport, new org.netbeans.lib.awtextra.AbsoluteConstraints(1150, 30, 136, 40));
 
         buttonModify.setFont(new java.awt.Font("Dialog", 1, 16)); // NOI18N
         buttonModify.setForeground(new java.awt.Color(101, 128, 223));
@@ -133,6 +180,37 @@ public class ListProducts extends javax.swing.JPanel {
             }
         });
         jPanel1.add(buttonDelete, new org.netbeans.lib.awtextra.AbsoluteConstraints(510, 10, 170, 60));
+
+        buttonExportPdf.setBackground(new java.awt.Color(153, 0, 51));
+        buttonExportPdf.setFont(new java.awt.Font("Dialog", 1, 16)); // NOI18N
+        buttonExportPdf.setForeground(new java.awt.Color(255, 255, 255));
+        buttonExportPdf.setIcon(new javax.swing.ImageIcon(getClass().getResource("/pdfIcon.png"))); // NOI18N
+        buttonExportPdf.setText("Exportar");
+        buttonExportPdf.setBorder(null);
+        buttonExportPdf.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+        buttonExportPdf.setHorizontalTextPosition(javax.swing.SwingConstants.RIGHT);
+        buttonExportPdf.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                buttonExportPdfActionPerformed(evt);
+            }
+        });
+        jPanel1.add(buttonExportPdf, new org.netbeans.lib.awtextra.AbsoluteConstraints(1300, 30, 136, 40));
+
+        buttonTemplate.setBackground(new java.awt.Color(0, 102, 153));
+        buttonTemplate.setFont(new java.awt.Font("Dialog", 1, 16)); // NOI18N
+        buttonTemplate.setForeground(new java.awt.Color(255, 255, 255));
+        buttonTemplate.setIcon(new javax.swing.ImageIcon(getClass().getResource("/exportExcel .png"))); // NOI18N
+        buttonTemplate.setText("Plantilla");
+        buttonTemplate.setBorder(null);
+        buttonTemplate.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+        buttonTemplate.setHorizontalTextPosition(javax.swing.SwingConstants.RIGHT);
+        buttonTemplate.setVerticalTextPosition(javax.swing.SwingConstants.BOTTOM);
+        buttonTemplate.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                buttonTemplateActionPerformed(evt);
+            }
+        });
+        jPanel1.add(buttonTemplate, new org.netbeans.lib.awtextra.AbsoluteConstraints(1000, 30, 136, 40));
 
         jPanel2.setBackground(new java.awt.Color(255, 255, 255));
         jPanel2.setOpaque(false);
@@ -278,6 +356,56 @@ public class ListProducts extends javax.swing.JPanel {
         }
     }//GEN-LAST:event_buttonModifyActionPerformed
 
+    private void buttonExportPdfActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_buttonExportPdfActionPerformed
+        try {
+            String reportPath = "src/main/java/com/unsis/reports/Products.jasper";
+
+            // Cargar platilla .jasper (compilado)
+            JasperReport jasperReport = (JasperReport) JRLoader.loadObjectFromFile(reportPath);
+
+            // agregar información 
+            JRBeanCollectionDataSource dataSource
+                    = new JRBeanCollectionDataSource(jpaController.findAllEntities(Product.class));
+            JasperPrint jasperPrint = JasperFillManager.fillReport(jasperReport, null, dataSource);
+
+            // Exportar el informe a PDF
+            JasperExportManager.exportReportToPdfFile(jasperPrint, "./reports/Products.pdf");
+
+            JOptionPane.showMessageDialog(null, "Reporte exportado", "Accion exitosa",
+                    JOptionPane.INFORMATION_MESSAGE);
+        } catch (JRException e) {
+            JOptionPane.showMessageDialog(null, "Reporte no exportado", "Accion no exitosa",
+                    JOptionPane.ERROR_MESSAGE);
+        }
+    }//GEN-LAST:event_buttonExportPdfActionPerformed
+
+    private void buttonExportActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_buttonExportActionPerformed
+        try {
+            exportToExcel("./reports/" + Tools.getFormatExcelFileName("Empleados"));
+            JOptionPane.showMessageDialog(null, "Reporte exportado", "Accion exitosa",
+                    JOptionPane.INFORMATION_MESSAGE);
+        } catch (Exception e) {
+            JOptionPane.showMessageDialog(null, "Reporte no exportado", "Accion no exitosa",
+                    JOptionPane.ERROR_MESSAGE);
+        }
+    }//GEN-LAST:event_buttonExportActionPerformed
+
+    private void buttonTemplateActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_buttonTemplateActionPerformed
+        int userSelection = fileChooser.showSaveDialog(null);
+
+        if (userSelection == JFileChooser.APPROVE_OPTION) {
+            // El usuario ha seleccionado un archivo y ha hecho clic en "Guardar"
+            String filePath = fileChooser.getSelectedFile().getAbsolutePath();
+            // Verifica si la cadena ya termina con ".xlsx"
+            if (!filePath.endsWith(".xlsx")) {
+                // Si no termina con ".xlsx", agrégale la extensión
+                filePath += ".xlsx";
+            }
+            excelTemplate(filePath);
+        }
+    }//GEN-LAST:event_buttonTemplateActionPerformed
+    
+    /**/
     public Product findProduct() {
         int filaSeleccionada = tableProduct.getSelectedRow();
 
@@ -322,7 +450,7 @@ public class ListProducts extends javax.swing.JPanel {
     }
 
     //Busca los sabores del producto seleccionado
-    private List<String> obtenerFlavors(int idProducto){
+    private List<String> obtenerFlavors(int idProducto) {
         List<Flavors> sabores = jpaController.findAllEntities(Flavors.class);
         List<String> saboresProd = new ArrayList<>();
 
@@ -333,12 +461,103 @@ public class ListProducts extends javax.swing.JPanel {
         }
         return saboresProd;
     }
-    
+
+    private void excelTemplate(String outputPath) {
+        try (Workbook workbook = new XSSFWorkbook()) {
+            Sheet sheet = workbook.createSheet("Products");
+
+            // Crear encabezados
+            Row headerRow = sheet.createRow(0);
+            String[] columns = {"Codigo de barras", "Nombre", "Precio de Compra", "Precio de Venta", "Tipo", "Descripción", "Numero de Producto", "Estado", "Disponible", "Variantes"};
+
+            CellStyle headerStyle = createHeaderStyle(workbook);
+
+            for (int i = 0; i < columns.length; i++) {
+                Cell cell = headerRow.createCell(i);
+                cell.setCellValue(columns[i]);
+                cell.setCellStyle(headerStyle);
+            }
+
+            // Escribir el archivo Excel
+            try (FileOutputStream fileOut = new FileOutputStream(outputPath)) {
+                workbook.write(fileOut);
+            }
+
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+    }
+
+    private static CellStyle createHeaderStyle(Workbook workbook) {
+        CellStyle style = workbook.createCellStyle();
+
+        // Establecer el color de fondo
+        style.setFillForegroundColor(IndexedColors.DARK_TEAL.getIndex()); // Color: 0, 102, 102
+        style.setFillPattern(FillPatternType.SOLID_FOREGROUND);
+
+        // Establecer el color de la letra (fuente)
+        org.apache.poi.ss.usermodel.Font font = workbook.createFont();
+        font.setColor(IndexedColors.WHITE.getIndex());
+        style.setFont(font);
+
+        return style;
+    }
+   
+    private void exportToExcel(String outputPath) {
+        try (Workbook workbook = new XSSFWorkbook()) {
+            Sheet sheet = workbook.createSheet("Product");
+
+            // Crear encabezados
+            Row headerRow = sheet.createRow(0);
+            String[] columns = {"Codigo de barras", "Nombre", "Precio de Compra", "Precio de Venta", "Tipo", "Descripción", "Numero de Producto", "Estado", "Disponible", "Variantes"};
+
+            CellStyle headerStyle = createHeaderStyle(workbook);
+
+            for (int i = 0; i < columns.length; i++) {
+                Cell cell = headerRow.createCell(i);
+                cell.setCellValue(columns[i]);
+                cell.setCellStyle(headerStyle);
+            }
+
+            // Agregar datos de empleados
+            int rowNum = 1;
+            for (Product producto : productList) {
+                Row row = sheet.createRow(rowNum++);
+                row.createCell(0).setCellValue(producto.getCodigobarra());
+                row.createCell(1).setCellValue(producto.getNombre());
+                row.createCell(2).setCellValue(producto.getPreciocom());
+                row.createCell(3).setCellValue(producto.getPrecioventa());
+                row.createCell(4).setCellValue(producto.getTipo());// Ajusta según el formato de fecha que desees
+                row.createCell(5).setCellValue(producto.getDescripcion());
+                row.createCell(6).setCellValue(producto.getNumproducto());
+                row.createCell(7).setCellValue(producto.getEstado()); // Ajusta según el formato de fecha que desees
+                row.createCell(8).setCellValue(producto.getDisponible());
+                row.createCell(9).setCellValue(producto.getVariante());
+
+                // Autoajustar el ancho de las columnas después de agregar los datos a la fila
+                for (int i = 0; i < columns.length; i++) {
+                    sheet.autoSizeColumn(i);
+                }
+            }
+
+            // Escribir el archivo Excel
+            try (FileOutputStream fileOut = new FileOutputStream(outputPath)) {
+                workbook.write(fileOut);
+                System.out.println("Archivo Excel generado con éxito en: " + outputPath);
+            }
+
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+    }
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton buttonCreate;
     private javax.swing.JButton buttonDelete;
     private javax.swing.JButton buttonExport;
+    private javax.swing.JButton buttonExportPdf;
     private javax.swing.JButton buttonModify;
+    private javax.swing.JButton buttonTemplate;
+    private javax.swing.JFileChooser fileChooser;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanel2;

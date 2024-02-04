@@ -685,7 +685,6 @@ public class UpdateEmployee extends javax.swing.JPanel {
             System.out.println(access.getIdseccion().getId());
         }
         try {
-
             controller.edit(employee);
             controller.edit(account);
             JOptionPane.showMessageDialog(null, "Empleado actualizado", "Aviso", JOptionPane.ERROR_MESSAGE);

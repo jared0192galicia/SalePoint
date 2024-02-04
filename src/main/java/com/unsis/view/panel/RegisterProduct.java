@@ -581,7 +581,7 @@ public class RegisterProduct extends javax.swing.JPanel {
         if (camposEstanLlenos()) {
             // Todos los campos están llenos, proceder a crear y guardar el producto
             Product product = new Product.Builder()
-                    .withId(35)
+//                    .withId(35)
                     .withNumProducto(Integer.valueOf(txtNumProduct.getText().trim()))
                     .withNombre(txtPName.getText().trim())
                     .withPreciocom(Double.valueOf(txtPBuys.getText().trim()))

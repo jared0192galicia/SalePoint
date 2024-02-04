@@ -646,13 +646,7 @@ public class SalePoint extends javax.swing.JPanel {
 
             //jpaController.edit(product);
             index++;
-            String outputPath = "Venta" + String.valueOf(idVenta) + ".pdf";
-            try {
-                generaTicket(outputPath);
-                System.out.println("PDF generado exitosamente en: " + outputPath);
-            } catch (Exception e) {
-                e.printStackTrace();
-            }
+            //Llamada de generación de ticket
         }
         resetearTabla();
         listCantidad.clear();
@@ -905,17 +899,6 @@ public class SalePoint extends javax.swing.JPanel {
         } else {
             return false;
         }
-    }
-
-    private static void generaTicket(String outputPath) throws FileNotFoundException {
-        PdfWriter writer = new PdfWriter(outputPath);
-        PdfDocument pdf = new PdfDocument(writer);
-        Document document = new Document(pdf);
-
-        document.add(new Paragraph("Ejemplo de PDF con formato"));
-        document.add(new Paragraph("Fecha: 31 de enero de 2024"));
-
-        document.close();
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
