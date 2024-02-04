@@ -2,6 +2,7 @@ package com.unsis.view.panel;
 
 import com.unsis.clases.Tools;
 import com.unsis.controller.JpaController;
+import com.unsis.models.constants.Constants;
 import com.unsis.models.entity.Account;
 import com.unsis.models.entity.Employee;
 import com.unsis.view.Main;
@@ -58,6 +59,10 @@ public class ListEmployes extends javax.swing.JPanel {
         this.jpaController = new JpaController();
 
         this.resizeImages();
+        
+        buttonModify.setEnabled(Constants.accessTo("Editar Empleados"));
+        buttonDelete.setEnabled(Constants.accessTo("Editar Empleados"));
+        buttonCreate.setEnabled(Constants.accessTo("Alta de Empleado"));
     }
 
     /**

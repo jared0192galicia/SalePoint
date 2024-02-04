@@ -1,5 +1,6 @@
 package com.unsis.clases;
 
+import com.unsis.models.constants.Constants;
 import com.unsis.view.Main;
 import java.awt.event.KeyAdapter;
 import java.awt.event.KeyEvent;
@@ -53,7 +54,7 @@ public class KeyController extends KeyAdapter {
             }
         }
 
-        if (!name.equals("-1")) {
+        if (!name.equals("-1") && Constants.accessTo(name)) {
             this.window.setView(name);
             this.window.addPanelHistory(name);
         }
