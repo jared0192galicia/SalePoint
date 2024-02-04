@@ -481,7 +481,14 @@ public class ListEmployes extends javax.swing.JPanel {
     }//GEN-LAST:event_buttonModifyActionPerformed
 
     private void buttonExportXlsActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_buttonExportXlsActionPerformed
-        exportToExcel("./reports/" + Tools.getFormatExcelFileName("Empleados"));
+        try {
+            exportToExcel("./reports/" + Tools.getFormatExcelFileName("Empleados"));
+            JOptionPane.showMessageDialog(null, "Reporte exportado", "Accion exitosa",
+                    JOptionPane.INFORMATION_MESSAGE);
+        } catch (Exception e) {
+            JOptionPane.showMessageDialog(null, "Reporte no exportado", "Accion no exitosa",
+                    JOptionPane.ERROR_MESSAGE);
+        }
     }//GEN-LAST:event_buttonExportXlsActionPerformed
 
     /**
@@ -508,6 +515,8 @@ public class ListEmployes extends javax.swing.JPanel {
             JOptionPane.showMessageDialog(null, "Reporte exportado", "Accion exitosa",
                     JOptionPane.INFORMATION_MESSAGE);
         } catch (JRException e) {
+            JOptionPane.showMessageDialog(null, "Reporte no exportado", "Accion no exitosa",
+                    JOptionPane.ERROR_MESSAGE);
         }
     }//GEN-LAST:event_buttonExportPdfActionPerformed
 
