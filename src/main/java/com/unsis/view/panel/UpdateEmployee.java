@@ -200,8 +200,8 @@ public class UpdateEmployee extends javax.swing.JPanel {
 
             // Verificar si el idString coincide con el nombre y seleccionar el JCheckBox correspondiente
             if (checkBoxMap.containsKey(idString)) {
-                JCheckBox checkBox = checkBoxMap.get(idString);
-                checkBox.setSelected(true);
+                checkBoxMap.get(idString).setSelected(true);
+                
             } else {
                 System.err.println("Algo malio sal");
             }

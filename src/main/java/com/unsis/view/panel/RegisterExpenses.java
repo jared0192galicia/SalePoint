@@ -53,17 +53,16 @@ public class RegisterExpenses extends javax.swing.JPanel {
         labeldate = new javax.swing.JLabel();
         labelmonth = new javax.swing.JLabel();
         labelproduct = new javax.swing.JLabel();
-        jLabel13 = new javax.swing.JLabel();
         txtAmount = new javax.swing.JTextField();
         txtDate = new javax.swing.JTextField();
         txtDescription = new javax.swing.JTextField();
-        txtproduct = new javax.swing.JTextField();
         comboCategory = new javax.swing.JComboBox<>();
         comboboxmonth = new javax.swing.JComboBox<>();
         comboboxproduct = new javax.swing.JComboBox<>();
         buttonAdd = new javax.swing.JButton();
         buttonvoucher1 = new javax.swing.JButton();
         LabelGeneral1 = new javax.swing.JLabel();
+        buttonAdd1 = new javax.swing.JButton();
         Labebillsl = new javax.swing.JLabel();
 
         setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
@@ -99,7 +98,7 @@ public class RegisterExpenses extends javax.swing.JPanel {
         labelvoucher.setFont(new java.awt.Font("Jaldi", 0, 20)); // NOI18N
         labelvoucher.setForeground(new java.awt.Color(118, 125, 142));
         labelvoucher.setText("Adjunte de comprobante");
-        Panel1gastos.add(labelvoucher, new org.netbeans.lib.awtextra.AbsoluteConstraints(1190, 570, 250, -1));
+        Panel1gastos.add(labelvoucher, new org.netbeans.lib.awtextra.AbsoluteConstraints(890, 290, 250, -1));
 
         labelamount.setFont(new java.awt.Font("Jaldi", 0, 20)); // NOI18N
         labelamount.setForeground(new java.awt.Color(118, 125, 142));
@@ -128,13 +127,8 @@ public class RegisterExpenses extends javax.swing.JPanel {
 
         labelproduct.setFont(new java.awt.Font("Jaldi", 0, 20)); // NOI18N
         labelproduct.setForeground(new java.awt.Color(118, 125, 142));
-        labelproduct.setText("Tipo de producto");
-        Panel1gastos.add(labelproduct, new org.netbeans.lib.awtextra.AbsoluteConstraints(1190, 460, 190, -1));
-
-        jLabel13.setFont(new java.awt.Font("Jaldi", 0, 20)); // NOI18N
-        jLabel13.setForeground(new java.awt.Color(118, 125, 142));
-        jLabel13.setText("Tipo de producto");
-        Panel1gastos.add(jLabel13, new org.netbeans.lib.awtextra.AbsoluteConstraints(890, 570, 190, -1));
+        labelproduct.setText("Tipo de gasto");
+        Panel1gastos.add(labelproduct, new org.netbeans.lib.awtextra.AbsoluteConstraints(890, 560, 190, -1));
 
         txtAmount.addKeyListener(new java.awt.event.KeyAdapter() {
             public void keyPressed(java.awt.event.KeyEvent evt) {
@@ -144,16 +138,15 @@ public class RegisterExpenses extends javax.swing.JPanel {
         Panel1gastos.add(txtAmount, new org.netbeans.lib.awtextra.AbsoluteConstraints(1190, 230, 250, 30));
         Panel1gastos.add(txtDate, new org.netbeans.lib.awtextra.AbsoluteConstraints(890, 140, 250, 30));
         Panel1gastos.add(txtDescription, new org.netbeans.lib.awtextra.AbsoluteConstraints(1190, 140, 250, 30));
-        Panel1gastos.add(txtproduct, new org.netbeans.lib.awtextra.AbsoluteConstraints(890, 600, 250, 30));
 
         comboCategory.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Viatico", "Otro" }));
         Panel1gastos.add(comboCategory, new org.netbeans.lib.awtextra.AbsoluteConstraints(890, 230, 250, 30));
 
-        comboboxmonth.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
+        comboboxmonth.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Enero", "Febrero", "Marzo", "Abril", "Mayo", "Junio", "Julio", "Agosto", "Septiembre", "Octubre", "Noviembre", "Diciembre" }));
         Panel1gastos.add(comboboxmonth, new org.netbeans.lib.awtextra.AbsoluteConstraints(890, 500, 250, 30));
 
-        comboboxproduct.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
-        Panel1gastos.add(comboboxproduct, new org.netbeans.lib.awtextra.AbsoluteConstraints(1190, 500, 250, 30));
+        comboboxproduct.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Viatico", "Otro" }));
+        Panel1gastos.add(comboboxproduct, new org.netbeans.lib.awtextra.AbsoluteConstraints(890, 600, 250, 30));
 
         buttonAdd.setBackground(new java.awt.Color(25, 130, 206));
         buttonAdd.setFont(new java.awt.Font("Jaldi", 1, 17)); // NOI18N
@@ -166,18 +159,31 @@ public class RegisterExpenses extends javax.swing.JPanel {
                 buttonAddActionPerformed(evt);
             }
         });
-        Panel1gastos.add(buttonAdd, new org.netbeans.lib.awtextra.AbsoluteConstraints(1040, 310, 240, 40));
+        Panel1gastos.add(buttonAdd, new org.netbeans.lib.awtextra.AbsoluteConstraints(1190, 310, 250, 40));
 
         buttonvoucher1.setBackground(new java.awt.Color(204, 255, 255));
         buttonvoucher1.setFont(new java.awt.Font("Jaldi", 0, 12)); // NOI18N
         buttonvoucher1.setText("Seleccionar archivo");
         buttonvoucher1.setBorder(javax.swing.BorderFactory.createCompoundBorder());
-        Panel1gastos.add(buttonvoucher1, new org.netbeans.lib.awtextra.AbsoluteConstraints(1190, 600, 250, 30));
+        Panel1gastos.add(buttonvoucher1, new org.netbeans.lib.awtextra.AbsoluteConstraints(890, 320, 250, 30));
 
         LabelGeneral1.setFont(new java.awt.Font("Jaldi", 0, 24)); // NOI18N
         LabelGeneral1.setForeground(new java.awt.Color(82, 146, 222));
         LabelGeneral1.setText("Información general ");
         Panel1gastos.add(LabelGeneral1, new org.netbeans.lib.awtextra.AbsoluteConstraints(830, 50, 270, 39));
+
+        buttonAdd1.setBackground(new java.awt.Color(25, 130, 206));
+        buttonAdd1.setFont(new java.awt.Font("Jaldi", 1, 17)); // NOI18N
+        buttonAdd1.setForeground(new java.awt.Color(255, 255, 255));
+        buttonAdd1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/image-search_116996.png"))); // NOI18N
+        buttonAdd1.setText("Buscar");
+        buttonAdd1.setBorder(javax.swing.BorderFactory.createCompoundBorder());
+        buttonAdd1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                buttonAdd1ActionPerformed(evt);
+            }
+        });
+        Panel1gastos.add(buttonAdd1, new org.netbeans.lib.awtextra.AbsoluteConstraints(1230, 590, 190, 40));
 
         add(Panel1gastos, new org.netbeans.lib.awtextra.AbsoluteConstraints(50, 70, 1580, 780));
 
@@ -198,6 +204,10 @@ public class RegisterExpenses extends javax.swing.JPanel {
         
     }//GEN-LAST:event_txtAmountKeyPressed
 
+    private void buttonAdd1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_buttonAdd1ActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_buttonAdd1ActionPerformed
+
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JLabel Labebillsl;
@@ -205,11 +215,11 @@ public class RegisterExpenses extends javax.swing.JPanel {
     private javax.swing.JLabel LabelGeneral1;
     private javax.swing.JPanel Panel1gastos;
     private javax.swing.JButton buttonAdd;
+    private javax.swing.JButton buttonAdd1;
     private javax.swing.JButton buttonvoucher1;
     private javax.swing.JComboBox<String> comboCategory;
     private javax.swing.JComboBox<String> comboboxmonth;
     private javax.swing.JComboBox<String> comboboxproduct;
-    private javax.swing.JLabel jLabel13;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JLabel labelamount;
     private javax.swing.JLabel labelcategory;
@@ -223,6 +233,5 @@ public class RegisterExpenses extends javax.swing.JPanel {
     private javax.swing.JTextField txtAmount;
     private javax.swing.JTextField txtDate;
     private javax.swing.JTextField txtDescription;
-    private javax.swing.JTextField txtproduct;
     // End of variables declaration//GEN-END:variables
 }
