@@ -85,6 +85,7 @@ public class ListProducts extends javax.swing.JPanel {
     private void initComponents() {
 
         fileChooser = new javax.swing.JFileChooser();
+        selectFileChooser = new javax.swing.JFileChooser();
         jLabel2 = new javax.swing.JLabel();
         jPanel1 = new javax.swing.JPanel();
         buttonCreate = new javax.swing.JButton();
@@ -93,6 +94,7 @@ public class ListProducts extends javax.swing.JPanel {
         buttonDelete = new javax.swing.JButton();
         buttonExportPdf = new javax.swing.JButton();
         buttonTemplate = new javax.swing.JButton();
+        buttonTemplate1 = new javax.swing.JButton();
         jPanel2 = new javax.swing.JPanel();
         jScrollPane1 = new javax.swing.JScrollPane();
         tableProduct = new javax.swing.JTable();
@@ -102,6 +104,10 @@ public class ListProducts extends javax.swing.JPanel {
         fileChooser.setApproveButtonToolTipText("");
         fileChooser.setDialogTitle("Descargar platilla");
         fileChooser.setFileFilter(new FileNameExtensionFilter("Documento Excel", "xlsx"));
+
+        selectFileChooser.setApproveButtonToolTipText("");
+        selectFileChooser.setDialogTitle("Descargar platilla");
+        selectFileChooser.setFileFilter(new FileNameExtensionFilter("Documento Excel", "xlsx"));
 
         setBackground(new java.awt.Color(240, 240, 240));
         addComponentListener(new java.awt.event.ComponentAdapter() {
@@ -211,6 +217,22 @@ public class ListProducts extends javax.swing.JPanel {
             }
         });
         jPanel1.add(buttonTemplate, new org.netbeans.lib.awtextra.AbsoluteConstraints(1000, 30, 136, 40));
+
+        buttonTemplate1.setBackground(new java.awt.Color(0, 102, 102));
+        buttonTemplate1.setFont(new java.awt.Font("Dialog", 1, 16)); // NOI18N
+        buttonTemplate1.setForeground(new java.awt.Color(255, 255, 255));
+        buttonTemplate1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/exportExcel .png"))); // NOI18N
+        buttonTemplate1.setText("Cargar");
+        buttonTemplate1.setBorder(null);
+        buttonTemplate1.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+        buttonTemplate1.setHorizontalTextPosition(javax.swing.SwingConstants.RIGHT);
+        buttonTemplate1.setVerticalTextPosition(javax.swing.SwingConstants.BOTTOM);
+        buttonTemplate1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                buttonTemplate1ActionPerformed(evt);
+            }
+        });
+        jPanel1.add(buttonTemplate1, new org.netbeans.lib.awtextra.AbsoluteConstraints(850, 30, 136, 40));
 
         jPanel2.setBackground(new java.awt.Color(255, 255, 255));
         jPanel2.setOpaque(false);
@@ -405,6 +427,84 @@ public class ListProducts extends javax.swing.JPanel {
             excelTemplate(filePath);
         }
     }//GEN-LAST:event_buttonTemplateActionPerformed
+
+    private void buttonTemplate1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_buttonTemplate1ActionPerformed
+        //Establecer el filtro para que solo se muestren archivos con extensión xlsx
+        FileNameExtensionFilter filter = new FileNameExtensionFilter("Archivos Excel (*.xlsx)", "xlsx");
+        selectFileChooser.setFileFilter(filter);
+
+        // Mostrar el diálogo de selección de archivo
+        int result = selectFileChooser.showOpenDialog(this);
+
+        // Verificar si se seleccionó un archivo
+        if (result == JFileChooser.APPROVE_OPTION) {
+            // Obtener el archivo seleccionado
+            String pathFile = Tools.ROOTPATH + "files/temporal.xlsx";
+            Tools.copyFile(selectFileChooser.getSelectedFile().getAbsolutePath(), pathFile);
+            try (Workbook workbook = new XSSFWorkbook(pathFile)) {
+                Sheet sheet = workbook.getSheetAt(0); // Obtén la primera hoja (índice 0)
+                Product producto;
+                
+                ArrayList<Product> productos = new ArrayList<>();
+                int index = 2;
+                System.out.println("Lineas: " + sheet.getLastRowNum());
+                // Iterar sobre las filas, comenzando desde la segunda fila (índice 1, ya que la primera fila es el encabezado)
+                for (int rowIndex = 1; rowIndex < sheet.getLastRowNum(); rowIndex++) {
+                    Row row = sheet.getRow(rowIndex);
+
+                    try {
+
+                        // Crear un nuevo objeto Product utilizando el formato del Builder y los valores de las celdas
+                        producto = new Product.Builder()
+                                .withCodigobarra(row.getCell(0).getStringCellValue())
+                                .withNombre(row.getCell(1).getStringCellValue())
+                                .withPreciocom(row.getCell(2).getNumericCellValue())
+                                .withPrecioventa(row.getCell(3).getNumericCellValue())
+                                .withTipo(row.getCell(4).getStringCellValue())
+                                .withDescripcion(row.getCell(5).getStringCellValue())
+                                .withNumProducto(row.getCell(6).getColumnIndex())
+                                .withEstado(row.getCell(7).getStringCellValue()) // Asegúrate de que la celda contenga una fecha
+                                .withDisponible(row.getCell(8).getColumnIndex())
+                                .withVariente(row.getCell(9).getStringCellValue())
+                                .build();
+
+                        productos.add(producto);
+
+                        // Sabores separados por comas en la celda
+                        String[] saboresArray = row.getCell(10).getStringCellValue().split(",\\s");
+
+                        // Iterar sobre los sabores y crear objetos Flavors
+                        for (String sabor : saboresArray) {
+                            Flavors flavors = new Flavors.Builder()
+                                    .withIdProduct(producto.getId())
+                                    .withSabor(sabor.trim())
+                                    .build();
+
+                            // Crear o actualizar el sabor en la base de datos
+                            jpaController.create(flavors);
+                        }
+                    } catch (Exception e) {
+                        System.err.println("Error al crear entidades\n" + e.getMessage());
+                        e.printStackTrace();
+                        JOptionPane.showMessageDialog(this, "Error al leer el archivo\nLinea " + index, "Aviso", JOptionPane.ERROR_MESSAGE);
+                    }
+                    index++;
+                }
+
+                // Iterar sobre la lista de productos y guardar en la base de datos
+                for (Product product : productos) {
+                    jpaController.create(product);
+                }
+            } catch (Exception e) {
+                System.err.println("Error al registrar\n" + e.getMessage());
+                 JOptionPane.showMessageDialog(null, "Se produjo un error.", "Error", JOptionPane.ERROR_MESSAGE);
+                e.printStackTrace();
+            }
+        } else {
+            // Mostrar un mensaje si se canceló la selección
+            System.out.println("Selección de archivo cancelada");
+        }
+    }//GEN-LAST:event_buttonTemplate1ActionPerformed
     
     /**/
     public Product findProduct() {
@@ -469,7 +569,7 @@ public class ListProducts extends javax.swing.JPanel {
 
             // Crear encabezados
             Row headerRow = sheet.createRow(0);
-            String[] columns = {"Codigo de barras", "Nombre", "Precio de Compra", "Precio de Venta", "Tipo", "Descripción", "Numero de Producto", "Estado", "Disponible", "Variantes"};
+            String[] columns = {"Codigo de barras", "Nombre", "Precio de Compra", "Precio de Venta", "Tipo", "Descripción", "Numero de Producto", "Estado", "Disponible", "Variantes", "Sabores (deben ser ingresados separados por comas)"};
 
             CellStyle headerStyle = createHeaderStyle(workbook);
 
@@ -558,11 +658,13 @@ public class ListProducts extends javax.swing.JPanel {
     private javax.swing.JButton buttonExportPdf;
     private javax.swing.JButton buttonModify;
     private javax.swing.JButton buttonTemplate;
+    private javax.swing.JButton buttonTemplate1;
     private javax.swing.JFileChooser fileChooser;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanel2;
     private javax.swing.JScrollPane jScrollPane1;
+    private javax.swing.JFileChooser selectFileChooser;
     private javax.swing.JTable tableProduct;
     // End of variables declaration//GEN-END:variables
 }
