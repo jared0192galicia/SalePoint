@@ -16,6 +16,7 @@ import com.unsis.view.panel.RegisterProduct;
 import com.unsis.view.panel.ToolBar;
 import com.unsis.view.panel.SalePoint;
 import com.unsis.view.panel.UpdateEmployee;
+import com.unsis.view.panel.UpdateProduct;
 import com.unsis.view.panel.ventasDesp;
 import java.awt.CardLayout;
 import java.awt.event.KeyEvent;
@@ -130,6 +131,7 @@ public class Main extends javax.swing.JFrame {
         defaultPanel.add("Gastos", new RegisterExpenses());
         defaultPanel.add("Ajustes del generales", new GeneralSettings());
         defaultPanel.add("Editar Emplado", new UpdateEmployee());
+        defaultPanel.add("Editar Producto", new UpdateProduct());
 
         defaultPanel.addKeyListener(keyController);
         this.add(defaultPanel);

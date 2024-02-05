@@ -1,6 +1,9 @@
 package com.unsis.view.panel;
 
+import com.unsis.controller.JpaController;
+import com.unsis.models.entity.Company;
 import com.unsis.view.Main;
+import java.util.ArrayList;
 
 /**
  *
@@ -8,6 +11,7 @@ import com.unsis.view.Main;
  */
 public class NavBar extends javax.swing.JPanel {
 
+    private final JpaController controller;
     /**
      * Creates new form NavBar
      * @param main main window, used for child
@@ -18,6 +22,11 @@ public class NavBar extends javax.swing.JPanel {
         PanelContainer options = new PanelContainer(main);
         options.setBounds(5, 150, 217, 149);
         this.add(options);
+        this.controller = new JpaController();
+        ArrayList<Company> company = controller.findAllEntities(Company.class);
+        for (Company company1 : company) {
+            jLabelNameEmpresa.setText(company1.getName());
+        }
     }
 
     /**
@@ -29,15 +38,15 @@ public class NavBar extends javax.swing.JPanel {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
-        jLabel1 = new javax.swing.JLabel();
+        jLabelNameEmpresa = new javax.swing.JLabel();
         buttonHome = new javax.swing.JButton();
 
         setBackground(new java.awt.Color(17, 57, 103));
 
-        jLabel1.setFont(new java.awt.Font("Liberation Sans", 0, 36)); // NOI18N
-        jLabel1.setForeground(new java.awt.Color(255, 255, 255));
-        jLabel1.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        jLabel1.setText("Empresa");
+        jLabelNameEmpresa.setFont(new java.awt.Font("Liberation Sans", 0, 36)); // NOI18N
+        jLabelNameEmpresa.setForeground(new java.awt.Color(255, 255, 255));
+        jLabelNameEmpresa.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        jLabelNameEmpresa.setText("Empresa");
 
         buttonHome.setBackground(new java.awt.Color(17, 57, 103));
         buttonHome.setForeground(new java.awt.Color(255, 255, 255));
@@ -55,7 +64,7 @@ public class NavBar extends javax.swing.JPanel {
             .addGroup(layout.createSequentialGroup()
                 .addContainerGap()
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 204, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jLabelNameEmpresa, javax.swing.GroupLayout.PREFERRED_SIZE, 204, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(buttonHome, javax.swing.GroupLayout.PREFERRED_SIZE, 83, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
@@ -63,7 +72,7 @@ public class NavBar extends javax.swing.JPanel {
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
                 .addGap(16, 16, 16)
-                .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 67, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(jLabelNameEmpresa, javax.swing.GroupLayout.PREFERRED_SIZE, 67, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(buttonHome, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap(887, Short.MAX_VALUE))
@@ -73,6 +82,6 @@ public class NavBar extends javax.swing.JPanel {
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     public javax.swing.JButton buttonHome;
-    private javax.swing.JLabel jLabel1;
+    private javax.swing.JLabel jLabelNameEmpresa;
     // End of variables declaration//GEN-END:variables
 }

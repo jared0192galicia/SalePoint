@@ -209,10 +209,10 @@ public class Product implements Serializable {
             product = new Product();
         }
 
-        public Builder withId(Integer id) {
-          product.id = id;
-            return this;
-        }
+//        public Builder withId(Integer id) {
+//          product.id = id;
+//            return this;
+//        }
 
         public Builder withNumProducto(Integer numProduct) {
             product.numproducto = numProduct;
