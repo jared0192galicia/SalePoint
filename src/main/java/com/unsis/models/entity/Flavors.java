@@ -5,6 +5,8 @@
 package com.unsis.models.entity;
 
 import java.io.Serializable;
+import java.util.ArrayList;
+import java.util.Collection;
 import javax.persistence.Basic;
 import javax.persistence.Column;
 import javax.persistence.Entity;
@@ -38,6 +40,7 @@ public class Flavors implements Serializable {
     private Integer idproducto;
     @Column(name = "sabor")
     private String sabor;
+    private Collection<Sales> salesCollection;
 
     public Flavors() {
     }
@@ -68,6 +71,15 @@ public class Flavors implements Serializable {
 
     public void setSabor(String sabor) {
         this.sabor = sabor;
+    }
+    
+    
+    public Collection<Sales> getSalesCollection() {
+        return salesCollection;
+    }
+
+    public void setSalesCollection(Collection<Sales> salesCollection) {
+        this.salesCollection = salesCollection;
     }
 
     @Override
@@ -101,6 +113,7 @@ public class Flavors implements Serializable {
 
         public Builder() {
             this.flavors = new Flavors();
+            flavors.setSalesCollection(new ArrayList<>());
         }
 
         public Builder withIdProduct(Integer idproduct) {
@@ -110,6 +123,11 @@ public class Flavors implements Serializable {
 
         public Builder withSabor(String sabor) {
             flavors.setSabor(sabor);
+            return this;
+        }
+        
+        public Builder withSalesCollection(Collection<Sales> salesCollection) {
+            flavors.setSalesCollection(salesCollection);
             return this;
         }
 

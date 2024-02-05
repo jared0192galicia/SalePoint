@@ -5,6 +5,7 @@
 package com.unsis.models.entity;
 
 import java.io.Serializable;
+import java.util.ArrayList;
 import java.util.Collection;
 import javax.persistence.Basic;
 import javax.persistence.Column;
@@ -207,12 +208,13 @@ public class Product implements Serializable {
 
         public Builder() {
             product = new Product();
+            product.setSalesCollection(new ArrayList<>());
         }
 
-//        public Builder withId(Integer id) {
-//          product.id = id;
-//            return this;
-//        }
+        public Builder withId(Integer id) {
+          product.id = id;
+            return this;
+        }
 
         public Builder withNumProducto(Integer numProduct) {
             product.numproducto = numProduct;
@@ -260,10 +262,16 @@ public class Product implements Serializable {
             return this;
         }
 
-         public Builder withVariente(String variante) {
+        public Builder withVariente(String variante) {
            product.variante = variante;
             return this;
         }
+         
+        public Builder withSalesCollection(Collection<Sales> salesCollection) {
+            product.setSalesCollection(salesCollection);
+            return this;
+        }
+        
         public Product build() {
             return product;
         }

@@ -5,10 +5,12 @@ import com.unsis.controller.JpaController;
 import com.unsis.models.entity.Flavors;
 import java.awt.Color;
 import com.unsis.models.entity.Product;
+import com.unsis.models.entity.Sales;
 import com.unsis.view.Main;
 import java.awt.event.KeyEvent;
 import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.Collection;
 import java.util.List;
 import java.util.Locale;
 import java.util.regex.Matcher;
@@ -26,7 +28,8 @@ public class UpdateProduct extends javax.swing.JPanel {
 
     private final JpaController controller;
     private static Product product;
-
+    private List<String> flavorList;
+    
     /**
      * Creates new form RegisterProduct
      */
@@ -38,6 +41,7 @@ public class UpdateProduct extends javax.swing.JPanel {
 
         // comboSaller.addItem("+");
         this.dialogRegisterSaller.setLocationRelativeTo(null);
+        this.flavorList = new ArrayList<>();
    
     }
 
@@ -111,8 +115,10 @@ public class UpdateProduct extends javax.swing.JPanel {
         } else if ("No disponible".equalsIgnoreCase(product.getEstado())) {
             RadioButtonNotavailable.setSelected(true);
         }
-
-        List<String> flavorList = obtFlavors(product.getId());
+        
+        flavorList.clear();
+        flavorList= obtFlavors(product.getId());
+        
         System.out.println("Lista de sabores obtenida: " + flavorList);
         String sabores = String.join(", ", flavorList);
 
@@ -631,8 +637,9 @@ public class UpdateProduct extends javax.swing.JPanel {
         // Verificar que todos los campos estén llenos
         if (camposEstanLlenos()) {
             // Todos los campos están llenos, proceder a crear y guardar el producto
+            Collection<Sales> salesCollection = new ArrayList<>();
             Product productact = new Product.Builder()
-                    //                    .withId(35)
+                    .withId(product.getId())
                     .withNumProducto(Integer.valueOf(txtNumProduct.getText().trim()))
                     .withNombre(txtPName.getText().trim())
                     .withPreciocom(Double.valueOf(txtPBuys.getText().trim()))
@@ -643,12 +650,13 @@ public class UpdateProduct extends javax.swing.JPanel {
                     .withEstado(RadioButtonAvailable.isSelected() ? "Disponible" : "No disponible")
                     .withDisponible(Integer.parseInt(txtAvailable.getText().trim()))
                     .withVariente(txtVariants.getText().trim())
+                    .withSalesCollection(salesCollection)
                     .build();
 
             controller.edit(productact);
             product = productact;
-//            product = controller.edit(product);
-             System.out.println( product.getId());
+
+            System.out.println( product.getId());
             Integer productId = product.getId();
             if (productId != null) {
                 String sabores = txtFlavors.getText();
@@ -656,8 +664,8 @@ public class UpdateProduct extends javax.swing.JPanel {
                 List<String> saboresList = new ArrayList<>(Arrays.asList(saboresArray));
 
                 for (String sabor : saboresList) {
-
                     Flavors flavors = new Flavors.Builder()
+                            .withSalesCollection(salesCollection)
                             .withIdProduct(product.getId())
                             .withSabor(sabor.trim())
                             .build();
@@ -667,6 +675,7 @@ public class UpdateProduct extends javax.swing.JPanel {
                 System.out.println("El id del producto después de la edición: " + product.getId());
 
             }
+            JOptionPane.showMessageDialog(null, "El producto se edito con exito.", "Aviso", JOptionPane.INFORMATION_MESSAGE);
 
         } else {
             // Mostrar un mensaje indicando que todos los campos deben estar llenos
