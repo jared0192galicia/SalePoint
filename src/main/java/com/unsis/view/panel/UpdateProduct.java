@@ -105,16 +105,17 @@ public class UpdateProduct extends javax.swing.JPanel {
         this.txtDescription.setText(product.getDescripcion());
         this.txtAvailable.setText(String.valueOf(product.getDisponible()));
         this.txtVariants.setText(product.getVariante());
-        
-        if("Disponible".equalsIgnoreCase(product.getEstado())){
+
+        if ("Disponible".equalsIgnoreCase(product.getEstado())) {
             RadioButtonAvailable.setSelected(true);
-        }else if ("No disponible".equalsIgnoreCase(product.getEstado())){
+        } else if ("No disponible".equalsIgnoreCase(product.getEstado())) {
             RadioButtonNotavailable.setSelected(true);
         }
-        
+
         List<String> flavorList = obtFlavors(product.getId());
+        System.out.println("Lista de sabores obtenida: " + flavorList);
         String sabores = String.join(", ", flavorList);
-        
+
         this.txtFlavors.setText(sabores);
     }
 
@@ -123,7 +124,8 @@ public class UpdateProduct extends javax.swing.JPanel {
         List<String> saboresProd = new ArrayList<>();
 
         for (Flavors sabor : sabores) {
-            if (sabor.getIdProduct() == idProducto) {
+            Integer idProduct = sabor.getIdProduct();
+            if (idProduct != null && idProduct.intValue() == idProducto) {
                 saboresProd.add(sabor.getSabor());
             }
         }
@@ -508,7 +510,7 @@ public class UpdateProduct extends javax.swing.JPanel {
 
         jLabel1.setFont(new java.awt.Font("Jaldi", 0, 30)); // NOI18N
         jLabel1.setForeground(new java.awt.Color(1, 41, 87));
-        jLabel1.setText("Alta de producto");
+        jLabel1.setText("Actualización de Producto");
 
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
@@ -629,8 +631,8 @@ public class UpdateProduct extends javax.swing.JPanel {
         // Verificar que todos los campos estén llenos
         if (camposEstanLlenos()) {
             // Todos los campos están llenos, proceder a crear y guardar el producto
-            Product product = new Product.Builder()
-//                    .withId(35)
+            Product productact = new Product.Builder()
+                    //                    .withId(35)
                     .withNumProducto(Integer.valueOf(txtNumProduct.getText().trim()))
                     .withNombre(txtPName.getText().trim())
                     .withPreciocom(Double.valueOf(txtPBuys.getText().trim()))
@@ -640,22 +642,30 @@ public class UpdateProduct extends javax.swing.JPanel {
                     .withDescripcion(txtDescription.getText().trim())
                     .withEstado(RadioButtonAvailable.isSelected() ? "Disponible" : "No disponible")
                     .withDisponible(Integer.parseInt(txtAvailable.getText().trim()))
+                    .withVariente(txtVariants.getText().trim())
                     .build();
-            controller.edit(product);
-            
-            String sabores = txtFlavors.getText();
-            String[] saboresArray = sabores.split(",\\s");
-            List<String> saboresList = new ArrayList<>(Arrays.asList(saboresArray));
 
-            for (String sabor : saboresList) {
-                if (product.getId() != null){
+            controller.edit(productact);
+            product = productact;
+//            product = controller.edit(product);
+             System.out.println( product.getId());
+            Integer productId = product.getId();
+            if (productId != null) {
+                String sabores = txtFlavors.getText();
+                String[] saboresArray = sabores.split(",\\s");
+                List<String> saboresList = new ArrayList<>(Arrays.asList(saboresArray));
+
+                for (String sabor : saboresList) {
+
                     Flavors flavors = new Flavors.Builder()
-                        .withIdProduct(product.getId())
-                        .withSabor(sabor.trim())
-                        .build();
-                controller.edit(flavors);
+                            .withIdProduct(product.getId())
+                            .withSabor(sabor.trim())
+                            .build();
+                    controller.edit(flavors);
                 }
-                System.out.println("El id del producto no está asignado correctamente.");
+            } else {
+                System.out.println("El id del producto después de la edición: " + product.getId());
+
             }
 
         } else {

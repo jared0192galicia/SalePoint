@@ -573,7 +573,6 @@ public class SalePoint extends javax.swing.JPanel {
         labelProdNoFind.setFont(new java.awt.Font("Dialog", 1, 13)); // NOI18N
         labelProdNoFind.setForeground(new java.awt.Color(255, 153, 0));
         labelProdNoFind.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        labelProdNoFind.setText("Mercancia no disponible");
         jPanel2.add(labelProdNoFind, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 360, 560, -1));
 
         labelNoSelectProd.setFont(new java.awt.Font("Dialog", 1, 13)); // NOI18N
@@ -804,7 +803,7 @@ public class SalePoint extends javax.swing.JPanel {
 
     public void llenarTabla(String productName, int cantidad) {
         ArrayList<Product> products = controller.findAllEntities(Product.class);
-
+        boolean productSelect = false;
         txtCant.setText("");
         txtComents.setText("");
         DefaultTableModel tableModel = (DefaultTableModel) tableProduct.getModel();
@@ -835,12 +834,26 @@ public class SalePoint extends javax.swing.JPanel {
                     total
                 };
                 tableModel.addRow(rowData);
-
+                productSelect = true;
                 selectedProduct = producto;
                 break;
-            } else {
-                labelProdNoFind.setVisible(true);
+            } 
+        }
+        
+        if (!productSelect) {
+            labelProdNoFind.setVisible(true);
+
+            Product productNoFind = products.stream()
+                    .filter(p -> p.getNombre().equalsIgnoreCase(productName))
+                    .findFirst()
+                    .orElse(null);
+
+            if (productNoFind != null) {
+                labelProdNoFind.setText("Mercancia no disponible, quedan " + productNoFind.getDisponible()+ " en existencia.");
+            }else {
+                labelProdNoFind.setText("Mercancia no disponible.");
             }
+
         }
         if (selectedProduct != null) {
             //for (int i = 0; i <= cantidad; i++) {

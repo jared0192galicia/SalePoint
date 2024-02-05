@@ -591,6 +591,7 @@ public class RegisterProduct extends javax.swing.JPanel {
                     .withDescripcion(txtDescription.getText().trim())
                     .withEstado(RadioButtonAvailable.isSelected() ? "Disponible" : "No disponible")
                     .withDisponible(Integer.parseInt(txtAvailable.getText().trim()))
+                    .withVariente(txtVariants.getText().trim())
                     .build();
             controller.create(product);
             
