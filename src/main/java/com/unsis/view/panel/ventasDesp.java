@@ -95,8 +95,12 @@ public class ventasDesp extends javax.swing.JPanel {
         List<Sales> salesListTemp = new JpaController().findAllEntities(Sales.class); // Cambie los nombres a minusculas porque me marcaba error.
         salesList = new ArrayList<>();
         for (Sales sales : salesListTemp) {
+            try {
             if (sales.getEstatus() == 0) {
-                salesList.add(sales);
+                    salesList.add(sales);
+                }
+            } catch (Exception e) {
+                    salesList.add(sales);
             }
         }
     }

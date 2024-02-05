@@ -2,6 +2,7 @@ package com.unsis.view.panel;
 
 import com.unsis.clases.Tools;
 import com.unsis.controller.JpaController;
+import com.unsis.models.constants.Constants;
 import com.unsis.models.entity.Account;
 import com.unsis.models.entity.Employee;
 import com.unsis.view.Main;
@@ -58,6 +59,10 @@ public class ListEmployes extends javax.swing.JPanel {
         this.jpaController = new JpaController();
 
         this.resizeImages();
+        
+        buttonModify.setEnabled(Constants.accessTo("Editar Empleados"));
+        buttonDelete.setEnabled(Constants.accessTo("Editar Empleados"));
+        buttonCreate.setEnabled(Constants.accessTo("Alta de Empleado"));
     }
 
     /**
@@ -75,12 +80,14 @@ public class ListEmployes extends javax.swing.JPanel {
     private void initComponents() {
 
         fileChooser = new javax.swing.JFileChooser();
+        selectFileChooser = new javax.swing.JFileChooser();
         jPanel1 = new javax.swing.JPanel();
         buttonCreate = new javax.swing.JButton();
         buttonExportXls = new javax.swing.JButton();
         buttonModify = new javax.swing.JButton();
         buttonDelete = new javax.swing.JButton();
         buttonExportPdf = new javax.swing.JButton();
+        buttonTemplate1 = new javax.swing.JButton();
         buttonTemplate = new javax.swing.JButton();
         jPanel2 = new javax.swing.JPanel();
         jScrollPane1 = new javax.swing.JScrollPane();
@@ -92,6 +99,10 @@ public class ListEmployes extends javax.swing.JPanel {
         fileChooser.setApproveButtonToolTipText("");
         fileChooser.setDialogTitle("Descargar platilla");
         fileChooser.setFileFilter(new FileNameExtensionFilter("Documento Excel", "xlsx"));
+
+        selectFileChooser.setApproveButtonToolTipText("");
+        selectFileChooser.setDialogTitle("Descargar platilla");
+        selectFileChooser.setFileFilter(new FileNameExtensionFilter("Documento Excel", "xlsx"));
 
         setBackground(new java.awt.Color(240, 240, 240));
         addComponentListener(new java.awt.event.ComponentAdapter() {
@@ -181,6 +192,22 @@ public class ListEmployes extends javax.swing.JPanel {
             }
         });
         jPanel1.add(buttonExportPdf, new org.netbeans.lib.awtextra.AbsoluteConstraints(1340, 25, 136, 40));
+
+        buttonTemplate1.setBackground(new java.awt.Color(0, 102, 102));
+        buttonTemplate1.setFont(new java.awt.Font("Dialog", 1, 16)); // NOI18N
+        buttonTemplate1.setForeground(new java.awt.Color(255, 255, 255));
+        buttonTemplate1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/exportExcel .png"))); // NOI18N
+        buttonTemplate1.setText("Cargar");
+        buttonTemplate1.setBorder(null);
+        buttonTemplate1.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+        buttonTemplate1.setHorizontalTextPosition(javax.swing.SwingConstants.RIGHT);
+        buttonTemplate1.setVerticalTextPosition(javax.swing.SwingConstants.BOTTOM);
+        buttonTemplate1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                buttonTemplate1ActionPerformed(evt);
+            }
+        });
+        jPanel1.add(buttonTemplate1, new org.netbeans.lib.awtextra.AbsoluteConstraints(920, 25, 136, 40));
 
         buttonTemplate.setBackground(new java.awt.Color(0, 102, 153));
         buttonTemplate.setFont(new java.awt.Font("Dialog", 1, 16)); // NOI18N
@@ -292,7 +319,7 @@ public class ListEmployes extends javax.swing.JPanel {
      * @param outputPath String con la ruta y nombre a guardar
      */
     private void exportToExcel(String outputPath) {
-        try (Workbook workbook = new XSSFWorkbook()) {
+        try ( Workbook workbook = new XSSFWorkbook()) {
             Sheet sheet = workbook.createSheet("Employees");
 
             // Crear encabezados
@@ -329,7 +356,7 @@ public class ListEmployes extends javax.swing.JPanel {
             }
 
             // Escribir el archivo Excel
-            try (FileOutputStream fileOut = new FileOutputStream(outputPath)) {
+            try ( FileOutputStream fileOut = new FileOutputStream(outputPath)) {
                 workbook.write(fileOut);
                 System.out.println("Archivo Excel generado con éxito en: " + outputPath);
             }
@@ -346,12 +373,14 @@ public class ListEmployes extends javax.swing.JPanel {
      * @param outputPath String con la ruta y nombre a guardar
      */
     private void excelTemplate(String outputPath) {
-        try (Workbook workbook = new XSSFWorkbook()) {
+        try ( Workbook workbook = new XSSFWorkbook()) {
             Sheet sheet = workbook.createSheet("Employees");
 
             // Crear encabezados
             Row headerRow = sheet.createRow(0);
-            String[] columns = {"Número de Empleado", "Nombre", "Apellido Paterno", "Apellido Materno", "Fecha Nacimiento", "Correo", "Teléfono", "Fecha Ingreso", "Estado", "Puesto"};
+            String[] columns = {"Número de Empleado", "Nombre", "Apellido Paterno", "Apellido Materno",
+                "Fecha Nacimiento", "Correo", "Teléfono", "Fecha Ingreso", "Estado", "Puesto",
+                "Usuario", "Contraseña", "Foto de perfil"};
 
             CellStyle headerStyle = createHeaderStyle(workbook);
 
@@ -362,7 +391,7 @@ public class ListEmployes extends javax.swing.JPanel {
             }
 
             // Escribir el archivo Excel
-            try (FileOutputStream fileOut = new FileOutputStream(outputPath)) {
+            try ( FileOutputStream fileOut = new FileOutputStream(outputPath)) {
                 workbook.write(fileOut);
             }
 
@@ -418,11 +447,11 @@ public class ListEmployes extends javax.swing.JPanel {
         }
     }
     private void formComponentShown(java.awt.event.ComponentEvent evt) {//GEN-FIRST:event_formComponentShown
-       this.showModel();
+        this.showModel();
     }//GEN-LAST:event_formComponentShown
 
     public Employee findEmployee() {
-          int filaSeleccionada = table.getSelectedRow();
+        int filaSeleccionada = table.getSelectedRow();
 
         if (filaSeleccionada != -1) { // Verifica que haya una fila seleccionada
             var codeEmployee = table.getValueAt(filaSeleccionada, 0);
@@ -432,22 +461,19 @@ public class ListEmployes extends javax.swing.JPanel {
             for (Employee employee : employees) {
                 if (employee.getNumempleado() == codeEmployee) {
                     return employee;
-
                 }
             }
         }
         return null;
-       
+
     }
 
     public Account findAccount(Employee employee) {
-
         ArrayList<Account> accounts = jpaController.findAllEntities(Account.class);
 
         for (Account account : accounts) {
             if (Objects.equals(account.getIdempleado().getNumempleado(), employee.getNumempleado())) {
                 return account;
-
             }
         }
         return null;
@@ -521,8 +547,6 @@ public class ListEmployes extends javax.swing.JPanel {
     }//GEN-LAST:event_buttonExportPdfActionPerformed
 
     private void buttonTemplateActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_buttonTemplateActionPerformed
-//        String path = fileChooser.sel
-
         int userSelection = fileChooser.showSaveDialog(null);
 
         if (userSelection == JFileChooser.APPROVE_OPTION) {
@@ -537,6 +561,80 @@ public class ListEmployes extends javax.swing.JPanel {
         }
     }//GEN-LAST:event_buttonTemplateActionPerformed
 
+    private void buttonTemplate1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_buttonTemplate1ActionPerformed
+        // Establecer el filtro para que solo se muestren archivos con extensión xlsx
+        FileNameExtensionFilter filter = new FileNameExtensionFilter("Archivos Excel (*.xlsx)", "xlsx");
+        selectFileChooser.setFileFilter(filter);
+
+        // Mostrar el diálogo de selección de archivo
+        int result = selectFileChooser.showOpenDialog(this);
+
+        // Verificar si se seleccionó un archivo
+        if (result == JFileChooser.APPROVE_OPTION) {
+            // Obtener el archivo seleccionado
+            String pathFile = Tools.ROOTPATH + "files/temporal.xlsx";
+            Tools.copyFile(selectFileChooser.getSelectedFile().getAbsolutePath(), pathFile);
+            try ( Workbook workbook = new XSSFWorkbook(pathFile)) {
+                Sheet sheet = workbook.getSheetAt(0); // Obtén la primera hoja (índice 0)
+                Employee employee;
+                Account account;
+                DataFormatter format = new DataFormatter();
+                ArrayList<Employee> emplooyes = new ArrayList<>();
+                int index = 2;
+                System.out.println("Lineas: "+ sheet.getLastRowNum());
+                // Iterar sobre las filas, comenzando desde la segunda fila (índice 1, ya que la primera fila es el encabezado)
+                for (int rowIndex = 1; rowIndex < sheet.getLastRowNum(); rowIndex++) {
+                    Row row = sheet.getRow(rowIndex);
+
+                    try {
+
+                        // Crear un nuevo objeto Employee utilizando el formato del Builder y los valores de las celdas
+                        employee = new Employee.Builder()
+                                .withNumEmpleado((int) row.getCell(0).getNumericCellValue())
+                                .withNombre(row.getCell(1).getStringCellValue())
+                                .withApellidoP(row.getCell(2).getStringCellValue())
+                                .withApellidoM(row.getCell(3).getStringCellValue())
+                                .withFechaNac(row.getCell(4).getDateCellValue()) // Asegúrate de que la celda contenga una fecha
+                                .withCorreo(row.getCell(5).getStringCellValue())
+                                .withTelefono(row.getCell(6).getStringCellValue())
+                                .withFechaIng(row.getCell(7).getDateCellValue()) // Asegúrate de que la celda contenga una fecha
+                                .withEstado(row.getCell(8).getStringCellValue())
+                                .withPuesto(row.getCell(9).getStringCellValue())
+                                .build();
+
+                        account = new Account.Builder()
+                                .withId(1)
+                                .withIdEmpleado(employee)
+                                .withNumCuenta(0)
+                                .withUsuario(row.getCell(10).getStringCellValue())
+                                .withContrasena(Tools.cryptPassword(format.formatCellValue(row.getCell(11)))) // Encriptar usando tools
+                                .withFotoPerfil(row.getCell(12).getStringCellValue())
+                                .build();
+
+                        // Agregar el objeto a la lista
+                        employee.setAccount(account);
+//                    jpaController.create(employee);
+                        emplooyes.add(employee);
+                    } catch (Exception e) {
+                        System.err.println("Error al crear entidades\n" + e.getMessage());
+                        e.printStackTrace();
+                        JOptionPane.showMessageDialog(null, "Error al leer el archivo\nLinea " + index, "Aviso", JOptionPane.ERROR_MESSAGE);
+                    }
+                    index++;
+                }
+                for (Employee emplooye : emplooyes) {
+                    jpaController.create(emplooye);
+                }
+            } catch (Exception e) {
+                System.err.println("Error al registrar\n" + e.getMessage());
+                e.printStackTrace();
+            }
+        } else {
+            // Mostrar un mensaje si se canceló la selección
+            System.out.println("Selección de archivo cancelada");
+        }
+    }//GEN-LAST:event_buttonTemplate1ActionPerformed
+
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton buttonCreate;
     private javax.swing.JButton buttonDelete;
@@ -544,11 +642,13 @@ public class ListEmployes extends javax.swing.JPanel {
     private javax.swing.JButton buttonExportXls;
     private javax.swing.JButton buttonModify;
     private javax.swing.JButton buttonTemplate;
+    private javax.swing.JButton buttonTemplate1;
     private javax.swing.JFileChooser fileChooser;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanel2;
     private javax.swing.JScrollPane jScrollPane1;
+    private javax.swing.JFileChooser selectFileChooser;
     private javax.swing.JTable table;
     // End of variables declaration//GEN-END:variables
 }

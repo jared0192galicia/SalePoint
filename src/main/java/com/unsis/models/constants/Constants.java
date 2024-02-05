@@ -9,13 +9,21 @@ import java.util.ArrayList;
  */
 public class Constants {
 
-    public static String PU_NAME= "com.unsis_puntoVenta_jar_1.0-SNAPSHOTPU";
+    public static String PU_NAME = "com.unsis_puntoVenta_jar_1.0-SNAPSHOTPU";
     public static ArrayList<Section> sections = new ArrayList<>();
 
     public static void fillContants() {
         sections = new ConstantsController().loadSections();
     }
-    
+
+    public static boolean accessTo(String secction) {
+        for (Section item : sections) {
+            if (item.nombre.equals(secction)) {
+                return true;
+            }
+        }
+        return false;
+    }
 
     /**
      * Method for get all areas of the user permise
@@ -60,8 +68,9 @@ public class Constants {
         ArrayList<String> sectionsAcces = new ArrayList<>();
 
         for (Section section : sections) {
-            if (section.area.equals(area))
+            if (section.area.equals(area)) {
                 sectionsAcces.add(section.nombre);
+            }
         }
 
         return sectionsAcces;

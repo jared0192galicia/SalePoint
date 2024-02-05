@@ -91,19 +91,20 @@ public class UpdateEmployee extends javax.swing.JPanel {
     private List<Access> generateAccess(Account account) {
         // Creas una instancia de Access
         Access access;
-        ArrayList<Section> sections = controller.findAllEntities(Section.class);
+        Section secctionAux;
+//        ArrayList<Section> sections = new ArrayList<>();
         ArrayList<String> ids = getCheckBoxNames();
         List<Access> accessList = new ArrayList<>();
         // Estableces la relación con la sección
-        for (Section section : sections) {
-            if (ids.contains(String.valueOf(section.getId()))) {
-                access = new Access.Builder()
-                        .withId(section.getId())
-                        .withIdCuenta(account)
-                        .withIdSeccion(new Section(section))
-                        .build();
-                accessList.add(access);
-            }
+        for (String id : ids) {
+            secctionAux = controller.findEntityById(Integer.parseInt(id), Section.class);
+            access = new Access.Builder()
+                    .withId(0)
+                    .withIdCuenta(account)
+                    .withIdSeccion(secctionAux)
+                    .build();
+            
+            accessList.add(access);
         }
         return accessList;
     }
@@ -200,8 +201,8 @@ public class UpdateEmployee extends javax.swing.JPanel {
 
             // Verificar si el idString coincide con el nombre y seleccionar el JCheckBox correspondiente
             if (checkBoxMap.containsKey(idString)) {
-                JCheckBox checkBox = checkBoxMap.get(idString);
-                checkBox.setSelected(true);
+                checkBoxMap.get(idString).setSelected(true);
+                
             } else {
                 System.err.println("Algo malio sal");
             }

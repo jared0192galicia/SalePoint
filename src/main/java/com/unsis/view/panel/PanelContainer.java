@@ -36,7 +36,7 @@ public class PanelContainer extends javax.swing.JPanel {
         JPopupMenu menu = new JPopupMenu();
         JMenuItem item;
         for (Constants.Section section : Constants.sections) {
-            if (section.getArea().equals(area)) {
+            if (section.getArea().equals(area) && !(excudeSections(section))) {
                 item = new JMenuItem(section.getNombre());
                 item.setToolTipText(section.getDescripcion());
                 item.setForeground(Color.WHITE);
@@ -54,6 +54,11 @@ public class PanelContainer extends javax.swing.JPanel {
         }
 
         return menu;
+    }
+    
+    private boolean excudeSections(Constants.Section section) {
+        return section.getNombre().equals("Editar Empleados") || 
+                section.getNombre().equals("Editar Productos");
     }
 
     /**
