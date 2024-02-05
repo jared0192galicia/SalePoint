@@ -165,4 +165,6 @@
             <version>1.0.0.0</version>
         </dependency>
     </dependencies>
+    <name>PuntoVenta</name>
+    <description>Sistema para realizar y llevar un registro de ventas</description>
 </project>
