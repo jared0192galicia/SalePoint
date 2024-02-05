@@ -521,7 +521,6 @@ public class RegisterEmployed extends javax.swing.JPanel {
         if (dateNac.isVisible()) {
             dateNac.setVisible(false);
             buttonCalendarNac.setText(dateNac.getDate().toLocaleString());
-            System.err.println("Fecha seleccionada: " + dateNac.getDate().toLocaleString());
         } else {
             dateNac.setVisible(true);
             buttonCalendarNac.setText("-- : -- : ----");
@@ -563,7 +562,6 @@ public class RegisterEmployed extends javax.swing.JPanel {
         if (dateIngres.isVisible()) {
             dateIngres.setVisible(false);
             buttonCalendarIngress.setText(dateIngres.getDate().toLocaleString());
-            System.err.println("Fecha seleccionada: " + dateIngres.getDate().toLocaleString());
         } else {
             dateIngres.setVisible(true);
             buttonCalendarIngress.setText("-- : -- : ----");
@@ -656,9 +654,9 @@ public class RegisterEmployed extends javax.swing.JPanel {
 
         try {
             controller.create(employee);
-            JOptionPane.showMessageDialog(null, "Empleado egistrado", "Aviso", JOptionPane.INFORMATION_MESSAGE);
+            JOptionPane.showMessageDialog(this, "Empleado egistrado", "Aviso", JOptionPane.INFORMATION_MESSAGE);
         } catch (HeadlessException e) {
-            JOptionPane.showMessageDialog(null, "Error al registrar a el empleado", "Aviso", JOptionPane.ERROR_MESSAGE);
+            JOptionPane.showMessageDialog(this, "Error al registrar a el empleado", "Aviso", JOptionPane.ERROR_MESSAGE);
         }
 //        controller.create(account);
 

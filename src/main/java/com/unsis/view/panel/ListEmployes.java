@@ -483,7 +483,7 @@ public class ListEmployes extends javax.swing.JPanel {
         Employee employee = findEmployee();
 
         if (employee != null) {
-            int opcion = JOptionPane.showConfirmDialog(null,
+            int opcion = JOptionPane.showConfirmDialog(this,
                     "¿Estás seguro de continuar?", "Confirmación", JOptionPane.YES_NO_OPTION);
 
             if (opcion == JOptionPane.YES_OPTION) {
@@ -509,10 +509,10 @@ public class ListEmployes extends javax.swing.JPanel {
     private void buttonExportXlsActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_buttonExportXlsActionPerformed
         try {
             exportToExcel("./reports/" + Tools.getFormatExcelFileName("Empleados"));
-            JOptionPane.showMessageDialog(null, "Reporte exportado", "Accion exitosa",
+            JOptionPane.showMessageDialog(this, "Reporte exportado", "Accion exitosa",
                     JOptionPane.INFORMATION_MESSAGE);
         } catch (Exception e) {
-            JOptionPane.showMessageDialog(null, "Reporte no exportado", "Accion no exitosa",
+            JOptionPane.showMessageDialog(this, "Reporte no exportado", "Accion no exitosa",
                     JOptionPane.ERROR_MESSAGE);
         }
     }//GEN-LAST:event_buttonExportXlsActionPerformed
@@ -538,10 +538,10 @@ public class ListEmployes extends javax.swing.JPanel {
             // Exportar el informe a PDF
             JasperExportManager.exportReportToPdfFile(jasperPrint, "./reports/Empleados.pdf");
 
-            JOptionPane.showMessageDialog(null, "Reporte exportado", "Accion exitosa",
+            JOptionPane.showMessageDialog(this, "Reporte exportado", "Accion exitosa",
                     JOptionPane.INFORMATION_MESSAGE);
         } catch (JRException e) {
-            JOptionPane.showMessageDialog(null, "Reporte no exportado", "Accion no exitosa",
+            JOptionPane.showMessageDialog(this, "Reporte no exportado", "Accion no exitosa",
                     JOptionPane.ERROR_MESSAGE);
         }
     }//GEN-LAST:event_buttonExportPdfActionPerformed
@@ -618,7 +618,7 @@ public class ListEmployes extends javax.swing.JPanel {
                     } catch (Exception e) {
                         System.err.println("Error al crear entidades\n" + e.getMessage());
                         e.printStackTrace();
-                        JOptionPane.showMessageDialog(null, "Error al leer el archivo\nLinea " + index, "Aviso", JOptionPane.ERROR_MESSAGE);
+                        JOptionPane.showMessageDialog(this, "Error al leer el archivo\nLinea " + index, "Aviso", JOptionPane.ERROR_MESSAGE);
                     }
                     index++;
                 }

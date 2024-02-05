@@ -9,6 +9,7 @@ import com.unsis.models.entity.Account;
 import com.unsis.models.entity.Area;
 import com.unsis.models.entity.Company;
 import com.unsis.models.entity.Employee;
+import com.unsis.models.entity.Expenses;
 import com.unsis.models.entity.Product;
 import com.unsis.models.entity.Section;
 import com.unsis.models.entity.Sales;
@@ -32,6 +33,7 @@ public class JpaController {
     private final ProductJpaController product;
     private final SalesJpaController sales;
     private final FlavorsJpaController flavors;
+    private final ExpensesJpaController expenses;
     
     public JpaController() {
         Dotenv env = Dotenv.load();
@@ -47,6 +49,7 @@ public class JpaController {
         this.product = new ProductJpaController(emf);
         this.sales = new SalesJpaController(emf);
         this.flavors = new FlavorsJpaController(emf);
+        this.expenses = new ExpensesJpaController(emf);
     }
 
     /**
@@ -82,6 +85,9 @@ public class JpaController {
 
             case Flavors flavorsObj ->
                 this.flavors.create(flavorsObj);
+                
+            case Expenses expenseObj ->
+                this.expenses.create(expenseObj);
 
             default -> {
                 System.err.println("Invalid entity type");
