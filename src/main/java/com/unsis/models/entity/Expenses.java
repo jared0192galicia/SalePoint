@@ -12,6 +12,8 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
 import javax.persistence.NamedQueries;
 import javax.persistence.NamedQuery;
 import javax.persistence.Table;
@@ -23,7 +25,7 @@ import javax.persistence.TemporalType;
  * @author jared
  */
 @Entity
-@Table(name = "Expenses")
+@Table(name = "\"Expenses\"")
 @NamedQueries({
     @NamedQuery(name = "Expenses.findAll", query = "SELECT e FROM Expenses e"),
     @NamedQuery(name = "Expenses.findById", query = "SELECT e FROM Expenses e WHERE e.id = :id"),
@@ -52,6 +54,9 @@ public class Expenses implements Serializable {
     private Float monto;
     @Column(name = "comprobante")
     private String comprobante;
+    @ManyToOne
+    @JoinColumn(name = "idaccount", referencedColumnName = "id")
+    private Account idaccount;
 
     public Expenses() {
     }
@@ -132,5 +137,56 @@ public class Expenses implements Serializable {
     public String toString() {
         return "com.unsis.models.entity.Expenses[ id=" + id + " ]";
     }
-    
+
+    private void setIdempleado(Account idaccount) {
+        this.idaccount = idaccount;
+    }
+
+    public static class Builder {
+
+        private final Expenses expenses;
+
+        public Builder() {
+            expenses = new Expenses();
+        }
+
+        public Builder id(Integer id) {
+            expenses.setId(id);
+            return this;
+        }
+
+        public Builder date(Date date) {
+            expenses.setDate(date);
+            return this;
+        }
+
+        public Builder descripcion(String descripcion) {
+            expenses.setDescripcion(descripcion);
+            return this;
+        }
+
+        public Builder categoria(String categoria) {
+            expenses.setCategoria(categoria);
+            return this;
+        }
+
+        public Builder monto(Float monto) {
+            expenses.setMonto(monto);
+            return this;
+        }
+
+        public Builder comprobante(String comprobante) {
+            expenses.setComprobante(comprobante);
+            return this;
+        }
+
+        public Builder usuario(Account idaccount) {
+            expenses.setIdempleado(idaccount);
+            return this;
+        }
+
+        public Expenses build() {
+            return expenses;
+        }
+    }
 }
