@@ -1,4 +1,5 @@
 VAT=16%
 Decimals=25
-Email=
-Contact=
+Email=dede
+Contact=dewd234ew
+Ruta=no se

@@ -18,7 +18,7 @@ import javax.persistence.EntityManagerFactory;
 
 /**
  *
- * @author labtecweb10
+ * @author labtecweb04
  */
 public class SalesJpaController implements Serializable {
 

@@ -1,0 +1,156 @@
+@startuml
+annotation java.lang.Override
+annotation javax.persistence.Basic
+annotation javax.persistence.Column
+annotation javax.persistence.Entity
+annotation javax.persistence.GeneratedValue
+annotation javax.persistence.Id
+annotation javax.persistence.JoinColumn
+annotation javax.persistence.ManyToOne
+annotation javax.persistence.NamedQueries
+annotation javax.persistence.NamedQuery
+annotation javax.persistence.OneToMany
+annotation javax.persistence.OneToOne
+annotation javax.persistence.Table
+annotation javax.persistence.Temporal
+class com.unsis.models.entity.Access
+class com.unsis.models.entity.Account
+class com.unsis.models.entity.Area
+class com.unsis.models.entity.Company
+class com.unsis.models.entity.Employee
+class com.unsis.models.entity.Flavors
+class com.unsis.models.entity.Product
+class com.unsis.models.entity.Sales
+class com.unsis.models.entity.Section
+class java.util.ArrayList
+class java.util.Collection
+class java.util.Date
+class java.util.List
+class javax.persistence.GenerationType
+class javax.persistence.TemporalType
+interface java.io.Serializable
+com.unsis.models.entity.Access ..> java.lang.Override
+com.unsis.models.entity.Access ..> javax.persistence.Basic
+com.unsis.models.entity.Access ..> javax.persistence.Column
+com.unsis.models.entity.Access ..> javax.persistence.Entity
+com.unsis.models.entity.Access ..> javax.persistence.GeneratedValue
+com.unsis.models.entity.Access ..> javax.persistence.Id
+com.unsis.models.entity.Access ..> javax.persistence.JoinColumn
+com.unsis.models.entity.Access ..> javax.persistence.ManyToOne
+com.unsis.models.entity.Access ..> javax.persistence.NamedQueries
+com.unsis.models.entity.Access ..> javax.persistence.NamedQuery
+com.unsis.models.entity.Access ..> javax.persistence.Table
+com.unsis.models.entity.Access ..> javax.persistence.GenerationType
+com.unsis.models.entity.Access --|> java.io.Serializable
+com.unsis.models.entity.Account ..> java.lang.Override
+com.unsis.models.entity.Account ..> javax.persistence.Basic
+com.unsis.models.entity.Account ..> javax.persistence.Column
+com.unsis.models.entity.Account ..> javax.persistence.Entity
+com.unsis.models.entity.Account ..> javax.persistence.GeneratedValue
+com.unsis.models.entity.Account ..> javax.persistence.Id
+com.unsis.models.entity.Account ..> javax.persistence.JoinColumn
+com.unsis.models.entity.Account ..> javax.persistence.NamedQueries
+com.unsis.models.entity.Account ..> javax.persistence.NamedQuery
+com.unsis.models.entity.Account ..> javax.persistence.OneToMany
+com.unsis.models.entity.Account ..> javax.persistence.OneToOne
+com.unsis.models.entity.Account ..> javax.persistence.Table
+com.unsis.models.entity.Account ..> java.util.List
+com.unsis.models.entity.Account ..> javax.persistence.GenerationType
+com.unsis.models.entity.Account --|> java.io.Serializable
+com.unsis.models.entity.Area ..> java.lang.Override
+com.unsis.models.entity.Area ..> javax.persistence.Basic
+com.unsis.models.entity.Area ..> javax.persistence.Column
+com.unsis.models.entity.Area ..> javax.persistence.Entity
+com.unsis.models.entity.Area ..> javax.persistence.GeneratedValue
+com.unsis.models.entity.Area ..> javax.persistence.Id
+com.unsis.models.entity.Area ..> javax.persistence.NamedQueries
+com.unsis.models.entity.Area ..> javax.persistence.NamedQuery
+com.unsis.models.entity.Area ..> javax.persistence.OneToMany
+com.unsis.models.entity.Area ..> javax.persistence.Table
+com.unsis.models.entity.Area ..> java.util.List
+com.unsis.models.entity.Area ..> javax.persistence.GenerationType
+com.unsis.models.entity.Area --|> java.io.Serializable
+com.unsis.models.entity.Company ..> java.lang.Override
+com.unsis.models.entity.Company ..> javax.persistence.Basic
+com.unsis.models.entity.Company ..> javax.persistence.Column
+com.unsis.models.entity.Company ..> javax.persistence.Entity
+com.unsis.models.entity.Company ..> javax.persistence.GeneratedValue
+com.unsis.models.entity.Company ..> javax.persistence.Id
+com.unsis.models.entity.Company ..> javax.persistence.NamedQueries
+com.unsis.models.entity.Company ..> javax.persistence.NamedQuery
+com.unsis.models.entity.Company ..> javax.persistence.Table
+com.unsis.models.entity.Company ..> javax.persistence.GenerationType
+com.unsis.models.entity.Company --|> java.io.Serializable
+com.unsis.models.entity.Employee ..> java.lang.Override
+com.unsis.models.entity.Employee ..> javax.persistence.Basic
+com.unsis.models.entity.Employee ..> javax.persistence.Column
+com.unsis.models.entity.Employee ..> javax.persistence.Entity
+com.unsis.models.entity.Employee ..> javax.persistence.GeneratedValue
+com.unsis.models.entity.Employee ..> javax.persistence.Id
+com.unsis.models.entity.Employee ..> javax.persistence.NamedQueries
+com.unsis.models.entity.Employee ..> javax.persistence.NamedQuery
+com.unsis.models.entity.Employee ..> javax.persistence.OneToOne
+com.unsis.models.entity.Employee ..> javax.persistence.Table
+com.unsis.models.entity.Employee ..> javax.persistence.Temporal
+com.unsis.models.entity.Employee ..> java.util.Date
+com.unsis.models.entity.Employee ..> javax.persistence.GenerationType
+com.unsis.models.entity.Employee ..> javax.persistence.TemporalType
+com.unsis.models.entity.Employee --|> java.io.Serializable
+com.unsis.models.entity.Flavors ..> java.lang.Override
+com.unsis.models.entity.Flavors ..> javax.persistence.Basic
+com.unsis.models.entity.Flavors ..> javax.persistence.Column
+com.unsis.models.entity.Flavors ..> javax.persistence.Entity
+com.unsis.models.entity.Flavors ..> javax.persistence.GeneratedValue
+com.unsis.models.entity.Flavors ..> javax.persistence.Id
+com.unsis.models.entity.Flavors ..> javax.persistence.NamedQueries
+com.unsis.models.entity.Flavors ..> javax.persistence.NamedQuery
+com.unsis.models.entity.Flavors ..> javax.persistence.Table
+com.unsis.models.entity.Flavors ..> javax.persistence.GenerationType
+com.unsis.models.entity.Flavors --|> java.io.Serializable
+com.unsis.models.entity.Product ..> java.lang.Override
+com.unsis.models.entity.Product ..> javax.persistence.Basic
+com.unsis.models.entity.Product ..> javax.persistence.Column
+com.unsis.models.entity.Product ..> javax.persistence.Entity
+com.unsis.models.entity.Product ..> javax.persistence.GeneratedValue
+com.unsis.models.entity.Product ..> javax.persistence.Id
+com.unsis.models.entity.Product ..> javax.persistence.NamedQueries
+com.unsis.models.entity.Product ..> javax.persistence.NamedQuery
+com.unsis.models.entity.Product ..> javax.persistence.OneToMany
+com.unsis.models.entity.Product ..> javax.persistence.Table
+com.unsis.models.entity.Product ..> java.util.Collection
+com.unsis.models.entity.Product ..> javax.persistence.GenerationType
+com.unsis.models.entity.Product --|> java.io.Serializable
+com.unsis.models.entity.Sales ..> java.lang.Override
+com.unsis.models.entity.Sales ..> javax.persistence.Basic
+com.unsis.models.entity.Sales ..> javax.persistence.Column
+com.unsis.models.entity.Sales ..> javax.persistence.Entity
+com.unsis.models.entity.Sales ..> javax.persistence.GeneratedValue
+com.unsis.models.entity.Sales ..> javax.persistence.Id
+com.unsis.models.entity.Sales ..> javax.persistence.JoinColumn
+com.unsis.models.entity.Sales ..> javax.persistence.ManyToOne
+com.unsis.models.entity.Sales ..> javax.persistence.NamedQueries
+com.unsis.models.entity.Sales ..> javax.persistence.NamedQuery
+com.unsis.models.entity.Sales ..> javax.persistence.OneToOne
+com.unsis.models.entity.Sales ..> javax.persistence.Table
+com.unsis.models.entity.Sales ..> javax.persistence.Temporal
+com.unsis.models.entity.Sales ..> java.util.Date
+com.unsis.models.entity.Sales ..> javax.persistence.GenerationType
+com.unsis.models.entity.Sales ..> javax.persistence.TemporalType
+com.unsis.models.entity.Sales --|> java.io.Serializable
+com.unsis.models.entity.Section ..> java.lang.Override
+com.unsis.models.entity.Section ..> javax.persistence.Basic
+com.unsis.models.entity.Section ..> javax.persistence.Column
+com.unsis.models.entity.Section ..> javax.persistence.Entity
+com.unsis.models.entity.Section ..> javax.persistence.GeneratedValue
+com.unsis.models.entity.Section ..> javax.persistence.Id
+com.unsis.models.entity.Section ..> javax.persistence.JoinColumn
+com.unsis.models.entity.Section ..> javax.persistence.ManyToOne
+com.unsis.models.entity.Section ..> javax.persistence.NamedQueries
+com.unsis.models.entity.Section ..> javax.persistence.NamedQuery
+com.unsis.models.entity.Section ..> javax.persistence.OneToMany
+com.unsis.models.entity.Section ..> javax.persistence.Table
+com.unsis.models.entity.Section ..> java.util.ArrayList
+com.unsis.models.entity.Section ..> java.util.List
+com.unsis.models.entity.Section ..> javax.persistence.GenerationType
+com.unsis.models.entity.Section --|> java.io.Serializable
+@enduml

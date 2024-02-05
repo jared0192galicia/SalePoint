@@ -1,15 +1,21 @@
 package com.unsis.view.panel;
 
 import com.unsis.clases.Tools;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 import java.io.BufferedWriter;
 import java.io.File;
 import java.io.FileWriter;
 import java.io.IOException;
+import javax.swing.Timer;
+
 import javax.swing.Icon;
+import javax.swing.JTextField;
 import javax.swing.event.DocumentEvent;
 import javax.swing.event.DocumentListener;
 
 public class GeneralSettings extends javax.swing.JPanel {
+    private Timer timer; // Agrega esta línea para declarar la variable timer
 
     /**
      * Creates new form PanelAjustes
@@ -18,6 +24,7 @@ public class GeneralSettings extends javax.swing.JPanel {
         initComponents();
         this.resizeImages();
         addListeners();
+            initializeTimer();
         this.addComponentListener(new java.awt.event.ComponentAdapter() {
             @Override
             public void componentShown(java.awt.event.ComponentEvent evt) {
@@ -41,78 +48,59 @@ public class GeneralSettings extends javax.swing.JPanel {
     }
 
     private void addListeners() {
-        // validacion del campo iva
-        jTextFieldVAT.getDocument().addDocumentListener(new DocumentListener() {
-            @Override
-            public void insertUpdate(DocumentEvent e) {
-                validateVAT();
-            }
+       // Validación del campo iva
+       
 
+        buttonSave.addActionListener(new ActionListener() {
             @Override
-            public void removeUpdate(DocumentEvent e) {
-                validateVAT();
-            }
-
-            @Override
-            public void changedUpdate(DocumentEvent e) {
-                validateVAT();
-            }
-        });
-
-        //  Validación del campo Decimales
-        jTextFieldDecimals.getDocument().addDocumentListener(new DocumentListener() {
-            @Override
-            public void insertUpdate(DocumentEvent e) {
-                validateDecimals();
-            }
-
-            @Override
-            public void removeUpdate(DocumentEvent e) {
-                validateDecimals();
-            }
-
-            @Override
-            public void changedUpdate(DocumentEvent e) {
-                validateDecimals();
-            }
-        });
-
-        // Validación del campo Correo
-        jTextFieldEmail.getDocument().addDocumentListener(new DocumentListener() {
-            @Override
-            public void insertUpdate(DocumentEvent e) {
-                validateEmail();
-            }
-
-            @Override
-            public void removeUpdate(DocumentEvent e) {
-                validateEmail();
-            }
-
-            @Override
-            public void changedUpdate(DocumentEvent e) {
-                validateEmail();
-            }
-        });
-
-        // Validación del campo Contacto
-        jTextFieldContact.getDocument().addDocumentListener(new DocumentListener() {
-            @Override
-            public void insertUpdate(DocumentEvent e) {
-                validateContact();
-            }
-
-            @Override
-            public void removeUpdate(DocumentEvent e) {
-                validateContact();
-            }
-
-            @Override
-            public void changedUpdate(DocumentEvent e) {
-                validateContact();
+            public void actionPerformed(ActionEvent e) {
+                // Llama al método separado para manejar la acción de buttonSave
+                buttonSaveActionPerformed(e);
             }
         });
     }
+    
+    private void addValidationListener(JTextField textField, ActionListener validationAction) {
+        textField.getDocument().addDocumentListener(new DocumentListener() {
+            @Override
+            public void insertUpdate(DocumentEvent e) {
+                startValidationTimer(validationAction);
+            }
+
+            @Override
+            public void removeUpdate(DocumentEvent e) {
+                startValidationTimer(validationAction);
+            }
+
+            @Override
+            public void changedUpdate(DocumentEvent e) {
+                startValidationTimer(validationAction);
+            }
+        });
+    }
+
+    private void startValidationTimer(ActionListener validationAction) {
+        if (timer.isRunning()) {
+            timer.restart();
+        } else {
+            timer.start();
+        }
+
+        timer.addActionListener(validationAction);
+    }
+
+    private void initializeTimer() {
+        // Configurar el temporizador para 500 milisegundos
+        timer = new Timer(500, new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                timer.stop();
+            }
+        });
+
+        timer.setRepeats(false);
+    }
+
 
     private void validateVAT() {
         String textVAT = jTextFieldVAT.getText();
@@ -171,6 +159,8 @@ public class GeneralSettings extends javax.swing.JPanel {
         Labeajustes2 = new javax.swing.JLabel();
         buttonSave = new javax.swing.JButton();
         jTextFieldContact = new javax.swing.JTextField();
+        labelfilter7 = new javax.swing.JLabel();
+        jTextFieldroute = new javax.swing.JTextField();
         Labeajustes1 = new javax.swing.JLabel();
 
         setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
@@ -191,8 +181,8 @@ public class GeneralSettings extends javax.swing.JPanel {
 
         labelfilter1.setFont(new java.awt.Font("Jaldi", 0, 20)); // NOI18N
         labelfilter1.setForeground(new java.awt.Color(82, 146, 222));
-        labelfilter1.setText("Contacto");
-        jPanel1.add(labelfilter1, new org.netbeans.lib.awtextra.AbsoluteConstraints(1060, 460, 140, 39));
+        labelfilter1.setText("ruta");
+        jPanel1.add(labelfilter1, new org.netbeans.lib.awtextra.AbsoluteConstraints(1060, 540, 140, 39));
 
         jButton1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/IconCafe.png"))); // NOI18N
         jButton1.setContentAreaFilled(false);
@@ -270,6 +260,12 @@ public class GeneralSettings extends javax.swing.JPanel {
         jTextFieldContact.setForeground(new java.awt.Color(51, 51, 51));
         jPanel1.add(jTextFieldContact, new org.netbeans.lib.awtextra.AbsoluteConstraints(1060, 500, 250, 35));
 
+        labelfilter7.setFont(new java.awt.Font("Jaldi", 0, 20)); // NOI18N
+        labelfilter7.setForeground(new java.awt.Color(82, 146, 222));
+        labelfilter7.setText("Contacto");
+        jPanel1.add(labelfilter7, new org.netbeans.lib.awtextra.AbsoluteConstraints(1060, 460, 140, 39));
+        jPanel1.add(jTextFieldroute, new org.netbeans.lib.awtextra.AbsoluteConstraints(1060, 580, 250, 40));
+
         add(jPanel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(60, 70, 1540, 690));
 
         Labeajustes1.setFont(new java.awt.Font("Jaldi", 0, 40)); // NOI18N
@@ -277,12 +273,18 @@ public class GeneralSettings extends javax.swing.JPanel {
         Labeajustes1.setText("Ajustes");
         add(Labeajustes1, new org.netbeans.lib.awtextra.AbsoluteConstraints(50, 10, -1, -1));
     }// </editor-fold>                        
-//Guardar en archivo
-    private void buttonSaveActionPerformed(java.awt.event.ActionEvent evt) {                                           
+
+    /**
+     * Recopila los datos ingresados y los guarda en su archivo de texto
+     * @param evt 
+     */
+    private void buttonSaveActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_buttonSaveActionPerformed
         String vat = jTextFieldVAT.getText();
         String decimals = jTextFieldDecimals.getText();
         String email = jTextFieldEmail.getText();
         String contact = jTextFieldContact.getText();
+       String ruta = jTextFieldroute.getText(); // Obtener ruta desde JTextField
+
 
         String filePath = "src/main/resources/files/config.txt";
 
@@ -301,7 +303,9 @@ public class GeneralSettings extends javax.swing.JPanel {
                 writer.write("Email=" + email);
                 writer.newLine();
                 writer.write("Contact=" + contact);
-                writer.close();
+                writer.newLine();
+            writer.write("Ruta=" + ruta); // Guardar la ruta
+
                 System.out.println("Data saved successfully in the file.");
             } catch (IOException e) {
                 System.err.println("Error saving data to the file: " + e.getMessage());
@@ -310,13 +314,22 @@ public class GeneralSettings extends javax.swing.JPanel {
             System.err.println("Error: " + e.getMessage());
         }
 
-    }                                          
-
+    }//GEN-LAST:event_buttonSaveActionPerformed
+ 
+    /**
+     * Evenot para cargar los valores en la ventana
+     * Ejecutable cada vez que el panel se muestra en pantalla
+     * @param evt 
+     */
     public void componentShown(java.awt.event.ComponentEvent evt) {
         // Este método se llama cuando se muestra el panel
         readDataFromFile(); // Llama a un método para leer datos desde el archivo y actualizar la interfaz de usuario
     }
 
+    /**
+     * Lee el contenido de un archivo de configuracion y establece los valores a su respectivo
+     * campo de texto para
+     */
     private void readDataFromFile() {
         String filePath = "src/main/resources/files/config.txt";
 
@@ -331,19 +344,11 @@ public class GeneralSettings extends javax.swing.JPanel {
                     String value = parts[1];
 
                     switch (key) {
-                        case "VAT":
-                            jTextFieldVAT.setText(value);
-                            break;
-                        case "Decimals":
-                            jTextFieldDecimals.setText(value);
-                            break;
-                        case "Email":
-                            jTextFieldEmail.setText(value);
-                            break;
-                        case "Contact":
-                            jTextFieldContact.setText(value);
-                            break;
-                        // Agrega más casos si es necesario para otras configuraciones
+                        case "VAT" -> jTextFieldVAT.setText(value);
+                        case "Decimals" -> jTextFieldDecimals.setText(value);
+                        case "Email" -> jTextFieldEmail.setText(value);
+                        case "Contact" -> jTextFieldContact.setText(value);
+                        case "Ruta" -> jTextFieldroute.setText(value);
                     }
                 }
             }
@@ -366,6 +371,7 @@ public class GeneralSettings extends javax.swing.JPanel {
     private javax.swing.JTextField jTextFieldDecimals;
     private javax.swing.JTextField jTextFieldEmail;
     private javax.swing.JTextField jTextFieldVAT;
+    private javax.swing.JTextField jTextFieldroute;
     private javax.swing.JLabel labelfilter;
     private javax.swing.JLabel labelfilter1;
     private javax.swing.JLabel labelfilter2;
@@ -373,5 +379,6 @@ public class GeneralSettings extends javax.swing.JPanel {
     private javax.swing.JLabel labelfilter4;
     private javax.swing.JLabel labelfilter5;
     private javax.swing.JLabel labelfilter6;
+    private javax.swing.JLabel labelfilter7;
     // End of variables declaration                   
 }
