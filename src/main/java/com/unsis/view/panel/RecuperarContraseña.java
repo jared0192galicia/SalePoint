@@ -84,7 +84,7 @@ public class RecuperarContraseña extends javax.swing.JPanel {
 
         jLabel5.setFont(new java.awt.Font("Jaldi", 0, 18)); // NOI18N
         jLabel5.setForeground(new java.awt.Color(118, 125, 142));
-        jLabel5.setText("Correo Electronico");
+        jLabel5.setText("Correo Electrónico");
 
         txtMailReset.setHorizontalAlignment(javax.swing.JTextField.CENTER);
 

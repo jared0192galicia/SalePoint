@@ -154,6 +154,37 @@ AFTER INSERT ON "Sales"
 FOR EACH ROW
 EXECUTE FUNCTION actualizar_disponible();
 
+--Trigger para actualizar o no los sabores
+CREATE OR REPLACE FUNCTION before_insert_flavors()
+RETURNS TRIGGER AS $$
+CREATE OR REPLACE FUNCTION before_insert_flavors()
+RETURNS TRIGGER AS $$
+BEGIN
+    -- Verificar si ya existe un sabor igual para el mismo producto
+    IF EXISTS (
+        SELECT 1
+        FROM "Flavors"
+        WHERE idproducto = NEW.idproducto AND sabor = NEW.sabor
+    ) THEN
+        -- Si ya existe, actualiza el registro existente en lugar de insertar uno nuevo
+        UPDATE "Flavors"
+        SET sabor = NEW.sabor
+        WHERE idproducto = NEW.idproducto AND sabor = NEW.sabor;
+
+        -- Anula la inserción del nuevo sabor
+        RETURN NULL;
+    END IF;
+
+    -- Si no existe, permite la inserción del nuevo sabor
+    RETURN NEW;
+END;
+$$ LANGUAGE plpgsql;
+
+-- Crear el trigger
+CREATE TRIGGER before_insert_flavors
+BEFORE INSERT ON "Flavors"
+FOR EACH ROW
+EXECUTE FUNCTION before_insert_flavors();
 --Script de consulta de compras
 SELECT * FROM "Sales" 
 LEFT JOIN "Product" ON "Product".id = "Sales".idproducto 

@@ -101,7 +101,7 @@ public class RegisterExpenses extends javax.swing.JPanel {
                 {null, null, null, null}
             },
             new String [] {
-                "Descripcion", "Tipo", "Realizado Por", "Monto"
+                "Descripción", "Categoría", "Realizado por", "Monto"
             }
         ));
         jScrollPane1.setViewportView(table);
@@ -130,7 +130,7 @@ public class RegisterExpenses extends javax.swing.JPanel {
 
         labelcategory.setFont(new java.awt.Font("Jaldi", 0, 20)); // NOI18N
         labelcategory.setForeground(new java.awt.Color(118, 125, 142));
-        labelcategory.setText("Categoria");
+        labelcategory.setText("Categoría");
         Panel1gastos.add(labelcategory, new org.netbeans.lib.awtextra.AbsoluteConstraints(890, 200, 160, -1));
 
         LabelGeneral.setFont(new java.awt.Font("Jaldi", 0, 24)); // NOI18N
