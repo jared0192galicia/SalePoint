@@ -326,7 +326,7 @@ public class UpdateEmployee extends javax.swing.JPanel {
 
         jLabel8.setFont(new java.awt.Font("Jaldi", 0, 18)); // NOI18N
         jLabel8.setForeground(new java.awt.Color(118, 125, 142));
-        jLabel8.setText("Telefono");
+        jLabel8.setText("Teléfono");
         panelInternal.add(jLabel8, new org.netbeans.lib.awtextra.AbsoluteConstraints(420, 170, -1, -1));
 
         jLabel10.setBackground(new java.awt.Color(255, 255, 255));
@@ -369,7 +369,7 @@ public class UpdateEmployee extends javax.swing.JPanel {
 
         jLabel22.setFont(new java.awt.Font("Jaldi", 0, 24)); // NOI18N
         jLabel22.setForeground(new java.awt.Color(82, 146, 222));
-        jLabel22.setText("Informacion personal");
+        jLabel22.setText("Información personal");
         panelInternal.add(jLabel22, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 30, 260, -1));
 
         jLabel23.setFont(new java.awt.Font("Jaldi", 0, 18)); // NOI18N
@@ -575,22 +575,22 @@ public class UpdateEmployee extends javax.swing.JPanel {
 
         labelInvalidMail.setFont(new java.awt.Font("Dialog", 1, 13)); // NOI18N
         labelInvalidMail.setForeground(new java.awt.Color(153, 0, 0));
-        labelInvalidMail.setText("Correo invalido");
+        labelInvalidMail.setText("Correo inválido");
         panelInternal.add(labelInvalidMail, new org.netbeans.lib.awtextra.AbsoluteConstraints(240, 240, 150, -1));
 
         labelInvalidPhone.setFont(new java.awt.Font("Dialog", 1, 13)); // NOI18N
         labelInvalidPhone.setForeground(new java.awt.Color(153, 0, 0));
-        labelInvalidPhone.setText("Telefono invalido");
+        labelInvalidPhone.setText("Telefono inválido");
         panelInternal.add(labelInvalidPhone, new org.netbeans.lib.awtextra.AbsoluteConstraints(420, 240, 150, -1));
 
         jLabel2.setFont(new java.awt.Font("Jaldi", 0, 24)); // NOI18N
         jLabel2.setForeground(new java.awt.Color(82, 146, 222));
-        jLabel2.setText("Informacion empresarial");
+        jLabel2.setText("Información empresarial");
         panelInternal.add(jLabel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 260, 360, -1));
 
         labelInvalidUser.setFont(new java.awt.Font("Dialog", 1, 13)); // NOI18N
         labelInvalidUser.setForeground(new java.awt.Color(153, 0, 0));
-        labelInvalidUser.setText("Nombre de usuario invalido");
+        labelInvalidUser.setText("Nombre de usuario inválido");
         panelInternal.add(labelInvalidUser, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 620, 210, -1));
         panelInternal.add(txtPosition, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 450, 150, 30));
 

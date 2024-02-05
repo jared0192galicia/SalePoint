@@ -573,7 +573,7 @@ public class SalePoint extends javax.swing.JPanel {
         labelProdNoFind.setForeground(new java.awt.Color(255, 153, 0));
         labelProdNoFind.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         labelProdNoFind.setText("Mercancia no disponible");
-        jPanel2.add(labelProdNoFind, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 360, 560, -1));
+        jPanel2.add(labelProdNoFind, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 520, 560, -1));
 
         labelNoSelectProd.setFont(new java.awt.Font("Dialog", 1, 13)); // NOI18N
         labelNoSelectProd.setForeground(new java.awt.Color(255, 153, 0));

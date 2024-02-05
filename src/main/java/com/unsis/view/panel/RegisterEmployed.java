@@ -243,7 +243,7 @@ public class RegisterEmployed extends javax.swing.JPanel {
 
         jLabel8.setFont(new java.awt.Font("Jaldi", 0, 18)); // NOI18N
         jLabel8.setForeground(new java.awt.Color(118, 125, 142));
-        jLabel8.setText("Telefono");
+        jLabel8.setText("Teléfono");
         panelInternal.add(jLabel8, new org.netbeans.lib.awtextra.AbsoluteConstraints(420, 170, -1, -1));
 
         jLabel10.setBackground(new java.awt.Color(255, 255, 255));
@@ -286,7 +286,7 @@ public class RegisterEmployed extends javax.swing.JPanel {
 
         jLabel22.setFont(new java.awt.Font("Jaldi", 0, 24)); // NOI18N
         jLabel22.setForeground(new java.awt.Color(82, 146, 222));
-        jLabel22.setText("Informacion personal");
+        jLabel22.setText("Información personal");
         panelInternal.add(jLabel22, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 30, 260, -1));
 
         jLabel23.setFont(new java.awt.Font("Jaldi", 0, 18)); // NOI18N
@@ -333,14 +333,12 @@ public class RegisterEmployed extends javax.swing.JPanel {
         checkListProducts.setSelected(true);
         checkListProducts.setText("Lista de productos");
         checkListProducts.setName("4"); // NOI18N
-        checkListProducts.setOpaque(false);
         panelInternal.add(checkListProducts, new org.netbeans.lib.awtextra.AbsoluteConstraints(980, 140, -1, -1));
 
         checkSalePoint.setFont(new java.awt.Font("Jaldi", 0, 16)); // NOI18N
         checkSalePoint.setForeground(new java.awt.Color(118, 125, 142));
         checkSalePoint.setText("Punto de venta");
         checkSalePoint.setName("6"); // NOI18N
-        checkSalePoint.setOpaque(false);
         panelInternal.add(checkSalePoint, new org.netbeans.lib.awtextra.AbsoluteConstraints(1340, 140, -1, -1));
 
         checkOrders.setFont(new java.awt.Font("Jaldi", 0, 16)); // NOI18N
@@ -348,42 +346,36 @@ public class RegisterEmployed extends javax.swing.JPanel {
         checkOrders.setSelected(true);
         checkOrders.setText("Pedidos entranates");
         checkOrders.setName("5"); // NOI18N
-        checkOrders.setOpaque(false);
         panelInternal.add(checkOrders, new org.netbeans.lib.awtextra.AbsoluteConstraints(1340, 180, -1, -1));
 
         checkSettingsApp.setFont(new java.awt.Font("Jaldi", 0, 16)); // NOI18N
         checkSettingsApp.setForeground(new java.awt.Color(118, 125, 142));
         checkSettingsApp.setText("Ajustes del aplicativo");
         checkSettingsApp.setName("7"); // NOI18N
-        checkSettingsApp.setOpaque(false);
         panelInternal.add(checkSettingsApp, new org.netbeans.lib.awtextra.AbsoluteConstraints(1340, 280, -1, -1));
 
         checkCourt.setFont(new java.awt.Font("Jaldi", 0, 16)); // NOI18N
         checkCourt.setForeground(new java.awt.Color(118, 125, 142));
         checkCourt.setText("Corte de caja");
         checkCourt.setName("8"); // NOI18N
-        checkCourt.setOpaque(false);
         panelInternal.add(checkCourt, new org.netbeans.lib.awtextra.AbsoluteConstraints(1340, 380, -1, -1));
 
         checkRegisterExpenses.setFont(new java.awt.Font("Jaldi", 0, 16)); // NOI18N
         checkRegisterExpenses.setForeground(new java.awt.Color(118, 125, 142));
         checkRegisterExpenses.setText("Registrar gastos");
         checkRegisterExpenses.setName("9"); // NOI18N
-        checkRegisterExpenses.setOpaque(false);
         panelInternal.add(checkRegisterExpenses, new org.netbeans.lib.awtextra.AbsoluteConstraints(1340, 420, -1, -1));
 
         checkExpensesHistory.setFont(new java.awt.Font("Jaldi", 0, 16)); // NOI18N
         checkExpensesHistory.setForeground(new java.awt.Color(118, 125, 142));
         checkExpensesHistory.setText("Historial de gastos");
         checkExpensesHistory.setName("9"); // NOI18N
-        checkExpensesHistory.setOpaque(false);
         panelInternal.add(checkExpensesHistory, new org.netbeans.lib.awtextra.AbsoluteConstraints(1340, 460, -1, -1));
 
         checkListEmployes.setFont(new java.awt.Font("Jaldi", 0, 16)); // NOI18N
         checkListEmployes.setForeground(new java.awt.Color(118, 125, 142));
         checkListEmployes.setText("Lista de Empleados");
         checkListEmployes.setName("1"); // NOI18N
-        checkListEmployes.setOpaque(false);
         panelInternal.add(checkListEmployes, new org.netbeans.lib.awtextra.AbsoluteConstraints(970, 320, -1, -1));
 
         checkUpdateEmployes.setFont(new java.awt.Font("Jaldi", 0, 16)); // NOI18N
@@ -397,7 +389,6 @@ public class RegisterEmployed extends javax.swing.JPanel {
         checkRegisterEmploy.setForeground(new java.awt.Color(118, 125, 142));
         checkRegisterEmploy.setText("Registro de empleados");
         checkRegisterEmploy.setName("2"); // NOI18N
-        checkRegisterEmploy.setOpaque(false);
         panelInternal.add(checkRegisterEmploy, new org.netbeans.lib.awtextra.AbsoluteConstraints(970, 360, -1, -1));
 
         checkUpdateProducts.setFont(new java.awt.Font("Jaldi", 0, 16)); // NOI18N
@@ -411,7 +402,6 @@ public class RegisterEmployed extends javax.swing.JPanel {
         checkRegisterProduct.setForeground(new java.awt.Color(118, 125, 142));
         checkRegisterProduct.setText("Alta de productos");
         checkRegisterProduct.setName("3"); // NOI18N
-        checkRegisterProduct.setOpaque(false);
         panelInternal.add(checkRegisterProduct, new org.netbeans.lib.awtextra.AbsoluteConstraints(980, 180, -1, -1));
 
         jLabel27.setFont(new java.awt.Font("Jaldi", 0, 18)); // NOI18N
@@ -495,17 +485,17 @@ public class RegisterEmployed extends javax.swing.JPanel {
 
         labelInvalidMail.setFont(new java.awt.Font("Dialog", 1, 13)); // NOI18N
         labelInvalidMail.setForeground(new java.awt.Color(153, 0, 0));
-        labelInvalidMail.setText("Correo invalido");
+        labelInvalidMail.setText("Correo inválido");
         panelInternal.add(labelInvalidMail, new org.netbeans.lib.awtextra.AbsoluteConstraints(240, 240, 150, -1));
 
         labelInvalidPhone.setFont(new java.awt.Font("Dialog", 1, 13)); // NOI18N
         labelInvalidPhone.setForeground(new java.awt.Color(153, 0, 0));
-        labelInvalidPhone.setText("Telefono invalido");
+        labelInvalidPhone.setText("Telefono inválido");
         panelInternal.add(labelInvalidPhone, new org.netbeans.lib.awtextra.AbsoluteConstraints(420, 240, 150, -1));
 
         jLabel2.setFont(new java.awt.Font("Jaldi", 0, 24)); // NOI18N
         jLabel2.setForeground(new java.awt.Color(82, 146, 222));
-        jLabel2.setText("Informacion empresarial");
+        jLabel2.setText("Información empresarial");
         panelInternal.add(jLabel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 260, 360, -1));
 
         labelInvalidUser.setFont(new java.awt.Font("Dialog", 1, 13)); // NOI18N
