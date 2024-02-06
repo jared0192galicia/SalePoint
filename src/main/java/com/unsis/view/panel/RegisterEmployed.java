@@ -83,7 +83,7 @@ public class RegisterEmployed extends javax.swing.JPanel {
                     .withIdCuenta(account)
                     .withIdSeccion(secctionAux)
                     .build();
-            
+
             accessList.add(access);
         }
         return accessList;
@@ -619,15 +619,23 @@ public class RegisterEmployed extends javax.swing.JPanel {
                 .withPuesto(txtPosition.getText().trim())
                 .build();
 
-        String path;
+        String path = new String();
+        String copyPath = Tools.ROOTPATH + "profiles";
         try {
 
             path = fileChooser.getSelectedFile().getPath();
 
             if (path.isEmpty()) {
                 path = "/profileDefault.png";
+            } else {
+                String partPath[] = path.split("\\\\");
+                path = "/" + partPath[partPath.length - 1];
+                copyPath += path;
+                Tools.copyFile(fileChooser.getSelectedFile().getAbsolutePath(), copyPath);
             }
+
         } catch (Exception e) {
+            System.err.println("Error al copiar imagen\n" + e.getMessage());
             path = "/profileDefault.png";
         }
 
@@ -656,7 +664,7 @@ public class RegisterEmployed extends javax.swing.JPanel {
     private void txtNumEmployKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtNumEmployKeyReleased
         verify(evt, txtNumEmploy, "^[0-9]$");
     }//GEN-LAST:event_txtNumEmployKeyReleased
-   
+
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JToggleButton buttonCalendarIngress;
     private javax.swing.JToggleButton buttonCalendarNac;

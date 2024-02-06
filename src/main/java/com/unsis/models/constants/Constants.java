@@ -11,6 +11,7 @@ public class Constants {
 
     public static String PU_NAME = "com.unsis_puntoVenta_jar_1.0-SNAPSHOTPU";
     public static ArrayList<Section> sections = new ArrayList<>();
+    public static final String PATH_PROFILE= "./src/main/resources/profiles";
 
     public static void fillContants() {
         sections = new ConstantsController().loadSections();

@@ -1,8 +1,11 @@
 package com.unsis.view.panel;
 
+import com.unsis.clases.Session;
 import com.unsis.clases.Tools;
+import com.unsis.models.constants.Constants;
 import com.unsis.view.Main;
 import javax.swing.Icon;
+import javax.swing.ImageIcon;
 
 /**
  *
@@ -22,6 +25,14 @@ public class ToolBar extends javax.swing.JPanel {
         this.resizeImages();
         
         this.mainWindow = mainWindow;
+
+        this.labelName.setText(Session.getAccount().getIdempleado().getNombre());
+        
+        String rutaImagen = Constants.PATH_PROFILE + Session.getAccount().getFotoperfil();
+        System.out.println(rutaImagen);
+        ImageIcon icono = new ImageIcon(rutaImagen);
+        System.out.println(icono);
+        labelProfile.setIcon(icono);
     }
     
      /**
@@ -44,7 +55,7 @@ public class ToolBar extends javax.swing.JPanel {
     private void initComponents() {
 
         labelProfile = new javax.swing.JLabel();
-        jLabel1 = new javax.swing.JLabel();
+        labelName = new javax.swing.JLabel();
         buttonCloseSesion = new javax.swing.JButton();
         buttonBack = new javax.swing.JButton();
 
@@ -52,9 +63,9 @@ public class ToolBar extends javax.swing.JPanel {
 
         labelProfile.setIcon(new javax.swing.ImageIcon(getClass().getResource("/user1.png"))); // NOI18N
 
-        jLabel1.setFont(new java.awt.Font("Dialog", 1, 18)); // NOI18N
-        jLabel1.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        jLabel1.setText("Jared Galicia");
+        labelName.setFont(new java.awt.Font("Dialog", 1, 18)); // NOI18N
+        labelName.setHorizontalAlignment(javax.swing.SwingConstants.LEFT);
+        labelName.setText("Jared Galicia");
 
         buttonCloseSesion.setIcon(new javax.swing.ImageIcon(getClass().getResource("/closeSession.jpg"))); // NOI18N
         buttonCloseSesion.setToolTipText("Cerrar Sesión");
@@ -85,8 +96,8 @@ public class ToolBar extends javax.swing.JPanel {
                 .addGap(14, 14, 14)
                 .addComponent(labelProfile)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 131, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 708, Short.MAX_VALUE)
+                .addComponent(labelName, javax.swing.GroupLayout.PREFERRED_SIZE, 430, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 409, Short.MAX_VALUE)
                 .addComponent(buttonBack, javax.swing.GroupLayout.PREFERRED_SIZE, 68, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(18, 18, 18)
                 .addComponent(buttonCloseSesion)
@@ -95,7 +106,7 @@ public class ToolBar extends javax.swing.JPanel {
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addComponent(labelProfile, javax.swing.GroupLayout.PREFERRED_SIZE, 0, Short.MAX_VALUE)
-            .addComponent(jLabel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+            .addComponent(labelName, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
             .addGroup(layout.createSequentialGroup()
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(buttonCloseSesion, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
@@ -120,7 +131,7 @@ public class ToolBar extends javax.swing.JPanel {
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton buttonBack;
     private javax.swing.JButton buttonCloseSesion;
-    private javax.swing.JLabel jLabel1;
+    private javax.swing.JLabel labelName;
     private javax.swing.JLabel labelProfile;
     // End of variables declaration//GEN-END:variables
 }
